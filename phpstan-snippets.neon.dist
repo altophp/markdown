@@ -1,0 +1,11 @@
+# Isolated config for documentation snippets. Passed explicitly via -c so it
+# does not inherit phpstan.neon.dist (whose paths are src/tests and whose
+# strict-rules would reject terse example code). The generated files live under
+# var/snippets and reference Alto types resolved through --autoload-file.
+# Driven by the maintainer tooling outside this package, through
+# Alto\Markdown\Tests\Snippets\SnippetChecker.
+parameters:
+    level: max
+    paths:
+        - var/snippets
+    tmpDir: var/phpstan-snippets

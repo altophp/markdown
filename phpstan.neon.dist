@@ -1,0 +1,18 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - tests/fixtures
+
+    # Stricter checking
+    checkUninitializedProperties: true
+    reportUnmatchedIgnoredErrors: true
+    treatPhpDocTypesAsCertain: false
+
+    # Improve error messages
+    reportWrongPhpDocTypeInVarTag: true

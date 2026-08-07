@@ -1,0 +1,41 @@
+--- original
++++ edited
+@@ -9,8 +9,8 @@
+ Installation
+ ------------
+
+-* [Install Symfony][4] with Composer (see [requirements details][3]).
+-* Symfony follows the [semantic versioning][5] strictly, publishes "Long Term
++- [Install Symfony][4] with Composer (see [requirements details][3]).
++- Symfony follows the [semantic versioning][5] strictly, publishes "Long Term
+   Support" (LTS) versions and has a [release process][6] that is predictable and
+   business-friendly.
+
+@@ -42,19 +42,19 @@
+ Documentation
+ -------------
+
+-* Read the [Getting Started guide][7] if you are new to Symfony.
+-* Try the [Symfony Demo application][23] to learn Symfony in practice.
+-* Discover Symfony ecosystem in detail with [Symfony The Fast Track][26].
+-* Master Symfony with the [Guides and Tutorials][8], the [Components docs][9]
++- Read the [Getting Started guide][7] if you are new to Symfony.
++- Try the [Symfony Demo application][23] to learn Symfony in practice.
++- Discover Symfony ecosystem in detail with [Symfony The Fast Track][26].
++- Master Symfony with the [Guides and Tutorials][8], the [Components docs][9]
+   and the [Best Practices][10] reference.
+
+ Community
+ ---------
+
+-* [Join the Symfony Community][11] and meet other members at the [Symfony events][12].
+-* [Get Symfony support][13] on GitHub Discussions, Slack, etc.
+-* Follow us on [GitHub][14], [Twitter][15] and [Facebook][16].
+-* Read our [Code of Conduct][24] and meet the [CARE Team][25].
++- [Join the Symfony Community][11] and meet other members at the [Symfony events][12].
++- [Get Symfony support][13] on GitHub Discussions, Slack, etc.
++- Follow us on [GitHub][14], [Twitter][15] and [Facebook][16].
++- Read our [Code of Conduct][24] and meet the [CARE Team][25].
+
+ Contributing
+ ------------
