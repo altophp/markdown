@@ -141,17 +141,17 @@ final class SectionHandle implements Section
     {
         $prefix = $this->hasBlankBefore($range->startOffset) ? '' : "\n";
 
-        return $prefix.rtrim($markdown, "\r\n")."\n\n";
+        return $prefix . rtrim($markdown, "\r\n") . "\n\n";
     }
 
     private function prependPatchMarkdown(string $markdown): string
     {
-        return "\n\n".rtrim($markdown, "\r\n");
+        return "\n\n" . rtrim($markdown, "\r\n");
     }
 
     private function replaceBodyPatchMarkdown(string $markdown): string
     {
-        return "\n\n".rtrim($markdown, "\r\n")."\n\n";
+        return "\n\n" . rtrim($markdown, "\r\n") . "\n\n";
     }
 
     private function hasBlankBefore(int $offset): bool

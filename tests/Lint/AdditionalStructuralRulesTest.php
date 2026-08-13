@@ -41,7 +41,7 @@ final class AdditionalStructuralRulesTest extends TestCase
         self::assertSame(
             ['| one |', '| one | two | three |'],
             array_map(
-                static fn ($problem): string => substr(
+                static fn($problem): string => substr(
                     $source,
                     $problem->range->startOffset,
                     $problem->range->endOffset - $problem->range->startOffset,

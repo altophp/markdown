@@ -23,8 +23,7 @@ final readonly class ExampleFilter
     public function __construct(
         public ?string $section = null,
         public ?int $example = null,
-    ) {
-    }
+    ) {}
 
     public function matches(SpecExample $candidate): bool
     {

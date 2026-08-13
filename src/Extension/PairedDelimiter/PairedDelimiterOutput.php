@@ -25,13 +25,11 @@ use Alto\Markdown\Extension\Inline\MarkdownInlinePrinter;
  */
 final readonly class PairedDelimiterOutput implements HtmlInlineRenderer, MarkdownInlinePrinter
 {
-    public function __construct(private string $element)
-    {
-    }
+    public function __construct(private string $element) {}
 
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<'.$this->element.'>'.$context->escapeText($context->node->text).'</'.$this->element.'>';
+        return '<' . $this->element . '>' . $context->escapeText($context->node->text) . '</' . $this->element . '>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string

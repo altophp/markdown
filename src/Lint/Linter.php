@@ -24,8 +24,7 @@ final readonly class Linter
 {
     public function __construct(
         private LintConfig $config,
-    ) {
-    }
+    ) {}
 
     public function lint(MarkdownDocument $document): LintReport
     {

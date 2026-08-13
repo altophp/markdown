@@ -24,14 +24,14 @@ final class HtmlUrlAttributeRewriter
 {
     public static function first(string $html, string $tag, string $attribute, string $escapedValue): string
     {
-        $pattern = '/(<'.preg_quote($tag, '/').'(?=[\\s>])'
-            .'(?:(?:"[^"]*"|\'[^\']*\'|[^\'">])*)'
-            .'\\s'.preg_quote($attribute, '/').'\\s*=\\s*)'
-            .'(?:"[^"]*"|\'[^\']*\'|[^\\s>]+)/i';
+        $pattern = '/(<' . preg_quote($tag, '/') . '(?=[\\s>])'
+            . '(?:(?:"[^"]*"|\'[^\']*\'|[^\'">])*)'
+            . '\\s' . preg_quote($attribute, '/') . '\\s*=\\s*)'
+            . '(?:"[^"]*"|\'[^\']*\'|[^\\s>]+)/i';
 
         return preg_replace_callback(
             $pattern,
-            static fn (array $match): string => $match[1].'"'.$escapedValue.'"',
+            static fn(array $match): string => $match[1] . '"' . $escapedValue . '"',
             $html,
             1,
         ) ?? $html;

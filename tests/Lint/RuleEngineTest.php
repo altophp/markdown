@@ -174,7 +174,7 @@ final class RuleEngineTest extends TestCase
     private static function ruleIds(array $problems): array
     {
         return array_map(
-            static fn (LintProblem $problem): string => $problem->ruleId,
+            static fn(LintProblem $problem): string => $problem->ruleId,
             $problems,
         );
     }

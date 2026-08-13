@@ -24,15 +24,15 @@ final readonly class PublicCalloutOutput implements HtmlBlockRenderer, MarkdownB
     {
         $label = $context->escapeAttribute($context->state()->string('label'));
 
-        return '<aside class="callout callout-'.$label.'">'."\n".$children."</aside>\n";
+        return '<aside class="callout callout-' . $label . '">' . "\n" . $children . "</aside>\n";
     }
 
     public function print(MarkdownBlockOutputContext $context, string $children): string
     {
         $fence = str_repeat(':', $context->state()->int('fence'));
 
-        return $fence.$context->state()->string('label')
-            .('' === $children ? '' : "\n".$children)
-            ."\n".$fence;
+        return $fence . $context->state()->string('label')
+            . ('' === $children ? '' : "\n" . $children)
+            . "\n" . $fence;
     }
 }

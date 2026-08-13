@@ -26,6 +26,5 @@ final readonly class ParsedAttributeList
     public function __construct(
         public int $length,
         public array $attributes,
-    ) {
-    }
+    ) {}
 }

@@ -31,8 +31,7 @@ final class CompiledExtension implements FeatureExtensionInterface, NodeKindExte
         private readonly string $name,
         private readonly array $features,
         private readonly array $nodeKinds,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {

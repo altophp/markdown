@@ -64,9 +64,7 @@ final class BlockEventCollector implements TraversalVisitor
         $this->events[] = $event;
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
     public function inline(InlineEvent $event): void
     {

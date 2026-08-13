@@ -27,8 +27,7 @@ final readonly class Diff
         public bool $isEmpty,
         public string $unified,
         private array $hunks = [],
-    ) {
-    }
+    ) {}
 
     public static function between(
         string $originalBytes,
@@ -61,7 +60,7 @@ final readonly class Diff
             }
         }
 
-        return new self(false, implode("\n", $out)."\n", $hunks);
+        return new self(false, implode("\n", $out) . "\n", $hunks);
     }
 
     public function isEmpty(): bool
@@ -365,7 +364,7 @@ final readonly class Diff
             }
         }
 
-        usort($pairs, static fn (array $left, array $right): int => $left[0] <=> $right[0]);
+        usort($pairs, static fn(array $left, array $right): int => $left[0] <=> $right[0]);
 
         $tails = [];
         $tailPairs = [];
@@ -487,7 +486,7 @@ final readonly class Diff
                 ++$editedCount;
             }
 
-            $lines[] = $action['type'].self::stripLineEnding($action['line']);
+            $lines[] = $action['type'] . self::stripLineEnding($action['line']);
         }
 
         $first = $actions[0];

@@ -107,18 +107,14 @@ final class EditJournalTest extends TestCase
 
 final readonly class RecordingOperation implements Operation
 {
-    public function __construct(private string $description)
-    {
-    }
+    public function __construct(private string $description) {}
 
     public function describe(): string
     {
         return $this->description;
     }
 
-    public function apply(DocumentModel $model): void
-    {
-    }
+    public function apply(DocumentModel $model): void {}
 
     public function toPatch(DocumentModel $model): ?SourcePatch
     {

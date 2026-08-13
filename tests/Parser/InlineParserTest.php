@@ -160,7 +160,7 @@ final class InlineParserTest extends TestCase
     public function testSourceOffsetsAdvanceMonotonicallyAcrossSegments(): void
     {
         $lines = array_fill(0, 100, '*value* and [link](/target)');
-        $source = implode("\n", $lines)."\n";
+        $source = implode("\n", $lines) . "\n";
         $pairs = [];
         $offset = 0;
 

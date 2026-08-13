@@ -53,8 +53,7 @@ class ParsedMarkdownDocument implements MarkdownDocument
     public function __construct(
         private readonly Profile $profile,
         private readonly ParsedDocumentModel $model,
-    ) {
-    }
+    ) {}
 
     public function profile(): Profile
     {
@@ -87,7 +86,7 @@ class ParsedMarkdownDocument implements MarkdownDocument
     public function headings(?int $level = null): Collection
     {
         /** @var LazyCollection<Heading> $collection */
-        $collection = new LazyCollection(fn (): iterable => $this->model->headings($level));
+        $collection = new LazyCollection(fn(): iterable => $this->model->headings($level));
 
         return $collection;
     }
@@ -114,7 +113,7 @@ class ParsedMarkdownDocument implements MarkdownDocument
     public function links(): Collection
     {
         /** @var LazyCollection<Link> $collection */
-        $collection = new LazyCollection(fn (): iterable => $this->model->links());
+        $collection = new LazyCollection(fn(): iterable => $this->model->links());
 
         return $collection;
     }
@@ -122,7 +121,7 @@ class ParsedMarkdownDocument implements MarkdownDocument
     public function images(): Collection
     {
         /** @var LazyCollection<Image> $collection */
-        $collection = new LazyCollection(fn (): iterable => $this->model->images());
+        $collection = new LazyCollection(fn(): iterable => $this->model->images());
 
         return $collection;
     }
@@ -130,7 +129,7 @@ class ParsedMarkdownDocument implements MarkdownDocument
     public function codeBlocks(?string $language = null): Collection
     {
         /** @var LazyCollection<CodeBlock> $collection */
-        $collection = new LazyCollection(fn (): iterable => $this->model->codeBlocks($language));
+        $collection = new LazyCollection(fn(): iterable => $this->model->codeBlocks($language));
 
         return $collection;
     }

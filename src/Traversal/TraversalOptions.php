@@ -24,6 +24,5 @@ final readonly class TraversalOptions
         public ?NodeId $root = null,
         public bool $includeInlines = false,
         public bool $includeSourceLines = false,
-    ) {
-    }
+    ) {}
 }

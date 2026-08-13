@@ -37,7 +37,7 @@ final class LintReportTest extends TestCase
         ]);
 
         self::assertSame(['a-rule', 'b-rule', 'c-rule'], array_map(
-            static fn (LintProblem $problem): string => $problem->ruleId,
+            static fn(LintProblem $problem): string => $problem->ruleId,
             $report->problems,
         ));
     }

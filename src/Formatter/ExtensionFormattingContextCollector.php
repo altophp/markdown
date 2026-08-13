@@ -47,9 +47,7 @@ final class ExtensionFormattingContextCollector implements TraversalVisitor
         $this->blocks[] = new FormatterBlock($event->kind->name, $event->range, $event->depth);
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
     public function inline(InlineEvent $event): void
     {

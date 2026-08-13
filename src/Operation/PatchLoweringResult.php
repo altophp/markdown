@@ -28,6 +28,5 @@ final readonly class PatchLoweringResult
         public string $bytes,
         public array $patches,
         public array $fallbacks = [],
-    ) {
-    }
+    ) {}
 }

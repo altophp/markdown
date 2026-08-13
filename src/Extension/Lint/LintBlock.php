@@ -24,6 +24,5 @@ final readonly class LintBlock
         public string $kind,
         public SourceRange $range,
         public int $depth,
-    ) {
-    }
+    ) {}
 }

@@ -31,12 +31,12 @@ final readonly class ImportOutput implements HtmlBlockRenderer, MarkdownBlockPri
 
         $language = $context->state()->value('language');
         $class = \is_string($language)
-            ? ' class="language-'.$context->escapeAttribute($language).'"'
+            ? ' class="language-' . $context->escapeAttribute($language) . '"'
             : '';
 
-        return '<pre><code'.$class.'>'
-            .$context->escapeText($context->state()->string('content'))
-            ."</code></pre>\n";
+        return '<pre><code' . $class . '>'
+            . $context->escapeText($context->state()->string('content'))
+            . "</code></pre>\n";
     }
 
     public function print(MarkdownBlockOutputContext $context, string $children): string

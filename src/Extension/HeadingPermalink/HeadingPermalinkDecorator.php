@@ -23,9 +23,7 @@ use Alto\Markdown\Extension\Html\HtmlNodeOutputContext;
  */
 final readonly class HeadingPermalinkDecorator implements HtmlNodeDecorator
 {
-    public function __construct(private HeadingPermalinkPolicy $policy)
-    {
-    }
+    public function __construct(private HeadingPermalinkPolicy $policy) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
@@ -34,14 +32,14 @@ final readonly class HeadingPermalinkDecorator implements HtmlNodeDecorator
             return $html;
         }
 
-        $open = '<h'.$level;
+        $open = '<h' . $level;
         $openAt = stripos($html, $open);
         if (false === $openAt) {
             return $html;
         }
 
         $openEnd = strpos($html, '>', $openAt + \strlen($open));
-        $closeAt = strripos($html, '</h'.$level.'>');
+        $closeAt = strripos($html, '</h' . $level . '>');
         if (false === $openEnd || false === $closeAt || $closeAt < $openEnd) {
             return $html;
         }
@@ -49,16 +47,16 @@ final readonly class HeadingPermalinkDecorator implements HtmlNodeDecorator
         $slug = $context->string('slug');
         $headingAttributes = [];
         if ($this->policy->applyIdToHeading) {
-            $headingAttributes[] = 'id="'.$context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->idPrefix, $slug)).'"';
+            $headingAttributes[] = 'id="' . $context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->idPrefix, $slug)) . '"';
         }
         if ('' !== $this->policy->headingClass) {
-            $headingAttributes[] = 'class="'.$context->escapeAttribute($this->policy->headingClass).'"';
+            $headingAttributes[] = 'class="' . $context->escapeAttribute($this->policy->headingClass) . '"';
         }
 
         if ([] !== $headingAttributes) {
             $insert = $openAt + \strlen($open);
-            $attributes = ' '.implode(' ', $headingAttributes);
-            $html = substr($html, 0, $insert).$attributes.substr($html, $insert);
+            $attributes = ' ' . implode(' ', $headingAttributes);
+            $html = substr($html, 0, $insert) . $attributes . substr($html, $insert);
             $openEnd += \strlen($attributes);
             $closeAt += \strlen($attributes);
         }
@@ -69,23 +67,23 @@ final readonly class HeadingPermalinkDecorator implements HtmlNodeDecorator
 
         $anchorAttributes = [];
         if (!$this->policy->applyIdToHeading) {
-            $anchorAttributes[] = 'id="'.$context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->idPrefix, $slug)).'"';
+            $anchorAttributes[] = 'id="' . $context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->idPrefix, $slug)) . '"';
         }
-        $anchorAttributes[] = 'href="#'.$context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->fragmentPrefix, $slug)).'"';
+        $anchorAttributes[] = 'href="#' . $context->escapeAttribute(HeadingPermalinkPolicy::prefixed($this->policy->fragmentPrefix, $slug)) . '"';
         if ('' !== $this->policy->htmlClass) {
-            $anchorAttributes[] = 'class="'.$context->escapeAttribute($this->policy->htmlClass).'"';
+            $anchorAttributes[] = 'class="' . $context->escapeAttribute($this->policy->htmlClass) . '"';
         }
         if ($this->policy->ariaHidden) {
             $anchorAttributes[] = 'aria-hidden="true"';
         }
-        $anchorAttributes[] = 'title="'.$context->escapeAttribute($this->policy->title).'"';
-        $anchor = '<a '.implode(' ', $anchorAttributes).'>'
-            .$context->escapeText($this->policy->symbol)
-            .'</a>';
+        $anchorAttributes[] = 'title="' . $context->escapeAttribute($this->policy->title) . '"';
+        $anchor = '<a ' . implode(' ', $anchorAttributes) . '>'
+            . $context->escapeText($this->policy->symbol)
+            . '</a>';
         $insert = HeadingPermalinkPosition::Before === $this->policy->position
             ? $openEnd + 1
             : $closeAt;
 
-        return substr($html, 0, $insert).$anchor.substr($html, $insert);
+        return substr($html, 0, $insert) . $anchor . substr($html, $insert);
     }
 }

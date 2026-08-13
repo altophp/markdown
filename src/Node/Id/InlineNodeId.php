@@ -21,6 +21,5 @@ final readonly class InlineNodeId
     public function __construct(
         public int $blockOrdinal,
         public int $inlineOrdinal,
-    ) {
-    }
+    ) {}
 }

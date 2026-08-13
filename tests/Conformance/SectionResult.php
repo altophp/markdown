@@ -22,6 +22,5 @@ final readonly class SectionResult
         public string $section,
         public int $passed,
         public int $total,
-    ) {
-    }
+    ) {}
 }

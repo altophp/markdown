@@ -155,7 +155,5 @@ final class ResourceOptionTokenizer
             || '-' === $byte;
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

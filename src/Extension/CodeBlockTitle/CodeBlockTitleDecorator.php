@@ -23,9 +23,7 @@ use Alto\Markdown\Extension\Html\HtmlNodeOutputContext;
  */
 final readonly class CodeBlockTitleDecorator implements HtmlNodeDecorator
 {
-    public function __construct(private CodeBlockTitlePolicy $policy)
-    {
-    }
+    public function __construct(private CodeBlockTitlePolicy $policy) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
@@ -36,17 +34,17 @@ final readonly class CodeBlockTitleDecorator implements HtmlNodeDecorator
 
         $figureAttributes = '' === $this->policy->figureClass
             ? ''
-            : ' class="'.$context->escapeAttribute($this->policy->figureClass).'"';
+            : ' class="' . $context->escapeAttribute($this->policy->figureClass) . '"';
         if ($this->policy->includeDataTitle) {
-            $figureAttributes .= ' data-title="'.$context->escapeAttribute($title).'"';
+            $figureAttributes .= ' data-title="' . $context->escapeAttribute($title) . '"';
         }
         $captionAttributes = '' === $this->policy->captionClass
             ? ''
-            : ' class="'.$context->escapeAttribute($this->policy->captionClass).'"';
+            : ' class="' . $context->escapeAttribute($this->policy->captionClass) . '"';
 
-        return '<figure'.$figureAttributes.">\n"
-            .'<figcaption'.$captionAttributes.'>'.$context->escapeText($title)."</figcaption>\n"
-            .$html
-            ."</figure>\n";
+        return '<figure' . $figureAttributes . ">\n"
+            . '<figcaption' . $captionAttributes . '>' . $context->escapeText($title) . "</figcaption>\n"
+            . $html
+            . "</figure>\n";
     }
 }

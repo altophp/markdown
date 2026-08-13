@@ -27,11 +27,11 @@ final readonly class HighlightOutput implements HtmlInlineRenderer, MarkdownInli
 {
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<mark>'.$context->escapeText($context->node->text).'</mark>';
+        return '<mark>' . $context->escapeText($context->node->text) . '</mark>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string
     {
-        return '=='.$context->node->text.'==';
+        return '==' . $context->node->text . '==';
     }
 }

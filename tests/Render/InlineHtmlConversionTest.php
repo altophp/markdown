@@ -94,7 +94,7 @@ final class InlineHtmlConversionTest extends TestCase
 
         self::assertSame(
             '<mark data-label="marked">marked</mark> '
-            .'<a href="https://example.com/users/ada">@ada</a>',
+            . '<a href="https://example.com/users/ada">@ada</a>',
             $factory->toInlineHtml('^^marked^^ @ada'),
         );
         self::assertSame(
@@ -189,7 +189,7 @@ final class InlineRangeDecorator implements HtmlNodeDecorator
 
         return str_replace(
             '<a ',
-            '<a data-range="'.$range?->startOffset.':'.$range?->endOffset.'" ',
+            '<a data-range="' . $range?->startOffset . ':' . $range?->endOffset . '" ',
             $html,
         );
     }
@@ -199,8 +199,7 @@ final readonly class InlineRangeDecoratorExtension implements HtmlDecoratorExten
 {
     public function __construct(
         private InlineRangeDecorator $decorator,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -221,7 +220,7 @@ final class InlineRecordingSanitizer implements HtmlSanitizer
     {
         ++$this->calls;
 
-        return '<sanitized>'.$html.'</sanitized>';
+        return '<sanitized>' . $html . '</sanitized>';
     }
 
     public function cacheKey(): string

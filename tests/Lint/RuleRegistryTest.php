@@ -109,10 +109,10 @@ final class RuleRegistryTest extends TestCase
     public function testCatalogDeclaresRulesThatCanEmitFixes(): void
     {
         $fixable = array_map(
-            static fn ($metadata): string => $metadata->id,
+            static fn($metadata): string => $metadata->id,
             array_filter(
                 new RuleRegistry()->metadata(),
-                static fn ($metadata): bool => $metadata->fixable,
+                static fn($metadata): bool => $metadata->fixable,
             ),
         );
 
@@ -127,7 +127,7 @@ final class RuleRegistryTest extends TestCase
         $second = $registry->resolve($config);
 
         self::assertSame(['final-newline', 'require-title'], array_map(
-            static fn ($rule): string => $rule->id(),
+            static fn($rule): string => $rule->id(),
             $first,
         ));
         self::assertCount(2, $first);
@@ -236,12 +236,10 @@ final class RuleRegistryTest extends TestCase
             $linter->lint(Markdown::github()->fromString("```\ncode\n```\n"));
             self::fail('Expected mismatched options to fail.');
         } catch (InvalidMarkdownArgumentException $error) {
-            self::assertStringContainsString('expects options of type '.RequireCodeBlockLanguageOptions::class, $error->getMessage());
+            self::assertStringContainsString('expects options of type ' . RequireCodeBlockLanguageOptions::class, $error->getMessage());
             self::assertSame(0, Instrumentation::$traversals);
         }
     }
 }
 
-final readonly class UnsupportedRuleOptions implements LintRuleOptions
-{
-}
+final readonly class UnsupportedRuleOptions implements LintRuleOptions {}

@@ -44,8 +44,7 @@ final class ParsedSyntax
         private readonly ReferenceMap $referenceMap,
         private readonly LineEnding $dominantEol,
         private readonly ParseOptions $parseOptions,
-    ) {
-    }
+    ) {}
 
     public function source(): SourceDocument
     {

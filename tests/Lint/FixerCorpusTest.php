@@ -63,13 +63,13 @@ final class FixerCorpusTest extends TestCase
                     $reparsed = Markdown::github()->open($path);
 
                     if ($original->toHtml() !== $reparsed->toHtml()) {
-                        $failures[] = $name.': rendered HTML changed after trailing-space fix.';
+                        $failures[] = $name . ': rendered HTML changed after trailing-space fix.';
                     }
                 } finally {
                     @unlink($path);
                 }
             } catch (\Throwable $error) {
-                $failures[] = $name.': '.$error::class.': '.$error->getMessage();
+                $failures[] = $name . ': ' . $error::class . ': ' . $error->getMessage();
             }
         }
 
@@ -107,7 +107,7 @@ final class FixerCorpusTest extends TestCase
                 $firstBytes = $this->read($path);
 
                 if (!$file->model()->journal()->isEmpty()) {
-                    $failures[] = $name.': save did not clear the first-pass journal.';
+                    $failures[] = $name . ': save did not clear the first-pass journal.';
                 }
 
                 $reparsed = Markdown::github()->open($path);
@@ -115,7 +115,7 @@ final class FixerCorpusTest extends TestCase
 
                 foreach ($report as $problem) {
                     if (null !== $problem->fix) {
-                        $failures[] = $name.': relint still has fixable problem '.$problem->ruleId.'.';
+                        $failures[] = $name . ': relint still has fixable problem ' . $problem->ruleId . '.';
 
                         continue;
                     }
@@ -126,27 +126,27 @@ final class FixerCorpusTest extends TestCase
                 $reparsed->fix($this->fixableConfig());
 
                 if (!$reparsed->model()->journal()->isEmpty()) {
-                    $failures[] = $name.': second fix pass produced operations.';
+                    $failures[] = $name . ': second fix pass produced operations.';
                 }
 
                 if (!$reparsed->diff()->isEmpty()) {
-                    $failures[] = $name.': second fix pass produced a diff.';
+                    $failures[] = $name . ': second fix pass produced a diff.';
                 }
 
                 $reparsed->save();
 
                 if ($firstBytes !== $this->read($path)) {
-                    $failures[] = $name.': second fix-save pass changed bytes.';
+                    $failures[] = $name . ': second fix-save pass changed bytes.';
                 }
             } catch (\Throwable $error) {
-                $failures[] = $name.': '.$error::class.': '.$error->getMessage();
+                $failures[] = $name . ': ' . $error::class . ': ' . $error->getMessage();
             } finally {
                 @unlink($path);
             }
         }
 
         if (self::EXPECTED_REPORT_ONLY !== $reportOnly) {
-            $failures[] = 'report-only corpus changed: '.json_encode($reportOnly, \JSON_THROW_ON_ERROR).'.';
+            $failures[] = 'report-only corpus changed: ' . json_encode($reportOnly, \JSON_THROW_ON_ERROR) . '.';
         }
 
         self::assertSame(

@@ -31,9 +31,7 @@ use Alto\Markdown\Query\Collection;
  */
 final readonly class BlockInsertion
 {
-    public function __construct(private ParsedDocumentModel $model)
-    {
-    }
+    public function __construct(private ParsedDocumentModel $model) {}
 
     /**
      * @return Collection<Block>
@@ -97,6 +95,6 @@ final readonly class BlockInsertion
      */
     private function collection(array $handles): Collection
     {
-        return new LazyCollection(static fn (): iterable => $handles);
+        return new LazyCollection(static fn(): iterable => $handles);
     }
 }

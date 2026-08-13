@@ -26,7 +26,7 @@ final readonly class TableOfContentsHeadingDecorator implements HtmlNodeDecorato
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
         $level = $context->int('level');
-        $open = '<h'.$level;
+        $open = '<h' . $level;
         $openAt = stripos($html, $open);
 
         if (false === $openAt) {
@@ -45,11 +45,11 @@ final readonly class TableOfContentsHeadingDecorator implements HtmlNodeDecorato
         if (1 === preg_match('/\sid=(["\'])(.*?)\1/i', $opening, $match)) {
             return $escaped === $match[2]
                 ? $html
-                : '<span id="'.$escaped.'"></span>'.$html;
+                : '<span id="' . $escaped . '"></span>' . $html;
         }
 
         $insert = $openAt + \strlen($open);
 
-        return substr($html, 0, $insert).' id="'.$escaped.'"'.substr($html, $insert);
+        return substr($html, 0, $insert) . ' id="' . $escaped . '"' . substr($html, $insert);
     }
 }

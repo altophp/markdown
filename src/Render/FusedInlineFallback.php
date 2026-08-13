@@ -27,6 +27,6 @@ final class FusedInlineFallback extends \Exception
 {
     public function __construct(public readonly string $reason)
     {
-        parent::__construct('Fused inline rendering fell back: '.$reason);
+        parent::__construct('Fused inline rendering fell back: ' . $reason);
     }
 }

@@ -230,5 +230,5 @@ On POSIX, atomic replacement preserves permission and special mode bits or
 fails before replacement. It does not preserve ACLs, ownership, extended
 attributes, or other platform metadata. New files use `0666 & ~umask`.
 Windows replacement and mode semantics are platform-limited and may fail when
-the destination exists or is open. See [Errors](errors.md) for recovery and
-[Manipulation](manipulation.md) for the complete save flow.
+the destination exists or is open. See [Exceptions](../api/exceptions.md) for recovery and
+[Editing](../documents/editing.md) for the complete save flow.

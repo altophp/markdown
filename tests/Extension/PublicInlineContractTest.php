@@ -167,8 +167,7 @@ final class PublicInlineContractTest extends TestCase
 
     public function testProfileIgnoresExtensionsThatDoNotDeclareFeatures(): void
     {
-        $profile = new class('test', [new TriggerInlineExtension('no-features', new CountingInlineParser('^'))]) extends AbstractProfile {
-        };
+        $profile = new class ('test', [new TriggerInlineExtension('no-features', new CountingInlineParser('^'))]) extends AbstractProfile {};
 
         self::assertFalse($profile->supports(Feature::Strikethrough));
     }
@@ -199,8 +198,7 @@ final class PublicInlineContractTest extends TestCase
 
     public function testFeatureAddedAfterAnInlineExtensionStillReservesItsTrigger(): void
     {
-        $profile = new class('late-feature', [new TriggerInlineExtension('tilde', new CountingInlineParser('~')), new GfmExtension()]) extends AbstractProfile {
-        };
+        $profile = new class ('late-feature', [new TriggerInlineExtension('tilde', new CountingInlineParser('~')), new GfmExtension()]) extends AbstractProfile {};
 
         $this->expectException(InvalidMarkdownArgumentException::class);
         $this->expectExceptionMessage('trigger byte "~" is reserved');
@@ -230,8 +228,7 @@ final readonly class TriggerInlineExtension implements InlineExtensionInterface
     public function __construct(
         private string $extensionName,
         private InlineParser $parser,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -250,9 +247,7 @@ final class CountingInlineParser implements InlineParser
 {
     public int $calls = 0;
 
-    public function __construct(private readonly string $trigger)
-    {
-    }
+    public function __construct(private readonly string $trigger) {}
 
     public function triggerByte(): string
     {

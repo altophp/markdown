@@ -64,7 +64,7 @@ final class TapeDumper
             return '';
         }
 
-        return implode("\n", $lines)."\n";
+        return implode("\n", $lines) . "\n";
     }
 
     /**
@@ -97,7 +97,7 @@ final class TapeDumper
         $payload = $tape->payload($ordinal);
 
         if (null !== $payload) {
-            $line .= ' payload='.$this->quote($payload);
+            $line .= ' payload=' . $this->quote($payload);
         }
 
         return $line;
@@ -113,6 +113,6 @@ final class TapeDumper
             '"' => '\\"',
         ]);
 
-        return '"'.$escaped.'"';
+        return '"' . $escaped . '"';
     }
 }

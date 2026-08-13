@@ -60,7 +60,7 @@ final class TabsExtension extends AbstractExtension implements DocumentTransform
     {
         yield new DocumentTransformDefinition(
             'catalog',
-            static fn (): TabsTransform => new TabsTransform(),
+            static fn(): TabsTransform => new TabsTransform(),
         );
     }
 

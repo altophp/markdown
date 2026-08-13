@@ -152,7 +152,7 @@ final class PublicLintExtensionTest extends TestCase
 
     public function testPublicRuleFixtureCannotImportMutableInternals(): void
     {
-        $path = __DIR__.'/Fixture/PublicCalloutLabelRule.php';
+        $path = __DIR__ . '/Fixture/PublicCalloutLabelRule.php';
         $source = file_get_contents($path);
 
         self::assertIsString($source);
@@ -197,7 +197,7 @@ final class PublicLintExtensionTest extends TestCase
         $this->expectException(InvalidMarkdownArgumentException::class);
         $this->expectExceptionMessage('Lint rule summary must not be empty.');
 
-        new LintRuleDefinition('valid', ' ', static fn (): EmptyLintRule => new EmptyLintRule());
+        new LintRuleDefinition('valid', ' ', static fn(): EmptyLintRule => new EmptyLintRule());
     }
 
     public function testLintRuleDefinitionRejectsAnInvalidFactoryResult(): void
@@ -205,7 +205,7 @@ final class PublicLintExtensionTest extends TestCase
         $definition = new \ReflectionClass(LintRuleDefinition::class)->newInstance(
             'valid',
             'Valid rule.',
-            static fn (): object => new \stdClass(),
+            static fn(): object => new \stdClass(),
         );
         self::assertInstanceOf(LintRuleDefinition::class, $definition);
 
@@ -221,7 +221,7 @@ final class PublicLintExtensionTest extends TestCase
         $rule->expects(self::once())
             ->method('check')
             ->with(self::callback(
-                static fn (LintContext $context): bool => [] !== $context->inlines(),
+                static fn(LintContext $context): bool => [] !== $context->inlines(),
             ))
             ->willReturn([]);
         $document = Markdown::commonmark()
@@ -289,14 +289,12 @@ final readonly class DuplicateLintExtension implements LintExtensionInterface
 
     public function lintRules(): iterable
     {
-        yield new LintRuleDefinition('same', 'First rule.', static fn (): EmptyLintRule => new EmptyLintRule());
-        yield new LintRuleDefinition('same', 'Second rule.', static fn (): EmptyLintRule => new EmptyLintRule());
+        yield new LintRuleDefinition('same', 'First rule.', static fn(): EmptyLintRule => new EmptyLintRule());
+        yield new LintRuleDefinition('same', 'Second rule.', static fn(): EmptyLintRule => new EmptyLintRule());
     }
 }
 
-final readonly class CustomRuleOptions implements LintRuleOptions
-{
-}
+final readonly class CustomRuleOptions implements LintRuleOptions {}
 
 final readonly class InvalidResultLintExtension implements LintExtensionInterface
 {
@@ -307,7 +305,7 @@ final readonly class InvalidResultLintExtension implements LintExtensionInterfac
 
     public function lintRules(): iterable
     {
-        yield new LintRuleDefinition('range', 'Return an invalid range.', static fn (): InvalidRangeLintRule => new InvalidRangeLintRule());
+        yield new LintRuleDefinition('range', 'Return an invalid range.', static fn(): InvalidRangeLintRule => new InvalidRangeLintRule());
     }
 }
 
@@ -323,7 +321,7 @@ final readonly class UndeclaredFixLintExtension implements LintExtensionInterfac
         yield new LintRuleDefinition(
             'undeclared-fix',
             'Emit a fix without declaring it.',
-            static fn (): UndeclaredFixLintRule => new UndeclaredFixLintRule(),
+            static fn(): UndeclaredFixLintRule => new UndeclaredFixLintRule(),
         );
     }
 }
@@ -337,7 +335,7 @@ final readonly class InvalidDefinitionLintExtension implements LintExtensionInte
 
     public function lintRules(): iterable
     {
-        yield new LintRuleDefinition('Not Valid', 'Invalid rule name.', static fn (): EmptyLintRule => new EmptyLintRule());
+        yield new LintRuleDefinition('Not Valid', 'Invalid rule name.', static fn(): EmptyLintRule => new EmptyLintRule());
     }
 }
 
@@ -381,8 +379,7 @@ final readonly class InjectedLintExtension implements LintExtensionInterface
         private string $extensionName,
         private LintRule $rule,
         private bool $includeInlines = false,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -394,7 +391,7 @@ final readonly class InjectedLintExtension implements LintExtensionInterface
         yield new LintRuleDefinition(
             'rule',
             'Injected test rule.',
-            fn (): LintRule => $this->rule,
+            fn(): LintRule => $this->rule,
             includeInlines: $this->includeInlines,
         );
     }

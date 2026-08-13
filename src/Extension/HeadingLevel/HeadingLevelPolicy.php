@@ -23,9 +23,7 @@ final readonly class HeadingLevelPolicy
     /**
      * @param \Closure(int): mixed $resolver
      */
-    private function __construct(private \Closure $resolver)
-    {
-    }
+    private function __construct(private \Closure $resolver) {}
 
     /**
      * @param array<int, int> $levels
@@ -41,7 +39,7 @@ final readonly class HeadingLevelPolicy
             }
         }
 
-        return new self(static fn (int $level): ?int => $levels[$level] ?? null);
+        return new self(static fn(int $level): ?int => $levels[$level] ?? null);
     }
 
     public static function shift(int $offset): self
@@ -50,7 +48,7 @@ final readonly class HeadingLevelPolicy
             throw new InvalidExtensionException('Heading level shift must be between -5 and 5.');
         }
 
-        return new self(static fn (int $level): int => $level + $offset);
+        return new self(static fn(int $level): int => $level + $offset);
     }
 
     /**
@@ -86,7 +84,7 @@ final readonly class HeadingLevelPolicy
         }
 
         if (\is_string($value)) {
-            $display = \strlen($value) > 40 ? substr($value, 0, 37).'...' : $value;
+            $display = \strlen($value) > 40 ? substr($value, 0, 37) . '...' : $value;
 
             return \sprintf('%s (string)', var_export($display, true));
         }

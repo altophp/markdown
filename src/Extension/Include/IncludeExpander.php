@@ -123,7 +123,7 @@ final readonly class IncludeExpander
 
         for ($index = \count($replacements) - 1; $index >= 0; --$index) {
             [$start, $end, $replacement] = $replacements[$index];
-            $expanded = substr($expanded, 0, $start).$replacement.substr($expanded, $end);
+            $expanded = substr($expanded, 0, $start) . $replacement . substr($expanded, $end);
         }
 
         return $expanded;

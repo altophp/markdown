@@ -103,7 +103,7 @@ final class PublicFormatterStatsContractTest extends TestCase
             new FormatterPassDefinition(
                 'Not Valid',
                 'Invalid name.',
-                static fn (): EmptyPublicFormatterPass => new EmptyPublicFormatterPass(),
+                static fn(): EmptyPublicFormatterPass => new EmptyPublicFormatterPass(),
             );
             self::fail('Expected the invalid formatter name to fail.');
         } catch (InvalidMarkdownArgumentException $error) {
@@ -114,7 +114,7 @@ final class PublicFormatterStatsContractTest extends TestCase
             new StatsMetricDefinition(
                 'valid',
                 ' ',
-                static fn (): ConstantPublicStatsMetric => new ConstantPublicStatsMetric(),
+                static fn(): ConstantPublicStatsMetric => new ConstantPublicStatsMetric(),
             );
             self::fail('Expected the empty stats summary to fail.');
         } catch (InvalidMarkdownArgumentException $error) {
@@ -127,7 +127,7 @@ final class PublicFormatterStatsContractTest extends TestCase
         new StatsMetricDefinition(
             'Not Valid',
             'Invalid name.',
-            static fn (): ConstantPublicStatsMetric => new ConstantPublicStatsMetric(),
+            static fn(): ConstantPublicStatsMetric => new ConstantPublicStatsMetric(),
         );
     }
 
@@ -139,7 +139,7 @@ final class PublicFormatterStatsContractTest extends TestCase
         new FormatterPassDefinition(
             'valid',
             ' ',
-            static fn (): EmptyPublicFormatterPass => new EmptyPublicFormatterPass(),
+            static fn(): EmptyPublicFormatterPass => new EmptyPublicFormatterPass(),
         );
     }
 
@@ -148,7 +148,7 @@ final class PublicFormatterStatsContractTest extends TestCase
         $definition = new \ReflectionClass(FormatterPassDefinition::class)->newInstance(
             'valid',
             'Valid pass.',
-            static fn (): object => new \stdClass(),
+            static fn(): object => new \stdClass(),
         );
         self::assertInstanceOf(FormatterPassDefinition::class, $definition);
 
@@ -163,7 +163,7 @@ final class PublicFormatterStatsContractTest extends TestCase
         $definition = new \ReflectionClass(StatsMetricDefinition::class)->newInstance(
             'valid',
             'Valid metric.',
-            static fn (): object => new \stdClass(),
+            static fn(): object => new \stdClass(),
         );
         self::assertInstanceOf(StatsMetricDefinition::class, $definition);
 
@@ -240,7 +240,7 @@ final readonly class InlineAwarePublicExtension implements FormatterExtensionInt
         yield new FormatterPassDefinition(
             'no-op',
             'Inspect inline snapshots without changing source.',
-            static fn (): InlineAwarePublicFormatterPass => new InlineAwarePublicFormatterPass(),
+            static fn(): InlineAwarePublicFormatterPass => new InlineAwarePublicFormatterPass(),
             includeInlines: true,
         );
     }
@@ -250,7 +250,7 @@ final readonly class InlineAwarePublicExtension implements FormatterExtensionInt
         yield new StatsMetricDefinition(
             'inlines',
             'Count inline snapshots.',
-            static fn (): InlineCountPublicStatsMetric => new InlineCountPublicStatsMetric(),
+            static fn(): InlineCountPublicStatsMetric => new InlineCountPublicStatsMetric(),
             includeInlines: true,
         );
     }

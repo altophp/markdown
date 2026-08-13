@@ -50,7 +50,7 @@ final class TablePrinter implements BlockPrinter
             $out[] = $this->cell($cells[$index] ?? '');
         }
 
-        return '| '.implode(' | ', $out).' |';
+        return '| ' . implode(' | ', $out) . ' |';
     }
 
     /**
@@ -69,7 +69,7 @@ final class TablePrinter implements BlockPrinter
             };
         }
 
-        return '| '.implode(' | ', $cells).' |';
+        return '| ' . implode(' | ', $cells) . ' |';
     }
 
     private function cell(string $cell): string

@@ -114,9 +114,7 @@ final class FactoryCompositionTest extends TestCase
 
 final readonly class MetadataExtension implements ExtensionInterface
 {
-    public function __construct(private string $name)
-    {
-    }
+    public function __construct(private string $name) {}
 
     public function name(): string
     {
@@ -129,8 +127,7 @@ final readonly class FeatureMetadataExtension implements FeatureExtensionInterfa
     public function __construct(
         private string $name,
         private Feature $feature,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {

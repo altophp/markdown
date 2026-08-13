@@ -20,9 +20,7 @@ namespace Alto\Markdown\Extension\Attributes;
  */
 final readonly class AttributeListParser
 {
-    public function __construct(private AttributesPolicy $policy)
-    {
-    }
+    public function __construct(private AttributesPolicy $policy) {}
 
     public function parsePrefix(string $source): ?ParsedAttributeList
     {

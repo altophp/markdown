@@ -26,6 +26,5 @@ final readonly class OpeningFence
         public string $char,
         public int $length,
         public int $indent,
-    ) {
-    }
+    ) {}
 }

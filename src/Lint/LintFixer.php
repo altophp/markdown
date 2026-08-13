@@ -26,8 +26,7 @@ final readonly class LintFixer
 {
     public function __construct(
         private LintConfig $config,
-    ) {
-    }
+    ) {}
 
     public function fix(MarkdownDocument $document): MarkdownDocument
     {

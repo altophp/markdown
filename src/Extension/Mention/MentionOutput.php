@@ -29,12 +29,12 @@ final readonly class MentionOutput implements HtmlInlineRenderer, MarkdownInline
     {
         $title = $context->node->attribute('title');
         $titleAttribute = \is_string($title)
-            ? ' title="'.$context->escapeAttribute($title).'"'
+            ? ' title="' . $context->escapeAttribute($title) . '"'
             : '';
 
-        return '<a href="'.$context->escapeUrl($context->node->string('url')).'"'.$titleAttribute.'>'
-            .$context->escapeText($context->node->text)
-            .'</a>';
+        return '<a href="' . $context->escapeUrl($context->node->string('url')) . '"' . $titleAttribute . '>'
+            . $context->escapeText($context->node->text)
+            . '</a>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string

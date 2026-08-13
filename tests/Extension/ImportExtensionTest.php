@@ -93,9 +93,9 @@ final class ImportExtensionTest extends TestCase
     public function testSelectsASmallRangeWithoutMaterializingEveryResourceLine(): void
     {
         $line = '0123456789abcdefgh';
-        $resource = str_repeat($line."\r\n", 5_000)
-            ."target one\r\ntarget two\r\ntarget three\r\n"
-            .str_repeat($line."\r\n", 5_000);
+        $resource = str_repeat($line . "\r\n", 5_000)
+            . "target one\r\ntarget two\r\ntarget three\r\n"
+            . str_repeat($line . "\r\n", 5_000);
         $factory = Markdown::commonmark()->with(new ImportExtension(
             new ImportFixtureResolver(['medium.txt' => $resource]),
         ));
@@ -136,11 +136,11 @@ final class ImportExtensionTest extends TestCase
         yield 'descending range' => ['@import "snippet.md" {lines: 3-2}'];
         yield 'line above bound' => ['@import "snippet.md" {lines: 1000001}'];
         yield 'invalid language' => ['@import "snippet.md" {lang: php html}'];
-        yield 'long language' => ['@import "snippet.md" {lang: '.str_repeat('x', 65).'}'];
+        yield 'long language' => ['@import "snippet.md" {lang: ' . str_repeat('x', 65) . '}'];
         yield 'negative indent' => ['@import "snippet.md" {indent: -1}'];
         yield 'indent above bound' => ['@import "snippet.md" {indent: 33}'];
         yield 'duplicate comma' => ['@import "snippet.md" {lines: 1,, lang: php}'];
-        yield 'long directive' => ['@import "'.str_repeat('x', 4_096).'"'];
+        yield 'long directive' => ['@import "' . str_repeat('x', 4_096) . '"'];
         yield 'similar name' => ['@important "snippet.md"'];
     }
 
@@ -261,16 +261,14 @@ final class ImportFixtureResolver implements ResourceResolver
     /**
      * @param array<string, string> $resources
      */
-    public function __construct(private array $resources)
-    {
-    }
+    public function __construct(private array $resources) {}
 
     public function resolve(ResourceRequest $request): ResolvedResource
     {
         $this->requests[] = $request;
 
         return new ResolvedResource(
-            id: 'fixture:'.$request->reference,
+            id: 'fixture:' . $request->reference,
             bytes: $this->resources[$request->reference] ?? '',
         );
     }

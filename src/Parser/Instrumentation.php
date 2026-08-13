@@ -248,9 +248,7 @@ final class Instrumentation
      */
     public static array $fusedFallbackReasons = [];
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
      * Opens a timed stage. The currently active stage, if any, is paused so

@@ -23,6 +23,4 @@ namespace Alto\Markdown\Parser\Block;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-interface OpaqueLeafBlock extends BlockConstruct
-{
-}
+interface OpaqueLeafBlock extends BlockConstruct {}

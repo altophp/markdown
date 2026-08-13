@@ -28,8 +28,7 @@ final readonly class PairedDelimiterParser implements InlineParser
     public function __construct(
         private string $opening,
         private string $closing,
-    ) {
-    }
+    ) {}
 
     public function triggerByte(): string
     {

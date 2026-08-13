@@ -43,14 +43,14 @@ final readonly class TabsItemOutput implements PlannedHtmlBlockRenderer
             $context->range->startOffset,
             $context->state()->string('title'),
         );
-        $class = 'markdown-tabs-panel'.(0 === $item['index'] ? ' is-active' : '');
-        $html = '<div class="'.$class.'" id="'.$context->escapeAttribute($item['panelId']).'"'
-            .' aria-labelledby="'.$context->escapeAttribute($item['tabId']).'">';
+        $class = 'markdown-tabs-panel' . (0 === $item['index'] ? ' is-active' : '');
+        $html = '<div class="' . $class . '" id="' . $context->escapeAttribute($item['panelId']) . '"'
+            . ' aria-labelledby="' . $context->escapeAttribute($item['tabId']) . '">';
 
         if ('' !== $children) {
-            $html .= "\n".$children;
+            $html .= "\n" . $children;
         }
 
-        return $html."</div>\n";
+        return $html . "</div>\n";
     }
 }

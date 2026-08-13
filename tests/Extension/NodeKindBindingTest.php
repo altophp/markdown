@@ -158,9 +158,7 @@ final readonly class ReservedKindExtension implements ExtensionInterface, Syntax
 
 final readonly class BoundKindExtension implements NodeKindBindableExtensionInterface, SyntaxExtensionInterface
 {
-    public function __construct(private ?NodeKind $kind = null)
-    {
-    }
+    public function __construct(private ?NodeKind $kind = null) {}
 
     public function name(): string
     {
@@ -190,9 +188,7 @@ final readonly class BoundKindExtension implements NodeKindBindableExtensionInte
 
 final readonly class BoundBlockConstruct implements BlockConstruct
 {
-    public function __construct(private int $kind)
-    {
-    }
+    public function __construct(private int $kind) {}
 
     public function kind(): int
     {

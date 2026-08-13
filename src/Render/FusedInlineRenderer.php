@@ -416,7 +416,7 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
 
             case InlineKind::CODE_SPAN:
                 $code = $payload ?? substr($this->text, $offset, $end - $offset);
-                $this->current .= '<code>'.HtmlEscaper::text($code).'</code>';
+                $this->current .= '<code>' . HtmlEscaper::text($code) . '</code>';
 
                 if ($this->altTracking) {
                     $this->altCurrent .= $code;
@@ -436,7 +436,7 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
                         $end,
                         $label,
                     );
-                $rendered = '<a href="'.HtmlEscaper::attribute($this->policyUrl($destination)).'">'.HtmlEscaper::text($label).'</a>';
+                $rendered = '<a href="' . HtmlEscaper::attribute($this->policyUrl($destination)) . '">' . HtmlEscaper::text($label) . '</a>';
 
                 if (null !== $this->htmlLinkDecorators) {
                     $startOffset = $this->content->sourceOffset($offset);
@@ -609,12 +609,12 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
 
         $opener->length -= $use;
         $this->slotLength[$openSlot] = $opener->length;
-        $this->slotOpen[$openSlot] = $openTag.($this->slotOpen[$openSlot] ?? '');
+        $this->slotOpen[$openSlot] = $openTag . ($this->slotOpen[$openSlot] ?? '');
         $this->slotOpenCount[$openSlot] = ($this->slotOpenCount[$openSlot] ?? 0) + 1;
 
         $closer->length -= $use;
         $this->slotLength[$closeSlot] = $closer->length;
-        $this->slotClose[$closeSlot] = ($this->slotClose[$closeSlot] ?? '').$closeTag;
+        $this->slotClose[$closeSlot] = ($this->slotClose[$closeSlot] ?? '') . $closeTag;
         $this->slotCloseCount[$closeSlot] = ($this->slotCloseCount[$closeSlot] ?? 0) + 1;
     }
 
@@ -972,7 +972,7 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
             );
         $href = $this->policyUrl($destination);
         $title = Href::resolve($title);
-        $attribute = '' === $title ? '' : ' title="'.HtmlEscaper::attribute($title).'"';
+        $attribute = '' === $title ? '' : ' title="' . HtmlEscaper::attribute($title) . '"';
 
         if ($bracket->image) {
             $this->patchImage($bracket, $href, $attribute);
@@ -980,7 +980,7 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
             return $end;
         }
 
-        $this->parts[$bracket->node] = '<a href="'.HtmlEscaper::attribute($href).'"'.$attribute.'>';
+        $this->parts[$bracket->node] = '<a href="' . HtmlEscaper::attribute($href) . '"' . $attribute . '>';
         $this->reservePart('</a>', '');
 
         if ($this->altTracking) {
@@ -1038,7 +1038,7 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
         $this->current = '';
         $this->altCurrent = '';
 
-        $this->parts[$bracket->node] = '<img src="'.HtmlEscaper::attribute($href).'" alt="'.HtmlEscaper::attribute($alt).'"'.$attribute.' />';
+        $this->parts[$bracket->node] = '<img src="' . HtmlEscaper::attribute($href) . '" alt="' . HtmlEscaper::attribute($alt) . '"' . $attribute . ' />';
 
         --$this->imageDepth;
         $this->altTracking = $this->imageDepth > 0;
@@ -1093,11 +1093,11 @@ final class FusedInlineRenderer implements BlockInlineRenderer, InlineScanState,
         foreach ($this->slotChar as $index => $char) {
             $length = $this->slotLength[$index];
             $this->parts[$index] = ($this->slotClose[$index] ?? '')
-                .($length > 0 ? str_repeat($char, $length) : '')
-                .($this->slotOpen[$index] ?? '');
+                . ($length > 0 ? str_repeat($char, $length) : '')
+                . ($this->slotOpen[$index] ?? '');
         }
 
-        return implode('', $this->parts).$this->current;
+        return implode('', $this->parts) . $this->current;
     }
 
     /**

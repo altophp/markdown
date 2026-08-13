@@ -60,7 +60,7 @@ final class PublicApiClassMapTest extends TestCase
 
     public function testResolvesAgainstRealSourceTree(): void
     {
-        $map = PublicApiClassMap::build(\dirname(__DIR__, 2).'/src', 'Alto\Markdown');
+        $map = PublicApiClassMap::build(\dirname(__DIR__, 2) . '/src', 'Alto\Markdown');
 
         self::assertSame('Alto\Markdown\MarkdownDocument', $map['MarkdownDocument'] ?? null);
         self::assertSame('Alto\Markdown\Stats\DocumentStats', $map['DocumentStats'] ?? null);
@@ -73,10 +73,10 @@ final class PublicApiClassMapTest extends TestCase
      */
     private function buildFromFixture(array $files): array
     {
-        $root = sys_get_temp_dir().'/alto-classmap-'.bin2hex(random_bytes(6));
+        $root = sys_get_temp_dir() . '/alto-classmap-' . bin2hex(random_bytes(6));
 
         foreach ($files as $relative => $contents) {
-            $path = $root.'/'.$relative;
+            $path = $root . '/' . $relative;
             $dir = \dirname($path);
 
             if (!is_dir($dir) && !mkdir($dir, 0o755, true) && !is_dir($dir)) {
@@ -100,7 +100,7 @@ final class PublicApiClassMapTest extends TestCase
 
             foreach (false === $entries ? [] : $entries as $entry) {
                 if ('.' !== $entry && '..' !== $entry) {
-                    $this->removeTree($path.'/'.$entry);
+                    $this->removeTree($path . '/' . $entry);
                 }
             }
 

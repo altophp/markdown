@@ -125,6 +125,6 @@ final class SnippetExtractor
             return '';
         }
 
-        return implode("\n", $body)."\n";
+        return implode("\n", $body) . "\n";
     }
 }

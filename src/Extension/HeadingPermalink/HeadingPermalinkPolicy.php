@@ -56,6 +56,6 @@ final readonly class HeadingPermalinkPolicy
      */
     public static function prefixed(string $prefix, string $slug): string
     {
-        return '' === $prefix ? $slug : $prefix.'-'.$slug;
+        return '' === $prefix ? $slug : $prefix . '-' . $slug;
     }
 }

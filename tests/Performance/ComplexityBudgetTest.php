@@ -69,8 +69,8 @@ final class ComplexityBudgetTest extends TestCase
             $special = $compiled->inlineSpecialBytes;
 
             self::assertLessThanOrEqual(16, \strlen($special), \sprintf(
-                'The %s profile scans on %d special bytes ("%s"). A construct that declares whole '.
-                'character classes as triggers defeats the literal skip. Locate candidates with a '.
+                'The %s profile scans on %d special bytes ("%s"). A construct that declares whole ' .
+                'character classes as triggers defeats the literal skip. Locate candidates with a ' .
                 'substring search instead, the way ContentScannedInlineConstruct does.',
                 $name,
                 \strlen($special),
@@ -95,7 +95,7 @@ final class ComplexityBudgetTest extends TestCase
 
         foreach (['une ligne' => $paragraph, 'replie' => wordwrap($paragraph, 60)] as $shape => $markdown) {
             Instrumentation::measure();
-            Markdown::gfm()->toHtml($markdown."\n", null, self::options());
+            Markdown::gfm()->toHtml($markdown . "\n", null, self::options());
 
             self::assertGreaterThan(0, Instrumentation::$plainScanHits, \sprintf(
                 'Plain prose (%s) fell through to the rich inline path.',
@@ -115,13 +115,13 @@ final class ComplexityBudgetTest extends TestCase
     public function testCountersStayWiredToTheirPaths(): void
     {
         Instrumentation::measure();
-        Markdown::gfm()->toHtml('<span title="x">a</span> b'."\n", null, self::options());
+        Markdown::gfm()->toHtml('<span title="x">a</span> b' . "\n", null, self::options());
 
         self::assertGreaterThan(0, Instrumentation::$rawHtmlCandidates, self::blind('rawHtmlCandidates', 'inline raw HTML'));
         self::assertGreaterThan(0, Instrumentation::$rawHtmlScanBytes, self::blind('rawHtmlScanBytes', 'inline raw HTML'));
 
         Instrumentation::measure();
-        Markdown::gfm()->toHtml('*a* **b** *c* **d**'."\n", null, self::options());
+        Markdown::gfm()->toHtml('*a* **b** *c* **d**' . "\n", null, self::options());
 
         self::assertGreaterThan(0, Instrumentation::$fusedInlineRenders, self::blind('fusedInlineRenders', 'rich inline content'));
         self::assertGreaterThan(0, Instrumentation::$escapeCalls, self::blind('escapeCalls', 'text that needs escaping'));
@@ -183,7 +183,7 @@ final class ComplexityBudgetTest extends TestCase
 
         // One start probe per opening fence, not per line of the document.
         self::assertSame(400, $counts[400]['tryStart'], \sprintf(
-            '400 fenced blocks cost %d start probes. A probe per line rather than per block is '.
+            '400 fenced blocks cost %d start probes. A probe per line rather than per block is ' .
             'the fragmentation trap this budget exists for.',
             $counts[400]['tryStart'],
         ));
@@ -194,7 +194,7 @@ final class ComplexityBudgetTest extends TestCase
         $fnsGrowth = $counts[400]['fns'] / max(1, $counts[10]['fns']);
 
         self::assertLessThan(2.0 * $lineGrowth, $fnsGrowth, \sprintf(
-            'Fragmenting to 400 blocks grew the line count %.2fx but the first-non-space '.
+            'Fragmenting to 400 blocks grew the line count %.2fx but the first-non-space ' .
             'queries %.2fx (%d to %d). The block loop is asking per block per line.',
             $lineGrowth,
             $fnsGrowth,
@@ -204,7 +204,7 @@ final class ComplexityBudgetTest extends TestCase
 
         // Code content never needs a column: a root fence keeps one span.
         self::assertSame(0, $counts[400]['columnWalk'], \sprintf(
-            'Root fenced code walked %d bytes of column arithmetic. Contiguous spans exist so '.
+            'Root fenced code walked %d bytes of column arithmetic. Contiguous spans exist so ' .
             'it walks none.',
             $counts[400]['columnWalk'],
         ));
@@ -213,7 +213,7 @@ final class ComplexityBudgetTest extends TestCase
     private static function blind(string $counter, string $input): string
     {
         return \sprintf(
-            'Counter %s stayed at zero on input containing %s. It is no longer wired to the path '.
+            'Counter %s stayed at zero on input containing %s. It is no longer wired to the path ' .
             'it claims to measure, so any attribution reading it is silently wrong.',
             $counter,
             $input,
@@ -234,13 +234,13 @@ final class ComplexityBudgetTest extends TestCase
             $definitions .= \sprintf("[ref%d]: /url/%d\n", $i, $i);
         }
 
-        $markdown = $definitions."\n".str_repeat("Some prose that mentions nothing in particular.\n\n", 200);
+        $markdown = $definitions . "\n" . str_repeat("Some prose that mentions nothing in particular.\n\n", 200);
 
         Instrumentation::measure();
         Markdown::gfm()->toHtml($markdown, null, self::options());
 
         self::assertLessThan(\strlen($markdown), Instrumentation::$blockRefdefScanBytes, \sprintf(
-            'Reference extraction examined %d bytes of a %d byte document. It is rescanning '.
+            'Reference extraction examined %d bytes of a %d byte document. It is rescanning ' .
             'beyond the paragraph being closed.',
             Instrumentation::$blockRefdefScanBytes,
             \strlen($markdown),
@@ -260,7 +260,7 @@ final class ComplexityBudgetTest extends TestCase
         // counter measures real search work.
         foreach ([1000, 2000, 4000] as $size) {
             Instrumentation::measure();
-            Markdown::gfm()->toHtml(str_repeat('*x* ', $size)."\n", null, self::options());
+            Markdown::gfm()->toHtml(str_repeat('*x* ', $size) . "\n", null, self::options());
             $steps[$size] = Instrumentation::$delimiterSearchSteps;
         }
 
@@ -272,7 +272,7 @@ final class ComplexityBudgetTest extends TestCase
             $growth = $steps[$size / 2] > 0 ? $steps[$size] / $steps[$size / 2] : 1.0;
 
             self::assertLessThan(2.5, $growth, \sprintf(
-                'Delimiter search grew %.2fx when the input doubled to %d (%d steps to %d). '.
+                'Delimiter search grew %.2fx when the input doubled to %d (%d steps to %d). ' .
                 'Linear behaviour doubles; anything approaching 4x is quadratic.',
                 $growth,
                 $size,
@@ -291,10 +291,10 @@ final class ComplexityBudgetTest extends TestCase
     public function testUnmatchedDelimitersDoNotRescanTheStack(): void
     {
         Instrumentation::measure();
-        Markdown::gfm()->toHtml(str_repeat('a* ', 4000)."\n", null, self::options());
+        Markdown::gfm()->toHtml(str_repeat('a* ', 4000) . "\n", null, self::options());
 
         self::assertLessThan(4000, Instrumentation::$delimiterSearchSteps, \sprintf(
-            '4,000 unmatched closers cost %d search steps. The openers-bottom bound is not '.
+            '4,000 unmatched closers cost %d search steps. The openers-bottom bound is not ' .
             'holding, which is the quadratic emphasis trap.',
             Instrumentation::$delimiterSearchSteps,
         ));
@@ -324,7 +324,7 @@ final class ComplexityBudgetTest extends TestCase
      */
     public function testFusedFallbackDoesNotFireOnOrdinaryContent(): void
     {
-        $markdown = "# Title\n\n".wordwrap(trim(str_repeat('some prose with `code`, *emphasis*, a [link](/url) and **strong** text. ', 20)), 78)."\n";
+        $markdown = "# Title\n\n" . wordwrap(trim(str_repeat('some prose with `code`, *emphasis*, a [link](/url) and **strong** text. ', 20)), 78) . "\n";
 
         Instrumentation::measure();
         Markdown::gfm()->toHtml($markdown, null, self::options());

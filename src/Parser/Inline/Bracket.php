@@ -34,6 +34,5 @@ final class Bracket
         public readonly int $delimiterIndex,
         public readonly int $contentOffset,
         public readonly int $previousSibling,
-    ) {
-    }
+    ) {}
 }

@@ -29,9 +29,7 @@ final class InlineCountBudget
 {
     private int $inlineCount = 0;
 
-    public function __construct(private readonly int $maxInlineCount)
-    {
-    }
+    public function __construct(private readonly int $maxInlineCount) {}
 
     public function begin(): InlineCountBudgetSession
     {

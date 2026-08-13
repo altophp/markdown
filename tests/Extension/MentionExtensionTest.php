@@ -58,8 +58,8 @@ final class MentionExtensionTest extends TestCase
 
         self::assertSame(
             '<p><a href="https://example.com/teams/Core">@@Core</a> '
-            .'<a href="https://example.com/users/Ada">@Ada</a> '
-            ."<a href=\"https://example.com/issues/42\">#42</a></p>\n",
+            . '<a href="https://example.com/users/Ada">@Ada</a> '
+            . "<a href=\"https://example.com/issues/42\">#42</a></p>\n",
             $factory->toHtml("@@Core @Ada #42\n"),
         );
     }
@@ -89,8 +89,8 @@ final class MentionExtensionTest extends TestCase
             public function resolve(Mention $mention): MentionTarget
             {
                 return new MentionTarget(
-                    'https://example.com/member/'.rawurlencode($mention->identifier),
-                    'Member '.$mention->identifier,
+                    'https://example.com/member/' . rawurlencode($mention->identifier),
+                    'Member ' . $mention->identifier,
                     'Open profile',
                 );
             }
@@ -168,7 +168,7 @@ final class MentionExtensionTest extends TestCase
 
         $mentions = array_values(array_filter(
             [...$model->traversalInlineEvents($heading->id()->ordinal)],
-            static fn (array $event): bool => 'mention:user' === $event[1],
+            static fn(array $event): bool => 'mention:user' === $event[1],
         ));
 
         self::assertCount(1, $mentions);
@@ -222,12 +222,12 @@ final class MentionExtensionTest extends TestCase
         $resolver = new UrlTemplateMentionResolver('https://example.com/%s');
 
         $invalid = [
-            static fn (): MentionDefinition => new MentionDefinition('Bad', '@', '[a-z]+', $resolver),
-            static fn (): MentionDefinition => new MentionDefinition('user', '', '[a-z]+', $resolver),
-            static fn (): MentionDefinition => new MentionDefinition('user', '@', '[', $resolver),
-            static fn (): MentionDefinition => new MentionDefinition('user', '@', '.*', $resolver),
-            static fn (): MentionDefinition => new MentionDefinition('user', '@', '[a-z]+', $resolver, 0),
-            static fn (): MentionDefinition => new MentionDefinition('user', '@', "~#%!;\x01", $resolver),
+            static fn(): MentionDefinition => new MentionDefinition('Bad', '@', '[a-z]+', $resolver),
+            static fn(): MentionDefinition => new MentionDefinition('user', '', '[a-z]+', $resolver),
+            static fn(): MentionDefinition => new MentionDefinition('user', '@', '[', $resolver),
+            static fn(): MentionDefinition => new MentionDefinition('user', '@', '.*', $resolver),
+            static fn(): MentionDefinition => new MentionDefinition('user', '@', '[a-z]+', $resolver, 0),
+            static fn(): MentionDefinition => new MentionDefinition('user', '@', "~#%!;\x01", $resolver),
         ];
 
         foreach ($invalid as $create) {

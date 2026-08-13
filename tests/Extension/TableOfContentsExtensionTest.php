@@ -53,17 +53,17 @@ final class TableOfContentsExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new TableOfContentsExtension());
         $source = "# Guide\n\n@toc {min: 2}\n\n## Intro *now*\n\n### Use [`it`](https://example.com)\n";
         $expected = "<h1 id=\"guide\">Guide</h1>\n"
-            ."<nav class=\"table-of-contents\" id=\"toc\">\n"
-            ."<ul>\n"
-            ."<li><a href=\"#intro-now\">Intro now</a>\n"
-            ."<ul>\n"
-            ."<li><a href=\"#use-it\">Use it</a></li>\n"
-            ."</ul>\n"
-            ."</li>\n"
-            ."</ul>\n"
-            ."</nav>\n"
-            ."<h2 id=\"intro-now\">Intro <em>now</em></h2>\n"
-            ."<h3 id=\"use-it\">Use <a href=\"https://example.com\"><code>it</code></a></h3>\n";
+            . "<nav class=\"table-of-contents\" id=\"toc\">\n"
+            . "<ul>\n"
+            . "<li><a href=\"#intro-now\">Intro now</a>\n"
+            . "<ul>\n"
+            . "<li><a href=\"#use-it\">Use it</a></li>\n"
+            . "</ul>\n"
+            . "</li>\n"
+            . "</ul>\n"
+            . "</nav>\n"
+            . "<h2 id=\"intro-now\">Intro <em>now</em></h2>\n"
+            . "<h3 id=\"use-it\">Use <a href=\"https://example.com\"><code>it</code></a></h3>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
 
@@ -80,10 +80,10 @@ final class TableOfContentsExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new TableOfContentsExtension());
         $source = "# Repeat\n\n# Repeat\n\n# Repeat-1\n\n# !\n\n# toc-heading\n";
         $expected = "<h1 id=\"repeat\">Repeat</h1>\n"
-            ."<h1 id=\"repeat-1\">Repeat</h1>\n"
-            ."<h1 id=\"repeat-1-1\">Repeat-1</h1>\n"
-            ."<h1 id=\"toc-heading\">!</h1>\n"
-            ."<h1 id=\"toc-heading-toc-heading\">toc-heading</h1>\n";
+            . "<h1 id=\"repeat-1\">Repeat</h1>\n"
+            . "<h1 id=\"repeat-1-1\">Repeat-1</h1>\n"
+            . "<h1 id=\"toc-heading\">!</h1>\n"
+            . "<h1 id=\"toc-heading-toc-heading\">toc-heading</h1>\n";
 
         Instrumentation::reset();
         self::assertSame($expected, $factory->toHtml($source));
@@ -103,18 +103,18 @@ final class TableOfContentsExtensionTest extends TestCase
 
         self::assertStringContainsString(
             "<nav class=\"table-of-contents\" id=\"toc\">\n"
-            ."<ul>\n"
-            ."<li><a href=\"#middle\">Middle</a></li>\n"
-            ."</ul>\n"
-            ."</nav>\n",
+            . "<ul>\n"
+            . "<li><a href=\"#middle\">Middle</a></li>\n"
+            . "</ul>\n"
+            . "</nav>\n",
             $html,
         );
         self::assertStringContainsString(
             "<nav class=\"table-of-contents\" id=\"toc-1\">\n"
-            ."<ol>\n"
-            ."<li><a href=\"#deep\">Deep</a></li>\n"
-            ."</ol>\n"
-            ."</nav>\n",
+            . "<ol>\n"
+            . "<li><a href=\"#deep\">Deep</a></li>\n"
+            . "</ol>\n"
+            . "</nav>\n",
             $html,
         );
         self::assertSame(1, Instrumentation::$documentTransformInvocations);
@@ -127,19 +127,19 @@ final class TableOfContentsExtensionTest extends TestCase
 
         self::assertSame(
             "<h1 id=\"top\">Top</h1>\n"
-            ."<nav class=\"table-of-contents\" id=\"toc\">\n"
-            ."<ul>\n"
-            ."<li><a href=\"#top\">Top</a>\n"
-            ."<ul>\n"
-            ."<li><a href=\"#root\">Root</a></li>\n"
-            ."</ul>\n"
-            ."</li>\n"
-            ."</ul>\n"
-            ."</nav>\n"
-            ."<blockquote>\n"
-            ."<h2 id=\"nested\">Nested</h2>\n"
-            ."</blockquote>\n"
-            ."<h2 id=\"root\">Root</h2>\n",
+            . "<nav class=\"table-of-contents\" id=\"toc\">\n"
+            . "<ul>\n"
+            . "<li><a href=\"#top\">Top</a>\n"
+            . "<ul>\n"
+            . "<li><a href=\"#root\">Root</a></li>\n"
+            . "</ul>\n"
+            . "</li>\n"
+            . "</ul>\n"
+            . "</nav>\n"
+            . "<blockquote>\n"
+            . "<h2 id=\"nested\">Nested</h2>\n"
+            . "</blockquote>\n"
+            . "<h2 id=\"root\">Root</h2>\n",
             $factory->toHtml("# Top\n\n@toc\n\n> ## Nested\n\n## Root\n"),
         );
     }
@@ -160,13 +160,13 @@ final class TableOfContentsExtensionTest extends TestCase
 
         self::assertSame(
             "<h1 id=\"top\">Top</h1>\n"
-            ."<nav class=\"contents &quot;wide&quot;\" id=\"guide\">\n"
-            ."<p class=\"table-of-contents-title\">On &lt;this&gt; page</p>\n"
-            ."<ol>\n"
-            ."<li><a href=\"#details\">Details</a></li>\n"
-            ."</ol>\n"
-            ."</nav>\n"
-            ."<h2 id=\"details\">Details</h2>\n",
+            . "<nav class=\"contents &quot;wide&quot;\" id=\"guide\">\n"
+            . "<p class=\"table-of-contents-title\">On &lt;this&gt; page</p>\n"
+            . "<ol>\n"
+            . "<li><a href=\"#details\">Details</a></li>\n"
+            . "</ol>\n"
+            . "</nav>\n"
+            . "<h2 id=\"details\">Details</h2>\n",
             $factory->toHtml("# Top\n\n[[toc]]\n\n## Details\n"),
         );
 
@@ -202,14 +202,14 @@ final class TableOfContentsExtensionTest extends TestCase
 
         self::assertSame(
             "\n<ul>\n"
-            ."<li><a href=\"#title\">Title</a>\n"
-            ."<ul>\n"
-            ."<li><a href=\"#child\">Child</a></li>\n"
-            ."</ul>\n"
-            ."</li>\n"
-            ."</ul>\n"
-            ."\n<h1>Title</h1>\n"
-            ."<h2>Child</h2>\n",
+            . "<li><a href=\"#title\">Title</a>\n"
+            . "<ul>\n"
+            . "<li><a href=\"#child\">Child</a></li>\n"
+            . "</ul>\n"
+            . "</li>\n"
+            . "</ul>\n"
+            . "\n<h1>Title</h1>\n"
+            . "<h2>Child</h2>\n",
             $html,
         );
     }
@@ -236,13 +236,13 @@ final class TableOfContentsExtensionTest extends TestCase
         yield 'missing brace' => ['@toc {min: 2'];
         yield 'nested brace' => ['@toc {{min: 2}}'];
         yield 'trailing comma' => ['@toc {min: 2,}'];
-        yield 'over byte limit' => ['@toc '.str_repeat('x', 508)];
+        yield 'over byte limit' => ['@toc ' . str_repeat('x', 508)];
     }
 
     #[DataProvider('invalidDirectives')]
     public function testInvalidOrIndentedDirectivesRemainLiteralMarkdown(string $directive): void
     {
-        $source = $directive."\n";
+        $source = $directive . "\n";
         $document = Markdown::commonmark()
             ->with(new TableOfContentsExtension())
             ->fromString($source);
@@ -324,11 +324,11 @@ final class TableOfContentsExtensionTest extends TestCase
 
         self::assertSame(
             "<nav class=\"table-of-contents\" id=\"toc\">\n"
-            ."<ul>\n"
-            ."<li><a href=\"#projected\">Projected</a></li>\n"
-            ."</ul>\n"
-            ."</nav>\n"
-            ."<h3 id=\"projected\">Projected</h3>\n",
+            . "<ul>\n"
+            . "<li><a href=\"#projected\">Projected</a></li>\n"
+            . "</ul>\n"
+            . "</nav>\n"
+            . "<h3 id=\"projected\">Projected</h3>\n",
             $factory->toHtml("@toc {min: 3, max: 3}\n\n# Projected\n"),
         );
     }
@@ -414,22 +414,22 @@ final class TableOfContentsExtensionTest extends TestCase
      */
     public static function invalidPolicies(): iterable
     {
-        yield 'minimum below one' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 0)];
-        yield 'minimum above six' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 7)];
-        yield 'maximum below one' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(maxLevel: 0)];
-        yield 'maximum above six' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(maxLevel: 7)];
-        yield 'reversed range' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 4, maxLevel: 2)];
-        yield 'class control byte' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(htmlClass: "toc\nwide")];
-        yield 'class too long' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(htmlClass: str_repeat('x', 257))];
-        yield 'id whitespace' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(id: 'table contents')];
-        yield 'id too long' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(id: str_repeat('x', 129))];
-        yield 'title control byte' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(title: "bad\x01title")];
-        yield 'title too long' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(title: str_repeat('x', 513))];
-        yield 'empty marker' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(marker: '')];
-        yield 'marker whitespace' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(marker: 'table contents')];
-        yield 'marker brace' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(marker: '[{toc}]')];
-        yield 'marker non ASCII' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(marker: 'sommaire-é')];
-        yield 'marker too long' => [static fn (): TableOfContentsPolicy => new TableOfContentsPolicy(marker: str_repeat('x', 65))];
+        yield 'minimum below one' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 0)];
+        yield 'minimum above six' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 7)];
+        yield 'maximum below one' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(maxLevel: 0)];
+        yield 'maximum above six' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(maxLevel: 7)];
+        yield 'reversed range' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(minLevel: 4, maxLevel: 2)];
+        yield 'class control byte' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(htmlClass: "toc\nwide")];
+        yield 'class too long' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(htmlClass: str_repeat('x', 257))];
+        yield 'id whitespace' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(id: 'table contents')];
+        yield 'id too long' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(id: str_repeat('x', 129))];
+        yield 'title control byte' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(title: "bad\x01title")];
+        yield 'title too long' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(title: str_repeat('x', 513))];
+        yield 'empty marker' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(marker: '')];
+        yield 'marker whitespace' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(marker: 'table contents')];
+        yield 'marker brace' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(marker: '[{toc}]')];
+        yield 'marker non ASCII' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(marker: 'sommaire-é')];
+        yield 'marker too long' => [static fn(): TableOfContentsPolicy => new TableOfContentsPolicy(marker: str_repeat('x', 65))];
     }
 
     #[DataProvider('invalidPolicies')]
@@ -452,7 +452,7 @@ final readonly class TocLevelExtension implements DocumentTransformExtensionInte
     {
         yield new DocumentTransformDefinition(
             'level',
-            static fn (): TocLevelTransform => new TocLevelTransform(),
+            static fn(): TocLevelTransform => new TocLevelTransform(),
             \PHP_INT_MAX,
         );
     }
@@ -499,7 +499,7 @@ final readonly class BrokenTocExtension implements BlockExtensionInterface, Docu
         if ($this->withTransform) {
             yield new DocumentTransformDefinition(
                 'unrelated',
-                static fn (): EmptyTocTransform => new EmptyTocTransform(),
+                static fn(): EmptyTocTransform => new EmptyTocTransform(),
             );
         }
     }

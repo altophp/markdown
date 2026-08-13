@@ -28,9 +28,7 @@ use Alto\Markdown\Parser\Block\RootOnlyBlockParser;
  */
 final readonly class IncludeParser implements BlockParser, RootOnlyBlockParser
 {
-    public function __construct(private ?IncludeExpander $expander = null)
-    {
-    }
+    public function __construct(private ?IncludeExpander $expander = null) {}
 
     public function triggerBytes(): string
     {

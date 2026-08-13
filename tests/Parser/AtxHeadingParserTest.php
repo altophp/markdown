@@ -61,7 +61,7 @@ final class AtxHeadingParserTest extends TestCase
     public function testSixLevels(): void
     {
         for ($level = 1; $level <= 6; ++$level) {
-            $line = str_repeat('#', $level).' foo';
+            $line = str_repeat('#', $level) . ' foo';
             $start = new AtxHeadingParser()->tryStart(self::state($line), 0, false);
 
             self::assertNotNull($start, $line);

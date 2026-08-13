@@ -26,9 +26,7 @@ final class InlineCountBudgetSession
 
     private bool $committed = false;
 
-    public function __construct(private readonly InlineCountBudget $budget)
-    {
-    }
+    public function __construct(private readonly InlineCountBudget $budget) {}
 
     public function add(?int $byteOffset): void
     {

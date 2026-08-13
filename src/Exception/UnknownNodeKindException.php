@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class UnknownNodeKindException extends \OutOfBoundsException implements MarkdownExceptionInterface
-{
-}
+final class UnknownNodeKindException extends \OutOfBoundsException implements MarkdownExceptionInterface {}

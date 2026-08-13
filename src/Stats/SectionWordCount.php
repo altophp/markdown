@@ -22,6 +22,5 @@ final readonly class SectionWordCount
         public string $title,
         public int $level,
         public int $wordCount,
-    ) {
-    }
+    ) {}
 }

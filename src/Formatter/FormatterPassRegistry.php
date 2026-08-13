@@ -137,7 +137,7 @@ final class FormatterPassRegistry
     public function createAll(): array
     {
         return array_map(
-            static fn (array $definition): FormattingPass => new $definition['class'](),
+            static fn(array $definition): FormattingPass => new $definition['class'](),
             array_values(self::PASSES),
         );
     }

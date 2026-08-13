@@ -49,9 +49,9 @@ final class LinkRewriterExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new LinkRewriterExtension($rewriter));
         $source = "[Guide](/guide) ![Logo](/logo.png) ![A &amp; B](/entity.png) <https://old.example/path>\n";
         $expected = '<p><a href="/v2/guide">Guide</a> '
-            .'<img src="https://cdn.example/logo.png" alt="Logo" /> '
-            .'<img src="https://cdn.example/entity.png" alt="A &amp; B" /> '
-            .'<a href="https://new.example/path">https://old.example/path</a></p>'."\n";
+            . '<img src="https://cdn.example/logo.png" alt="Logo" /> '
+            . '<img src="https://cdn.example/entity.png" alt="A &amp; B" /> '
+            . '<a href="https://new.example/path">https://old.example/path</a></p>' . "\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame(
@@ -92,7 +92,7 @@ final class LinkRewriterExtensionTest extends TestCase
             LinkRewriter::baseUri('https://docs.example/base/'),
         ));
         $source = '[Root](/guide) [Path](guide) [Empty]() [Fragment](#part) '
-            ."[Query](?page=2) [Network](//cdn.example/a) [Absolute](mailto:a@example.com)\n";
+            . "[Query](?page=2) [Network](//cdn.example/a) [Absolute](mailto:a@example.com)\n";
         $html = $factory->toHtml($source);
 
         self::assertStringContainsString('href="https://docs.example/base/guide"', $html);
@@ -111,8 +111,8 @@ final class LinkRewriterExtensionTest extends TestCase
         ));
         $source = "| Link |\n| --- |\n| [Guide](/guide) |\n";
         $expected = "<table>\n<thead>\n<tr>\n<th>Link</th>\n</tr>\n</thead>\n"
-            ."<tbody>\n<tr>\n<td><a href=\"/v2/guide\">Guide</a></td>\n"
-            ."</tr>\n</tbody>\n</table>\n";
+            . "<tbody>\n<tr>\n<td><a href=\"/v2/guide\">Guide</a></td>\n"
+            . "</tr>\n</tbody>\n</table>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame($expected, $factory->fromString($source)->toHtml());
@@ -130,7 +130,7 @@ final class LinkRewriterExtensionTest extends TestCase
             LinkRewriter::callback(static function (LinkDestinationContext $context) use (&$seen): string {
                 $seen[] = [$context->kind, $context->destination, $context->source()];
 
-                return $context->destination.'?from=markdown';
+                return $context->destination . '?from=markdown';
             }),
         );
         $factory = Markdown::commonmark()->with(new LinkRewriterExtension($rewriter));
@@ -213,7 +213,7 @@ final class LinkRewriterExtensionTest extends TestCase
 
         $source = "[Guide](https://internal.example/guide)\n";
         $expected = '<p><a class="external" rel="noopener noreferrer" target="_blank" '
-            .'href="https://outside.example/guide" data-link>Guide</a></p>'."\n";
+            . 'href="https://outside.example/guide" data-link>Guide</a></p>' . "\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame($expected, $factory->fromString($source)->toHtml());
@@ -249,16 +249,16 @@ final class LinkRewriterExtensionTest extends TestCase
         self::assertSame(0, $result->skippedOverlaps);
         self::assertSame(
             '[One](https://docs.example/one) and [Two](https://docs.example/two) '
-            ."with ![Logo](https://docs.example/logo.png) and [Mail](mailto:a@example.com).\n",
+            . "with ![Logo](https://docs.example/logo.png) and [Mail](mailto:a@example.com).\n",
             $document->toMarkdown(),
         );
         self::assertCount(3, $document->model()->journal()->operations());
         self::assertCount(3, $document->model()->journal()->entries());
         self::assertSame(
             '<p><a href="https://docs.example/one">One</a> and '
-            .'<a href="https://docs.example/two">Two</a> with '
-            .'<img src="https://docs.example/logo.png" alt="Logo" /> and '
-            .'<a href="mailto:a@example.com">Mail</a>.</p>'."\n",
+            . '<a href="https://docs.example/two">Two</a> with '
+            . '<img src="https://docs.example/logo.png" alt="Logo" /> and '
+            . '<a href="mailto:a@example.com">Mail</a>.</p>' . "\n",
             $document->toHtml(),
         );
     }
@@ -266,9 +266,9 @@ final class LinkRewriterExtensionTest extends TestCase
     public function testExplicitMutationSkipsReferencesAndOverlappingDestinations(): void
     {
         $source = "[Reference][guide] ![Asset][image]\n\n"
-            ."[![Nested](/nested.png)](/outer)\n\n"
-            ."[guide]: /guide\n"
-            ."[image]: /image.png\n";
+            . "[![Nested](/nested.png)](/outer)\n\n"
+            . "[guide]: /guide\n"
+            . "[image]: /image.png\n";
         $document = Markdown::commonmark()->fromString($source);
 
         $result = LinkRewriter::baseUri('https://docs.example')->rewriteDocument($document);
@@ -322,7 +322,7 @@ final class LinkRewriterExtensionTest extends TestCase
                     throw new \RuntimeException('late failure');
                 }
 
-                return '/rewritten'.$context->destination;
+                return '/rewritten' . $context->destination;
             },
         );
         $source = "[One](/one) [Two](/two)\n";
@@ -355,11 +355,11 @@ final class LinkRewriterExtensionTest extends TestCase
     public function testRejectsInvalidBaseMapsPatternsAndCallbackOutputs(): void
     {
         foreach ([
-            static fn (): LinkRewriter => LinkRewriter::baseUri(''),
-            static fn (): mixed => new \ReflectionMethod(LinkRewriter::class, 'map')
+            static fn(): LinkRewriter => LinkRewriter::baseUri(''),
+            static fn(): mixed => new \ReflectionMethod(LinkRewriter::class, 'map')
                 ->invoke(null, [1 => '/invalid-key']),
-            static fn (): LinkRewriter => LinkRewriter::map(['/ok' => "bad\x00"]),
-            static fn (): LinkRewriter => LinkRewriter::pattern('/[/', 'x'),
+            static fn(): LinkRewriter => LinkRewriter::map(['/ok' => "bad\x00"]),
+            static fn(): LinkRewriter => LinkRewriter::pattern('/[/', 'x'),
         ] as $factory) {
             try {
                 $factory();
@@ -369,7 +369,7 @@ final class LinkRewriterExtensionTest extends TestCase
         }
 
         $factory = Markdown::commonmark()->with(new LinkRewriterExtension(
-            LinkRewriter::callback(static fn (): string => "bad\x00"),
+            LinkRewriter::callback(static fn(): string => "bad\x00"),
         ));
 
         $this->expectException(InvalidMarkdownArgumentException::class);

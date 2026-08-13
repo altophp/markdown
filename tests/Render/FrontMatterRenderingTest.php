@@ -208,11 +208,7 @@ final class FrontMatterRecordingVisitor implements TraversalVisitor
         $this->kinds[] = $event->kind->name;
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
-    public function inline(InlineEvent $event): void
-    {
-    }
+    public function inline(InlineEvent $event): void {}
 }

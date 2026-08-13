@@ -33,8 +33,7 @@ abstract class AbstractExtension implements FeatureExtensionInterface, NodeKindB
         private readonly array $features = [],
         private readonly array $nodeKindNames = [],
         private readonly array $nodeKinds = [],
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {

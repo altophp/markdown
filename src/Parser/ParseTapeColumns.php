@@ -59,6 +59,5 @@ final readonly class ParseTapeColumns
         public array $flags,
         public array $payload,
         public array $extensionInlineNode,
-    ) {
-    }
+    ) {}
 }

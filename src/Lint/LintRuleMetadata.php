@@ -29,6 +29,5 @@ final readonly class LintRuleMetadata
         public bool $fixable,
         public LintRuleCategory $category = LintRuleCategory::Style,
         public ?string $optionsClass = null,
-    ) {
-    }
+    ) {}
 }

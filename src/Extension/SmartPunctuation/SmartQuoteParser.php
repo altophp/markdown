@@ -34,8 +34,7 @@ final readonly class SmartQuoteParser implements InlineParser
         private string $opener,
         private string $closer,
         private string $unpaired,
-    ) {
-    }
+    ) {}
 
     public static function double(string $opener, string $closer): self
     {

@@ -33,10 +33,10 @@ final class DescriptionPrinter implements BlockPrinter
 
         $lines = explode("\n", $children);
         $first = array_shift($lines) ?? '';
-        $markdown = ': '.$first;
+        $markdown = ': ' . $first;
 
         foreach ($lines as $line) {
-            $markdown .= "\n".('' === $line ? '' : '  '.$line);
+            $markdown .= "\n" . ('' === $line ? '' : '  ' . $line);
         }
 
         return $markdown;

@@ -28,8 +28,7 @@ final readonly class ContentSlicerLayout implements DocumentRootHtmlLayout
     public function __construct(
         private array $before,
         private int $finalClosings,
-    ) {
-    }
+    ) {}
 
     public function isEmpty(): bool
     {

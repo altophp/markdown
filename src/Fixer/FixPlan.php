@@ -28,8 +28,7 @@ final readonly class FixPlan
      */
     public function __construct(
         private array $operations = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param iterable<FixResult> $results
@@ -141,7 +140,7 @@ final readonly class FixPlan
 
         usort(
             $patches,
-            static fn (array $left, array $right): int => [
+            static fn(array $left, array $right): int => [
                 $left[0]->range->startOffset,
                 $left[0]->range->endOffset,
                 $left[2],

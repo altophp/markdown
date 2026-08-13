@@ -31,8 +31,7 @@ final readonly class LintContext
         private string $source,
         private array $blocks,
         private array $inlines,
-    ) {
-    }
+    ) {}
 
     public function source(): string
     {

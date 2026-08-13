@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-interface MarkdownExceptionInterface extends \Throwable
-{
-}
+interface MarkdownExceptionInterface extends \Throwable {}

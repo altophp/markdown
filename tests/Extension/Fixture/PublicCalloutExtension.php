@@ -50,7 +50,7 @@ final readonly class PublicCalloutExtension implements BlockExtensionInterface, 
         yield new LintRuleDefinition(
             name: 'lowercase-label',
             summary: 'Require lowercase callout labels.',
-            factory: static fn (): PublicCalloutLabelRule => new PublicCalloutLabelRule(),
+            factory: static fn(): PublicCalloutLabelRule => new PublicCalloutLabelRule(),
             defaultSeverity: LintSeverity::Warning,
             fixable: true,
         );
@@ -61,7 +61,7 @@ final readonly class PublicCalloutExtension implements BlockExtensionInterface, 
         yield new FormatterPassDefinition(
             name: 'lowercase-label',
             summary: 'Normalize callout labels to lowercase.',
-            factory: static fn (): PublicCalloutFormatter => new PublicCalloutFormatter(),
+            factory: static fn(): PublicCalloutFormatter => new PublicCalloutFormatter(),
         );
     }
 
@@ -70,7 +70,7 @@ final readonly class PublicCalloutExtension implements BlockExtensionInterface, 
         yield new StatsMetricDefinition(
             name: 'callouts',
             summary: 'Count callout blocks.',
-            factory: static fn (): PublicCalloutMetric => new PublicCalloutMetric(),
+            factory: static fn(): PublicCalloutMetric => new PublicCalloutMetric(),
         );
     }
 }

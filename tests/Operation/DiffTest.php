@@ -92,7 +92,7 @@ final class DiffTest extends TestCase
 
     public function testLargeAlignedDiffStaysBoundedAndRepresentsEveryReplacement(): void
     {
-        $originalLines = array_map(static fn (int $line): string => "line {$line}\n", range(1, 1_100));
+        $originalLines = array_map(static fn(int $line): string => "line {$line}\n", range(1, 1_100));
         $editedLines = $originalLines;
         $editedLines[99] = "changed 100\n";
         $editedLines[999] = "changed 1000\n";
@@ -107,7 +107,7 @@ final class DiffTest extends TestCase
 
     public function testLargeUnequalDiffKeepsCommonEdgesAndRepresentsTheInsertion(): void
     {
-        $originalLines = array_map(static fn (int $line): string => "line {$line}\n", range(1, 1_100));
+        $originalLines = array_map(static fn(int $line): string => "line {$line}\n", range(1, 1_100));
         $editedLines = $originalLines;
         array_splice($editedLines, 550, 0, ["inserted\n"]);
         $original = implode('', $originalLines);
@@ -121,7 +121,7 @@ final class DiffTest extends TestCase
 
     public function testLargeEqualLengthShiftUsesStableAnchors(): void
     {
-        $originalLines = array_map(static fn (int $line): string => "line {$line}\n", range(1, 1_100));
+        $originalLines = array_map(static fn(int $line): string => "line {$line}\n", range(1, 1_100));
         $editedLines = $originalLines;
         array_splice($editedLines, 100, 0, ["inserted\n"]);
         array_splice($editedLines, 1_000, 1);
@@ -162,7 +162,7 @@ final class DiffTest extends TestCase
 
     public function testLargeReorderedInputsBuildAStableAnchorChain(): void
     {
-        $originalLines = array_map(static fn (int $line): string => "line {$line}\n", range(1, 1_100));
+        $originalLines = array_map(static fn(int $line): string => "line {$line}\n", range(1, 1_100));
         $editedLines = \array_reverse($originalLines);
         $original = implode('', $originalLines);
         $edited = implode('', $editedLines);
@@ -207,6 +207,6 @@ final class DiffTest extends TestCase
 
         array_push($editedLines, ...array_slice($originalLines, $cursor));
 
-        return implode("\n", $editedLines)."\n";
+        return implode("\n", $editedLines) . "\n";
     }
 }

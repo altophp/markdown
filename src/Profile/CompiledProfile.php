@@ -84,8 +84,7 @@ final readonly class CompiledProfile
         public ?CompiledHtmlDecoratorChain $htmlLinkDecorators,
         public ?CompiledHtmlDecoratorChain $htmlHeadingDecorators,
         public array $inlineLinks,
-    ) {
-    }
+    ) {}
 
     public function supports(Feature $feature): bool
     {

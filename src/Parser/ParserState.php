@@ -81,22 +81,34 @@ final class ParserState
      */
     public private(set) bool $lineIsBlank;
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private readonly array $lineStarts;
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private readonly array $lineContentEnds;
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private readonly array $lineEnds;
 
-    /** @var list<bool> */
+    /**
+     * @var list<bool>
+     */
     private readonly array $lineBlankFlags;
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private readonly array $lineFirstNonSpaceOffsets;
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private readonly array $lineFirstNonSpaceColumns;
 
     /**

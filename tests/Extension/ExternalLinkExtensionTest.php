@@ -39,13 +39,13 @@ final class ExternalLinkExtensionTest extends TestCase
             new ExternalLinkPolicy(internalHosts: ['internal.test']),
         ));
         $source = 'See [outside](https://outside.test/docs), '
-            ."[inside](https://internal.test/docs), and <https://outside.test/help>.\n";
+            . "[inside](https://internal.test/docs), and <https://outside.test/help>.\n";
         $expectedInline = 'See <a rel="noopener noreferrer" href="https://outside.test/docs">outside</a>, '
-            .'<a href="https://internal.test/docs">inside</a>, and '
-            .'<a rel="noopener noreferrer" href="https://outside.test/help">https://outside.test/help</a>.';
+            . '<a href="https://internal.test/docs">inside</a>, and '
+            . '<a rel="noopener noreferrer" href="https://outside.test/help">https://outside.test/help</a>.';
 
-        self::assertSame('<p>'.$expectedInline."</p>\n", $factory->toHtml($source));
-        self::assertSame('<p>'.$expectedInline."</p>\n", $factory->fromString($source)->toHtml());
+        self::assertSame('<p>' . $expectedInline . "</p>\n", $factory->toHtml($source));
+        self::assertSame('<p>' . $expectedInline . "</p>\n", $factory->fromString($source)->toHtml());
         self::assertSame($expectedInline, $factory->toInlineHtml(rtrim($source)));
         self::assertSame($source, $factory->fromString($source)->toMarkdown());
     }
@@ -65,7 +65,7 @@ final class ExternalLinkExtensionTest extends TestCase
 
         self::assertSame(
             '<p><a class="external" rel="nofollow noopener" target="_blank" href="https://outside.test">outside</a> '
-            .'<a rel="noopener noreferrer" href="https://internal.test">inside</a></p>'."\n",
+            . '<a rel="noopener noreferrer" href="https://internal.test">inside</a></p>' . "\n",
             $factory->toHtml("[outside](https://outside.test) [inside](https://internal.test)\n"),
         );
     }
@@ -145,7 +145,7 @@ final class ExternalLinkExtensionTest extends TestCase
 
         self::assertSame(
             '<a href="/local">local</a> <a href="#part">part</a> '
-            .'<a href="mailto:user@example.com">mail</a> <a href="">unsafe</a>',
+            . '<a href="mailto:user@example.com">mail</a> <a href="">unsafe</a>',
             $factory->toInlineHtml(
                 '[local](/local) [part](#part) [mail](mailto:user@example.com) [unsafe](javascript:alert(1))',
             ),

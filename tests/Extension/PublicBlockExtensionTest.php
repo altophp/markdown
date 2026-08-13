@@ -120,7 +120,7 @@ final class PublicBlockExtensionTest extends TestCase
     public function testDeepCustomContainersUseTheIterativeRenderPaths(): void
     {
         $depth = 600;
-        $source = str_repeat(":::note\n", $depth)."Body\n".str_repeat(":::\n", $depth);
+        $source = str_repeat(":::note\n", $depth) . "Body\n" . str_repeat(":::\n", $depth);
         $factory = Markdown::commonmark()->with(new PublicCalloutExtension());
         $options = (new ParseOptions())->withUnboundedNestingDepth();
         $direct = $factory->toHtml($source, $options);

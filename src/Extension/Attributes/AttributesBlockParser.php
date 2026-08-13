@@ -29,8 +29,7 @@ final readonly class AttributesBlockParser implements BlockConstruct
     public function __construct(
         private int $kind,
         private AttributeListParser $parser,
-    ) {
-    }
+    ) {}
 
     public function kind(): int
     {
@@ -73,7 +72,7 @@ final readonly class AttributesBlockParser implements BlockConstruct
             $state->tape->setEndOffset($ordinal, $state->lineContentEnd);
             $state->tape->setExtensionBlockState(
                 $ordinal,
-                $blockState->with('source', $blockState->string('source')."\n".$line),
+                $blockState->with('source', $blockState->string('source') . "\n" . $line),
             );
 
             return ContinueResult::Matched;

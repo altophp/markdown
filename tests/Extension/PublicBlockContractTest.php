@@ -167,8 +167,7 @@ class TestLineContext
     public function __construct(
         private readonly string $line,
         private readonly int $lineStart,
-    ) {
-    }
+    ) {}
 
     public function lineStartOffset(): int
     {

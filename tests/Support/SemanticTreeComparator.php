@@ -235,7 +235,7 @@ final class SemanticTreeComparator
                 $expectedChild,
                 $actual,
                 $actualChild,
-                $path.'['.$index.']',
+                $path . '[' . $index . ']',
             );
 
             if (!$comparison->isEqual()) {

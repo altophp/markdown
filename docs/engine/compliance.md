@@ -1,4 +1,4 @@
-# Specifications and compliance
+# Compliance
 
 Alto separates language compliance from safe application rendering. The parser
 profiles define accepted syntax, while `HtmlPolicy` defines output safety.

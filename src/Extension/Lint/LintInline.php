@@ -23,6 +23,5 @@ final readonly class LintInline
     public function __construct(
         public string $kind,
         public SourceRange $range,
-    ) {
-    }
+    ) {}
 }

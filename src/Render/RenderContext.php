@@ -121,17 +121,17 @@ final class RenderContext
         };
 
         if ('' === $children) {
-            return rtrim($marker.' '.$task);
+            return rtrim($marker . ' ' . $task);
         }
 
         $lines = explode("\n", $children);
         $first = array_shift($lines) ?? '';
-        $prefix = $marker.' '.$task;
+        $prefix = $marker . ' ' . $task;
         $indent = str_repeat(' ', \strlen($prefix));
-        $rendered = $prefix.$first;
+        $rendered = $prefix . $first;
 
         foreach ($lines as $line) {
-            $rendered .= "\n".('' === $line ? '' : $indent.$line);
+            $rendered .= "\n" . ('' === $line ? '' : $indent . $line);
         }
 
         return $rendered;

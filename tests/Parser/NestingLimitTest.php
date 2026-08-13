@@ -35,7 +35,7 @@ final class NestingLimitTest extends TestCase
 
     public function testNestingAtTheDefaultLimitParses(): void
     {
-        $markdown = str_repeat('> ', self::MAX_QUOTES_AT_DEFAULT)."text\n";
+        $markdown = str_repeat('> ', self::MAX_QUOTES_AT_DEFAULT) . "text\n";
 
         $html = Markdown::gfm()->toHtml($markdown);
 
@@ -44,7 +44,7 @@ final class NestingLimitTest extends TestCase
 
     public function testNestingPastTheDefaultLimitIsRefused(): void
     {
-        $markdown = str_repeat('> ', self::MAX_QUOTES_AT_DEFAULT + 1)."text\n";
+        $markdown = str_repeat('> ', self::MAX_QUOTES_AT_DEFAULT + 1) . "text\n";
 
         $this->expectException(NestingLimitException::class);
 
@@ -53,7 +53,7 @@ final class NestingLimitTest extends TestCase
 
     public function testRefusalIsTypedAsAMarkdownException(): void
     {
-        $markdown = str_repeat('> ', 5000)."text\n";
+        $markdown = str_repeat('> ', 5000) . "text\n";
 
         try {
             Markdown::gfm()->toHtml($markdown);
@@ -72,7 +72,7 @@ final class NestingLimitTest extends TestCase
      */
     public function testRefusalDoesNotParseTheWholeInput(): void
     {
-        $markdown = str_repeat('> ', 50000)."text\n";
+        $markdown = str_repeat('> ', 50000) . "text\n";
 
         $start = hrtime(true);
 
@@ -87,7 +87,7 @@ final class NestingLimitTest extends TestCase
 
     public function testDocumentLaneRefusesTheSameInput(): void
     {
-        $markdown = str_repeat('> ', 1000)."text\n";
+        $markdown = str_repeat('> ', 1000) . "text\n";
 
         $this->expectException(NestingLimitException::class);
 
@@ -96,7 +96,7 @@ final class NestingLimitTest extends TestCase
 
     public function testTheLimitIsConfigurable(): void
     {
-        $markdown = str_repeat('> ', 10)."text\n";
+        $markdown = str_repeat('> ', 10) . "text\n";
         $options = (new ParseOptions())->withMaxNestingDepth(5);
 
         $this->expectException(NestingLimitException::class);
@@ -106,7 +106,7 @@ final class NestingLimitTest extends TestCase
 
     public function testUnboundedModeAcceptsDeepNesting(): void
     {
-        $markdown = str_repeat('> ', 1000)."text\n";
+        $markdown = str_repeat('> ', 1000) . "text\n";
         $options = (new ParseOptions())->withUnboundedNestingDepth();
 
         $html = Markdown::gfm()->toHtml($markdown, $options);

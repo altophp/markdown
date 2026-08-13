@@ -32,7 +32,7 @@ final class BlockQuotePrinter implements BlockPrinter
         }
 
         return implode("\n", array_map(
-            static fn (string $line): string => '' === $line ? '>' : '> '.$line,
+            static fn(string $line): string => '' === $line ? '>' : '> ' . $line,
             explode("\n", $children),
         ));
     }

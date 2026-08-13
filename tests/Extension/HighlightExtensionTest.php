@@ -33,8 +33,8 @@ final class HighlightExtensionTest extends TestCase
         $factory = Markdown::github()->with(new HighlightExtension());
         $source = "A ==small <mark>== in a table.\n\n| Value |\n| --- |\n| ==large== |\n";
         $expected = "<p>A <mark>small &lt;mark&gt;</mark> in a table.</p>\n"
-            ."<table>\n<thead>\n<tr>\n<th>Value</th>\n</tr>\n</thead>\n"
-            ."<tbody>\n<tr>\n<td><mark>large</mark></td>\n</tr>\n</tbody>\n</table>\n";
+            . "<table>\n<thead>\n<tr>\n<th>Value</th>\n</tr>\n</thead>\n"
+            . "<tbody>\n<tr>\n<td><mark>large</mark></td>\n</tr>\n</tbody>\n</table>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
 
@@ -77,7 +77,7 @@ final class HighlightExtensionTest extends TestCase
         ];
 
         foreach ($examples as $source => $expected) {
-            self::assertSame("<p>{$expected}</p>\n", $factory->toHtml($source."\n"));
+            self::assertSame("<p>{$expected}</p>\n", $factory->toHtml($source . "\n"));
         }
 
         self::assertSame("==line\n==", $factory->toInlineHtml("==line\n=="));
@@ -106,7 +106,7 @@ final class HighlightExtensionTest extends TestCase
 
         $marks = array_values(array_filter(
             [...$model->traversalInlineEvents($heading->id()->ordinal)],
-            static fn (array $event): bool => 'highlight:mark' === $event[1],
+            static fn(array $event): bool => 'highlight:mark' === $event[1],
         ));
 
         self::assertCount(1, $marks);

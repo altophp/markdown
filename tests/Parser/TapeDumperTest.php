@@ -60,8 +60,8 @@ final class TapeDumperTest extends TestCase
         $tape->setEndOffset($paragraph, 20);
 
         $expected = "#0 kind=0 [0..20] flags=0\n"
-            ."  #1 kind=1 [0..9] flags=0\n"
-            ."  #2 kind=2 [10..20] flags=0\n";
+            . "  #1 kind=1 [0..9] flags=0\n"
+            . "  #2 kind=2 [10..20] flags=0\n";
 
         self::assertSame($expected, (new TapeDumper())->dump($tape));
     }
@@ -79,8 +79,8 @@ final class TapeDumperTest extends TestCase
         $tape->linkNextSibling($second, $first);
 
         $expected = "#0 kind=0 [0..-1] flags=0\n"
-            ."  #2 kind=2 [0..-1] flags=0\n"
-            ."  #1 kind=1 [0..-1] flags=0\n";
+            . "  #2 kind=2 [0..-1] flags=0\n"
+            . "  #1 kind=1 [0..-1] flags=0\n";
 
         self::assertSame($expected, (new TapeDumper())->dump($tape));
     }
@@ -95,7 +95,7 @@ final class TapeDumperTest extends TestCase
         $tape->linkNextSibling($second, $first);
 
         $expected = "#1 kind=2 [5..-1] flags=0\n"
-            ."#0 kind=1 [0..-1] flags=0\n";
+            . "#0 kind=1 [0..-1] flags=0\n";
 
         self::assertSame($expected, (new TapeDumper())->dump($tape));
     }
@@ -107,7 +107,7 @@ final class TapeDumperTest extends TestCase
         $tape->allocate(2, ParseTape::NONE, 5, 0);
 
         $expected = "#0 kind=1 [0..-1] flags=0\n"
-            ."#1 kind=2 [5..-1] flags=0\n";
+            . "#1 kind=2 [5..-1] flags=0\n";
 
         self::assertSame($expected, (new TapeDumper())->dump($tape));
     }

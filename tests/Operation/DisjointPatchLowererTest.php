@@ -73,10 +73,8 @@ final class DisjointPatchLowererTest extends TestCase
         $document = Markdown::commonmark()->fromString("Body\n");
         $journal = $document->model()->journal();
         $journal->record(new DescribedOperation('foreign edit'), new SourceRange(0, 4));
-        $model = new class($journal) implements DocumentModel {
-            public function __construct(private readonly EditJournal $editJournal)
-            {
-            }
+        $model = new class ($journal) implements DocumentModel {
+            public function __construct(private readonly EditJournal $editJournal) {}
 
             public function generation(): int
             {
@@ -119,7 +117,7 @@ final class DisjointPatchLowererTest extends TestCase
         $result = new DisjointPatchLowerer()->lower($document->model(), $document->model()->journal());
 
         self::assertSame("a\nB\nC\n", $result->bytes);
-        self::assertSame([2, 4], array_map(static fn (SourcePatch $patch): int => $patch->range->startOffset, $result->patches));
+        self::assertSame([2, 4], array_map(static fn(SourcePatch $patch): int => $patch->range->startOffset, $result->patches));
     }
 
     public function testRejectsOverlappingPatches(): void
@@ -372,18 +370,14 @@ final class DisjointPatchLowererTest extends TestCase
 
 final readonly class PatchOperation implements \Alto\Markdown\Operation\Operation
 {
-    public function __construct(private SourcePatch $patch)
-    {
-    }
+    public function __construct(private SourcePatch $patch) {}
 
     public function describe(): string
     {
         return 'test patch';
     }
 
-    public function apply(DocumentModel $model): void
-    {
-    }
+    public function apply(DocumentModel $model): void {}
 
     public function toPatch(DocumentModel $model): SourcePatch
     {

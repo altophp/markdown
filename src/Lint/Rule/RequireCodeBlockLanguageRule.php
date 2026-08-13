@@ -34,8 +34,7 @@ final readonly class RequireCodeBlockLanguageRule implements BlockRule, Configur
 {
     public function __construct(
         private RequireCodeBlockLanguageOptions $options = new RequireCodeBlockLanguageOptions(),
-    ) {
-    }
+    ) {}
 
     public static function fromOptions(?LintRuleOptions $options): self
     {
@@ -73,7 +72,7 @@ final readonly class RequireCodeBlockLanguageRule implements BlockRule, Configur
                     $range,
                     $this->options->defaultLanguage,
                     $range,
-                    'set code block language to '.$this->options->defaultLanguage,
+                    'set code block language to ' . $this->options->defaultLanguage,
                 )),
             severity: $context->config->severityFor($this->id()),
         );

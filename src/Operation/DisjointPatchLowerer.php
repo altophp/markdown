@@ -113,7 +113,7 @@ final class DisjointPatchLowerer
             $cursor = $patch->range->endOffset;
         }
 
-        return $bytes.substr($source, $cursor);
+        return $bytes . substr($source, $cursor);
     }
 
     /**
@@ -172,7 +172,7 @@ final class DisjointPatchLowerer
             (str_ends_with($original, "\r\n") || str_ends_with($original, "\r") || str_ends_with($original, "\n"))
             && !str_ends_with($replacement, $eol)
         ) {
-            return $replacement.$eol;
+            return $replacement . $eol;
         }
 
         return $replacement;
@@ -183,7 +183,7 @@ final class DisjointPatchLowerer
         $source = $model->source();
         $replacement = $this->normalizeLineEndings($replacement, $source->dominantEol->value);
 
-        return ($source->hasBom ? "\xEF\xBB\xBF" : '').$replacement;
+        return ($source->hasBom ? "\xEF\xBB\xBF" : '') . $replacement;
     }
 
     private function rangeLineEnding(string $source): ?string
@@ -227,7 +227,7 @@ final class DisjointPatchLowerer
     {
         usort(
             $patches,
-            static fn (SourcePatch $left, SourcePatch $right): int => $left->range->startOffset <=> $right->range->startOffset,
+            static fn(SourcePatch $left, SourcePatch $right): int => $left->range->startOffset <=> $right->range->startOffset,
         );
 
         return $patches;

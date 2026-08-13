@@ -65,19 +65,29 @@ final class FencedCodeParser implements OpaqueLeafBlock
      */
     private array $openChar = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $openLength = [];
 
-    /** @var array<int, string> */
+    /**
+     * @var array<int, string>
+     */
     private array $openInfo = [];
 
-    /** @var array<int, bool> */
+    /**
+     * @var array<int, bool>
+     */
     private array $openCompact = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $openSpanStart = [];
 
-    /** @var array<int, bool> */
+    /**
+     * @var array<int, bool>
+     */
     private array $openClosed = [];
 
     public function kind(): int
@@ -172,7 +182,7 @@ final class FencedCodeParser implements OpaqueLeafBlock
             $pad = $state->takePendingPad();
             $offset = $state->offset;
             $column = $state->columnAt($offset);
-            $pair = $offset.':'.$contentEnd.($pad > 0 || $column > 0 ? ':'.$pad.':'.$column : '');
+            $pair = $offset . ':' . $contentEnd . ($pad > 0 || $column > 0 ? ':' . $pad . ':' . $column : '');
             $tape->appendPayloadPart($ordinal, $pair, ';');
         }
 
@@ -202,14 +212,14 @@ final class FencedCodeParser implements OpaqueLeafBlock
 
                 $state->tape->setPayload(
                     $ordinal,
-                    '@'.$spanStart.':'.$spanEnd.':'.($appendLf ? '1' : '0')
-                        .($this->openClosed[$ordinal] ? '!' : '')
-                        .'|'.$this->openInfo[$ordinal],
+                    '@' . $spanStart . ':' . $spanEnd . ':' . ($appendLf ? '1' : '0')
+                        . ($this->openClosed[$ordinal] ? '!' : '')
+                        . '|' . $this->openInfo[$ordinal],
                 );
             } else {
                 $state->tape->appendPayloadPart(
                     $ordinal,
-                    ($this->openClosed[$ordinal] ? '!' : '').'|'.$this->openInfo[$ordinal],
+                    ($this->openClosed[$ordinal] ? '!' : '') . '|' . $this->openInfo[$ordinal],
                 );
             }
         }

@@ -62,7 +62,7 @@ final class LinkReferenceDefinitionParser implements BlockConstruct
      * parenthesis; a backslash starts an escape.
      */
     private const string DESTINATION_STOP = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
-        ."\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x7f\\()";
+        . "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x7f\\()";
 
     public function kind(): int
     {
@@ -84,9 +84,7 @@ final class LinkReferenceDefinitionParser implements BlockConstruct
         return ContinueResult::NotMatched;
     }
 
-    public function close(ParserState $state, int $ordinal): void
-    {
-    }
+    public function close(ParserState $state, int $ordinal): void {}
 
     /**
      * Extract leading reference definitions from a closing paragraph.
@@ -208,7 +206,7 @@ final class LinkReferenceDefinitionParser implements BlockConstruct
             }
         }
 
-        return [] === $kept ? $boundary.':'.$end : implode(';', $kept);
+        return [] === $kept ? $boundary . ':' . $end : implode(';', $kept);
     }
 
     private function link(ParseTape $tape, int $parent, int $previous, int $node): void

@@ -80,8 +80,8 @@ final class TabsCatalog implements DocumentRenderProjection
 
         return [
             'groupId' => $groupId,
-            'tabId' => $groupId.'-tab-'.$number,
-            'panelId' => $groupId.'-panel-'.$number,
+            'tabId' => $groupId . '-tab-' . $number,
+            'panelId' => $groupId . '-panel-' . $number,
             'index' => $item['index'],
         ];
     }
@@ -112,6 +112,6 @@ final class TabsCatalog implements DocumentRenderProjection
         $index = $this->groupIndexes[$groupOffset]
             ?? throw new \LogicException(\sprintf('Source offset %d is not a tab group.', $groupOffset));
 
-        return 'markdown-tabs-'.($index + 1);
+        return 'markdown-tabs-' . ($index + 1);
     }
 }

@@ -43,10 +43,10 @@ final class IncludeExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new IncludeExtension($resolver));
         $source = "Before.\n\n@include \"guide.md\"\n\nAfter.\n";
         $expected = "<p>Before.</p>\n"
-            ."<h1>Guide</h1>\n"
-            ."<h2>Setup</h2>\n"
-            ."<p>Install <strong>Alto</strong>.</p>\n"
-            ."<p>After.</p>\n";
+            . "<h1>Guide</h1>\n"
+            . "<h2>Setup</h2>\n"
+            . "<p>Install <strong>Alto</strong>.</p>\n"
+            . "<p>After.</p>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertCount(3, $resolver->requests);
@@ -315,7 +315,7 @@ final class IncludeExtensionTest extends TestCase
         yield 'nested quote' => ['> @include "file.md"'];
         yield 'extra option' => ['@include "file.md" {lines: 1}'];
         yield 'similar name' => ['@included "file.md"'];
-        yield 'long directive' => ['@include "'.str_repeat('x', 4_096).'"'];
+        yield 'long directive' => ['@include "' . str_repeat('x', 4_096) . '"'];
     }
 
     #[DataProvider('invalidDirectives')]
@@ -356,16 +356,16 @@ final class IncludeExtensionTest extends TestCase
         $rejected = 0;
 
         foreach ([
-            static fn (): IncludePolicy => new IncludePolicy(maxDepth: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxDepth: 65),
-            static fn (): IncludePolicy => new IncludePolicy(maxResources: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxResources: 10_001),
-            static fn (): IncludePolicy => new IncludePolicy(maxExpandedBytes: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxExpandedBytes: \PHP_INT_MAX),
-            static fn (): IncludePolicy => new IncludePolicy(maxNestingDepth: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxBlockCount: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxInlineCount: 0),
-            static fn (): IncludePolicy => new IncludePolicy(maxReferenceCount: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxDepth: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxDepth: 65),
+            static fn(): IncludePolicy => new IncludePolicy(maxResources: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxResources: 10_001),
+            static fn(): IncludePolicy => new IncludePolicy(maxExpandedBytes: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxExpandedBytes: \PHP_INT_MAX),
+            static fn(): IncludePolicy => new IncludePolicy(maxNestingDepth: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxBlockCount: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxInlineCount: 0),
+            static fn(): IncludePolicy => new IncludePolicy(maxReferenceCount: 0),
         ] as $create) {
             try {
                 $create();
@@ -389,15 +389,13 @@ final class IncludeFixtureResolver implements ResourceResolver
     /**
      * @param array<string, array{string, string}> $resources
      */
-    public function __construct(private array $resources)
-    {
-    }
+    public function __construct(private array $resources) {}
 
     public function resolve(ResourceRequest $request): ResolvedResource
     {
         $this->requests[] = $request;
-        $key = ($request->originId ?? 'root').'|'.$request->reference;
-        [$id, $bytes] = $this->resources[$key] ?? throw new \LogicException('Missing fixture resource '.$key);
+        $key = ($request->originId ?? 'root') . '|' . $request->reference;
+        [$id, $bytes] = $this->resources[$key] ?? throw new \LogicException('Missing fixture resource ' . $key);
 
         return new ResolvedResource($id, $bytes);
     }

@@ -27,8 +27,7 @@ abstract readonly class InlineOutputContext
         public InlineNode $node,
         public ?SourceRange $range,
         private string $source,
-    ) {
-    }
+    ) {}
 
     /**
      * Exact joined inline bytes matched by the parser.

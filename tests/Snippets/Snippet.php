@@ -23,6 +23,5 @@ final readonly class Snippet
     public function __construct(
         public int $line,
         public string $code,
-    ) {
-    }
+    ) {}
 }

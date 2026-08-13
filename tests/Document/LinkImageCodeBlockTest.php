@@ -41,7 +41,7 @@ final class LinkImageCodeBlockTest extends TestCase
         self::assertContainsOnlyInstancesOf(Link::class, $links);
         self::assertSame('link', $links[0]->kind()->name);
         self::assertSame(['one', 'three'], \array_map(
-            static fn (Link $link): string => $link->text(),
+            static fn(Link $link): string => $link->text(),
             $links,
         ));
         $linkRange = $links[0]->range();

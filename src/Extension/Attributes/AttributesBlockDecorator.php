@@ -24,9 +24,7 @@ use Alto\Markdown\Extension\Html\HtmlNodeOutputContext;
  */
 final readonly class AttributesBlockDecorator implements PlannedHtmlNodeDecorator
 {
-    public function __construct(private AttributesHtmlInjector $injector = new AttributesHtmlInjector())
-    {
-    }
+    public function __construct(private AttributesHtmlInjector $injector = new AttributesHtmlInjector()) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {

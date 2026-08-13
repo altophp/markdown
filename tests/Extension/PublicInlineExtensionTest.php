@@ -161,11 +161,11 @@ final class PublicInlineExtensionTest extends TestCase
 
         $model = $document->model();
         self::assertInstanceOf(ParsedDocumentModel::class, $model);
-        self::assertSame('A first'."\n".'second value.', $model->plainText(2));
+        self::assertSame('A first' . "\n" . 'second value.', $model->plainText(2));
 
         $custom = array_values(array_filter(
             [...$model->traversalInlineEvents(2)],
-            static fn (array $event): bool => 'source-aware:mark' === $event[1],
+            static fn(array $event): bool => 'source-aware:mark' === $event[1],
         ));
         self::assertCount(1, $custom);
         self::assertEquals(new SourceRange(4, 22), $custom[0][2]);
@@ -231,10 +231,10 @@ final class PublicInlineExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new RangeAwareMarkExtension());
         $source = "> A ^^first\r\n> second^^ value.\r\n";
         $expected = '<mark data-range="4:23" data-source="^^first'
-            ."\n"
-            .'second^^">first'
-            ."\n"
-            .'second</mark>';
+            . "\n"
+            . 'second^^">first'
+            . "\n"
+            . 'second</mark>';
 
         self::assertStringContainsString($expected, $factory->toHtml($source));
         self::assertStringContainsString($expected, $factory->fromString($source)->toHtml());
@@ -292,7 +292,7 @@ final readonly class UnsafePublicMarkOutput implements HtmlInlineRenderer, Markd
 {
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<script>unsafe()</script><mark>'.$context->escapeText($context->node->text).'</mark>';
+        return '<script>unsafe()</script><mark>' . $context->escapeText($context->node->text) . '</mark>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string
@@ -320,7 +320,7 @@ final readonly class SourceAwareMarkOutput implements HtmlInlineRenderer, Markdo
 {
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<mark>source='.$context->escapeText($context->source()).'</mark>';
+        return '<mark>source=' . $context->escapeText($context->source()) . '</mark>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string
@@ -354,11 +354,11 @@ final readonly class RangeAwareMarkOutput implements HtmlInlineRenderer, Markdow
     {
         $range = null === $context->range
             ? 'detached'
-            : $context->range->startOffset.':'.$context->range->endOffset;
+            : $context->range->startOffset . ':' . $context->range->endOffset;
 
-        return '<mark data-range="'.$range.'" data-source="'.$context->escapeAttribute($context->source()).'">'
-            .$context->escapeText($context->node->text)
-            .'</mark>';
+        return '<mark data-range="' . $range . '" data-source="' . $context->escapeAttribute($context->source()) . '">'
+            . $context->escapeText($context->node->text)
+            . '</mark>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string
@@ -372,8 +372,7 @@ final readonly class PriorityInlineExtension implements InlineExtensionInterface
     public function __construct(
         private string $extensionName,
         private PriorityInlineParser $parser,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -396,8 +395,7 @@ final class PriorityInlineParser implements InlineParser
         private readonly string $trigger,
         private readonly bool $matches,
         private readonly string $text,
-    ) {
-    }
+    ) {}
 
     public function triggerByte(): string
     {
@@ -423,7 +421,7 @@ final readonly class PriorityInlineOutput implements HtmlInlineRenderer, Markdow
 {
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<u>'.$context->escapeText($context->node->text).'</u>';
+        return '<u>' . $context->escapeText($context->node->text) . '</u>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string

@@ -22,9 +22,7 @@ use Alto\Markdown\Render\RenderOptions;
  */
 final readonly class ParsedMarkdownFragment implements MarkdownFragment
 {
-    public function __construct(private string $markdown)
-    {
-    }
+    public function __construct(private string $markdown) {}
 
     public function toMarkdown(?RenderOptions $options = null): string
     {

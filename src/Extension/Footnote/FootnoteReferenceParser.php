@@ -24,9 +24,7 @@ use Alto\Markdown\Parser\Inline\InlineScanState;
  */
 final readonly class FootnoteReferenceParser implements ContentScannedInlineConstruct
 {
-    public function __construct(private int $kind)
-    {
-    }
+    public function __construct(private int $kind) {}
 
     public function triggerBytes(): string
     {

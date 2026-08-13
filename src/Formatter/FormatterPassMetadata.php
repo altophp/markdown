@@ -23,6 +23,5 @@ final readonly class FormatterPassMetadata
         public string $summary,
         public FormattingLevel $level,
         public ?string $styleField,
-    ) {
-    }
+    ) {}
 }

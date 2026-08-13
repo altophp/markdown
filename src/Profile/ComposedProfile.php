@@ -59,10 +59,10 @@ final readonly class ComposedProfile implements Profile
         }
 
         $this->extensions = $extensions;
-        $this->name = $base->name().'+'.implode(
+        $this->name = $base->name() . '+' . implode(
             '+',
             array_map(
-                static fn (ExtensionInterface $extension): string => $extension->name(),
+                static fn(ExtensionInterface $extension): string => $extension->name(),
                 $additionalExtensions,
             ),
         );

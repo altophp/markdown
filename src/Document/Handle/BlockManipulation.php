@@ -36,9 +36,7 @@ use Alto\Markdown\Source\SourceRange;
  */
 final readonly class BlockManipulation
 {
-    public function __construct(private ParsedDocumentModel $model)
-    {
-    }
+    public function __construct(private ParsedDocumentModel $model) {}
 
     public function move(NodeId $target, NodeId $anchor, BlockInsertPosition $position): NodeId
     {
@@ -214,7 +212,7 @@ final readonly class BlockManipulation
     private function singleBlock(array $ids, string $operation): Block
     {
         if (1 !== \count($ids)) {
-            throw new \LogicException($operation.' must produce exactly one top-level block.');
+            throw new \LogicException($operation . ' must produce exactly one top-level block.');
         }
 
         return $this->block($ids[0]);

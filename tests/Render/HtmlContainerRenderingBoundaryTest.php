@@ -92,11 +92,11 @@ final class HtmlContainerRenderingBoundaryTest extends TestCase
             ->get()
             ->first();
 
-        self::assertSame(self::SECTION_HTML."\n<h1>End</h1>\n<p>Done.</p>\n", $document->toHtml());
+        self::assertSame(self::SECTION_HTML . "\n<h1>End</h1>\n<p>Done.</p>\n", $document->toHtml());
         self::assertSame($document->toHtml(), $factory->toHtml(self::SOURCE));
-        self::assertSame(self::SECTION_HTML."\n", $renderer->renderSection($document->model(), $document->section('Start')));
+        self::assertSame(self::SECTION_HTML . "\n", $renderer->renderSection($document->model(), $document->section('Start')));
         self::assertInstanceOf(NodeHandle::class, $blockQuote);
-        self::assertSame(self::BLOCK_QUOTE_HTML."\n", $renderer->renderNode($document->model(), $blockQuote));
+        self::assertSame(self::BLOCK_QUOTE_HTML . "\n", $renderer->renderNode($document->model(), $blockQuote));
     }
 
     public function testNodeRenderingMaterializesOnlyTheSelectedNode(): void

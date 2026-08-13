@@ -221,9 +221,9 @@ final class ExtendedAutolinkScanTest extends TestCase
      */
     public static function declinedCandidateFloods(): iterable
     {
-        yield 'schemes without a domain' => [str_repeat('http://', 16000)."\n"];
-        yield 'locals without a domain' => [str_repeat('a@', 16000)."\n"];
-        yield 'labels without a domain' => [str_repeat('www.', 16000)."\n"];
+        yield 'schemes without a domain' => [str_repeat('http://', 16000) . "\n"];
+        yield 'locals without a domain' => [str_repeat('a@', 16000) . "\n"];
+        yield 'labels without a domain' => [str_repeat('www.', 16000) . "\n"];
     }
 
     #[DataProvider('declinedCandidateFloods')]

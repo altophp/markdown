@@ -24,6 +24,5 @@ final readonly class FormatterBlock
         public string $kind,
         public SourceRange $range,
         public int $depth,
-    ) {
-    }
+    ) {}
 }

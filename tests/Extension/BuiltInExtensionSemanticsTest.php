@@ -64,8 +64,8 @@ final class BuiltInExtensionSemanticsTest extends TestCase
         self::assertContains('strikethrough', $visitor->inlines);
         self::assertSame(
             "<table>\n<thead>\n<tr>\n<th>Name</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Alto</td>\n</tr>\n</tbody>\n</table>\n"
-            ."<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> <del>done</del></li>\n</ul>\n"
-            ."<div class=\"markdown-alert markdown-alert-note\">\n<p class=\"markdown-alert-title\">Note</p>\n<p>Alert</p>\n</div>\n",
+            . "<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> <del>done</del></li>\n</ul>\n"
+            . "<div class=\"markdown-alert markdown-alert-note\">\n<p class=\"markdown-alert-title\">Note</p>\n<p>Alert</p>\n</div>\n",
             $document->toHtml(),
         );
     }
@@ -88,9 +88,7 @@ final class BuiltInKindRecordingVisitor implements TraversalVisitor
         $this->blocks[] = $event->kind->name;
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
     public function inline(InlineEvent $event): void
     {

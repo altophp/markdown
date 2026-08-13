@@ -50,7 +50,7 @@ final class PublicApiClassMap
 
             $relative = substr($file->getPathname(), \strlen($root) + 1);
             $classPath = str_replace('/', '\\', substr($relative, 0, -\strlen('.php')));
-            $fqcn = $prefix.'\\'.$classPath;
+            $fqcn = $prefix . '\\' . $classPath;
             $shortName = $file->getBasename('.php');
 
             if (isset($byShortName[$shortName])) {

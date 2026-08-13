@@ -36,7 +36,7 @@ final class ParsedMarkdownFragmentBuilder implements MarkdownFragmentBuilder
     {
         $fence = $this->fence($code);
         $info = null === $language ? '' : $this->info($language);
-        $this->blocks[] = $fence.$info."\n".rtrim($code, "\n")."\n".$fence;
+        $this->blocks[] = $fence . $info . "\n" . rtrim($code, "\n") . "\n" . $fence;
 
         return $this;
     }
@@ -54,7 +54,7 @@ final class ParsedMarkdownFragmentBuilder implements MarkdownFragmentBuilder
             return new ParsedMarkdownFragment('');
         }
 
-        $markdown = implode("\n\n", $this->blocks)."\n";
+        $markdown = implode("\n\n", $this->blocks) . "\n";
 
         return new ParsedMarkdownFragment($markdown);
     }
@@ -63,7 +63,7 @@ final class ParsedMarkdownFragmentBuilder implements MarkdownFragmentBuilder
     {
         return (string) preg_replace_callback(
             '/[!"#$%&\'()*+,\\.\/:;<=>?@\[\\\\\]\^_`{|}~-]/',
-            static fn (array $match): string => '\\'.$match[0],
+            static fn(array $match): string => '\\' . $match[0],
             $text,
         );
     }

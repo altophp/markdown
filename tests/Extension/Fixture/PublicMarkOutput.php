@@ -22,13 +22,13 @@ final readonly class PublicMarkOutput implements HtmlInlineRenderer, MarkdownInl
 {
     public function render(HtmlInlineOutputContext $context): string
     {
-        return '<mark data-label="'.$context->escapeAttribute($context->node->string('label')).'">'
-            .$context->escapeText($context->node->text)
-            .'</mark>';
+        return '<mark data-label="' . $context->escapeAttribute($context->node->string('label')) . '">'
+            . $context->escapeText($context->node->text)
+            . '</mark>';
     }
 
     public function print(MarkdownInlineOutputContext $context): string
     {
-        return '^^'.$context->node->text.'^^';
+        return '^^' . $context->node->text . '^^';
     }
 }

@@ -34,8 +34,7 @@ final readonly class EmbedParser implements BlockParser, RootOnlyBlockParser
     public function __construct(
         private ResourceResolver $resolver,
         private EmbedPolicy $policy,
-    ) {
-    }
+    ) {}
 
     public function triggerBytes(): string
     {

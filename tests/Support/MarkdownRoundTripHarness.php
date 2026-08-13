@@ -22,8 +22,7 @@ final readonly class MarkdownRoundTripHarness
     public function __construct(
         private MarkdownFactory $markdown,
         private SemanticTreeComparator $comparator = new SemanticTreeComparator(),
-    ) {
-    }
+    ) {}
 
     /**
      * @param callable(MarkdownDocument, string): string|null $render

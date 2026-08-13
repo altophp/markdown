@@ -64,8 +64,7 @@ final class HtmlPolicy
         public readonly bool $filtersUrls,
         public readonly RawHtmlPolicy $rawHtml,
         private readonly ?HtmlSanitizer $sanitizer = null,
-    ) {
-    }
+    ) {}
 
     /**
      * The default: filter URL schemes to http, https, mailto, tel (plus
@@ -169,9 +168,9 @@ final class HtmlPolicy
 
         $sanitizer = null === $this->sanitizer
             ? ''
-            : '|'.get_debug_type($this->sanitizer).':'.$this->sanitizer->cacheKey();
+            : '|' . get_debug_type($this->sanitizer) . ':' . $this->sanitizer->cacheKey();
 
-        return $this->cacheKey = ($this->filtersUrls ? 'f' : 'p').'|'.$this->rawHtml->name.'|'.implode(',', $schemes).$sanitizer;
+        return $this->cacheKey = ($this->filtersUrls ? 'f' : 'p') . '|' . $this->rawHtml->name . '|' . implode(',', $schemes) . $sanitizer;
     }
 
     /**

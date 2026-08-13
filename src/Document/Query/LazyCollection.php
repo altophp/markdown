@@ -29,9 +29,7 @@ final readonly class LazyCollection implements Collection
     /**
      * @param \Closure(): iterable<T> $factory
      */
-    public function __construct(private \Closure $factory)
-    {
-    }
+    public function __construct(private \Closure $factory) {}
 
     public function first(): mixed
     {

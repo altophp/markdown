@@ -27,9 +27,7 @@ final readonly class CompiledHtmlDecoratorChain
     /**
      * @param list<HtmlNodeDecorator> $decorators
      */
-    public function __construct(private array $decorators)
-    {
-    }
+    public function __construct(private array $decorators) {}
 
     public function decorate(
         HtmlNodeOutputContext $context,

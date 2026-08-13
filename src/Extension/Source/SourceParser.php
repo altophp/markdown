@@ -123,9 +123,7 @@ final readonly class SourceParser implements BlockParser
         'txt' => 'text',
     ];
 
-    public function __construct(private ResourceResolver $resolver)
-    {
-    }
+    public function __construct(private ResourceResolver $resolver) {}
 
     public function triggerBytes(): string
     {

@@ -41,8 +41,7 @@ final class ExtensionStatsVisitor implements TraversalVisitor
     public function __construct(
         private readonly StatsVisitor $core,
         private readonly bool $captureInlines,
-    ) {
-    }
+    ) {}
 
     public function enterBlock(BlockEvent $event): void
     {

@@ -83,10 +83,10 @@ final class BackslashEscapeParserTest extends TestCase
         $punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 
         foreach (str_split($punctuation) as $char) {
-            $source = '\\'.$char;
+            $source = '\\' . $char;
             $nodes = self::nodes($source, [[0, \strlen($source), 0]]);
 
-            self::assertSame([[InlineKind::TEXT, $source, $char]], $nodes, 'escape of '.$char);
+            self::assertSame([[InlineKind::TEXT, $source, $char]], $nodes, 'escape of ' . $char);
         }
     }
 }

@@ -57,7 +57,7 @@ final class FootnoteExtension extends AbstractExtension implements BlockExtensio
     {
         yield new DocumentTransformDefinition(
             'catalog',
-            static fn (): FootnoteTransform => new FootnoteTransform(),
+            static fn(): FootnoteTransform => new FootnoteTransform(),
         );
     }
 

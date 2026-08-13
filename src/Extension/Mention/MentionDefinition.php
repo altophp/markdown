@@ -77,7 +77,7 @@ final readonly class MentionDefinition
     {
         foreach (['~', '#', '%', '!', ';', "\x01"] as $delimiter) {
             if (!str_contains($pattern, $delimiter)) {
-                $compiled = $delimiter.'\A(?:'.$pattern.')'.$delimiter.'i';
+                $compiled = $delimiter . '\A(?:' . $pattern . ')' . $delimiter . 'i';
                 if (false === @preg_match($compiled, '')) {
                     throw new InvalidExtensionException('Mention pattern must be a valid PCRE expression.');
                 }

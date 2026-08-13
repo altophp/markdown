@@ -34,8 +34,7 @@ final readonly class DocumentMarkdownQuery implements MarkdownQuery
         private array $kindIds = [],
         private bool $filterByKind = false,
         private array $predicates = [],
-    ) {
-    }
+    ) {}
 
     public function kind(string $kind): self
     {

@@ -22,17 +22,14 @@ final readonly class SourcePatchOperation implements Operation
 {
     public function __construct(
         private SourcePatch $patch,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {
         return $this->patch->description;
     }
 
-    public function apply(DocumentModel $model): void
-    {
-    }
+    public function apply(DocumentModel $model): void {}
 
     public function toPatch(DocumentModel $model): SourcePatch
     {

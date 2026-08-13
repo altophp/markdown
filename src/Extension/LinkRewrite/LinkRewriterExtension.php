@@ -20,9 +20,7 @@ use Alto\Markdown\Extension\LinkDestinationRewriterExtensionInterface;
  */
 final readonly class LinkRewriterExtension implements LinkDestinationRewriterExtensionInterface
 {
-    public function __construct(private LinkRewriter $rewriter)
-    {
-    }
+    public function __construct(private LinkRewriter $rewriter) {}
 
     public function name(): string
     {

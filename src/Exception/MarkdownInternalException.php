@@ -18,6 +18,4 @@ namespace Alto\Markdown\Exception;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-final class MarkdownInternalException extends \LogicException implements MarkdownExceptionInterface
-{
-}
+final class MarkdownInternalException extends \LogicException implements MarkdownExceptionInterface {}

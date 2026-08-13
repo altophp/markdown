@@ -21,6 +21,5 @@ final readonly class FixContext
     public function __construct(
         public bool $allowModelOperations = true,
         public bool $allowSourceOperations = true,
-    ) {
-    }
+    ) {}
 }

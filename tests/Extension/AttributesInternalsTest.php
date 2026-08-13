@@ -76,10 +76,10 @@ final class AttributesInternalsTest extends TestCase
         yield 'control in plain value' => ["{name=bad\x7F}", $all];
         yield 'control in quoted value' => ["{name=\"bad\x7F\"}", $all];
         yield 'unclosed quoted value' => ['{name="bad}', $all];
-        yield 'long shortcut' => ['{.'.str_repeat('a', 65).'}', $all];
-        yield 'long name' => ['{'.str_repeat('a', 65).'=x}', $all];
+        yield 'long shortcut' => ['{.' . str_repeat('a', 65) . '}', $all];
+        yield 'long name' => ['{' . str_repeat('a', 65) . '=x}', $all];
         yield 'list byte limit' => [
-            '{name=x'.str_repeat(' ', 40).'}',
+            '{name=x' . str_repeat(' ', 40) . '}',
             new AttributesPolicy(['name'], maxListBytes: 32, maxValueBytes: 32),
         ];
     }
@@ -93,7 +93,7 @@ final class AttributesInternalsTest extends TestCase
     public function testInjectorHandlesNestedVoidMalformedAndExistingTags(): void
     {
         $injector = new AttributesHtmlInjector();
-        $escape = static fn (string $name, string $value): ?string => 'drop' === $name
+        $escape = static fn(string $name, string $value): ?string => 'drop' === $name
             ? null
             : htmlspecialchars($value, \ENT_QUOTES | \ENT_HTML5);
 
@@ -122,8 +122,8 @@ final class AttributesInternalsTest extends TestCase
             ['class' => 'x'],
             $escape,
         ));
-        self::assertSame('<img class="media" />'." \n", $injector->last(
-            '<img />'." \n",
+        self::assertSame('<img class="media" />' . " \n", $injector->last(
+            '<img />' . " \n",
             ['class' => 'media'],
             $escape,
         ));
@@ -151,7 +151,7 @@ final class AttributesInternalsTest extends TestCase
             $injector->first(
                 '<i>text</i>',
                 ['class' => 'drop'],
-                static fn (string $name, string $value): ?string => null,
+                static fn(string $name, string $value): ?string => null,
             ),
         );
         self::assertSame(['class' => '', 'id' => 'kept'], AttributeSet::merge(
@@ -223,7 +223,7 @@ final class AttributesInternalsTest extends TestCase
 
         self::assertSame("<h1>Heading</h1>\n", $factory->toHtml($source));
         self::assertSame(
-            '<h1 href="javascript:alert(1)">Heading</h1>'."\n",
+            '<h1 href="javascript:alert(1)">Heading</h1>' . "\n",
             $factory->toHtml(
                 $source,
                 renderOptions: new \Alto\Markdown\Render\RenderOptions(htmlPolicy: HtmlPolicy::spec()),

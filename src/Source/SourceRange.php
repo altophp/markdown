@@ -21,6 +21,5 @@ final readonly class SourceRange
     public function __construct(
         public int $startOffset,
         public int $endOffset,
-    ) {
-    }
+    ) {}
 }

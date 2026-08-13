@@ -28,8 +28,7 @@ final class ConformanceRunner
     public function __construct(
         private readonly HtmlRenderer $renderer,
         private readonly ?\Closure $rendererFor = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @param iterable<SpecExample> $examples

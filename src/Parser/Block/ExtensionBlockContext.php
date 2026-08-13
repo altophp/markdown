@@ -30,8 +30,7 @@ final readonly class ExtensionBlockContext implements BlockStartContext, BlockCo
         private ParserState $state,
         private bool $paragraphOpen,
         private BlockState $blockState = new BlockState(),
-    ) {
-    }
+    ) {}
 
     public function lineStartOffset(): int
     {

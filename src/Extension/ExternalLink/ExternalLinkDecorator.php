@@ -25,8 +25,7 @@ final readonly class ExternalLinkDecorator implements HtmlNodeDecorator
 {
     public function __construct(
         private ExternalLinkPolicy $policy,
-    ) {
-    }
+    ) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
@@ -39,7 +38,7 @@ final readonly class ExternalLinkDecorator implements HtmlNodeDecorator
         $attributes = [];
 
         if ($external && '' !== $this->policy->htmlClass) {
-            $attributes[] = 'class="'.$context->escapeAttribute($this->policy->htmlClass).'"';
+            $attributes[] = 'class="' . $context->escapeAttribute($this->policy->htmlClass) . '"';
         }
 
         $rel = [];
@@ -54,7 +53,7 @@ final readonly class ExternalLinkDecorator implements HtmlNodeDecorator
         }
 
         if ([] !== $rel) {
-            $attributes[] = 'rel="'.implode(' ', $rel).'"';
+            $attributes[] = 'rel="' . implode(' ', $rel) . '"';
         }
 
         if ($external && $this->policy->openInNewWindow) {
@@ -71,6 +70,6 @@ final readonly class ExternalLinkDecorator implements HtmlNodeDecorator
 
         $insert = $match[0][1] + 2;
 
-        return substr($html, 0, $insert).' '.implode(' ', $attributes).substr($html, $insert);
+        return substr($html, 0, $insert) . ' ' . implode(' ', $attributes) . substr($html, $insert);
     }
 }

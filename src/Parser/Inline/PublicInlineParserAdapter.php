@@ -83,7 +83,7 @@ final readonly class PublicInlineParserAdapter implements InlineConstruct
         return match ($trigger) {
             "\r" => '"\\r"',
             "\n" => '"\\n"',
-            default => '"'.$trigger.'"',
+            default => '"' . $trigger . '"',
         };
     }
 }

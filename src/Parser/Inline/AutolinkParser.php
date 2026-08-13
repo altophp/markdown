@@ -123,7 +123,7 @@ final class AutolinkParser implements InlineConstruct
             return null;
         }
 
-        return Href::encode('mailto:'.$content);
+        return Href::encode('mailto:' . $content);
     }
 
     private function isSchemeStart(int $byte): bool

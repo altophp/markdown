@@ -29,8 +29,7 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
     public function __construct(
         private array $attributes,
         private ?string $targetTag,
-    ) {
-    }
+    ) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
@@ -55,15 +54,15 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
             }
 
             $append .= true === $value
-                ? ' '.$name
-                : ' '.$name.'="'.$this->escapeValue($context, $name, $value).'"';
+                ? ' ' . $name
+                : ' ' . $name . '="' . $this->escapeValue($context, $name, $value) . '"';
         }
 
         if ('' !== $append) {
             $tag = $this->appendBeforeClose($tag, $append);
         }
 
-        return substr($html, 0, $start).$tag.substr($html, $end + 1);
+        return substr($html, 0, $start) . $tag . substr($html, $end + 1);
     }
 
     /**
@@ -73,7 +72,7 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
     {
         $pattern = null === $this->targetTag
             ? '/\\A<[A-Za-z][A-Za-z0-9:-]*(?=[\\s>\\/])/'
-            : '/<'.preg_quote($this->targetTag, '/').'(?=[\\s>\\/])/i';
+            : '/<' . preg_quote($this->targetTag, '/') . '(?=[\\s>\\/])/i';
 
         if (1 !== preg_match($pattern, $html, $matches, \PREG_OFFSET_CAPTURE)) {
             return null;
@@ -93,12 +92,12 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
 
         $class = true === $value ? '' : $context->escapeAttribute($value);
         $pattern = "/(?:\"[^\"]*\"|'[^']*')(*SKIP)(*F)|"
-            ."\\sclass(?:\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+)))?/i";
+            . "\\sclass(?:\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+)))?/i";
 
         if (1 !== preg_match($pattern, $tag, $matches, \PREG_OFFSET_CAPTURE)) {
             return $this->appendBeforeClose(
                 $tag,
-                true === $value ? ' class' : ' class="'.$class.'"',
+                true === $value ? ' class' : ' class="' . $class . '"',
             );
         }
 
@@ -117,7 +116,7 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
         }
 
         $classes = [];
-        $candidates = preg_split('/\s+/', trim($class.' '.$existing), -1, \PREG_SPLIT_NO_EMPTY);
+        $candidates = preg_split('/\s+/', trim($class . ' ' . $existing), -1, \PREG_SPLIT_NO_EMPTY);
         foreach (false === $candidates ? [] : $candidates as $candidate) {
             if (!\in_array($candidate, $classes, true)) {
                 $classes[] = $candidate;
@@ -127,7 +126,7 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
         $at = $matches[0][1];
         $length = \strlen($matches[0][0]);
 
-        return substr($tag, 0, $at).' class="'.$merged.'"'.substr($tag, $at + $length);
+        return substr($tag, 0, $at) . ' class="' . $merged . '"' . substr($tag, $at + $length);
     }
 
     private function appendBeforeClose(string $tag, string $attribute): string
@@ -140,14 +139,14 @@ final readonly class DefaultAttributesDecorator implements HtmlNodeDecorator
             }
         }
 
-        return substr($tag, 0, $insert).$attribute.substr($tag, $insert);
+        return substr($tag, 0, $insert) . $attribute . substr($tag, $insert);
     }
 
     private function hasAttribute(string $tag, string $name): bool
     {
         return 1 === preg_match(
             "/(?:\"[^\"]*\"|'[^']*')(*SKIP)(*F)|"
-            .'\\s'.preg_quote($name, '/').'(?=\\s|=|\\/?>)/i',
+            . '\\s' . preg_quote($name, '/') . '(?=\\s|=|\\/?>)/i',
             $tag,
         );
     }

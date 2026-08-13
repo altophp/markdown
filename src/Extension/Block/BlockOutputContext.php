@@ -27,8 +27,7 @@ abstract readonly class BlockOutputContext
         private BlockState $state,
         public SourceRange $range,
         private string $sourceBytes,
-    ) {
-    }
+    ) {}
 
     public function state(): BlockState
     {

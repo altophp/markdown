@@ -21,6 +21,5 @@ final readonly class NodeId
     public function __construct(
         public int $generation,
         public int $ordinal,
-    ) {
-    }
+    ) {}
 }

@@ -34,8 +34,8 @@ final class SmartPunctuationExtensionTest extends TestCase
         $factory = Markdown::github()->with(new SmartPunctuationExtension());
         $source = "\"Hello,\" she said... It's ready -- really --- now.\n";
         $expected = '<p>'
-            ."\u{201C}Hello,\u{201D} she said\u{2026} It\u{2019}s ready "
-            ."\u{2013} really \u{2014} now.</p>\n";
+            . "\u{201C}Hello,\u{201D} she said\u{2026} It\u{2019}s ready "
+            . "\u{2013} really \u{2014} now.</p>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame(

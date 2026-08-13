@@ -128,7 +128,7 @@ final class FusedInlineRendererTest extends TestCase
         foreach ([1000, 2000, 4000, 8000] as $size) {
             Instrumentation::reset();
             Instrumentation::$trackInlineComplexity = true;
-            $factory->toHtml(str_repeat('a* ', $size)."\n");
+            $factory->toHtml(str_repeat('a* ', $size) . "\n");
             $steps = Instrumentation::$delimiterSearchSteps;
 
             self::assertLessThanOrEqual($size, $steps);
@@ -147,7 +147,7 @@ final class FusedInlineRendererTest extends TestCase
         $size = 4000;
         Instrumentation::reset();
         Instrumentation::$trackInlineComplexity = true;
-        $factory->toHtml(str_repeat('*x* ', $size)."\n");
+        $factory->toHtml(str_repeat('*x* ', $size) . "\n");
 
         self::assertLessThanOrEqual($size, Instrumentation::$delimiterSearchSteps);
     }

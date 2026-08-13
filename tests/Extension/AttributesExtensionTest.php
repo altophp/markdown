@@ -40,17 +40,17 @@ final class AttributesExtensionTest extends TestCase
             'title',
         ])));
         $source = "{#intro .lead title=\"Welcome home\"}\n"
-            ."{.wide .lead}\n"
-            ."# Hello\n\n"
-            ."> Quote\n"
-            ."> {: .quoted}\n\n"
-            ."Paragraph\n"
-            ."{: .after}\n";
-        $expected = '<h1 class="lead wide" id="intro" title="Welcome home">Hello</h1>'."\n"
-            ."<blockquote>\n"
-            .'<p class="quoted">Quote</p>'."\n"
-            ."</blockquote>\n"
-            .'<p class="after">Paragraph</p>'."\n";
+            . "{.wide .lead}\n"
+            . "# Hello\n\n"
+            . "> Quote\n"
+            . "> {: .quoted}\n\n"
+            . "Paragraph\n"
+            . "{: .after}\n";
+        $expected = '<h1 class="lead wide" id="intro" title="Welcome home">Hello</h1>' . "\n"
+            . "<blockquote>\n"
+            . '<p class="quoted">Quote</p>' . "\n"
+            . "</blockquote>\n"
+            . '<p class="after">Paragraph</p>' . "\n";
 
         self::assertSame($expected, $factory->toHtml($source));
 
@@ -70,13 +70,13 @@ final class AttributesExtensionTest extends TestCase
             'disabled',
         ])));
         $source = '*red*{.accent title=Warm}, **bold**{#strong}, '
-            .'`code`{.token}, ![Logo](logo.png){.media disabled=true}, '
-            .'and plain{.literal}.';
+            . '`code`{.token}, ![Logo](logo.png){.media disabled=true}, '
+            . 'and plain{.literal}.';
         $expected = '<em class="accent" title="Warm">red</em>, '
-            .'<strong id="strong">bold</strong>, '
-            .'<code class="token">code</code>, '
-            .'<img src="logo.png" alt="Logo" class="media" disabled />, '
-            .'and plain{.literal}.';
+            . '<strong id="strong">bold</strong>, '
+            . '<code class="token">code</code>, '
+            . '<img src="logo.png" alt="Logo" class="media" disabled />, '
+            . 'and plain{.literal}.';
 
         self::assertSame($expected, $factory->toInlineHtml($source));
         self::assertSame("<p>{$expected}</p>\n", $factory->toHtml($source));
@@ -90,11 +90,11 @@ final class AttributesExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new AttributesExtension());
         $source = "{#title .hero title=Ignored data-x=Ignored}\n# Hello\n\n"
-            ."*text*{.accent title=Ignored}\n";
+            . "*text*{.accent title=Ignored}\n";
 
         self::assertSame(
-            '<h1 class="hero" id="title">Hello</h1>'."\n"
-            .'<p><em class="accent">text</em></p>'."\n",
+            '<h1 class="hero" id="title">Hello</h1>' . "\n"
+            . '<p><em class="accent">text</em></p>' . "\n",
             $factory->toHtml($source),
         );
     }
@@ -128,7 +128,7 @@ final class AttributesExtensionTest extends TestCase
         );
 
         self::assertSame(
-            '<h1 class="default source" id="source">Heading</h1>'."\n",
+            '<h1 class="default source" id="source">Heading</h1>' . "\n",
             $factory->toHtml("{#source .source}\n# Heading\n"),
         );
     }
@@ -140,10 +140,10 @@ final class AttributesExtensionTest extends TestCase
             new TabsExtension(),
         );
         $source = "{.source-tabs}\n"
-            ."@tabs\n"
-            ."@tab One\n"
-            ."Body.\n"
-            ."@endtabs\n";
+            . "@tabs\n"
+            . "@tab One\n"
+            . "Body.\n"
+            . "@endtabs\n";
 
         $html = $factory->toHtml($source);
 
@@ -200,23 +200,23 @@ final class AttributesExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new AttributesExtension($policy));
 
         self::assertSame("<p>{.}</p>\n<h1>Heading</h1>\n", $factory->toHtml("{.}\n# Heading\n"));
-        self::assertSame('<p><em>x</em>{.one .two .three}</p>'."\n", $factory->toHtml("*x*{.one .two .three}\n"));
+        self::assertSame('<p><em>x</em>{.one .two .three}</p>' . "\n", $factory->toHtml("*x*{.one .two .three}\n"));
         self::assertSame(
-            '<p><em>x</em>{title=&quot;too-long-value&quot;}</p>'."\n",
+            '<p><em>x</em>{title=&quot;too-long-value&quot;}</p>' . "\n",
             $factory->toHtml("*x*{title=\"too-long-value\"}\n"),
         );
-        self::assertSame('<p><em>x</em>{}</p>'."\n", $factory->toHtml("*x*{}\n"));
+        self::assertSame('<p><em>x</em>{}</p>' . "\n", $factory->toHtml("*x*{}\n"));
     }
 
     public function testPolicyRejectsInvalidDangerousDuplicateAndOutOfRangeConfiguration(): void
     {
         $invalid = [
-            static fn (): AttributesPolicy => new AttributesPolicy(['onclick']),
-            static fn (): AttributesPolicy => new AttributesPolicy(['CLASS', 'class']),
-            static fn (): AttributesPolicy => new AttributesPolicy(['bad name']),
-            static fn (): AttributesPolicy => new AttributesPolicy(maxAttributes: 0),
-            static fn (): AttributesPolicy => new AttributesPolicy(maxListBytes: 15),
-            static fn (): AttributesPolicy => new AttributesPolicy(maxValueBytes: 1025),
+            static fn(): AttributesPolicy => new AttributesPolicy(['onclick']),
+            static fn(): AttributesPolicy => new AttributesPolicy(['CLASS', 'class']),
+            static fn(): AttributesPolicy => new AttributesPolicy(['bad name']),
+            static fn(): AttributesPolicy => new AttributesPolicy(maxAttributes: 0),
+            static fn(): AttributesPolicy => new AttributesPolicy(maxListBytes: 15),
+            static fn(): AttributesPolicy => new AttributesPolicy(maxValueBytes: 1025),
         ];
         $caught = 0;
 

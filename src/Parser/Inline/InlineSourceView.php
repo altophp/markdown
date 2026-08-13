@@ -30,6 +30,5 @@ final readonly class InlineSourceView
     public function __construct(
         public SourceBuffer $buffer,
         public array $pairs,
-    ) {
-    }
+    ) {}
 }

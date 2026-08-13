@@ -22,6 +22,5 @@ final readonly class Mention
         public string $type,
         public string $prefix,
         public string $identifier,
-    ) {
-    }
+    ) {}
 }

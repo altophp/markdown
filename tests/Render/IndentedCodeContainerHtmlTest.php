@@ -193,7 +193,7 @@ final class IndentedCodeContainerHtmlTest extends TestCase
      */
     private static function loadExamples(string $fixture, array $wanted): array
     {
-        $path = \dirname(__DIR__).'/fixtures/'.$fixture;
+        $path = \dirname(__DIR__) . '/fixtures/' . $fixture;
         $json = file_get_contents($path);
 
         if (false === $json) {

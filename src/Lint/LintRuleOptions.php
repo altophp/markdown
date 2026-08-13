@@ -18,6 +18,4 @@ namespace Alto\Markdown\Lint;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-interface LintRuleOptions
-{
-}
+interface LintRuleOptions {}

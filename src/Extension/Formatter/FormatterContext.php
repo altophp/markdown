@@ -33,8 +33,7 @@ final readonly class FormatterContext
         private array $blocks,
         private array $inlines,
         public MarkdownStyle $style,
-    ) {
-    }
+    ) {}
 
     public function source(): string
     {

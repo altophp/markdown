@@ -26,6 +26,5 @@ final readonly class PatchLoweringFallback
         public string $kind,
         public SourceRange $range,
         public string $reason,
-    ) {
-    }
+    ) {}
 }

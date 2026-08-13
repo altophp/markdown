@@ -29,6 +29,5 @@ final readonly class GeneratedSnippet
         public int $fenceLine,
         public int $bodyStartLine,
         public int $strippedLines,
-    ) {
-    }
+    ) {}
 }

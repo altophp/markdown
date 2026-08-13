@@ -171,7 +171,7 @@ final class ProfileCompiler
             }
 
             foreach ($publicBlocks as $definition) {
-                $kind = $bindings->get($extension->name().':'.$definition->kind);
+                $kind = $bindings->get($extension->name() . ':' . $definition->kind);
                 $blockConstructs[] = new PublicBlockParserAdapter($kind->id, $definition->parser);
 
                 if (null !== $definition->html) {
@@ -183,7 +183,7 @@ final class ProfileCompiler
             }
 
             foreach ($publicInlines as $definition) {
-                $kind = $bindings->get($extension->name().':'.$definition->kind);
+                $kind = $bindings->get($extension->name() . ':' . $definition->kind);
                 $trigger = $definition->parser->triggerByte();
                 PublicInlineParserAdapter::validateTrigger($trigger);
                 $inlineConstructs[] = new PublicInlineParserAdapter($kind->id, $definition->parser, $trigger);
@@ -204,7 +204,7 @@ final class ProfileCompiler
             }
 
             foreach ($this->lintRules($extension) as $definition) {
-                $id = $extension->name().':'.$definition->name;
+                $id = $extension->name() . ':' . $definition->name;
 
                 if (isset($lintRules[$id])) {
                     throw new InvalidExtensionException(\sprintf('Duplicate lint rule "%s".', $id));
@@ -214,7 +214,7 @@ final class ProfileCompiler
             }
 
             foreach ($this->formatterPasses($extension) as $definition) {
-                $id = $extension->name().':'.$definition->name;
+                $id = $extension->name() . ':' . $definition->name;
 
                 if (isset($formatterPasses[$id])) {
                     throw new InvalidExtensionException(\sprintf('Duplicate formatter pass "%s".', $id));
@@ -224,7 +224,7 @@ final class ProfileCompiler
             }
 
             foreach ($this->statsMetrics($extension) as $definition) {
-                $id = $extension->name().':'.$definition->name;
+                $id = $extension->name() . ':' . $definition->name;
 
                 if (isset($statsMetrics[$id])) {
                     throw new InvalidExtensionException(\sprintf('Duplicate stats metric "%s".', $id));
@@ -236,7 +236,7 @@ final class ProfileCompiler
             $documentTransformOrder = 0;
 
             foreach ($publicDocumentTransforms as $definition) {
-                $id = $extension->name().':'.$definition->name;
+                $id = $extension->name() . ':' . $definition->name;
 
                 if (isset($documentTransformIds[$id])) {
                     throw new InvalidExtensionException(\sprintf('Duplicate document transform "%s".', $id));
@@ -275,7 +275,7 @@ final class ProfileCompiler
 
         uksort(
             $formatterPasses,
-            static fn (string $left, string $right): int => [
+            static fn(string $left, string $right): int => [
                 $formatterPasses[$left]->order,
                 $left,
             ] <=> [
@@ -701,7 +701,7 @@ final class ProfileCompiler
     {
         usort(
             $entries,
-            static fn (array $left, array $right): int => [
+            static fn(array $left, array $right): int => [
                 $left[0]->priority,
                 $left[1],
                 $left[2],
@@ -713,7 +713,7 @@ final class ProfileCompiler
         );
 
         return new CompiledHtmlDecoratorChain(array_map(
-            static fn (array $entry): \Alto\Markdown\Extension\Html\HtmlNodeDecorator => $entry[0]->decorator,
+            static fn(array $entry): \Alto\Markdown\Extension\Html\HtmlNodeDecorator => $entry[0]->decorator,
             $entries,
         ));
     }

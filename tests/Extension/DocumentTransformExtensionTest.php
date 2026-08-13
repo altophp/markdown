@@ -83,19 +83,19 @@ final class DocumentTransformExtensionTest extends TestCase
         $first = new FixtureDocumentTransformExtension('first-extension', [
             new DocumentTransformDefinition(
                 'second',
-                static fn (): OrderingDocumentTransform => new OrderingDocumentTransform('second', 3),
+                static fn(): OrderingDocumentTransform => new OrderingDocumentTransform('second', 3),
                 order: 20,
             ),
             new DocumentTransformDefinition(
                 'first',
-                static fn (): OrderingDocumentTransform => new OrderingDocumentTransform('first', 2),
+                static fn(): OrderingDocumentTransform => new OrderingDocumentTransform('first', 2),
                 order: 10,
             ),
         ]);
         $second = new FixtureDocumentTransformExtension('second-extension', [
             new DocumentTransformDefinition(
                 'third',
-                static fn (): OrderingDocumentTransform => new OrderingDocumentTransform('third', 5),
+                static fn(): OrderingDocumentTransform => new OrderingDocumentTransform('third', 5),
                 order: 20,
             ),
         ]);
@@ -113,7 +113,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('views', [
             new DocumentTransformDefinition(
                 'headings',
-                static fn (): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeHeadings: true),
+                static fn(): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeHeadings: true),
             ),
         ]));
 
@@ -140,7 +140,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('views', [
             new DocumentTransformDefinition(
                 'blocks',
-                static fn (): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeBlocks: true),
+                static fn(): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeBlocks: true),
             ),
         ]));
 
@@ -154,7 +154,7 @@ final class DocumentTransformExtensionTest extends TestCase
         self::assertSame(
             ['block-quote', 'atx-heading', 'paragraph'],
             array_map(
-                static fn (DocumentTransformBlock $block): string => $block->kind,
+                static fn(DocumentTransformBlock $block): string => $block->kind,
                 ViewCapturingDocumentTransform::$blocks,
             ),
         );
@@ -165,7 +165,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('views', [
             new DocumentTransformDefinition(
                 'headings',
-                static fn (): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeHeadings: true),
+                static fn(): ViewCapturingDocumentTransform => new ViewCapturingDocumentTransform(includeHeadings: true),
             ),
         ]));
 
@@ -196,7 +196,7 @@ final class DocumentTransformExtensionTest extends TestCase
     public function testTraversesDeepContainersWithoutNativeRecursion(): void
     {
         $depth = 550;
-        $source = str_repeat('> ', $depth)."## Deep\n";
+        $source = str_repeat('> ', $depth) . "## Deep\n";
         $factory = Markdown::commonmark()->with(self::fixedLevelExtension(4));
 
         $html = $factory->toHtml(
@@ -213,7 +213,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('increment', [
             new DocumentTransformDefinition(
                 'heading-level',
-                static fn (): IncrementHeadingLevelDocumentTransform => new IncrementHeadingLevelDocumentTransform(),
+                static fn(): IncrementHeadingLevelDocumentTransform => new IncrementHeadingLevelDocumentTransform(),
             ),
         ]));
         $document = $factory->fromString("## Old\n");
@@ -234,7 +234,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('counting', [
             new DocumentTransformDefinition(
                 'count',
-                static fn (): CountingDocumentTransform => CountingDocumentTransform::create(),
+                static fn(): CountingDocumentTransform => CountingDocumentTransform::create(),
             ),
         ]));
 
@@ -263,7 +263,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('foreign', [
             new DocumentTransformDefinition(
                 'heading',
-                static fn (): ForeignHeadingDocumentTransform => new ForeignHeadingDocumentTransform(),
+                static fn(): ForeignHeadingDocumentTransform => new ForeignHeadingDocumentTransform(),
             ),
         ]));
 
@@ -300,7 +300,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('throw-once', [
             new DocumentTransformDefinition(
                 'heading',
-                static fn (): ThrowOnceDocumentTransform => new ThrowOnceDocumentTransform(),
+                static fn(): ThrowOnceDocumentTransform => new ThrowOnceDocumentTransform(),
             ),
         ]));
 
@@ -333,7 +333,7 @@ final class DocumentTransformExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FixtureDocumentTransformExtension('counting', [
             new DocumentTransformDefinition(
                 'count',
-                static fn (): CountingDocumentTransform => CountingDocumentTransform::create(),
+                static fn(): CountingDocumentTransform => CountingDocumentTransform::create(),
             ),
         ]));
 
@@ -352,7 +352,7 @@ final class DocumentTransformExtensionTest extends TestCase
         try {
             new DocumentTransformDefinition(
                 'Not Valid',
-                static fn (): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(2),
+                static fn(): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(2),
             );
             self::fail('Expected the invalid transform name to fail.');
         } catch (InvalidMarkdownArgumentException $error) {
@@ -361,7 +361,7 @@ final class DocumentTransformExtensionTest extends TestCase
 
         $invalidFactory = new \ReflectionClass(DocumentTransformDefinition::class)->newInstance(
             'invalid-factory',
-            static fn (): object => new \stdClass(),
+            static fn(): object => new \stdClass(),
         );
         self::assertInstanceOf(DocumentTransformDefinition::class, $invalidFactory);
 
@@ -388,11 +388,11 @@ final class DocumentTransformExtensionTest extends TestCase
         $duplicate = new FixtureDocumentTransformExtension('duplicate', [
             new DocumentTransformDefinition(
                 'same',
-                static fn (): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(2),
+                static fn(): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(2),
             ),
             new DocumentTransformDefinition(
                 'same',
-                static fn (): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(3),
+                static fn(): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform(3),
             ),
         ]);
 
@@ -407,7 +407,7 @@ final class DocumentTransformExtensionTest extends TestCase
         return new FixtureDocumentTransformExtension('fixed-level', [
             new DocumentTransformDefinition(
                 'heading-level',
-                static fn (): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform($level),
+                static fn(): FixedHeadingLevelDocumentTransform => new FixedHeadingLevelDocumentTransform($level),
             ),
         ]);
     }
@@ -421,8 +421,7 @@ final readonly class FixtureDocumentTransformExtension implements DocumentTransf
     public function __construct(
         private string $extensionName,
         private array $definitions,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -437,9 +436,7 @@ final readonly class FixtureDocumentTransformExtension implements DocumentTransf
 
 final readonly class FixedHeadingLevelDocumentTransform implements DocumentTransform
 {
-    public function __construct(private int $level)
-    {
-    }
+    public function __construct(private int $level) {}
 
     public function transform(DocumentTransformContext $context): void
     {
@@ -469,8 +466,7 @@ final class OrderingDocumentTransform implements DocumentTransform
     public function __construct(
         private string $name,
         private int $level,
-    ) {
-    }
+    ) {}
 
     public function transform(DocumentTransformContext $context): void
     {
@@ -506,8 +502,7 @@ final class ViewCapturingDocumentTransform implements DocumentTransform
     public function __construct(
         private bool $includeBlocks = false,
         private bool $includeHeadings = false,
-    ) {
-    }
+    ) {}
 
     public function transform(DocumentTransformContext $context): void
     {

@@ -36,17 +36,17 @@ final class CodeBlockTitleExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new CodeBlockTitleExtension());
         $source = "```php title=\"src/App.php\"\n<?php echo 1;\n```\n\n"
-            ."```php\nplain();\n```\n\n"
-            ."    indented();\n";
-        $expected = '<figure class="code-block has-title" data-title="src/App.php">'."\n"
-            .'<figcaption class="code-title">src/App.php</figcaption>'."\n"
-            .'<pre><code class="language-php">&lt;?php echo 1;'."\n"
-            .'</code></pre>'."\n"
-            .'</figure>'."\n"
-            .'<pre><code class="language-php">plain();'."\n"
-            .'</code></pre>'."\n"
-            .'<pre><code>indented();'."\n"
-            .'</code></pre>'."\n";
+            . "```php\nplain();\n```\n\n"
+            . "    indented();\n";
+        $expected = '<figure class="code-block has-title" data-title="src/App.php">' . "\n"
+            . '<figcaption class="code-title">src/App.php</figcaption>' . "\n"
+            . '<pre><code class="language-php">&lt;?php echo 1;' . "\n"
+            . '</code></pre>' . "\n"
+            . '</figure>' . "\n"
+            . '<pre><code class="language-php">plain();' . "\n"
+            . '</code></pre>' . "\n"
+            . '<pre><code>indented();' . "\n"
+            . '</code></pre>' . "\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame($expected, $factory->fromString($source)->toHtml());
@@ -57,9 +57,9 @@ final class CodeBlockTitleExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new CodeBlockTitleExtension());
         $source = "```php filename=\"fallback.php\" title=\"My File.php\"\na\n```\n\n"
-            ."```php title='Single quoted.php'\nb\n```\n\n"
-            ."```php title=first.php title=last.php\nc\n```\n\n"
-            ."```php linenos title=\"A\\* &amp; B\"\nd\n```\n";
+            . "```php title='Single quoted.php'\nb\n```\n\n"
+            . "```php title=first.php title=last.php\nc\n```\n\n"
+            . "```php linenos title=\"A\\* &amp; B\"\nd\n```\n";
         $html = $factory->toHtml($source);
 
         self::assertStringContainsString('<figcaption class="code-title">My File.php</figcaption>', $html);
@@ -98,7 +98,7 @@ final class CodeBlockTitleExtensionTest extends TestCase
     public function testMalformedOrMissingTitleKeepsTheNormalCodeBlock(string $info): void
     {
         $factory = Markdown::commonmark()->with(new CodeBlockTitleExtension());
-        $html = $factory->toHtml('```'.$info."\ncode\n```\n");
+        $html = $factory->toHtml('```' . $info . "\ncode\n```\n");
 
         self::assertStringStartsWith('<pre><code', $html);
         self::assertStringNotContainsString('<figure', $html);
@@ -110,10 +110,10 @@ final class CodeBlockTitleExtensionTest extends TestCase
 
         self::assertNull(CodeBlockTitleInfoParser::title('php ', $policy));
         self::assertSame('x.php', CodeBlockTitleInfoParser::title('php ! title=x.php', $policy));
-        self::assertNull(CodeBlockTitleInfoParser::title('php '.str_repeat('x', 40), $policy));
+        self::assertNull(CodeBlockTitleInfoParser::title('php ' . str_repeat('x', 40), $policy));
         self::assertNull(CodeBlockTitleInfoParser::title('php title="123456789"', $policy));
         self::assertNull(CodeBlockTitleInfoParser::title(
-            'php '.implode(' ', array_fill(0, 65, 'flag')),
+            'php ' . implode(' ', array_fill(0, 65, 'flag')),
             new CodeBlockTitlePolicy(maxInfoBytes: 1024),
         ));
     }
@@ -122,11 +122,11 @@ final class CodeBlockTitleExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new CodeBlockTitleExtension());
         $source = "> ```html title=\"quoted.html\"\n"
-            ."> <strong>literal</strong>\n"
-            ."> ```\n\n"
-            ."- ```php title=\"item.php\"\n"
-            ."  echo '**literal**';\n"
-            ."  ```\n";
+            . "> <strong>literal</strong>\n"
+            . "> ```\n\n"
+            . "- ```php title=\"item.php\"\n"
+            . "  echo '**literal**';\n"
+            . "  ```\n";
         $html = $factory->toHtml($source);
 
         self::assertStringContainsString("<blockquote>\n<figure", $html);
@@ -143,8 +143,8 @@ final class CodeBlockTitleExtensionTest extends TestCase
         $expectedTitle = '&lt;img src=x onerror=alert(1)&gt; &amp; &quot;quote&quot;';
         $safe = $factory->toHtml($source);
 
-        self::assertStringContainsString('data-title="'.$expectedTitle.'"', $safe);
-        self::assertStringContainsString('>'.$expectedTitle.'</figcaption>', $safe);
+        self::assertStringContainsString('data-title="' . $expectedTitle . '"', $safe);
+        self::assertStringContainsString('>' . $expectedTitle . '</figcaption>', $safe);
 
         if (class_exists(\Dom\HTMLDocument::class)) {
             $curated = $factory->toHtml(
@@ -176,10 +176,10 @@ final class CodeBlockTitleExtensionTest extends TestCase
 
         self::assertSame(
             "<figure>\n"
-            ."<figcaption>file.php</figcaption>\n"
-            .'<pre><code class="default language-php" data-copy>code'."\n"
-            .'</code></pre>'."\n"
-            .'</figure>'."\n",
+            . "<figcaption>file.php</figcaption>\n"
+            . '<pre><code class="default language-php" data-copy>code' . "\n"
+            . '</code></pre>' . "\n"
+            . '</figure>' . "\n",
             $factory->toHtml("```php title=\"file.php\"\ncode\n```\n"),
         );
     }
@@ -218,11 +218,11 @@ final class CodeBlockTitleExtensionTest extends TestCase
         $block = $block->replaceCode("newCode();\n")->setLanguage('js');
 
         self::assertSame(
-            '<figure class="code-block has-title" data-title="file.php">'."\n"
-            .'<figcaption class="code-title">file.php</figcaption>'."\n"
-            .'<pre><code class="language-js">newCode();'."\n"
-            .'</code></pre>'."\n"
-            .'</figure>'."\n",
+            '<figure class="code-block has-title" data-title="file.php">' . "\n"
+            . '<figcaption class="code-title">file.php</figcaption>' . "\n"
+            . '<pre><code class="language-js">newCode();' . "\n"
+            . '</code></pre>' . "\n"
+            . '</figure>' . "\n",
             $document->toHtml(),
         );
     }

@@ -94,7 +94,7 @@ final readonly class EmbedPolicy
                 || (
                     $this->includeSubdomains
                     && false === filter_var($allowed, \FILTER_VALIDATE_IP)
-                    && str_ends_with($host, '.'.$allowed)
+                    && str_ends_with($host, '.' . $allowed)
                 )
             ) {
                 return true;
@@ -159,7 +159,7 @@ final readonly class EmbedPolicy
 
         return 1 === preg_match(
             '/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*'
-            .'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/D',
+            . '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/D',
             $host,
         );
     }

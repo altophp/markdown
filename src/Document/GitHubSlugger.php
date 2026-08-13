@@ -31,7 +31,5 @@ final class GitHubSlugger
         return $slug;
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

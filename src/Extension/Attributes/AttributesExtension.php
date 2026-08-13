@@ -80,7 +80,7 @@ final class AttributesExtension extends AbstractExtension implements DocumentTra
 
         yield new DocumentTransformDefinition(
             'catalog',
-            static fn (): AttributesTransform => new AttributesTransform($parser),
+            static fn(): AttributesTransform => new AttributesTransform($parser),
         );
     }
 

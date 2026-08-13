@@ -64,12 +64,12 @@ final class FrontMatterParser implements OpaqueLeafBlock
      */
     private array $contentStart = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $contentEnd = [];
 
-    public function __construct(private readonly int $kind)
-    {
-    }
+    public function __construct(private readonly int $kind) {}
 
     public function kind(): int
     {
@@ -144,7 +144,7 @@ final class FrontMatterParser implements OpaqueLeafBlock
             return;
         }
 
-        $state->tape->setPayload($ordinal, $this->contentStart[$ordinal].':'.$this->contentEnd[$ordinal]);
+        $state->tape->setPayload($ordinal, $this->contentStart[$ordinal] . ':' . $this->contentEnd[$ordinal]);
 
         unset($this->contentStart[$ordinal], $this->contentEnd[$ordinal]);
     }

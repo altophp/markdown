@@ -27,6 +27,5 @@ final readonly class ResolvedLintRules
     public function __construct(
         public array $builtIns,
         public array $custom,
-    ) {
-    }
+    ) {}
 }

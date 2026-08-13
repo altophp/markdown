@@ -75,7 +75,7 @@ final class ProfileCompilerTest extends TestCase
                 IndentedCodeParser::class,
                 LinkReferenceDefinitionParser::class,
             ],
-            array_map(static fn (object $construct): string => $construct::class, $compiled->blockConstructs()),
+            array_map(static fn(object $construct): string => $construct::class, $compiled->blockConstructs()),
         );
         self::assertSame(
             [
@@ -85,7 +85,7 @@ final class ProfileCompilerTest extends TestCase
                 AutolinkParser::class,
                 RawHtmlParser::class,
             ],
-            array_map(static fn (object $construct): string => $construct::class, $compiled->inlineConstructs()),
+            array_map(static fn(object $construct): string => $construct::class, $compiled->inlineConstructs()),
         );
     }
 
@@ -125,7 +125,7 @@ final class ProfileCompilerTest extends TestCase
         $compiled = new ProfileCompiler()->compile(new GitHubProfile());
         $extensions = $compiled->extensions();
 
-        self::assertSame(['core', 'gfm', 'github', 'frontmatter'], array_map(static fn ($extension): string => $extension->name(), $extensions));
+        self::assertSame(['core', 'gfm', 'github', 'frontmatter'], array_map(static fn($extension): string => $extension->name(), $extensions));
         self::assertContainsOnlyInstancesOf(NodeKindExtensionInterface::class, $extensions);
         self::assertInstanceOf(NodeKindExtensionInterface::class, $extensions[0]);
         self::assertInstanceOf(NodeKindExtensionInterface::class, $extensions[1]);
@@ -134,10 +134,10 @@ final class ProfileCompilerTest extends TestCase
         self::assertSame([], [...$extensions[0]->nodeKinds()]);
         self::assertSame(
             [GfmExtension::TABLE_KIND],
-            array_map(static fn ($kind): string => $kind->name, [...$extensions[1]->nodeKinds()]),
+            array_map(static fn($kind): string => $kind->name, [...$extensions[1]->nodeKinds()]),
         );
-        self::assertSame(['github:alert'], array_map(static fn ($kind): string => $kind->name, [...$extensions[2]->nodeKinds()]));
-        self::assertSame(['frontmatter:block'], array_map(static fn ($kind): string => $kind->name, [...$extensions[3]->nodeKinds()]));
+        self::assertSame(['github:alert'], array_map(static fn($kind): string => $kind->name, [...$extensions[2]->nodeKinds()]));
+        self::assertSame(['frontmatter:block'], array_map(static fn($kind): string => $kind->name, [...$extensions[3]->nodeKinds()]));
     }
 
     public function testInlineSpecialBytesComeFromCompiledConstructs(): void

@@ -27,6 +27,5 @@ final readonly class LintProblem
         public SourceRange $range,
         public ?Operation $fix = null,
         public LintSeverity $severity = LintSeverity::Error,
-    ) {
-    }
+    ) {}
 }

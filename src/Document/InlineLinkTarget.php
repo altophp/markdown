@@ -34,6 +34,5 @@ final readonly class InlineLinkTarget
         public SourceRange $range,
         public string $source,
         public bool $inlineSyntax,
-    ) {
-    }
+    ) {}
 }

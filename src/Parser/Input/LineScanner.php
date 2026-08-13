@@ -37,16 +37,24 @@ use Alto\Markdown\Source\SourceRange;
  */
 final class LineScanner
 {
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private array $starts = [];
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private array $contentEnds = [];
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private array $lineEnds = [];
 
-    /** @var list<LineEnding|null> */
+    /**
+     * @var list<LineEnding|null>
+     */
     private array $eols = [];
 
     private readonly int $lineCount;

@@ -52,20 +52,20 @@ final class DeepContainerRobustnessTest extends TestCase
 
     public function testDeepNestedBlockquotesRenderToHtml(): void
     {
-        $markdown = str_repeat('> ', self::DEPTH)."text\n";
+        $markdown = str_repeat('> ', self::DEPTH) . "text\n";
 
         $baseline = memory_get_usage(true);
         memory_reset_peak_usage();
         $html = Markdown::gfm()->fromString($markdown, self::unbounded())->toHtml();
         $renderPeak = memory_get_peak_usage(true) - $baseline;
 
-        self::assertSame(str_repeat("<blockquote>\n", self::DEPTH).'<p>text</p>'."\n".str_repeat("</blockquote>\n", self::DEPTH), $html);
+        self::assertSame(str_repeat("<blockquote>\n", self::DEPTH) . '<p>text</p>' . "\n" . str_repeat("</blockquote>\n", self::DEPTH), $html);
         self::assertLessThan(self::RENDER_MEMORY_BUDGET, $renderPeak);
     }
 
     public function testDeepNestedBlockquotesMatchAcrossLanes(): void
     {
-        $markdown = str_repeat('> ', self::DEPTH)."text\n";
+        $markdown = str_repeat('> ', self::DEPTH) . "text\n";
 
         $direct = Markdown::gfm()->toHtml($markdown, self::unbounded());
         $document = Markdown::gfm()->fromString($markdown, self::unbounded())->toHtml();
@@ -75,7 +75,7 @@ final class DeepContainerRobustnessTest extends TestCase
 
     public function testDeepNestedBlockquotesRenderToMarkdown(): void
     {
-        $markdown = str_repeat('> ', self::DEPTH)."text\n";
+        $markdown = str_repeat('> ', self::DEPTH) . "text\n";
 
         $baseline = memory_get_usage(true);
         memory_reset_peak_usage();
@@ -87,14 +87,14 @@ final class DeepContainerRobustnessTest extends TestCase
         self::assertStringStartsWith(str_repeat('> ', 3), $rendered);
         self::assertStringEndsWith("text\n", $rendered);
         // A depth-N blockquote prints as "> " repeated N times before "text".
-        self::assertSame(str_repeat('> ', self::DEPTH).'text', trim($rendered));
+        self::assertSame(str_repeat('> ', self::DEPTH) . 'text', trim($rendered));
         self::assertLessThan(self::RENDER_MEMORY_BUDGET, $renderPeak);
     }
 
     public function testDeepNestedListsRenderToMarkdownIteratively(): void
     {
         $depth = MarkdownRenderer::STACK_LIMIT + 20;
-        $markdown = str_repeat('- ', $depth)."text\n";
+        $markdown = str_repeat('- ', $depth) . "text\n";
 
         $rendered = Markdown::gfm()
             ->fromString($markdown, self::unbounded())
@@ -111,7 +111,7 @@ final class DeepContainerRobustnessTest extends TestCase
         // depth keeps the quadratic inline parser fast while still driving the
         // walk far past any shallow nesting.
         $depth = 2000;
-        $markdown = '**foo **bar**** '.str_repeat('*a ', $depth).'x'.str_repeat(' a*', $depth)."\n";
+        $markdown = '**foo **bar**** ' . str_repeat('*a ', $depth) . 'x' . str_repeat(' a*', $depth) . "\n";
 
         $html = Markdown::gfm()->toHtml($markdown, self::unbounded());
 

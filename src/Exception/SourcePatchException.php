@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class SourcePatchException extends \InvalidArgumentException implements MarkdownExceptionInterface
-{
-}
+final class SourcePatchException extends \InvalidArgumentException implements MarkdownExceptionInterface {}

@@ -126,17 +126,17 @@ final class TestHtmlRenderer implements HtmlRenderer
         $node = $inlineTape->firstChildOrdinal($parent);
 
         while (ParseTape::NONE !== $node) {
-            $slice = fn (): string => $buffer->substring($inlineTape->startOffset($node), $inlineTape->endOffset($node));
+            $slice = fn(): string => $buffer->substring($inlineTape->startOffset($node), $inlineTape->endOffset($node));
             $html .= match ($inlineTape->kindId($node)) {
                 InlineKind::TEXT => $this->escape($inlineTape->payload($node) ?? $slice()),
                 InlineKind::SOFT_BREAK => "\n",
                 InlineKind::HARD_BREAK => $hardBreaks ? "<br />\n" : "\n",
-                InlineKind::CODE_SPAN => '<code>'.$this->escape($inlineTape->payload($node) ?? $slice()).'</code>',
-                InlineKind::AUTOLINK => '<a href="'.$this->escape($inlineTape->payload($node) ?? '').'">'.$this->escape($slice()).'</a>',
+                InlineKind::CODE_SPAN => '<code>' . $this->escape($inlineTape->payload($node) ?? $slice()) . '</code>',
+                InlineKind::AUTOLINK => '<a href="' . $this->escape($inlineTape->payload($node) ?? '') . '">' . $this->escape($slice()) . '</a>',
                 InlineKind::HTML_INLINE => $this->rawHtml($inlineTape->payload($node) ?? $slice()),
-                InlineKind::EMPHASIS => '<em>'.$this->renderInlineChildren($buffer, $inlineTape, $node, $hardBreaks).'</em>',
+                InlineKind::EMPHASIS => '<em>' . $this->renderInlineChildren($buffer, $inlineTape, $node, $hardBreaks) . '</em>',
                 InlineKind::STRONG => $this->strong($buffer, $inlineTape, $node, $hardBreaks, $insideStrong),
-                InlineKind::STRIKETHROUGH => '<del>'.$this->renderInlineChildren($buffer, $inlineTape, $node, $hardBreaks).'</del>',
+                InlineKind::STRIKETHROUGH => '<del>' . $this->renderInlineChildren($buffer, $inlineTape, $node, $hardBreaks) . '</del>',
                 InlineKind::LINK => $this->link($buffer, $inlineTape, $node, $hardBreaks),
                 InlineKind::IMAGE => $this->image($buffer, $inlineTape, $node),
                 default => throw new \RuntimeException(\sprintf('Inline kind %d is not renderable yet.', $inlineTape->kindId($node))),
@@ -170,14 +170,14 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         return match ($kind) {
             BlockKind::PARAGRAPH => $tight
-                ? $this->paragraphContent($buffer, $tape, $ordinal)."\n"
-                : '<p>'.$this->paragraphContent($buffer, $tape, $ordinal)."</p>\n",
+                ? $this->paragraphContent($buffer, $tape, $ordinal) . "\n"
+                : '<p>' . $this->paragraphContent($buffer, $tape, $ordinal) . "</p>\n",
             BlockKind::ATX_HEADING, BlockKind::SETEXT_HEADING => $this->heading($buffer, $tape, $ordinal),
             BlockKind::THEMATIC_BREAK => "<hr />\n",
             BlockKind::INDENTED_CODE => $this->indentedCode($buffer, $tape, $ordinal),
             BlockKind::FENCED_CODE => $this->fencedCode($buffer, $tape, $ordinal),
             BlockKind::HTML_BLOCK => $this->htmlBlock($buffer, $tape, $ordinal),
-            BlockKind::BLOCK_QUOTE => "<blockquote>\n".$this->renderChildren($buffer, $tape, $ordinal, false).'</blockquote>'."\n",
+            BlockKind::BLOCK_QUOTE => "<blockquote>\n" . $this->renderChildren($buffer, $tape, $ordinal, false) . '</blockquote>' . "\n",
             BlockKind::LIST => $this->list($buffer, $tape, $ordinal),
             BlockKind::LIST_ITEM => $this->listItem($buffer, $tape, $ordinal, $tight),
             BlockKind::LINK_REFERENCE_DEFINITION => '',
@@ -202,10 +202,10 @@ final class TestHtmlRenderer implements HtmlRenderer
         $code = '';
 
         foreach ($this->contentPairs($tape, $ordinal) as [$start, $end, $pad, $column]) {
-            $code .= $this->stripColumns($buffer->substring($start, $end), 4, $pad, $column)."\n";
+            $code .= $this->stripColumns($buffer->substring($start, $end), 4, $pad, $column) . "\n";
         }
 
-        return '<pre><code>'.$this->escape($code).'</code></pre>'."\n";
+        return '<pre><code>' . $this->escape($code) . '</code></pre>' . "\n";
     }
 
     private function fencedCode(SourceBuffer $buffer, ParseTape $tape, int $ordinal): string
@@ -236,7 +236,7 @@ final class TestHtmlRenderer implements HtmlRenderer
         } elseif ('' !== $pairsPart) {
             foreach (explode(';', $pairsPart) as $pair) {
                 $parts = array_map('intval', explode(':', $pair));
-                $code .= $this->stripFenceIndent($buffer->substring($parts[0], $parts[1]), $indent, (int) ($parts[2] ?? 0))."\n";
+                $code .= $this->stripFenceIndent($buffer->substring($parts[0], $parts[1]), $indent, (int) ($parts[2] ?? 0)) . "\n";
             }
         }
 
@@ -244,10 +244,10 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         if ('' !== $info) {
             $word = explode(' ', $this->decodeInfo($info))[0];
-            $attribute = ' class="language-'.$this->escape($word).'"';
+            $attribute = ' class="language-' . $this->escape($word) . '"';
         }
 
-        return '<pre><code'.$attribute.'>'.$this->escape($code).'</code></pre>'."\n";
+        return '<pre><code' . $attribute . '>' . $this->escape($code) . '</code></pre>' . "\n";
     }
 
     private function htmlBlock(SourceBuffer $buffer, ParseTape $tape, int $ordinal): string
@@ -255,10 +255,10 @@ final class TestHtmlRenderer implements HtmlRenderer
         $lines = [];
 
         foreach ($this->contentPairs($tape, $ordinal) as [$start, $end, $pad]) {
-            $lines[] = str_repeat(' ', $pad).$buffer->substring($start, $end);
+            $lines[] = str_repeat(' ', $pad) . $buffer->substring($start, $end);
         }
 
-        return $this->rawBlockHtml(implode("\n", $lines))."\n";
+        return $this->rawBlockHtml(implode("\n", $lines)) . "\n";
     }
 
     private function list(SourceBuffer $buffer, ParseTape $tape, int $ordinal): string
@@ -270,12 +270,12 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         if ($ordered) {
             $startNumber = $tape->payload($ordinal) ?? '1';
-            $attribute = '1' === $startNumber ? '' : ' start="'.$startNumber.'"';
+            $attribute = '1' === $startNumber ? '' : ' start="' . $startNumber . '"';
 
-            return '<ol'.$attribute.">\n".$items."</ol>\n";
+            return '<ol' . $attribute . ">\n" . $items . "</ol>\n";
         }
 
-        return "<ul>\n".$items."</ul>\n";
+        return "<ul>\n" . $items . "</ul>\n";
     }
 
     private function listItem(SourceBuffer $buffer, ParseTape $tape, int $ordinal, bool $tight): string
@@ -289,7 +289,7 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         while (ParseTape::NONE !== $child) {
             if ($tight && BlockKind::PARAGRAPH === $tape->kindId($child)) {
-                $parts[] = ($first ? $task : '').$this->paragraphContent($buffer, $tape, $child);
+                $parts[] = ($first ? $task : '') . $this->paragraphContent($buffer, $tape, $child);
                 $lastIsInline = true;
 
                 if ($first) {
@@ -299,7 +299,7 @@ final class TestHtmlRenderer implements HtmlRenderer
             } elseif ($first && '' !== $task && BlockKind::PARAGRAPH === $tape->kindId($child)) {
                 // The task marker belongs to the first paragraph's inline
                 // content, so a loose item keeps it inside the <p>.
-                $parts[] = '<p>'.$task.$this->paragraphContent($buffer, $tape, $child).'</p>';
+                $parts[] = '<p>' . $task . $this->paragraphContent($buffer, $tape, $child) . '</p>';
                 $task = '';
                 $lastIsInline = false;
             } else {
@@ -329,7 +329,7 @@ final class TestHtmlRenderer implements HtmlRenderer
         $prefix = $firstIsInline ? '' : "\n";
         $suffix = $lastIsInline ? '' : "\n";
 
-        return '<li>'.$prefix.$task.implode("\n", $parts).$suffix."</li>\n";
+        return '<li>' . $prefix . $task . implode("\n", $parts) . $suffix . "</li>\n";
     }
 
     private function taskCheckbox(ParseTape $tape, int $ordinal): string
@@ -349,7 +349,7 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         return (string) preg_replace_callback(
             '/<(?=\\/?(?:title|textarea|style|xmp|iframe|noembed|noframes|script|plaintext)(?:\\s|>|\\/))/i',
-            static fn (): string => '&lt;',
+            static fn(): string => '&lt;',
             $html,
         );
     }
@@ -374,7 +374,7 @@ final class TestHtmlRenderer implements HtmlRenderer
         $html = "<table>\n<thead>\n<tr>\n";
 
         foreach ($header as $index => $cell) {
-            $html .= '<th'.$this->alignAttribute($alignments[$index] ?? '').'>'.$this->inlineCellHtml($cell)."</th>\n";
+            $html .= '<th' . $this->alignAttribute($alignments[$index] ?? '') . '>' . $this->inlineCellHtml($cell) . "</th>\n";
         }
 
         $html .= "</tr>\n</thead>\n";
@@ -386,7 +386,7 @@ final class TestHtmlRenderer implements HtmlRenderer
                 $html .= "<tr>\n";
 
                 foreach ($header as $index => $_cell) {
-                    $html .= '<td'.$this->alignAttribute($alignments[$index] ?? '').'>'.$this->inlineCellHtml($row[$index] ?? '')."</td>\n";
+                    $html .= '<td' . $this->alignAttribute($alignments[$index] ?? '') . '>' . $this->inlineCellHtml($row[$index] ?? '') . "</td>\n";
                 }
 
                 $html .= "</tr>\n";
@@ -395,7 +395,7 @@ final class TestHtmlRenderer implements HtmlRenderer
             $html .= "</tbody>\n";
         }
 
-        return $html."</table>\n";
+        return $html . "</table>\n";
     }
 
     /**
@@ -428,7 +428,7 @@ final class TestHtmlRenderer implements HtmlRenderer
 
     private function alignAttribute(string $alignment): string
     {
-        return '' === $alignment ? '' : ' align="'.$alignment.'"';
+        return '' === $alignment ? '' : ' align="' . $alignment . '"';
     }
 
     private function inlineCellHtml(string $cell): string
@@ -488,7 +488,7 @@ final class TestHtmlRenderer implements HtmlRenderer
         $byteColumn = $startColumn >= 0 ? $startColumn : $column;
 
         if ($byteColumn >= $goal) {
-            return $prefix.$line;
+            return $prefix . $line;
         }
 
         $offset = 0;
@@ -511,7 +511,7 @@ final class TestHtmlRenderer implements HtmlRenderer
 
         $overshoot = $column > $goal ? $column - $goal : 0;
 
-        return $prefix.str_repeat(' ', $overshoot).substr($line, $offset);
+        return $prefix . str_repeat(' ', $overshoot) . substr($line, $offset);
     }
 
     private function stripFenceIndent(string $line, int $spaces, int $pad = 0): string
@@ -527,15 +527,15 @@ final class TestHtmlRenderer implements HtmlRenderer
             ++$offset;
         }
 
-        return str_repeat(' ', $pad).substr($line, $offset);
+        return str_repeat(' ', $pad) . substr($line, $offset);
     }
 
     private function link(SourceBuffer $buffer, ParseTape $inlineTape, int $node, bool $hardBreaks): string
     {
-        [$href, $title] = explode("\x00", ($inlineTape->payload($node) ?? "\x00")."\x00");
-        $attribute = '' !== $title ? ' title="'.$this->escape($title).'"' : '';
+        [$href, $title] = explode("\x00", ($inlineTape->payload($node) ?? "\x00") . "\x00");
+        $attribute = '' !== $title ? ' title="' . $this->escape($title) . '"' : '';
 
-        return '<a href="'.$this->escape($href).'"'.$attribute.'>'.$this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks).'</a>';
+        return '<a href="' . $this->escape($href) . '"' . $attribute . '>' . $this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks) . '</a>';
     }
 
     private function strong(SourceBuffer $buffer, ParseTape $inlineTape, int $node, bool $hardBreaks, bool $insideStrong): string
@@ -546,7 +546,7 @@ final class TestHtmlRenderer implements HtmlRenderer
             return $children;
         }
 
-        return '<strong>'.$children.'</strong>';
+        return '<strong>' . $children . '</strong>';
     }
 
     private function renderLinkText(SourceBuffer $buffer, ParseTape $inlineTape, int $parent, bool $hardBreaks, bool $insideStrong = false): string
@@ -555,17 +555,17 @@ final class TestHtmlRenderer implements HtmlRenderer
         $node = $inlineTape->firstChildOrdinal($parent);
 
         while (ParseTape::NONE !== $node) {
-            $slice = fn (): string => $buffer->substring($inlineTape->startOffset($node), $inlineTape->endOffset($node));
+            $slice = fn(): string => $buffer->substring($inlineTape->startOffset($node), $inlineTape->endOffset($node));
             $html .= match ($inlineTape->kindId($node)) {
                 InlineKind::TEXT => $this->escape($inlineTape->payload($node) ?? $slice()),
                 InlineKind::SOFT_BREAK => "\n",
                 InlineKind::HARD_BREAK => $hardBreaks ? "<br />\n" : "\n",
-                InlineKind::CODE_SPAN => '<code>'.$this->escape($inlineTape->payload($node) ?? $slice()).'</code>',
+                InlineKind::CODE_SPAN => '<code>' . $this->escape($inlineTape->payload($node) ?? $slice()) . '</code>',
                 InlineKind::AUTOLINK => $this->escape($slice()),
                 InlineKind::HTML_INLINE => $inlineTape->payload($node) ?? $slice(),
-                InlineKind::EMPHASIS => '<em>'.$this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks).'</em>',
+                InlineKind::EMPHASIS => '<em>' . $this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks) . '</em>',
                 InlineKind::STRONG => $this->strongLinkText($buffer, $inlineTape, $node, $hardBreaks, $insideStrong),
-                InlineKind::STRIKETHROUGH => '<del>'.$this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks).'</del>',
+                InlineKind::STRIKETHROUGH => '<del>' . $this->renderLinkText($buffer, $inlineTape, $node, $hardBreaks) . '</del>',
                 InlineKind::IMAGE => $this->image($buffer, $inlineTape, $node),
                 default => throw new \RuntimeException(\sprintf('Inline kind %d is not renderable in link text.', $inlineTape->kindId($node))),
             };
@@ -583,15 +583,15 @@ final class TestHtmlRenderer implements HtmlRenderer
             return $children;
         }
 
-        return '<strong>'.$children.'</strong>';
+        return '<strong>' . $children . '</strong>';
     }
 
     private function image(SourceBuffer $buffer, ParseTape $inlineTape, int $node): string
     {
-        [$src, $title] = explode("\x00", ($inlineTape->payload($node) ?? "\x00")."\x00");
-        $attribute = '' !== $title ? ' title="'.$this->escape($title).'"' : '';
+        [$src, $title] = explode("\x00", ($inlineTape->payload($node) ?? "\x00") . "\x00");
+        $attribute = '' !== $title ? ' title="' . $this->escape($title) . '"' : '';
 
-        return '<img src="'.$this->escape($src).'" alt="'.$this->escape($this->altText($buffer, $inlineTape, $node)).'"'.$attribute.' />';
+        return '<img src="' . $this->escape($src) . '" alt="' . $this->escape($this->altText($buffer, $inlineTape, $node)) . '"' . $attribute . ' />';
     }
 
     /**
@@ -625,7 +625,7 @@ final class TestHtmlRenderer implements HtmlRenderer
     {
         $info = preg_replace_callback(
             '/\\\\([!-\/:-@\[-`{-~])/',
-            static fn (array $m): string => $m[1],
+            static fn(array $m): string => $m[1],
             $info,
         ) ?? $info;
 
@@ -644,9 +644,9 @@ final class TestHtmlRenderer implements HtmlRenderer
 
                 return match (true) {
                     $code < 0x80 => \chr($code),
-                    $code < 0x800 => \chr(0xC0 | $code >> 6).\chr(0x80 | $code & 0x3F),
-                    $code < 0x10000 => \chr(0xE0 | $code >> 12).\chr(0x80 | $code >> 6 & 0x3F).\chr(0x80 | $code & 0x3F),
-                    default => \chr(0xF0 | $code >> 18).\chr(0x80 | $code >> 12 & 0x3F).\chr(0x80 | $code >> 6 & 0x3F).\chr(0x80 | $code & 0x3F),
+                    $code < 0x800 => \chr(0xC0 | $code >> 6) . \chr(0x80 | $code & 0x3F),
+                    $code < 0x10000 => \chr(0xE0 | $code >> 12) . \chr(0x80 | $code >> 6 & 0x3F) . \chr(0x80 | $code & 0x3F),
+                    default => \chr(0xF0 | $code >> 18) . \chr(0x80 | $code >> 12 & 0x3F) . \chr(0x80 | $code >> 6 & 0x3F) . \chr(0x80 | $code & 0x3F),
                 };
             },
             $info,

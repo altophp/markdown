@@ -38,7 +38,7 @@ final class InMemoryEditJournal implements EditJournal
 
     public function operations(): array
     {
-        return array_map(static fn (EditJournalEntry $entry): Operation => $entry->operation, $this->entries);
+        return array_map(static fn(EditJournalEntry $entry): Operation => $entry->operation, $this->entries);
     }
 
     public function entries(): array

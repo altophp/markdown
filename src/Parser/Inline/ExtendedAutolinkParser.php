@@ -224,7 +224,7 @@ final class ExtendedAutolinkParser implements ContentScannedInlineConstruct
 
         $label = substr($text, $start, $end - $start);
 
-        return [$end, Href::encode($prefix.$label)];
+        return [$end, Href::encode($prefix . $label)];
     }
 
     /**
@@ -252,7 +252,7 @@ final class ExtendedAutolinkParser implements ContentScannedInlineConstruct
         [$end] = $domain;
         $label = substr($text, $start, $end - $start);
 
-        return [$end, Href::encode('mailto:'.$label)];
+        return [$end, Href::encode('mailto:' . $label)];
     }
 
     private function hasUrlBoundary(string $text, int $start): bool

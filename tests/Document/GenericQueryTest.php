@@ -61,7 +61,7 @@ final class GenericQueryTest extends TestCase
 
         $handles = $document->query()
             ->kind('atx-heading')
-            ->where(static fn (NodeHandle $handle): bool => 0 === $handle->id()->generation)
+            ->where(static fn(NodeHandle $handle): bool => 0 === $handle->id()->generation)
             ->get()
             ->all();
 
@@ -74,7 +74,7 @@ final class GenericQueryTest extends TestCase
 
         $handles = $document->query()
             ->kind('atx-heading')
-            ->where(static fn (NodeHandle $handle): bool => 0 === $handle->range()->startOffset)
+            ->where(static fn(NodeHandle $handle): bool => 0 === $handle->range()->startOffset)
             ->get()
             ->all();
 

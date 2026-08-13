@@ -46,8 +46,8 @@ final class LazyCollectionTest extends TestCase
         });
 
         $filtered = $collection
-            ->filter(static fn (int $value): bool => 0 === $value % 2)
-            ->filter(static fn (int $value): bool => $value > 2);
+            ->filter(static fn(int $value): bool => 0 === $value % 2)
+            ->filter(static fn(int $value): bool => $value > 2);
 
         self::assertSame(0, $visited);
         self::assertSame([4], $filtered->all());
@@ -81,12 +81,12 @@ final class LazyCollectionTest extends TestCase
             MD);
 
         $headings = $document->headings()
-            ->filter(static fn (Heading $heading): bool => $heading->level() >= 2)
+            ->filter(static fn(Heading $heading): bool => $heading->level() >= 2)
             ->all();
 
         self::assertContainsOnlyInstancesOf(Heading::class, $headings);
         self::assertSame(['Install', 'Details'], \array_map(
-            static fn (Heading $heading): string => $heading->text(),
+            static fn(Heading $heading): string => $heading->text(),
             $headings,
         ));
     }

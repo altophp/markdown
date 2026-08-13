@@ -39,7 +39,5 @@ final class BlockKind
     public const int THEMATIC_BREAK = 11;
     public const int LINK_REFERENCE_DEFINITION = 12;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

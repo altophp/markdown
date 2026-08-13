@@ -47,18 +47,18 @@ final class InlineLinkSyntax
 
     public static function withLabel(string $label, string $destination, ?string $title): string
     {
-        return $label.'('.self::destination($destination).self::title($title).')';
+        return $label . '(' . self::destination($destination) . self::title($title) . ')';
     }
 
     public static function image(string $altText, string $destination, ?string $title): string
     {
-        return '!['.self::plainText($altText).']('.self::destination($destination).self::title($title).')';
+        return '![' . self::plainText($altText) . '](' . self::destination($destination) . self::title($title) . ')';
     }
 
     private static function validateSingleLine(string $value, string $name): void
     {
         if (str_contains($value, "\x00") || str_contains($value, "\r") || str_contains($value, "\n")) {
-            throw new InvalidMarkdownArgumentException($name.' must be a single line without null bytes.');
+            throw new InvalidMarkdownArgumentException($name . ' must be a single line without null bytes.');
         }
     }
 
@@ -73,19 +73,17 @@ final class InlineLinkSyntax
             return '';
         }
 
-        return ' "'.str_replace(['\\', '"'], ['\\\\', '\\"'], $title).'"';
+        return ' "' . str_replace(['\\', '"'], ['\\\\', '\\"'], $title) . '"';
     }
 
     private static function plainText(string $text): string
     {
         return (string) preg_replace_callback(
             '/[!"#$%&\'()*+,\\.\/:;<=>?@\[\\\\\]\^_`{|}~-]/',
-            static fn (array $match): string => '\\'.$match[0],
+            static fn(array $match): string => '\\' . $match[0],
             $text,
         );
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

@@ -32,7 +32,7 @@ final readonly class LintReport implements \Countable, \IteratorAggregate
     {
         usort(
             $problems,
-            static fn (LintProblem $left, LintProblem $right): int => [
+            static fn(LintProblem $left, LintProblem $right): int => [
                 $left->range->startOffset,
                 $left->ruleId,
             ] <=> [

@@ -44,6 +44,5 @@ final readonly class DocumentStats
         public array $codeBlocksByLanguage,
         public int $tableCount,
         public array $extensionStats = [],
-    ) {
-    }
+    ) {}
 }

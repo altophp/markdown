@@ -26,9 +26,7 @@ final class ContentSlicerTransform implements DocumentProjectionTransform
 {
     private ?ContentSlicerLayout $layout = null;
 
-    public function __construct(private readonly int $minLevel)
-    {
-    }
+    public function __construct(private readonly int $minLevel) {}
 
     public function transform(DocumentTransformContext $context): void
     {

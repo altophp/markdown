@@ -84,7 +84,7 @@ final class SourceWhitespaceFixTest extends TestCase
 
     private function tempPath(): string
     {
-        $path = \sys_get_temp_dir().'/alto-markdown-whitespace-fix-'.\bin2hex(\random_bytes(8)).'.md';
+        $path = \sys_get_temp_dir() . '/alto-markdown-whitespace-fix-' . \bin2hex(\random_bytes(8)) . '.md';
         $this->paths[] = $path;
 
         return $path;

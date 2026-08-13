@@ -33,7 +33,7 @@ final class ListPrinter implements BlockPrinter
 
         while (ParseTape::NONE !== $child) {
             $marker = $model->listIsOrdered($ordinal)
-                ? $number.'.'
+                ? $number . '.'
                 : $context->style()->bulletMarker;
 
             $items[] = $context->renderListItem($model, $child, $marker, $loose);

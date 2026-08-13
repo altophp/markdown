@@ -169,7 +169,7 @@ final class SourceEditPropertyHarness
             Assert::assertLessThanOrEqual($length, $range->endOffset);
         }
 
-        usort($ranges, static fn (SourceRange $left, SourceRange $right): int => $left->startOffset <=> $right->startOffset);
+        usort($ranges, static fn(SourceRange $left, SourceRange $right): int => $left->startOffset <=> $right->startOffset);
 
         $merged = [];
 
@@ -289,7 +289,7 @@ final class SourceEditPropertyHarness
 
         while ($i < \count($original) && $j < \count($edited)) {
             if ($original[$i] === $edited[$j]) {
-                $out[] = ' '.$this->stripLineEnding($original[$i]);
+                $out[] = ' ' . $this->stripLineEnding($original[$i]);
                 ++$i;
                 ++$j;
 
@@ -297,27 +297,27 @@ final class SourceEditPropertyHarness
             }
 
             if (($lengths[$i + 1][$j] ?? 0) >= ($lengths[$i][$j + 1] ?? 0)) {
-                $out[] = '-'.$this->stripLineEnding($original[$i]);
+                $out[] = '-' . $this->stripLineEnding($original[$i]);
                 ++$i;
 
                 continue;
             }
 
-            $out[] = '+'.$this->stripLineEnding($edited[$j]);
+            $out[] = '+' . $this->stripLineEnding($edited[$j]);
             ++$j;
         }
 
         while ($i < \count($original)) {
-            $out[] = '-'.$this->stripLineEnding($original[$i]);
+            $out[] = '-' . $this->stripLineEnding($original[$i]);
             ++$i;
         }
 
         while ($j < \count($edited)) {
-            $out[] = '+'.$this->stripLineEnding($edited[$j]);
+            $out[] = '+' . $this->stripLineEnding($edited[$j]);
             ++$j;
         }
 
-        return implode("\n", $out)."\n";
+        return implode("\n", $out) . "\n";
     }
 
     /**

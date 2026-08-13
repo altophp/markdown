@@ -26,8 +26,7 @@ final readonly class BlockContinueResult
         public BlockContinueAction $action,
         public ?int $advanceOffset,
         public ?BlockState $state,
-    ) {
-    }
+    ) {}
 
     public static function matched(?int $advanceOffset = null, ?BlockState $state = null): self
     {

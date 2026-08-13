@@ -48,6 +48,5 @@ final readonly class BlockStart
         public ?BlockState $extensionState = null,
         public ?int $paragraphWrapperKind = null,
         public ?int $paragraphChildKind = null,
-    ) {
-    }
+    ) {}
 }

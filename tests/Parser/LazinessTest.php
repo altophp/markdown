@@ -126,7 +126,7 @@ final class LazinessTest extends TestCase
 
     private function corpus(): string
     {
-        $path = \dirname(__DIR__, 2).'/tests/fixtures/spec.txt';
+        $path = \dirname(__DIR__, 2) . '/tests/fixtures/spec.txt';
         $contents = file_get_contents($path);
         self::assertIsString($contents, 'spec.txt fixture must be readable');
 

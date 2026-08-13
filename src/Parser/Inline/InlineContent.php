@@ -50,8 +50,7 @@ final class InlineContent
         private readonly array $sources,
         public readonly array $breakKinds,
         public readonly array $breakChops,
-    ) {
-    }
+    ) {}
 
     /**
      * A shared empty content: the pre-render placeholder state of reusable

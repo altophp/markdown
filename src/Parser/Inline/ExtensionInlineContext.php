@@ -26,8 +26,7 @@ final readonly class ExtensionInlineContext implements InlineParseContext
     public function __construct(
         private InlineContent $content,
         private int $cursor,
-    ) {
-    }
+    ) {}
 
     public function offset(): int
     {

@@ -1,4 +1,4 @@
-# Manipulation
+# Editing
 
 Alto edits a source-backed document. Each supported mutation updates the current
 model immediately and records the smallest safe source change for export or
@@ -252,5 +252,5 @@ mode handling is platform-limited. Use `atomic: false` only when retaining the
 existing inode and its metadata is more important than all-or-nothing
 replacement. A non-atomic write can leave partial content after an I/O failure.
 
-See [Errors](errors.md) for conflicts, stale handles, missing sections, and
+See [Exceptions](../api/exceptions.md) for conflicts, stale handles, missing sections, and
 unsupported edits.

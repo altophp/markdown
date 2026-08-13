@@ -49,7 +49,7 @@ final class DefaultNodeKindRegistry implements NodeKindRegistry
 
     public function reserve(string $extensionName, string $localName): NodeKind
     {
-        return $this->register($extensionName.':'.$localName);
+        return $this->register($extensionName . ':' . $localName);
     }
 
     public function find(string $name): ?NodeKind

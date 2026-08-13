@@ -25,8 +25,7 @@ final readonly class LinkDestinationContext
         public string $destination,
         public ?SourceRange $range,
         private string $source,
-    ) {
-    }
+    ) {}
 
     /**
      * Exact source bytes for the destination-bearing node.

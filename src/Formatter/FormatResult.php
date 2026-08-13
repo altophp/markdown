@@ -25,8 +25,7 @@ final readonly class FormatResult
      */
     public function __construct(
         public array $operations = [],
-    ) {
-    }
+    ) {}
 
     public function isEmpty(): bool
     {

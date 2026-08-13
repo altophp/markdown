@@ -123,7 +123,7 @@ final class NoTrailingSpacesSemanticFixTest extends TestCase
 
     private function writeTempFile(string $bytes): string
     {
-        $path = sys_get_temp_dir().'/alto-markdown-semantic-whitespace-'.bin2hex(random_bytes(8)).'.md';
+        $path = sys_get_temp_dir() . '/alto-markdown-semantic-whitespace-' . bin2hex(random_bytes(8)) . '.md';
         $this->paths[] = $path;
         file_put_contents($path, $bytes);
 

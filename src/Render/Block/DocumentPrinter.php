@@ -31,6 +31,6 @@ final class DocumentPrinter implements BlockPrinter
             return '';
         }
 
-        return $context->style()->finalNewline ? $children."\n" : $children;
+        return $context->style()->finalNewline ? $children . "\n" : $children;
     }
 }

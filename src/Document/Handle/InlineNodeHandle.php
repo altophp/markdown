@@ -31,8 +31,7 @@ abstract class InlineNodeHandle implements NodeHandle
         protected readonly ParsedDocumentModel $model,
         private readonly NodeId $blockId,
         protected readonly int $inlineOrdinal,
-    ) {
-    }
+    ) {}
 
     public function id(): NodeId
     {

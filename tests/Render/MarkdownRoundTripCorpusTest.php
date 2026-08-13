@@ -74,8 +74,8 @@ final class MarkdownRoundTripCorpusTest extends TestCase
 
     private function fixturePrefix(string $name, int $lines): string
     {
-        $source = (string) file_get_contents(__DIR__.'/../fixtures/'.$name);
+        $source = (string) file_get_contents(__DIR__ . '/../fixtures/' . $name);
 
-        return implode("\n", \array_slice(explode("\n", $source), 0, $lines))."\n";
+        return implode("\n", \array_slice(explode("\n", $source), 0, $lines)) . "\n";
     }
 }

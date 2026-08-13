@@ -27,6 +27,5 @@ final readonly class SourceEditExpectation
         public string $expectedSemanticBytes,
         public array $originalTouchedRanges,
         public array $editedTouchedRanges,
-    ) {
-    }
+    ) {}
 }

@@ -57,7 +57,7 @@ final class NoBareUrlsRule implements InlineRule
             $this->id(),
             'Bare URL should be wrapped in angle brackets.',
             $event->range,
-            new SourcePatchOperation(new SourcePatch($event->range, '<'.$source.'>', $event->range, 'wrap bare URL')),
+            new SourcePatchOperation(new SourcePatch($event->range, '<' . $source . '>', $event->range, 'wrap bare URL')),
             severity: $context->config->severityFor($this->id()),
         );
     }

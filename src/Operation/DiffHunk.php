@@ -27,6 +27,5 @@ final readonly class DiffHunk
         public int $editedStartLine,
         public int $editedLineCount,
         public array $lines,
-    ) {
-    }
+    ) {}
 }

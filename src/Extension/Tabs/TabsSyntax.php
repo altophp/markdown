@@ -26,9 +26,7 @@ final class TabsSyntax
 
     public const int MAX_TITLE_BYTES = 256;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     public static function groupMarker(ParserState $state): ?string
     {
@@ -47,13 +45,13 @@ final class TabsSyntax
 
     public static function closesGroup(ParserState $state, string $marker): bool
     {
-        return $marker.'endtabs' === rtrim(self::line($state) ?? '', " \t");
+        return $marker . 'endtabs' === rtrim(self::line($state) ?? '', " \t");
     }
 
     public static function tabTitle(ParserState $state, string $marker): ?string
     {
         $line = self::line($state);
-        $prefix = $marker.'tab';
+        $prefix = $marker . 'tab';
 
         if (null === $line
             || !str_starts_with($line, $prefix)

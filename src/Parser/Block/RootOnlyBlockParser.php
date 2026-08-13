@@ -21,6 +21,4 @@ namespace Alto\Markdown\Parser\Block;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-interface RootOnlyBlockParser
-{
-}
+interface RootOnlyBlockParser {}
