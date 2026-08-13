@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Alto\Markdown\Tests\Conformance;
 
-final class MalformedSpecException extends \RuntimeException
-{
-}
+final class MalformedSpecException extends \RuntimeException {}

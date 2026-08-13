@@ -34,16 +34,16 @@ final readonly class SourceOutput implements HtmlBlockRenderer, MarkdownBlockPri
         $numbers = $context->state()->value('numbers');
         $highlights = $context->state()->value('highlights');
         $class = \is_string($language)
-            ? ' class="language-'.$context->escapeAttribute($language).'"'
+            ? ' class="language-' . $context->escapeAttribute($language) . '"'
             : '';
 
         $html = "<div class=\"source-block\">\n";
         if (\is_string($title)) {
-            $html .= '<div class="source-title">'.$context->escapeText($title)."</div>\n";
+            $html .= '<div class="source-title">' . $context->escapeText($title) . "</div>\n";
         }
         $html .= '<div class="source-path">'
-            .$context->escapeText($context->state()->string('path'))
-            ."</div>\n<pre><code".$class.'>';
+            . $context->escapeText($context->state()->string('path'))
+            . "</div>\n<pre><code" . $class . '>';
 
         $content = $context->state()->string('content');
         if (true === $numbers || \is_string($highlights)) {
@@ -58,7 +58,7 @@ final readonly class SourceOutput implements HtmlBlockRenderer, MarkdownBlockPri
             $html .= $context->escapeText($content);
         }
 
-        return $html."</code></pre>\n</div>\n";
+        return $html . "</code></pre>\n</div>\n";
     }
 
     public function print(MarkdownBlockOutputContext $context, string $children): string
@@ -106,7 +106,7 @@ final readonly class SourceOutput implements HtmlBlockRenderer, MarkdownBlockPri
                 $range,
                 $rangeOffset,
             );
-            $html .= $lineHtml.$separator;
+            $html .= $lineHtml . $separator;
             $lineStart = $offset + 1;
             ++$lineNumber;
         }
@@ -149,15 +149,15 @@ final readonly class SourceOutput implements HtmlBlockRenderer, MarkdownBlockPri
         }
 
         $highlighted = null !== $range && $lineNumber >= $range[0];
-        $html = '<span class="line'.($highlighted ? ' highlighted' : '').'">';
+        $html = '<span class="line' . ($highlighted ? ' highlighted' : '') . '">';
 
         if ($numbers) {
-            $html .= '<span class="line-number" data-line="'.$lineNumber.'" aria-hidden="true">'
-                .$lineNumber
-                .'</span>';
+            $html .= '<span class="line-number" data-line="' . $lineNumber . '" aria-hidden="true">'
+                . $lineNumber
+                . '</span>';
         }
 
-        $html .= $context->escapeText($line).'</span>';
+        $html .= $context->escapeText($line) . '</span>';
 
         return [$html, $range, $rangeOffset];
     }

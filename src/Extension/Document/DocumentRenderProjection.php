@@ -20,6 +20,4 @@ namespace Alto\Markdown\Extension\Document;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-interface DocumentRenderProjection
-{
-}
+interface DocumentRenderProjection {}

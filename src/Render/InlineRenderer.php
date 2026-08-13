@@ -26,9 +26,7 @@ use Alto\Markdown\Parser\ParseTape;
  */
 final class InlineRenderer
 {
-    public function __construct(private readonly MarkdownStyle $style)
-    {
-    }
+    public function __construct(private readonly MarkdownStyle $style) {}
 
     public function renderBlock(ParsedDocumentModel $model, int $blockOrdinal): string
     {
@@ -55,13 +53,13 @@ final class InlineRenderer
             InlineKind::SOFT_BREAK => "\n",
             InlineKind::HARD_BREAK => "\\\n",
             InlineKind::CODE_SPAN => $this->codeSpan($model->inlineLiteral($blockOrdinal, $node)),
-            InlineKind::EMPHASIS => '*'.$this->renderChildren($model, $blockOrdinal, $node).'*',
-            InlineKind::STRONG => '**'.$this->renderChildren($model, $blockOrdinal, $node).'**',
+            InlineKind::EMPHASIS => '*' . $this->renderChildren($model, $blockOrdinal, $node) . '*',
+            InlineKind::STRONG => '**' . $this->renderChildren($model, $blockOrdinal, $node) . '**',
             InlineKind::LINK => $this->link($model, $blockOrdinal, $node),
             InlineKind::IMAGE => $this->image($model, $blockOrdinal, $node),
-            InlineKind::AUTOLINK => '<'.$model->inlineLiteral($blockOrdinal, $node).'>',
+            InlineKind::AUTOLINK => '<' . $model->inlineLiteral($blockOrdinal, $node) . '>',
             InlineKind::HTML_INLINE => $model->inlineLiteral($blockOrdinal, $node),
-            InlineKind::STRIKETHROUGH => '~~'.$this->renderChildren($model, $blockOrdinal, $node).'~~',
+            InlineKind::STRIKETHROUGH => '~~' . $this->renderChildren($model, $blockOrdinal, $node) . '~~',
             default => $this->custom($model, $blockOrdinal, $node),
         };
     }
@@ -84,10 +82,10 @@ final class InlineRenderer
     {
         [$destination, $title] = $model->inlinePayloadParts($blockOrdinal, $node);
 
-        return '['.$this->renderChildren($model, $blockOrdinal, $node).']('
-            .$this->destination($destination)
-            .$this->title($title)
-            .')';
+        return '[' . $this->renderChildren($model, $blockOrdinal, $node) . ']('
+            . $this->destination($destination)
+            . $this->title($title)
+            . ')';
     }
 
     private function image(ParsedDocumentModel $model, int $blockOrdinal, int $node): string
@@ -95,10 +93,10 @@ final class InlineRenderer
         [$destination, $title] = $model->inlinePayloadParts($blockOrdinal, $node);
         $altText = $model->inlineImageAltTextOverride($blockOrdinal, $node);
 
-        return '!['.(null === $altText ? $this->renderChildren($model, $blockOrdinal, $node) : $this->escapeText($altText)).']('
-            .$this->destination($destination)
-            .$this->title($title)
-            .')';
+        return '![' . (null === $altText ? $this->renderChildren($model, $blockOrdinal, $node) : $this->escapeText($altText)) . ']('
+            . $this->destination($destination)
+            . $this->title($title)
+            . ')';
     }
 
     private function codeSpan(string $code): string
@@ -120,10 +118,10 @@ final class InlineRenderer
             || str_ends_with($code, '`')
             || (str_starts_with($code, ' ') && str_ends_with($code, ' ') && '' !== trim($code, ' '))
         ) {
-            return $ticks.' '.$code.' '.$ticks;
+            return $ticks . ' ' . $code . ' ' . $ticks;
         }
 
-        return $ticks.$code.$ticks;
+        return $ticks . $code . $ticks;
     }
 
     private function destination(string $destination): string
@@ -137,14 +135,14 @@ final class InlineRenderer
             return '';
         }
 
-        return ' "'.str_replace(['\\', '"'], ['\\\\', '\\"'], $title).'"';
+        return ' "' . str_replace(['\\', '"'], ['\\\\', '\\"'], $title) . '"';
     }
 
     private function escapeText(string $text): string
     {
         return (string) preg_replace_callback(
             '/[!"#$%&\'()*+,\\.\/:;<=>?@\[\\\\\]\^_`{|}~-]/',
-            static fn (array $match): string => '\\'.$match[0],
+            static fn(array $match): string => '\\' . $match[0],
             $text,
         );
     }

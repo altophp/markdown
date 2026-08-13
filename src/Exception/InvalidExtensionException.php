@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-class InvalidExtensionException extends InvalidMarkdownArgumentException
-{
-}
+class InvalidExtensionException extends InvalidMarkdownArgumentException {}

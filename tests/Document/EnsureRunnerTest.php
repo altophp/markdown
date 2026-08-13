@@ -83,7 +83,7 @@ final class EnsureRunnerTest extends TestCase
     private static function headingTexts(MarkdownDocument $document): array
     {
         return array_map(
-            static fn (\Alto\Markdown\Node\Heading $heading): string => $heading->text(),
+            static fn(\Alto\Markdown\Node\Heading $heading): string => $heading->text(),
             $document->headings()->all(),
         );
     }

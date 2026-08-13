@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class StaleHandleException extends \RuntimeException implements MarkdownExceptionInterface
-{
-}
+final class StaleHandleException extends \RuntimeException implements MarkdownExceptionInterface {}

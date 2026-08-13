@@ -51,7 +51,7 @@ final class HtmlRendererEngineBoundaryTest extends TestCase
     public function testFrameStackRendersOrderedListWithNestedContainer(): void
     {
         $quote = self::quotePrefix();
-        $markdown = $quote."3. outer\n".$quote."   - inner\n";
+        $markdown = $quote . "3. outer\n" . $quote . "   - inner\n";
         $html = Markdown::gfm()->fromString($markdown, self::deepOptions())->toHtml();
 
         self::assertStringContainsString(
@@ -71,11 +71,11 @@ final class HtmlRendererEngineBoundaryTest extends TestCase
     public function testFrameStackDeliversLeafBlocksIntoAListItem(): void
     {
         $quote = self::quotePrefix();
-        $markdown = $quote."- item\n"
-            .$quote."\n"
-            .$quote."  ```\n"
-            .$quote."  code\n"
-            .$quote."  ```\n";
+        $markdown = $quote . "- item\n"
+            . $quote . "\n"
+            . $quote . "  ```\n"
+            . $quote . "  code\n"
+            . $quote . "  ```\n";
         $html = Markdown::gfm()->fromString($markdown, self::deepOptions())->toHtml();
 
         self::assertStringContainsString(
@@ -87,14 +87,14 @@ final class HtmlRendererEngineBoundaryTest extends TestCase
     public function testFrameStackRendersGitHubAlert(): void
     {
         $quote = self::quotePrefix();
-        $markdown = $quote."> [!WARNING]\n".$quote."> body\n";
+        $markdown = $quote . "> [!WARNING]\n" . $quote . "> body\n";
         $html = Markdown::github()->fromString($markdown, self::deepOptions())->toHtml();
 
         self::assertStringContainsString(
             "<div class=\"markdown-alert markdown-alert-warning\">\n"
-            ."<p class=\"markdown-alert-title\">Warning</p>\n"
-            ."<p>body</p>\n"
-            ."</div>\n",
+            . "<p class=\"markdown-alert-title\">Warning</p>\n"
+            . "<p>body</p>\n"
+            . "</div>\n",
             $html,
         );
     }
@@ -133,7 +133,7 @@ final class HtmlRendererEngineBoundaryTest extends TestCase
     private function renderDeep(string $leaf): string
     {
         return Markdown::gfm()
-            ->fromString(self::quotePrefix().$leaf, self::deepOptions())
+            ->fromString(self::quotePrefix() . $leaf, self::deepOptions())
             ->toHtml();
     }
 

@@ -216,14 +216,14 @@ final class AttributesHtmlInjector
             }
 
             if (true === $value) {
-                $append .= ' '.$name;
+                $append .= ' ' . $name;
 
                 continue;
             }
 
             $escaped = $escape($name, $value);
             if (null !== $escaped) {
-                $append .= ' '.$name.'="'.$escaped.'"';
+                $append .= ' ' . $name . '="' . $escaped . '"';
             }
         }
 
@@ -231,7 +231,7 @@ final class AttributesHtmlInjector
             $tag = $this->appendBeforeClose($tag, $append);
         }
 
-        return substr($html, 0, $start).$tag.substr($html, $end);
+        return substr($html, 0, $start) . $tag . substr($html, $end);
     }
 
     /**
@@ -245,10 +245,10 @@ final class AttributesHtmlInjector
         }
 
         $pattern = "/(?:\"[^\"]*\"|'[^']*')(*SKIP)(*F)|"
-            ."\\sclass(?:\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+)))?/i";
+            . "\\sclass(?:\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+)))?/i";
 
         if (1 !== preg_match($pattern, $tag, $matches, \PREG_OFFSET_CAPTURE)) {
-            return $this->appendBeforeClose($tag, ' class="'.$escaped.'"');
+            return $this->appendBeforeClose($tag, ' class="' . $escaped . '"');
         }
 
         $existing = '';
@@ -262,15 +262,15 @@ final class AttributesHtmlInjector
         }
 
         $classes = [];
-        $candidates = preg_split('/\s+/', trim($existing.' '.$escaped), -1, \PREG_SPLIT_NO_EMPTY);
+        $candidates = preg_split('/\s+/', trim($existing . ' ' . $escaped), -1, \PREG_SPLIT_NO_EMPTY);
         foreach (false === $candidates ? [] : $candidates as $class) {
             $classes[$class] = true;
         }
         $at = $matches[0][1];
 
         return substr($tag, 0, $at)
-            .' class="'.implode(' ', array_keys($classes)).'"'
-            .substr($tag, $at + \strlen($matches[0][0]));
+            . ' class="' . implode(' ', array_keys($classes)) . '"'
+            . substr($tag, $at + \strlen($matches[0][0]));
     }
 
     private function appendBeforeClose(string $tag, string $attributes): string
@@ -283,14 +283,14 @@ final class AttributesHtmlInjector
             }
         }
 
-        return substr($tag, 0, $insert).$attributes.substr($tag, $insert);
+        return substr($tag, 0, $insert) . $attributes . substr($tag, $insert);
     }
 
     private function hasAttribute(string $tag, string $name): bool
     {
         return 1 === preg_match(
             "/(?:\"[^\"]*\"|'[^']*')(*SKIP)(*F)|"
-            .'\\s'.preg_quote($name, '/').'(?=\\s|=|\\/?>)/i',
+            . '\\s' . preg_quote($name, '/') . '(?=\\s|=|\\/?>)/i',
             $tag,
         );
     }

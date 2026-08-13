@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Alto\Markdown\Tests\Resource;
 
-require_once __DIR__.'/FilesystemFunctionMocks.php';
+require_once __DIR__ . '/FilesystemFunctionMocks.php';
 
 use Alto\Markdown\Exception\InvalidMarkdownArgumentException;
 use Alto\Markdown\Exception\ResourceDeniedException;
@@ -54,7 +54,7 @@ final class FilesystemResourceResolverTest extends TestCase
     protected function setUp(): void
     {
         FilesystemFunctionState::reset();
-        $this->root = \sys_get_temp_dir().'/alto-markdown-resource-'.\bin2hex(\random_bytes(8));
+        $this->root = \sys_get_temp_dir() . '/alto-markdown-resource-' . \bin2hex(\random_bytes(8));
         self::assertTrue(mkdir($this->root, 0o755, true));
     }
 
@@ -88,7 +88,7 @@ final class FilesystemResourceResolverTest extends TestCase
         }
 
         $this->write('root.md', "root\n");
-        $path = realpath($this->root.'/root.md');
+        $path = realpath($this->root . '/root.md');
         self::assertIsString($path);
 
         $resource = new FilesystemResourceResolver('/', ['md'])
@@ -184,7 +184,7 @@ final class FilesystemResourceResolverTest extends TestCase
 
     public function testRejectsDirectoriesAndNonDirectoryParents(): void
     {
-        self::assertTrue(mkdir($this->root.'/directory'));
+        self::assertTrue(mkdir($this->root . '/directory'));
         $this->write('parent.md', 'not a directory');
         $resolver = new FilesystemResourceResolver($this->root);
 
@@ -202,10 +202,10 @@ final class FilesystemResourceResolverTest extends TestCase
     {
         $this->write('real/file.md', "content\n");
 
-        if (!@symlink($this->root.'/real/file.md', $this->root.'/file-link.md')) {
+        if (!@symlink($this->root . '/real/file.md', $this->root . '/file-link.md')) {
             self::markTestSkipped('Symbolic links are unavailable.');
         }
-        self::assertTrue(@symlink($this->root.'/real', $this->root.'/directory-link'));
+        self::assertTrue(@symlink($this->root . '/real', $this->root . '/directory-link'));
 
         $resolver = new FilesystemResourceResolver($this->root);
 
@@ -221,16 +221,16 @@ final class FilesystemResourceResolverTest extends TestCase
 
     public function testRejectsASymlinkConfiguredAsTheRoot(): void
     {
-        self::assertTrue(mkdir($this->root.'/real-root'));
+        self::assertTrue(mkdir($this->root . '/real-root'));
 
-        if (!@symlink($this->root.'/real-root', $this->root.'/root-link')) {
+        if (!@symlink($this->root . '/real-root', $this->root . '/root-link')) {
             self::markTestSkipped('Symbolic links are unavailable.');
         }
 
         $this->expectException(InvalidMarkdownArgumentException::class);
         $this->expectExceptionMessage('non-symlink directory');
 
-        new FilesystemResourceResolver($this->root.'/root-link');
+        new FilesystemResourceResolver($this->root . '/root-link');
     }
 
     public function testRejectsForeignAndMalformedOriginIds(): void
@@ -244,9 +244,9 @@ final class FilesystemResourceResolverTest extends TestCase
 
         foreach ([
             'other:origin',
-            $idPrefix.'***',
-            $idPrefix.$this->base64UrlEncode('../target.md'),
-            $idPrefix.$this->base64UrlEncode('docs\\target.md'),
+            $idPrefix . '***',
+            $idPrefix . $this->base64UrlEncode('../target.md'),
+            $idPrefix . $this->base64UrlEncode('docs\\target.md'),
         ] as $originId) {
             try {
                 $resolver->resolve(new ResourceRequest('target.md', 'include', $originId));
@@ -262,16 +262,16 @@ final class FilesystemResourceResolverTest extends TestCase
         $reflection = new \ReflectionClass(FilesystemResourceResolver::class);
 
         foreach ([
-            fn (): FilesystemResourceResolver => new FilesystemResourceResolver($this->root."\x00"),
-            static fn (): FilesystemResourceResolver => new FilesystemResourceResolver('/path/that/does/not/exist'),
-            fn (): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, []),
-            fn (): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['bad.ext']),
-            fn (): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['md'], -1),
-            fn (): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['md'], \PHP_INT_MAX),
-            fn (): object => $reflection->newInstanceArgs([$this->root, [42]]),
-            static fn (): ResourceRequest => new ResourceRequest('', 'include'),
-            static fn (): ResourceRequest => new ResourceRequest('file.md', 'Invalid Purpose'),
-            static fn (): ResourceRequest => new ResourceRequest('file.md', 'include', ''),
+            fn(): FilesystemResourceResolver => new FilesystemResourceResolver($this->root . "\x00"),
+            static fn(): FilesystemResourceResolver => new FilesystemResourceResolver('/path/that/does/not/exist'),
+            fn(): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, []),
+            fn(): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['bad.ext']),
+            fn(): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['md'], -1),
+            fn(): FilesystemResourceResolver => new FilesystemResourceResolver($this->root, ['md'], \PHP_INT_MAX),
+            fn(): object => $reflection->newInstanceArgs([$this->root, [42]]),
+            static fn(): ResourceRequest => new ResourceRequest('', 'include'),
+            static fn(): ResourceRequest => new ResourceRequest('file.md', 'Invalid Purpose'),
+            static fn(): ResourceRequest => new ResourceRequest('file.md', 'include', ''),
         ] as $factory) {
             try {
                 $factory();
@@ -357,7 +357,7 @@ final class FilesystemResourceResolverTest extends TestCase
 
     private function write(string $relative, string $bytes): void
     {
-        $path = $this->root.'/'.$relative;
+        $path = $this->root . '/' . $relative;
         $directory = \dirname($path);
 
         if (!is_dir($directory)) {
@@ -383,7 +383,7 @@ final class FilesystemResourceResolverTest extends TestCase
         if (false !== $entries) {
             foreach ($entries as $entry) {
                 if ('.' !== $entry && '..' !== $entry) {
-                    $this->remove($path.'/'.$entry);
+                    $this->remove($path . '/' . $entry);
                 }
             }
         }

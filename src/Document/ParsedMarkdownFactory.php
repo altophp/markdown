@@ -87,7 +87,7 @@ final readonly class ParsedMarkdownFactory implements MarkdownFactory
             throw new FileReadException(\sprintf('Unable to read Markdown file "%s".', $path), $path);
         }
 
-        $anchoredPath = \rtrim($directory, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR.\basename($path);
+        $anchoredPath = \rtrim($directory, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR . \basename($path);
 
         if (false !== @lstat($anchoredPath) && !is_file($anchoredPath)) {
             throw new FileReadException(\sprintf('Unable to read regular Markdown file "%s".', $path), $path);

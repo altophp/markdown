@@ -44,7 +44,7 @@ final class ThirdPartyExtensionDemoTest extends TestCase
         $renderer = new DemoDirectiveRenderer($extension->nodeKinds());
 
         self::assertSame(
-            '<directive name="alpha"></directive>'."\n",
+            '<directive name="alpha"></directive>' . "\n",
             $renderer->render("::demo alpha\n", $compiled),
         );
     }
@@ -108,9 +108,7 @@ final class DemoDirectiveExtension extends AbstractExtension
 
 final class DemoDirectiveParser implements BlockConstruct
 {
-    public function __construct(private readonly int $kind)
-    {
-    }
+    public function __construct(private readonly int $kind) {}
 
     public function kind(): int
     {
@@ -161,9 +159,7 @@ final class DemoDirectiveRenderer
     /**
      * @param iterable<NodeKind> $nodeKinds
      */
-    public function __construct(private readonly iterable $nodeKinds)
-    {
-    }
+    public function __construct(private readonly iterable $nodeKinds) {}
 
     public function render(string $markdown, \Alto\Markdown\Profile\CompiledProfile $profile): string
     {
@@ -179,6 +175,6 @@ final class DemoDirectiveRenderer
             throw new \RuntimeException('Demo directive did not parse.');
         }
 
-        return '<directive name="'.$tape->payload($directive).'"></directive>'."\n";
+        return '<directive name="' . $tape->payload($directive) . '"></directive>' . "\n";
     }
 }

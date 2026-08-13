@@ -23,8 +23,7 @@ final readonly class LinkRewriteResult
         public int $unchanged,
         public int $skippedReferences,
         public int $skippedOverlaps,
-    ) {
-    }
+    ) {}
 
     public function hasChanges(): bool
     {

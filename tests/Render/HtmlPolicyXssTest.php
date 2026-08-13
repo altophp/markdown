@@ -238,7 +238,7 @@ final class HtmlPolicyXssTest extends TestCase
         $direct = $factory->toHtml($markdown, renderOptions: $options);
         $document = $factory->fromString($markdown)->toHtml($options);
 
-        self::assertSame($document, $direct, 'Direct and document lanes diverge for: '.$markdown);
+        self::assertSame($document, $direct, 'Direct and document lanes diverge for: ' . $markdown);
 
         return $direct;
     }

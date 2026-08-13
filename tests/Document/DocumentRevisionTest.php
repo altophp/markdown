@@ -45,10 +45,10 @@ final class DocumentRevisionTest extends TestCase
         self::assertSame('Two', $rebased->text());
 
         self::assertFalse($third->exists());
-        $this->assertStale(static fn (): int => $third->level());
-        $this->assertStale(static fn (): string => $third->kind()->name);
-        $this->assertStale(static fn (): int => $third->range()->startOffset);
-        $this->assertStale(static fn (): string => $third->text());
+        $this->assertStale(static fn(): int => $third->level());
+        $this->assertStale(static fn(): string => $third->kind()->name);
+        $this->assertStale(static fn(): int => $third->range()->startOffset);
+        $this->assertStale(static fn(): string => $third->text());
     }
 
     public function testHandleToAnUntouchedNodeAlsoGoesStaleAcrossSave(): void
@@ -161,7 +161,7 @@ final class DocumentRevisionTest extends TestCase
 
     private function writeTempFile(string $bytes): string
     {
-        $path = \sys_get_temp_dir().'/alto-markdown-revision-'.\bin2hex(\random_bytes(8)).'.md';
+        $path = \sys_get_temp_dir() . '/alto-markdown-revision-' . \bin2hex(\random_bytes(8)) . '.md';
         $this->paths[] = $path;
         file_put_contents($path, $bytes);
 

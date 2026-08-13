@@ -66,18 +66,18 @@ final class AllocationLazinessTest extends TestCase
 
         for ($i = 0; $i < $blocks; ++$i) {
             if (0 === $i % 5) {
-                $parts[] = '## Heading '.$i.' with `code`';
+                $parts[] = '## Heading ' . $i . ' with `code`';
             } elseif (1 === $i % 5) {
-                $parts[] = 'Paragraph with [link '.$i.'](https://example.com/'.$i.') and ![image '.$i.'](/'.$i.'.png).';
+                $parts[] = 'Paragraph with [link ' . $i . '](https://example.com/' . $i . ') and ![image ' . $i . '](/' . $i . '.png).';
             } elseif (2 === $i % 5) {
-                $parts[] = "```php\n".'echo '.$i.";\n```";
+                $parts[] = "```php\n" . 'echo ' . $i . ";\n```";
             } elseif (3 === $i % 5) {
-                $parts[] = 'Plain paragraph '.$i.'.';
+                $parts[] = 'Plain paragraph ' . $i . '.';
             } else {
-                $parts[] = "- item {$i}\n- item ".($i + 1);
+                $parts[] = "- item {$i}\n- item " . ($i + 1);
             }
         }
 
-        return implode("\n\n", $parts)."\n";
+        return implode("\n\n", $parts) . "\n";
     }
 }

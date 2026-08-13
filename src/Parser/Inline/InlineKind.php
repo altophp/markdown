@@ -36,7 +36,5 @@ final class InlineKind
     public const int HTML_INLINE = 11;
     public const int STRIKETHROUGH = 12;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

@@ -23,6 +23,5 @@ final readonly class RuleContext
     public function __construct(
         public DocumentTraversal $traversal,
         public LintConfig $config,
-    ) {
-    }
+    ) {}
 }

@@ -26,8 +26,7 @@ final readonly class FixResult
      */
     public function __construct(
         public array $operations = [],
-    ) {
-    }
+    ) {}
 
     public function isEmpty(): bool
     {

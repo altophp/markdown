@@ -87,7 +87,7 @@ final class ParsedMarkdownFile extends ParsedMarkdownDocument implements \Alto\M
         $bytes = \str_starts_with($bytes, "\xEF\xBB\xBF") ? \substr($bytes, 3) : $bytes;
 
         if ($options->preserveBom && $source->hasBom) {
-            return "\xEF\xBB\xBF".$bytes;
+            return "\xEF\xBB\xBF" . $bytes;
         }
 
         return $bytes;
@@ -210,7 +210,7 @@ final class ParsedMarkdownFile extends ParsedMarkdownDocument implements \Alto\M
             throw new FileWriteException(\sprintf('Unable to resolve parent directory for Markdown file "%s".', $path), $path);
         }
 
-        return \rtrim($directory, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR.\basename($path);
+        return \rtrim($directory, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR . \basename($path);
     }
 
     private static function fingerprint(string $bytes): string

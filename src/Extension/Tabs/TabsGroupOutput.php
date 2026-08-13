@@ -45,21 +45,21 @@ final readonly class TabsGroupOutput implements PlannedHtmlBlockRenderer
         }
 
         $groupId = $catalog->groupId($context->range->startOffset);
-        $html = '<div class="markdown-tabs" id="'.$context->escapeAttribute($groupId).'">'."\n";
+        $html = '<div class="markdown-tabs" id="' . $context->escapeAttribute($groupId) . '">' . "\n";
         $html .= "<div class=\"markdown-tabs-list\">\n";
 
         foreach ($items as $item) {
-            $class = 'markdown-tabs-tab'.(0 === $item['index'] ? ' is-active' : '');
-            $html .= '<a class="'.$class.'" id="'.$context->escapeAttribute($item['tabId']).'"'
-                .' href="#'.$context->escapeAttribute($item['panelId']).'"'
-                .' aria-controls="'.$context->escapeAttribute($item['panelId']).'">'
-                .$context->escapeText($item['title'])
-                ."</a>\n";
+            $class = 'markdown-tabs-tab' . (0 === $item['index'] ? ' is-active' : '');
+            $html .= '<a class="' . $class . '" id="' . $context->escapeAttribute($item['tabId']) . '"'
+                . ' href="#' . $context->escapeAttribute($item['panelId']) . '"'
+                . ' aria-controls="' . $context->escapeAttribute($item['panelId']) . '">'
+                . $context->escapeText($item['title'])
+                . "</a>\n";
         }
 
         $html .= "</div>\n<div class=\"markdown-tabs-panels\">\n";
         $html .= $children;
 
-        return $html."</div>\n</div>\n";
+        return $html . "</div>\n</div>\n";
     }
 }

@@ -36,8 +36,7 @@ final readonly class SetInlineLinkOperation implements Operation
         private string $description,
         private ?SourceRange $range,
         private string $replacement,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

@@ -29,6 +29,5 @@ final readonly class InlineEvent
         public InlineNodeId $id,
         public string $kind,
         public SourceRange $range,
-    ) {
-    }
+    ) {}
 }

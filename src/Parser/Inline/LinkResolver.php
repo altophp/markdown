@@ -37,8 +37,7 @@ final class LinkResolver
 {
     public function __construct(
         private readonly EmphasisProcessor $emphasis,
-    ) {
-    }
+    ) {}
 
     /**
      * Handles a "]" at $offset. Returns the content offset after the
@@ -185,7 +184,7 @@ final class LinkResolver
         array_splice($delimiters, $bracket->delimiterIndex);
 
         $kind = $bracket->image ? InlineKind::IMAGE : InlineKind::LINK;
-        $payload = Href::encode(Href::resolve($destination))."\x00".Href::resolve($title);
+        $payload = Href::encode(Href::resolve($destination)) . "\x00" . Href::resolve($title);
         $labelSourceEnd = $content->sourceOffset($labelEnd);
         $sourceEnd = $content->sourceOffset($end);
 

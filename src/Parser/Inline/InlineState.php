@@ -42,8 +42,7 @@ class InlineState implements InlineScanState
         private readonly ParseTape $tape,
         private readonly ReferenceMap $referenceMap,
         private readonly int $root,
-    ) {
-    }
+    ) {}
 
     public function content(): InlineContent
     {
@@ -167,9 +166,7 @@ class InlineState implements InlineScanState
     /**
      * Accounts for a node allocated outside append(), such as a link wrapper.
      */
-    public function reserveNode(int $sourceOffset): void
-    {
-    }
+    public function reserveNode(int $sourceOffset): void {}
 
     protected function append(int $kind, int $contentStart, int $contentEnd, int $flags = 0, ?string $payload = null): int
     {

@@ -122,11 +122,11 @@ final class HtmlRendererEngine
 
         while (ParseTape::NONE !== $child) {
             $html .= $this->documentRenderPlan->htmlBeforeRootBlock($child)
-                .$this->renderBlock($source, $columns, $child, false, 0);
+                . $this->renderBlock($source, $columns, $child, false, 0);
             $child = $columns->nextSibling[$child];
         }
 
-        return $html.$this->documentRenderPlan->htmlAfterRootBlocks();
+        return $html . $this->documentRenderPlan->htmlAfterRootBlocks();
     }
 
     public function renderInlineMarkdown(InlineMarkdownRenderSource $source, string $markdown, HtmlPolicy $policy): string
@@ -233,18 +233,18 @@ final class HtmlRendererEngine
                 ? $this->codeBlockAttributes($source, $ordinal, $kind)
                 : null;
             $html = match ($kind) {
-                'paragraph' => $tight ? $this->paragraphContent($source, $ordinal)."\n" : '<p>'.$this->paragraphContent($source, $ordinal)."</p>\n",
+                'paragraph' => $tight ? $this->paragraphContent($source, $ordinal) . "\n" : '<p>' . $this->paragraphContent($source, $ordinal) . "</p>\n",
                 'atx-heading' => $this->heading($source, $columns, $ordinal, 'atx-heading', false),
                 'setext-heading' => $this->heading($source, $columns, $ordinal, 'setext-heading', true),
                 'thematic-break' => "<hr />\n",
                 'indented-code', 'fenced-code' => $this->codeBlock($codeAttributes ?? throw new \LogicException('Missing code-block attributes.')),
                 'html-block' => $this->rawBlockHtml($source, $columns, $ordinal),
-                'block-quote' => "<blockquote>\n".$this->renderChildren($source, $columns, $ordinal, false, $next)."</blockquote>\n",
+                'block-quote' => "<blockquote>\n" . $this->renderChildren($source, $columns, $ordinal, false, $next) . "</blockquote>\n",
                 'github:alert' => $this->alert($source, $columns, $ordinal, $next),
                 'list' => $this->list($source, $columns, $ordinal, $next),
                 'list-item' => $this->listItem($source, $columns, $ordinal, $tight, $next),
-                DescriptionListExtension::LIST_KIND => "<dl>\n".$this->renderChildren($source, $columns, $ordinal, false, $next)."</dl>\n",
-                DescriptionListExtension::TERM_KIND => '<dt>'.$this->inline->renderBlockInlines($source, $ordinal, true, $this->policy)."</dt>\n",
+                DescriptionListExtension::LIST_KIND => "<dl>\n" . $this->renderChildren($source, $columns, $ordinal, false, $next) . "</dl>\n",
+                DescriptionListExtension::TERM_KIND => '<dt>' . $this->inline->renderBlockInlines($source, $ordinal, true, $this->policy) . "</dt>\n",
                 DescriptionListExtension::DESCRIPTION_KIND => $this->description($source, $columns, $ordinal, $next),
                 GfmExtension::TABLE_KIND => $this->table($source, $ordinal),
                 default => throw new RenderException(\sprintf('No HTML decorator target for node kind "%s".', $kind)),
@@ -258,18 +258,18 @@ final class HtmlRendererEngine
         }
 
         return match ($kind) {
-            'paragraph' => $tight ? $this->paragraphContent($source, $ordinal)."\n" : '<p>'.$this->paragraphContent($source, $ordinal)."</p>\n",
+            'paragraph' => $tight ? $this->paragraphContent($source, $ordinal) . "\n" : '<p>' . $this->paragraphContent($source, $ordinal) . "</p>\n",
             'atx-heading' => $this->heading($source, $columns, $ordinal, 'atx-heading', false),
             'setext-heading' => $this->heading($source, $columns, $ordinal, 'setext-heading', true),
             'thematic-break' => "<hr />\n",
             'indented-code', 'fenced-code' => $this->codeBlock($this->codeBlockAttributes($source, $ordinal, $kind)),
             'html-block' => $this->rawBlockHtml($source, $columns, $ordinal),
-            'block-quote' => "<blockquote>\n".$this->renderChildren($source, $columns, $ordinal, false, $next)."</blockquote>\n",
+            'block-quote' => "<blockquote>\n" . $this->renderChildren($source, $columns, $ordinal, false, $next) . "</blockquote>\n",
             'github:alert' => $this->alert($source, $columns, $ordinal, $next),
             'list' => $this->list($source, $columns, $ordinal, $next),
             'list-item' => $this->listItem($source, $columns, $ordinal, $tight, $next),
-            DescriptionListExtension::LIST_KIND => "<dl>\n".$this->renderChildren($source, $columns, $ordinal, false, $next)."</dl>\n",
-            DescriptionListExtension::TERM_KIND => '<dt>'.$this->inline->renderBlockInlines($source, $ordinal, true, $this->policy)."</dt>\n",
+            DescriptionListExtension::LIST_KIND => "<dl>\n" . $this->renderChildren($source, $columns, $ordinal, false, $next) . "</dl>\n",
+            DescriptionListExtension::TERM_KIND => '<dt>' . $this->inline->renderBlockInlines($source, $ordinal, true, $this->policy) . "</dt>\n",
             DescriptionListExtension::DESCRIPTION_KIND => $this->description($source, $columns, $ordinal, $next),
             'link-reference-definition' => '',
             // Front matter is document metadata, never HTML output.
@@ -282,8 +282,8 @@ final class HtmlRendererEngine
     private function alert(HtmlRenderSource $source, ParseTapeColumns $columns, int $ordinal, int $depth): string
     {
         return $this->alertOpen($columns, $ordinal)
-            .$this->renderChildren($source, $columns, $ordinal, false, $depth)
-            ."</div>\n";
+            . $this->renderChildren($source, $columns, $ordinal, false, $depth)
+            . "</div>\n";
     }
 
     private function list(HtmlRenderSource $source, ParseTapeColumns $columns, int $ordinal, int $depth): string
@@ -293,12 +293,12 @@ final class HtmlRendererEngine
 
         if (0 !== ($flags & 1)) {
             $start = (int) ($columns->payload[$ordinal] ?? '1');
-            $attribute = 1 === $start ? '' : ' start="'.$start.'"';
+            $attribute = 1 === $start ? '' : ' start="' . $start . '"';
 
-            return '<ol'.$attribute.">\n".$items."</ol>\n";
+            return '<ol' . $attribute . ">\n" . $items . "</ol>\n";
         }
 
-        return "<ul>\n".$items."</ul>\n";
+        return "<ul>\n" . $items . "</ul>\n";
     }
 
     private function listItem(HtmlRenderSource $source, ParseTapeColumns $columns, int $ordinal, bool $tight, int $depth): string
@@ -312,7 +312,7 @@ final class HtmlRendererEngine
 
         while (ParseTape::NONE !== $child) {
             if ($tight && 'paragraph' === $this->kindName($source, $columns, $child)) {
-                $parts[] = ($first ? $task : '').$this->paragraphContent($source, $child);
+                $parts[] = ($first ? $task : '') . $this->paragraphContent($source, $child);
                 $lastIsInline = true;
 
                 if ($first) {
@@ -322,7 +322,7 @@ final class HtmlRendererEngine
             } elseif ($first && '' !== $task && 'paragraph' === $this->kindName($source, $columns, $child)) {
                 // The task marker is inline content of the item's first
                 // paragraph, so a loose item keeps it inside the <p>.
-                $parts[] = '<p>'.$task.$this->paragraphContent($source, $child).'</p>';
+                $parts[] = '<p>' . $task . $this->paragraphContent($source, $child) . '</p>';
                 $task = '';
                 $lastIsInline = false;
             } else {
@@ -345,7 +345,7 @@ final class HtmlRendererEngine
         $prefix = $firstIsInline ? '' : "\n";
         $suffix = $lastIsInline ? '' : "\n";
 
-        return '<li>'.$prefix.$task.implode("\n", $parts).$suffix."</li>\n";
+        return '<li>' . $prefix . $task . implode("\n", $parts) . $suffix . "</li>\n";
     }
 
     private function description(HtmlRenderSource $source, ParseTapeColumns $columns, int $ordinal, int $depth): string
@@ -382,7 +382,7 @@ final class HtmlRendererEngine
         $prefix = $firstIsInline ? '' : "\n";
         $suffix = $lastIsInline ? '' : "\n";
 
-        return '<dd>'.$prefix.implode("\n", $parts).$suffix."</dd>\n";
+        return '<dd>' . $prefix . implode("\n", $parts) . $suffix . "</dd>\n";
     }
 
     /**
@@ -409,7 +409,7 @@ final class HtmlRendererEngine
                             $top->customContext ?? throw new \LogicException('Missing custom block output context.'),
                             $top->buf,
                         )
-                        : $top->buf.$top->suffix);
+                        : $top->buf . $top->suffix);
 
                 if (null !== $top->decorator) {
                     $string = $top->decorator->decorate(
@@ -444,7 +444,7 @@ final class HtmlRendererEngine
 
             if ($this->isItemFrame($top)) {
                 if ($childTight && 'paragraph' === $childKind) {
-                    $top->parts[] = ($top->first ? $top->task : '').$this->paragraphContent($source, $cursor);
+                    $top->parts[] = ($top->first ? $top->task : '') . $this->paragraphContent($source, $cursor);
                     $top->lastIsInline = true;
 
                     if ($top->first) {
@@ -460,7 +460,7 @@ final class HtmlRendererEngine
                 if ($top->first && '' !== $top->task && 'paragraph' === $childKind) {
                     // Same rule as the recursive path: a loose task item
                     // carries its marker inside the first paragraph.
-                    $top->parts[] = '<p>'.$top->task.$this->paragraphContent($source, $cursor).'</p>';
+                    $top->parts[] = '<p>' . $top->task . $this->paragraphContent($source, $cursor) . '</p>';
                     $top->task = '';
                     $top->lastIsInline = false;
                     $top->first = false;
@@ -532,7 +532,7 @@ final class HtmlRendererEngine
 
                 if (0 !== ($flags & 1)) {
                     $start = (int) ($columns->payload[$ordinal] ?? '1');
-                    $frame->buf = '<ol'.(1 === $start ? '' : ' start="'.$start.'"').">\n";
+                    $frame->buf = '<ol' . (1 === $start ? '' : ' start="' . $start . '"') . ">\n";
                     $frame->suffix = "</ol>\n";
                 } else {
                     $frame->buf = "<ul>\n";
@@ -623,7 +623,7 @@ final class HtmlRendererEngine
             new \Alto\Markdown\Source\SourceRange($columns->startOffset[$ordinal], $columns->endOffset[$ordinal]),
             $source->htmlSourceBytes(),
             $this->policy,
-            fn (string $markdown, ParseOptions $options): string => $this->renderMarkdownFragment(
+            fn(string $markdown, ParseOptions $options): string => $this->renderMarkdownFragment(
                 $source,
                 $markdown,
                 $options,
@@ -712,13 +712,13 @@ final class HtmlRendererEngine
     private function finishItem(HtmlBlockFrame $item): string
     {
         if ([] === $item->parts) {
-            return '<'.$item->tag.'></'.$item->tag.">\n";
+            return '<' . $item->tag . '></' . $item->tag . ">\n";
         }
 
         $prefix = $item->firstIsInline ? '' : "\n";
         $suffix = $item->lastIsInline ? '' : "\n";
 
-        return '<'.$item->tag.'>'.$prefix.$item->task.implode("\n", $item->parts).$suffix.'</'.$item->tag.">\n";
+        return '<' . $item->tag . '>' . $prefix . $item->task . implode("\n", $item->parts) . $suffix . '</' . $item->tag . ">\n";
     }
 
     private function alertOpen(ParseTapeColumns $columns, int $ordinal): string
@@ -729,8 +729,8 @@ final class HtmlRendererEngine
             $type = 'note';
         }
 
-        return '<div class="markdown-alert markdown-alert-'.$type.'">'."\n"
-            .'<p class="markdown-alert-title">'.ucfirst($type)."</p>\n";
+        return '<div class="markdown-alert markdown-alert-' . $type . '">' . "\n"
+            . '<p class="markdown-alert-title">' . ucfirst($type) . "</p>\n";
     }
 
     private function heading(HtmlRenderSource $source, ParseTapeColumns $columns, int $ordinal, string $kind, bool $hardBreaks): string
@@ -804,9 +804,9 @@ final class HtmlRendererEngine
     {
         $language = $attributes['language'];
         $code = $attributes['code'];
-        $attribute = null === $language ? '' : ' class="language-'.HtmlEscaper::attribute($language).'"';
+        $attribute = null === $language ? '' : ' class="language-' . HtmlEscaper::attribute($language) . '"';
 
-        return '<pre><code'.$attribute.'>'.HtmlEscaper::text($code)."</code></pre>\n";
+        return '<pre><code' . $attribute . '>' . HtmlEscaper::text($code) . "</code></pre>\n";
     }
 
     private function taskCheckbox(ParseTapeColumns $columns, int $ordinal): string
@@ -833,7 +833,7 @@ final class HtmlRendererEngine
         $html = "<table>\n<thead>\n<tr>\n";
 
         foreach ($header as $index => $cell) {
-            $html .= '<th'.$this->alignAttribute($alignments[$index] ?? '').'>'.$this->cellHtml($source, $cell)."</th>\n";
+            $html .= '<th' . $this->alignAttribute($alignments[$index] ?? '') . '>' . $this->cellHtml($source, $cell) . "</th>\n";
         }
 
         $html .= "</tr>\n</thead>\n";
@@ -845,7 +845,7 @@ final class HtmlRendererEngine
                 $html .= "<tr>\n";
 
                 foreach ($header as $index => $_cell) {
-                    $html .= '<td'.$this->alignAttribute($alignments[$index] ?? '').'>'.$this->cellHtml($source, $row[$index] ?? '')."</td>\n";
+                    $html .= '<td' . $this->alignAttribute($alignments[$index] ?? '') . '>' . $this->cellHtml($source, $row[$index] ?? '') . "</td>\n";
                 }
 
                 $html .= "</tr>\n";
@@ -854,7 +854,7 @@ final class HtmlRendererEngine
             $html .= "</tbody>\n";
         }
 
-        return $html."</table>\n";
+        return $html . "</table>\n";
     }
 
     private function cellHtml(HtmlRenderSource $source, string $cell): string
@@ -929,7 +929,7 @@ final class HtmlRendererEngine
 
         return (string) preg_replace_callback(
             '/<(?=\/?(?:title|textarea|style|xmp|iframe|noembed|noframes|script|plaintext)(?:\s|>|\/))/i',
-            static fn (): string => '&lt;',
+            static fn(): string => '&lt;',
             $html,
         );
     }
@@ -963,6 +963,6 @@ final class HtmlRendererEngine
 
     private function alignAttribute(string $alignment): string
     {
-        return '' === $alignment ? '' : ' align="'.$alignment.'"';
+        return '' === $alignment ? '' : ' align="' . $alignment . '"';
     }
 }

@@ -43,7 +43,7 @@ final class CallbackResourceResolverTest extends TestCase
     public function testCallbackExceptionsRemainApplicationControlled(): void
     {
         $resolver = new CallbackResourceResolver(
-            static fn (): never => throw new \RuntimeException('backend unavailable'),
+            static fn(): never => throw new \RuntimeException('backend unavailable'),
         );
 
         $this->expectException(\RuntimeException::class);
@@ -54,7 +54,7 @@ final class CallbackResourceResolverTest extends TestCase
 
     public function testCallbackMustReturnAResolvedResource(): void
     {
-        $resolver = new CallbackResourceResolver(static fn (): string => 'invalid');
+        $resolver = new CallbackResourceResolver(static fn(): string => 'invalid');
 
         $this->expectException(InvalidMarkdownArgumentException::class);
         $this->expectExceptionMessage('must return ResolvedResource');

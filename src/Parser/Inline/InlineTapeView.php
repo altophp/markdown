@@ -28,6 +28,5 @@ final readonly class InlineTapeView
     public function __construct(
         public SourceBuffer $buffer,
         public ParseTape $tape,
-    ) {
-    }
+    ) {}
 }

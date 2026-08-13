@@ -33,8 +33,7 @@ final readonly class DescriptionParser implements BlockConstruct, ParagraphRepla
         private int $listKind,
         private int $termKind,
         private int $kind,
-    ) {
-    }
+    ) {}
 
     public function kind(): int
     {

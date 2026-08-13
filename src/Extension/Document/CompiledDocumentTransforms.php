@@ -35,7 +35,7 @@ final readonly class CompiledDocumentTransforms
     {
         usort(
             $entries,
-            static fn (array $left, array $right): int => [
+            static fn(array $left, array $right): int => [
                 $left[0]->order,
                 $left[1],
                 $left[2],
@@ -46,7 +46,7 @@ final readonly class CompiledDocumentTransforms
             ],
         );
         $this->definitions = array_map(
-            static fn (array $entry): DocumentTransformDefinition => $entry[0],
+            static fn(array $entry): DocumentTransformDefinition => $entry[0],
             $entries,
         );
     }

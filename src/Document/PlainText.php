@@ -44,7 +44,5 @@ final class PlainText
         return $text;
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

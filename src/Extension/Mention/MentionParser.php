@@ -27,8 +27,7 @@ final readonly class MentionParser implements InlineParser
 {
     public function __construct(
         private MentionDefinition $definition,
-    ) {
-    }
+    ) {}
 
     public function triggerByte(): string
     {
@@ -64,7 +63,7 @@ final readonly class MentionParser implements InlineParser
             return null;
         }
 
-        $source = $prefix.$identifier;
+        $source = $prefix . $identifier;
 
         return new InlineParseResult(
             $offset + \strlen($source),

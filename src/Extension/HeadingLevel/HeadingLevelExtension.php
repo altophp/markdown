@@ -21,9 +21,7 @@ use Alto\Markdown\Extension\DocumentTransformExtensionInterface;
  */
 final readonly class HeadingLevelExtension implements DocumentTransformExtensionInterface
 {
-    public function __construct(private HeadingLevelPolicy $policy)
-    {
-    }
+    public function __construct(private HeadingLevelPolicy $policy) {}
 
     public function name(): string
     {
@@ -34,7 +32,7 @@ final readonly class HeadingLevelExtension implements DocumentTransformExtension
     {
         yield new DocumentTransformDefinition(
             'levels',
-            fn (): HeadingLevelTransform => new HeadingLevelTransform($this->policy),
+            fn(): HeadingLevelTransform => new HeadingLevelTransform($this->policy),
             -100,
         );
     }

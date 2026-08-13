@@ -35,8 +35,8 @@ use PHPUnit\Framework\TestCase;
 final class InlineDeterminismTest extends TestCase
 {
     private const string FIXTURE = "# Title with *emphasis* and `code`\n\n"
-        ."A paragraph with **strong** text, a [link](https://example.com \"ref\") plus a `code span`, an entity &amp; and a numeric &#42; ref.\n\n"
-        ."Second paragraph adds _italic_, an ![image](/pic.png \"pic\"), and an autolink <https://auto.example.com>.\n";
+        . "A paragraph with **strong** text, a [link](https://example.com \"ref\") plus a `code span`, an entity &amp; and a numeric &#42; ref.\n\n"
+        . "Second paragraph adds _italic_, an ![image](/pic.png \"pic\"), and an autolink <https://auto.example.com>.\n";
 
     /**
      * Parsing the same block content twice into fresh tapes yields a

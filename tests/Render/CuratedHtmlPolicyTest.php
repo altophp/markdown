@@ -93,10 +93,10 @@ final class CuratedHtmlPolicyTest extends TestCase
 
         self::assertSame(
             "<div class=\"markdown-alert markdown-alert-warning\">\n"
-            ."<p class=\"markdown-alert-title\">Warning</p>\n"
-            ."<p>Be <strong>careful</strong>.</p>\n"
-            ."</div>\n"
-            ."<pre><code class=\"language-php\">echo 1;\n</code></pre>\n",
+            . "<p class=\"markdown-alert-title\">Warning</p>\n"
+            . "<p>Be <strong>careful</strong>.</p>\n"
+            . "</div>\n"
+            . "<pre><code class=\"language-php\">echo 1;\n</code></pre>\n",
             $html,
         );
     }
@@ -195,7 +195,7 @@ final class RecordingHtmlSanitizer implements HtmlSanitizer
     {
         ++$this->calls;
 
-        return '<sanitized>'.$html.'</sanitized>';
+        return '<sanitized>' . $html . '</sanitized>';
     }
 
     public function cacheKey(): string

@@ -49,7 +49,7 @@ final readonly class SmartDashParser implements InlineParser
             $offset + $count,
             new InlineNode(
                 str_repeat("\u{2014}", $emCount)
-                .str_repeat("\u{2013}", $enCount),
+                . str_repeat("\u{2013}", $enCount),
             ),
         );
     }

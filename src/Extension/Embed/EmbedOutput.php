@@ -25,9 +25,7 @@ use Alto\Markdown\Extension\Block\MarkdownBlockPrinter;
  */
 final readonly class EmbedOutput implements HtmlBlockRenderer, MarkdownBlockPrinter
 {
-    public function __construct(private EmbedPolicy $policy)
-    {
-    }
+    public function __construct(private EmbedPolicy $policy) {}
 
     public function render(HtmlBlockOutputContext $context, string $children): string
     {
@@ -39,7 +37,7 @@ final readonly class EmbedOutput implements HtmlBlockRenderer, MarkdownBlockPrin
                 return $html;
             }
 
-            return $html."\n";
+            return $html . "\n";
         }
 
         if (EmbedFallback::Remove === $this->policy->fallback) {
@@ -48,9 +46,9 @@ final readonly class EmbedOutput implements HtmlBlockRenderer, MarkdownBlockPrin
 
         $url = $context->state()->string('url');
 
-        return '<p><a href="'.$context->escapeUrl($url).'">'
-            .$context->escapeText($url)
-            ."</a></p>\n";
+        return '<p><a href="' . $context->escapeUrl($url) . '">'
+            . $context->escapeText($url)
+            . "</a></p>\n";
     }
 
     public function print(MarkdownBlockOutputContext $context, string $children): string

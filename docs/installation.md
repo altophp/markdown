@@ -1,58 +1,41 @@
 # Installation
 
-Alto Markdown requires PHP 8.4 or newer. The core has no runtime Composer
-dependencies. PHP's DOM extension is optional and used only by the curated HTML
-sanitizer.
+Install Alto Markdown in a PHP 8.4 or newer application, then run one smoke
+test to confirm that Composer can load the package.
 
-## Install
+## Requirements
+
+The core has no runtime Composer dependencies. The DOM extension is optional
+and is required only by `HtmlPolicy::curated()`.
+
+## Install the package
 
 ```bash
 composer require alto/markdown
 ```
 
-The command-line application ships as a separate package:
+## Verify the installation
 
-```bash
-composer require --dev alto/markdown-cli
-vendor/bin/markdown-cli --version
-```
-
-Use the PHP library for application code. Use the CLI for repository linting,
-format checks, statistics, and outlines.
-
-## Run the first conversion
-
-Create a PHP file that loads Composer and converts one string:
+Run this file through the same Composer autoloader as the application:
 
 ```php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
 use Alto\Markdown\Markdown;
 
-$markdown = "# Installation\n\nRun `composer install`.\n";
-$html = Markdown::github()->toHtml($markdown);
+echo Markdown::commonmark()->toHtml("# Ready\n");
 ```
 
-The generated HTML is:
+The command must print:
 
 ```html
-<h1>Installation</h1>
-<p>Run <code>composer install</code>.</p>
+<h1>Ready</h1>
 ```
 
-`github()` selects GFM plus GitHub alerts and front matter. If the target only
-needs portable CommonMark, start with `Markdown::commonmark()` instead.
+If Composer cannot resolve the package, verify the PHP version reported by
+`php -v` and the platform requirements reported by `composer check-platform-reqs`.
 
-HTML is safe by default. Read [Security](security.md) before preserving authored
-HTML, and [Conversion](conversion.md) before creating a reusable document.
-
-## Verify a checkout
-
-From a clone of the repository, install the development dependencies and run
-static analysis, style checks, and tests:
-
-```bash
-composer install
-composer qa
-```
-
-Continue with [Profiles](profiles.md), or use the
-[API reference](api-reference.md) when you already know the operation you need.
+Continue with [Getting started](getting-started.md) to choose a profile and
+reuse a parsed document.

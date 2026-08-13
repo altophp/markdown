@@ -84,7 +84,7 @@ final class TaskListHtmlTest extends TestCase
     {
         foreach (self::provideTaskLists() as $name => [$markdown, $html]) {
             foreach (['gfm', 'github'] as $profile) {
-                yield $name.' / '.$profile => [$markdown, $html, $profile];
+                yield $name . ' / ' . $profile => [$markdown, $html, $profile];
             }
         }
     }
@@ -110,7 +110,7 @@ final class TaskListHtmlTest extends TestCase
     {
         $depth = 520;
         $quote = str_repeat('> ', $depth);
-        $markdown = $quote."- [ ] task\n".$quote."\n".$quote."- [x] done\n";
+        $markdown = $quote . "- [ ] task\n" . $quote . "\n" . $quote . "- [x] done\n";
         $options = (new ParseOptions())->withMaxNestingDepth(4096);
 
         $document = Markdown::gfm()->fromString($markdown, $options)->toHtml();

@@ -34,9 +34,9 @@ final class SourceExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new SourceExtension($resolver));
         $source = "@source \"src/App.php\"\n";
         $expected = "<div class=\"source-block\">\n"
-            ."<div class=\"source-path\">src/App.php</div>\n"
-            ."<pre><code class=\"language-php\">one\n&lt;two&gt;\n</code></pre>\n"
-            ."</div>\n";
+            . "<div class=\"source-path\">src/App.php</div>\n"
+            . "<pre><code class=\"language-php\">one\n&lt;two&gt;\n</code></pre>\n"
+            . "</div>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertCount(1, $resolver->requests);
@@ -58,27 +58,27 @@ final class SourceExtensionTest extends TestCase
     public function testSelectsOriginalLinesAndRendersNormalizedHighlights(): void
     {
         $content = implode("\r\n", array_map(
-            static fn (int $line): string => 'line '.$line,
+            static fn(int $line): string => 'line ' . $line,
             range(1, 12),
         ));
         $factory = Markdown::commonmark()->with(new SourceExtension(
             new SourceFixtureResolver(['src/example.php' => $content]),
         ));
         $source = '@source "src/example.php" {lines: 9-11, title: "A, \\"B\\" \\\\ path", '
-            .'numbers: true, highlight: "11, 10, 10-11"}';
+            . 'numbers: true, highlight: "11, 10, 10-11"}';
 
         self::assertSame(
             "<div class=\"source-block\">\n"
-            ."<div class=\"source-title\">A, &quot;B&quot; \\ path</div>\n"
-            ."<div class=\"source-path\">src/example.php</div>\n"
-            .'<pre><code class="language-php">'
-            .'<span class="line"><span class="line-number" data-line="9" aria-hidden="true">9</span>line 9</span>'
-            ."\r\n"
-            .'<span class="line highlighted"><span class="line-number" data-line="10" aria-hidden="true">10</span>line 10</span>'
-            ."\r\n"
-            .'<span class="line highlighted"><span class="line-number" data-line="11" aria-hidden="true">11</span>line 11</span>'
-            ."</code></pre>\n"
-            ."</div>\n",
+            . "<div class=\"source-title\">A, &quot;B&quot; \\ path</div>\n"
+            . "<div class=\"source-path\">src/example.php</div>\n"
+            . '<pre><code class="language-php">'
+            . '<span class="line"><span class="line-number" data-line="9" aria-hidden="true">9</span>line 9</span>'
+            . "\r\n"
+            . '<span class="line highlighted"><span class="line-number" data-line="10" aria-hidden="true">10</span>line 10</span>'
+            . "\r\n"
+            . '<span class="line highlighted"><span class="line-number" data-line="11" aria-hidden="true">11</span>line 11</span>'
+            . "</code></pre>\n"
+            . "</div>\n",
             $factory->toHtml($source),
         );
     }
@@ -91,13 +91,13 @@ final class SourceExtensionTest extends TestCase
 
         self::assertSame(
             "<div class=\"source-block\">\n"
-            ."<div class=\"source-path\">mixed.txt</div>\n"
-            .'<pre><code class="language-text">'
-            ."<span class=\"line\">one</span>\r"
-            ."<span class=\"line highlighted\">two</span>\n"
-            ."<span class=\"line\">three</span>\r\n"
-            ."</code></pre>\n"
-            ."</div>\n",
+            . "<div class=\"source-path\">mixed.txt</div>\n"
+            . '<pre><code class="language-text">'
+            . "<span class=\"line\">one</span>\r"
+            . "<span class=\"line highlighted\">two</span>\n"
+            . "<span class=\"line\">three</span>\r\n"
+            . "</code></pre>\n"
+            . "</div>\n",
             $factory->toHtml('@source "mixed.txt" {highlight: 2}'),
         );
     }
@@ -143,8 +143,8 @@ final class SourceExtensionTest extends TestCase
         ));
 
         self::assertStringContainsString(
-            '<code class="language-'.$language.'">code</code>',
-            $factory->toHtml('@source "'.$path.'"'),
+            '<code class="language-' . $language . '">code</code>',
+            $factory->toHtml('@source "' . $path . '"'),
         );
     }
 
@@ -174,9 +174,9 @@ final class SourceExtensionTest extends TestCase
     public function testSelectsASmallDecoratedRangeFromAMediumResource(): void
     {
         $line = '0123456789abcdefgh';
-        $resource = str_repeat($line."\r\n", 5_000)
-            ."target one\r\ntarget two\r\ntarget three\r\n"
-            .str_repeat($line."\r\n", 5_000);
+        $resource = str_repeat($line . "\r\n", 5_000)
+            . "target one\r\ntarget two\r\ntarget three\r\n"
+            . str_repeat($line . "\r\n", 5_000);
         $factory = Markdown::commonmark()->with(new SourceExtension(
             new SourceFixtureResolver(['medium.txt' => $resource]),
         ));
@@ -212,7 +212,7 @@ final class SourceExtensionTest extends TestCase
         yield 'unterminated title' => ['@source "snippet.php" {title: "bad}'];
         yield 'trailing title bytes' => ['@source "snippet.php" {title: "valid" junk}'];
         yield 'control title' => ["@source \"snippet.php\" {title: \"bad\nvalue\"}"];
-        yield 'long title' => ['@source "snippet.php" {title: "'.str_repeat('x', 257).'"}'];
+        yield 'long title' => ['@source "snippet.php" {title: "' . str_repeat('x', 257) . '"}'];
         yield 'quoted numbers' => ['@source "snippet.php" {numbers: "true"}'];
         yield 'invalid numbers' => ['@source "snippet.php" {numbers: yes}'];
         yield 'zero line' => ['@source "snippet.php" {lines: 0}'];
@@ -222,17 +222,17 @@ final class SourceExtensionTest extends TestCase
         yield 'zero highlight' => ['@source "snippet.php" {highlight: 0}'];
         yield 'descending highlight' => ['@source "snippet.php" {highlight: 3-2}'];
         yield 'too many highlights' => [
-            '@source "snippet.php" {highlight: "'.implode(',', range(1, 65)).'"}',
+            '@source "snippet.php" {highlight: "' . implode(',', range(1, 65)) . '"}',
         ];
         yield 'too many duplicate highlights' => [
-            '@source "snippet.php" {highlight: "'.implode(',', array_fill(0, 65, '1')).'"}',
+            '@source "snippet.php" {highlight: "' . implode(',', array_fill(0, 65, '1')) . '"}',
         ];
         yield 'long highlight value' => [
-            '@source "snippet.php" {highlight: "'.str_repeat('1,', 256).'1"}',
+            '@source "snippet.php" {highlight: "' . str_repeat('1,', 256) . '1"}',
         ];
         yield 'invalid language' => ['@source "snippet.php" {lang: php html}'];
-        yield 'long language' => ['@source "snippet.php" {lang: '.str_repeat('x', 65).'}'];
-        yield 'long directive' => ['@source "'.str_repeat('x', 4_096).'"'];
+        yield 'long language' => ['@source "snippet.php" {lang: ' . str_repeat('x', 65) . '}'];
+        yield 'long directive' => ['@source "' . str_repeat('x', 4_096) . '"'];
     }
 
     #[DataProvider('invalidDirectives')]
@@ -317,16 +317,14 @@ final class SourceFixtureResolver implements ResourceResolver
     /**
      * @param array<string, string> $resources
      */
-    public function __construct(private array $resources)
-    {
-    }
+    public function __construct(private array $resources) {}
 
     public function resolve(ResourceRequest $request): ResolvedResource
     {
         $this->requests[] = $request;
 
         return new ResolvedResource(
-            id: 'fixture:'.$request->reference,
+            id: 'fixture:' . $request->reference,
             bytes: $this->resources[$request->reference] ?? '',
         );
     }

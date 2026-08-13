@@ -144,7 +144,7 @@ final class FormatterPassRegistryTest extends TestCase
         $definition = new FormatterPassDefinition(
             'invalid-result',
             'Returns an invalid edit.',
-            static fn (): ExtensionFormatterPass => $formatter,
+            static fn(): ExtensionFormatterPass => $formatter,
         );
 
         $this->expectException(InvalidFormatterResultException::class);
@@ -162,14 +162,13 @@ final class FormatterPassRegistryTest extends TestCase
         string $replacement,
         string $description,
     ): FormattingPass {
-        return new class($start, $end, $replacement, $description) implements FormattingPass {
+        return new class ($start, $end, $replacement, $description) implements FormattingPass {
             public function __construct(
                 private readonly int $start,
                 private readonly int $end,
                 private readonly string $replacement,
                 private readonly string $description,
-            ) {
-            }
+            ) {}
 
             public function level(): FormattingLevel
             {

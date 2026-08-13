@@ -28,8 +28,7 @@ final readonly class AttributesInlineOutput implements AccumulatingHtmlInlineRen
     public function __construct(
         private AttributeListParser $parser,
         private AttributesHtmlInjector $injector = new AttributesHtmlInjector(),
-    ) {
-    }
+    ) {}
 
     public function render(HtmlInlineOutputContext $context): string
     {
@@ -40,7 +39,7 @@ final readonly class AttributesInlineOutput implements AccumulatingHtmlInlineRen
     {
         $attributes = $this->parser->parseWhole($context->source())?->attributes;
         if (null === $attributes) {
-            return $html.$context->escapeText($context->source());
+            return $html . $context->escapeText($context->source());
         }
 
         $injected = $this->injector->last(
@@ -55,7 +54,7 @@ final readonly class AttributesInlineOutput implements AccumulatingHtmlInlineRen
             },
         );
 
-        return $injected ?? $html.$context->escapeText($context->source());
+        return $injected ?? $html . $context->escapeText($context->source());
     }
 
     public function print(MarkdownInlineOutputContext $context): string

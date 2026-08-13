@@ -1,20 +1,9 @@
-# Alto Markdown documentation
+# Alto Markdown
 
-Alto Markdown is a PHP 8.4+ document engine. It converts Markdown to HTML, but
-it can also open a document, query its structure, lint it, format it, and edit
-selected content without rewriting unrelated bytes.
-
-## Start here
-
-- [Installation](installation.md): install the package and render your first
-  document.
-- [Conversion](conversion.md): choose between direct HTML conversion and a
-  reusable document.
-- [Profiles](profiles.md): select CommonMark, GFM, or GitHub behavior.
-- [Security](security.md): render untrusted Markdown safely and report a
-  suspected vulnerability privately.
-
-The shortest path from a Markdown string to HTML is:
+Alto Markdown converts Markdown to safe HTML and keeps a source-backed
+document model when an application needs to inspect, lint, or edit content.
+Use direct conversion for one result; open a document when later work depends
+on its structure.
 
 ```php
 use Alto\Markdown\Markdown;
@@ -22,41 +11,51 @@ use Alto\Markdown\Markdown;
 $html = Markdown::github()->toHtml("# Hello\n\nWelcome.\n");
 ```
 
-## Work with documents
+## Start
 
-- [Queries and stats](queries-and-stats.md): inspect headings, sections, links,
-  code blocks, and aggregate metrics.
-- [Manipulation](manipulation.md): edit sections and rearrange top-level blocks
-  with minimal diffs.
-- [Lint, fix, and format](lint-fix-and-format.md): report policy problems and
-  apply safe, deterministic corrections.
-- [Command line](command-line.md): use the same engine in scripts and CI.
+- [Installation](installation.md): install the package and verify the runtime.
+- [Getting started](getting-started.md): render and inspect one document.
 
-Use a document when more than conversion is required:
+## Conversion
 
-```php
-use Alto\Markdown\Markdown;
+- [HTML](conversion/html.md): render block or inline Markdown safely.
+- [Markdown](conversion/markdown.md): preserve source or normalize output.
 
-$document = Markdown::github()->fromString("# Guide\n\n## Install\n\nRun Composer.\n");
+## Documents
 
-$title = $document->title()?->text();
-$install = $document->section('Install');
-$html = $document->toHtml();
-```
+- [Profiles](documents/profiles.md): choose CommonMark, GFM, or GitHub syntax.
+- [Queries](documents/queries.md): find headings, sections, links, and code.
+- [Statistics](documents/statistics.md): compute one immutable document summary.
+- [Editing](documents/editing.md): make source-preserving changes and save files.
 
-## Understand the boundaries
+## Quality
 
-- [API reference](api-reference.md): find the stable entry points, document
-  actions, handles, builders, and configuration values.
-- [Errors](errors.md): catch recoverable failures and protect file edits.
-- [Compliance](compliance.md): supported specifications and verification
-  commands.
-- [Performance](performance.md): benchmark lanes, reference results, and
-  measurement rules.
-- [Extensions](extensions.md): custom blocks and leaf inlines, lint rules,
-  formatter passes, stats metrics, compiled dispatch, and extension boundaries.
-- [Extension compatibility](extension-compatibility.md): versioning,
-  deprecations, package support, and migration from other engines.
+- [Linting](quality/linting.md): report content and policy problems.
+- [Fixing](quality/fixing.md): apply enabled safe corrections.
+- [Formatting](quality/formatting.md): normalize selected Markdown style.
 
-Public behavior described in these pages is covered by the repository test
-suite.
+## Extensions
+
+- [All extensions](extensions/index.md): choose bundled capabilities.
+- [Compatibility](extensions/compatibility.md): understand extension versioning.
+- [Extension points](extensions/extension-points.md): select the correct contract.
+- [Custom extension](extensions/custom.md): register trusted application behavior.
+
+## Engine
+
+- [Security](engine/security.md): keep untrusted input within safe policies.
+- [Performance](engine/performance.md): measure the correct processing lane.
+- [Compliance](engine/compliance.md): review supported Markdown specifications.
+
+## API
+
+- [Overview](api/index.md): map the public surface by task.
+- [Documents](api/documents.md): factories, documents, and files.
+- [Nodes](api/nodes.md): inspect and mutate typed handles.
+- [Queries](api/queries.md): collections, selectors, and statistics.
+- [Editing](api/editing.md): builders, patches, diffs, and saves.
+- [Extensions](api/extensions.md): profile and extension contracts.
+- [Exceptions](api/exceptions.md): catch recoverable failures at boundaries.
+
+HTML escapes authored raw HTML and rejects unsafe URL schemes by default.
+Read [Security](engine/security.md) before changing those policies.

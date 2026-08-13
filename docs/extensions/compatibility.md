@@ -1,4 +1,4 @@
-# Extension compatibility
+# Compatibility
 
 Alto extensions depend only on Alto's public contracts. Extensions written for
 League CommonMark, Parsedown, or the historical `alto/commonmark` packages use
@@ -94,15 +94,15 @@ Every historical Alto CommonMark feature has a native replacement:
 
 | Historical package | Native Alto replacement | Migration note |
 | --- | --- | --- |
-| `alto/commonmark-code-block-title` | [`CodeBlockTitleExtension`](extensions.md#add-code-block-titles) | Use the typed title policy |
-| `alto/commonmark-content-slicer` | [`ContentSlicerExtension`](extensions.md#group-heading-sections) | `minLevel` is the first heading level that opens a section |
-| `alto/commonmark-heading-level` | [`HeadingLevelExtension`](extensions.md#adjust-rendered-heading-levels) | Use `HeadingLevelPolicy::map()`, `shift()`, or `using()` |
-| `alto/commonmark-import` | [`ImportExtension`](extensions.md#import-code-from-a-resource) | Inject a bounded `ResourceResolver` |
-| `alto/commonmark-include` | [`IncludeExtension`](extensions.md#include-markdown-resources) | Inject a resolver and explicit recursion policy |
-| `alto/commonmark-link-rewriter` | [`LinkRewriterExtension`](extensions.md#rewrite-link-destinations) | Build rules with `LinkRewriter` |
-| `alto/commonmark-source` | [`SourceExtension`](extensions.md#display-a-source-excerpt) | Inject a bounded resolver |
-| `alto/commonmark-table-of-contents` | [`TableOfContentsExtension`](extensions.md#add-a-table-of-contents) | Use the typed TOC policy |
-| `alto/commonmark-tabs` | [`TabsExtension`](extensions.md#add-nested-tabs) | Review generated HTML and progressive behavior |
+| `alto/commonmark-code-block-title` | [`CodeBlockTitleExtension`](index.md) | Use the typed title policy |
+| `alto/commonmark-content-slicer` | [`ContentSlicerExtension`](index.md) | `minLevel` is the first heading level that opens a section |
+| `alto/commonmark-heading-level` | [`HeadingLevelExtension`](index.md) | Use `HeadingLevelPolicy::map()`, `shift()`, or `using()` |
+| `alto/commonmark-import` | [`ImportExtension`](index.md) | Inject a bounded `ResourceResolver` |
+| `alto/commonmark-include` | [`IncludeExtension`](index.md) | Inject a resolver and explicit recursion policy |
+| `alto/commonmark-link-rewriter` | [`LinkRewriterExtension`](index.md) | Build rules with `LinkRewriter` |
+| `alto/commonmark-source` | [`SourceExtension`](index.md) | Inject a bounded resolver |
+| `alto/commonmark-table-of-contents` | [`TableOfContentsExtension`](index.md) | Use the typed TOC policy |
+| `alto/commonmark-tabs` | [`TabsExtension`](index.md) | Review generated HTML and progressive behavior |
 
 These are feature migrations, not drop-in class aliases. Re-run output,
 security, and source-preservation tests when moving an application.

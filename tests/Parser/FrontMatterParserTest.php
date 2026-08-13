@@ -211,7 +211,7 @@ final class FrontMatterParserTest extends TestCase
 
     public function testUnterminatedBlockDoesNotSwallowALongDocument(): void
     {
-        $document = self::github("---\n".str_repeat("Paragraph text\n\n", 2000));
+        $document = self::github("---\n" . str_repeat("Paragraph text\n\n", 2000));
 
         self::assertNull($document->frontMatter());
         self::assertSame(2000, $document->query()->kind('paragraph')->get()->count());

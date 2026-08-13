@@ -18,8 +18,7 @@ final readonly class SemanticTreeComparison
     private function __construct(
         private bool $equal,
         private string $message,
-    ) {
-    }
+    ) {}
 
     public static function equal(): self
     {

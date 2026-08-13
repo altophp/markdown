@@ -33,13 +33,19 @@ use Alto\Markdown\Exception\SourcePositionException;
  */
 final class LineMap
 {
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private array $firstNonSpaceOffsets = [];
 
-    /** @var list<int> */
+    /**
+     * @var list<int>
+     */
     private array $firstNonSpaceColumns = [];
 
-    /** @var list<bool> */
+    /**
+     * @var list<bool>
+     */
     private array $blank = [];
 
     private readonly int $lineCount;

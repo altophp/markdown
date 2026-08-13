@@ -96,14 +96,12 @@ final class AtxHeadingParser implements BlockConstruct
 
         $tape->setFlags($ordinal, $level);
         $tape->setEndOffset($ordinal, $end);
-        $tape->setPayload($ordinal, $contentStart.':'.$contentEnd);
+        $tape->setPayload($ordinal, $contentStart . ':' . $contentEnd);
 
         return ContinueResult::Closed;
     }
 
-    public function close(ParserState $state, int $ordinal): void
-    {
-    }
+    public function close(ParserState $state, int $ordinal): void {}
 
     private function trimTrailingSpace(string $bytes, int $start, int $end): int
     {

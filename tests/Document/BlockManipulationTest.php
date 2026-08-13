@@ -88,22 +88,22 @@ final class BlockManipulationTest extends TestCase
     #[DataProvider('lineEndings')]
     public function testMovesWithoutBlankLinesNeverConsumeANeighbor(string $eol): void
     {
-        $source = '# A'.$eol.'# B'.$eol.'# C'.$eol;
+        $source = '# A' . $eol . '# B' . $eol . '# C' . $eol;
 
         $first = Markdown::github()->fromString($source);
         $firstHeadings = $first->headings()->all();
         $firstHeadings[0]->moveAfter($firstHeadings[2]);
-        self::assertSame('# B'.$eol.'# C'.$eol.$eol.'# A'.$eol, $first->toMarkdown());
+        self::assertSame('# B' . $eol . '# C' . $eol . $eol . '# A' . $eol, $first->toMarkdown());
 
         $last = Markdown::github()->fromString($source);
         $lastHeadings = $last->headings()->all();
         $lastHeadings[2]->moveBefore($lastHeadings[0]);
-        self::assertSame('# C'.$eol.$eol.'# A'.$eol.'# B'.$eol, $last->toMarkdown());
+        self::assertSame('# C' . $eol . $eol . '# A' . $eol . '# B' . $eol, $last->toMarkdown());
 
         $middle = Markdown::github()->fromString($source);
         $middleHeadings = $middle->headings()->all();
         $middleHeadings[1]->moveAfter($middleHeadings[2]);
-        self::assertSame('# A'.$eol.'# C'.$eol.$eol.'# B'.$eol, $middle->toMarkdown());
+        self::assertSame('# A' . $eol . '# C' . $eol . $eol . '# B' . $eol, $middle->toMarkdown());
     }
 
     public function testAdjacentAndSelfMovesAreNoOps(): void
@@ -233,7 +233,7 @@ final class BlockManipulationTest extends TestCase
         self::assertSame('Copy Me', $clone->text());
         self::assertTrue($heading->exists());
         self::assertSame(
-            $source."\r\n##   Copy Me ###\r\n",
+            $source . "\r\n##   Copy Me ###\r\n",
             $lowered->bytes,
         );
         self::assertSame([], $lowered->fallbacks);
@@ -452,9 +452,9 @@ final class BlockManipulationTest extends TestCase
     {
         foreach (
             [
-                static fn (): BlockWrapper => BlockWrapper::bullet('x'),
-                static fn (): BlockWrapper => BlockWrapper::ordered(-1),
-                static fn (): BlockWrapper => BlockWrapper::ordered(1, ':'),
+                static fn(): BlockWrapper => BlockWrapper::bullet('x'),
+                static fn(): BlockWrapper => BlockWrapper::ordered(-1),
+                static fn(): BlockWrapper => BlockWrapper::ordered(1, ':'),
             ] as $create
         ) {
             try {

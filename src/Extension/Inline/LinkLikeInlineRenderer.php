@@ -20,6 +20,4 @@ namespace Alto\Markdown\Extension\Inline;
  *
  * @author Simon André <smn.andre@gmail.com>
  */
-interface LinkLikeInlineRenderer
-{
-}
+interface LinkLikeInlineRenderer {}

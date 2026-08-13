@@ -23,8 +23,7 @@ final readonly class BlockWrapper
     private function __construct(
         private string $firstPrefix,
         private string $continuationPrefix,
-    ) {
-    }
+    ) {}
 
     public static function quote(): self
     {
@@ -37,7 +36,7 @@ final readonly class BlockWrapper
             throw new InvalidMarkdownArgumentException('A bullet block wrapper marker must be "-", "+", or "*".');
         }
 
-        return new self($marker.' ', '  ');
+        return new self($marker . ' ', '  ');
     }
 
     public static function ordered(int $start = 1, string $delimiter = '.'): self
@@ -50,9 +49,9 @@ final readonly class BlockWrapper
             throw new InvalidMarkdownArgumentException('An ordered block wrapper delimiter must be "." or ")".');
         }
 
-        $marker = (string) $start.$delimiter;
+        $marker = (string) $start . $delimiter;
 
-        return new self($marker.' ', str_repeat(' ', \strlen($marker) + 1));
+        return new self($marker . ' ', str_repeat(' ', \strlen($marker) + 1));
     }
 
     /**

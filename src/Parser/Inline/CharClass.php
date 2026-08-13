@@ -28,9 +28,7 @@ final class CharClass
     public const int WHITESPACE = 1;
     public const int PUNCTUATION = 2;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
      * Classifies the codepoint whose last byte ends at $offset (exclusive),

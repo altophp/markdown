@@ -31,8 +31,7 @@ final readonly class BlockContentReader
     public function __construct(
         private SourceBuffer $buffer,
         private ReadOnlyParseTape $tape,
-    ) {
-    }
+    ) {}
 
     public function inlineMarkdownSource(int $ordinal): string
     {
@@ -124,14 +123,14 @@ final readonly class BlockContentReader
             $indent = $this->tape->flags($ordinal);
 
             foreach ($this->codePairs($ordinal) as [$start, $end, $pad]) {
-                $code .= $this->stripFenceIndent($this->buffer->substring($start, $end), $indent, $pad)."\n";
+                $code .= $this->stripFenceIndent($this->buffer->substring($start, $end), $indent, $pad) . "\n";
             }
 
             return $code;
         }
 
         foreach ($this->codePairs($ordinal) as [$start, $end, $pad, $column]) {
-            $code .= $this->stripColumns($this->buffer->substring($start, $end), 4, $pad, $column)."\n";
+            $code .= $this->stripColumns($this->buffer->substring($start, $end), 4, $pad, $column) . "\n";
         }
 
         return $code;
@@ -188,7 +187,7 @@ final readonly class BlockContentReader
             $separator = "\n";
         }
 
-        return $html."\n";
+        return $html . "\n";
     }
 
     private function compactFencedCode(int $ordinal): ?string
@@ -213,7 +212,7 @@ final readonly class BlockContentReader
             $code = str_replace(["\r\n", "\r"], "\n", $code);
         }
 
-        return $code.(1 === $appendLf ? "\n" : '');
+        return $code . (1 === $appendLf ? "\n" : '');
     }
 
     /**
@@ -324,7 +323,7 @@ final readonly class BlockContentReader
         $prefix = str_repeat(' ', $pad - $consumedPad);
 
         if ($startColumn >= $goal) {
-            return $prefix.$line;
+            return $prefix . $line;
         }
 
         $offset = 0;
@@ -353,7 +352,7 @@ final readonly class BlockContentReader
 
         $overshoot = $column > $goal ? $column - $goal : 0;
 
-        return $prefix.str_repeat(' ', $overshoot).substr($line, $offset);
+        return $prefix . str_repeat(' ', $overshoot) . substr($line, $offset);
     }
 
     /**
@@ -375,7 +374,7 @@ final readonly class BlockContentReader
             ++$offset;
         }
 
-        return str_repeat(' ', $pad).substr($line, $offset);
+        return str_repeat(' ', $pad) . substr($line, $offset);
     }
 
     /**

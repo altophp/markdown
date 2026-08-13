@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-class InvalidMarkdownOperationException extends \BadMethodCallException implements MarkdownExceptionInterface
-{
-}
+class InvalidMarkdownOperationException extends \BadMethodCallException implements MarkdownExceptionInterface {}

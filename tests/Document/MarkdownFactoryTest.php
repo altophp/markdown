@@ -45,9 +45,9 @@ final class MarkdownFactoryTest extends TestCase
      */
     public static function provideProfileFactories(): iterable
     {
-        yield 'commonmark' => [static fn (): MarkdownFactory => Markdown::commonmark(), 'commonmark'];
-        yield 'gfm' => [static fn (): MarkdownFactory => Markdown::gfm(), 'gfm'];
-        yield 'github' => [static fn (): MarkdownFactory => Markdown::github(), 'github'];
+        yield 'commonmark' => [static fn(): MarkdownFactory => Markdown::commonmark(), 'commonmark'];
+        yield 'gfm' => [static fn(): MarkdownFactory => Markdown::gfm(), 'gfm'];
+        yield 'github' => [static fn(): MarkdownFactory => Markdown::github(), 'github'];
     }
 
     public function testFromStringReturnsParsedDocumentShell(): void
@@ -74,7 +74,7 @@ final class MarkdownFactoryTest extends TestCase
 
     public function testOpenReturnsFileShellWithPath(): void
     {
-        $path = __DIR__.'/../fixtures/readme-symfony.md';
+        $path = __DIR__ . '/../fixtures/readme-symfony.md';
         $file = Markdown::gfm()->open($path);
 
         self::assertInstanceOf(MarkdownFile::class, $file);
@@ -132,7 +132,7 @@ final class MarkdownFactoryTest extends TestCase
 
     public function testOpenReportsAnUnreadablePath(): void
     {
-        $path = __DIR__.'/missing-document.md';
+        $path = __DIR__ . '/missing-document.md';
 
         $this->expectException(FileReadException::class);
         $this->expectExceptionMessage(\sprintf('Unable to read Markdown file "%s".', $path));
@@ -142,7 +142,7 @@ final class MarkdownFactoryTest extends TestCase
 
     public function testOpenReportsAnUnresolvableParentDirectory(): void
     {
-        $path = __DIR__.'/missing-directory/document.md';
+        $path = __DIR__ . '/missing-directory/document.md';
 
         $this->expectException(FileReadException::class);
         $this->expectExceptionMessage(\sprintf('Unable to read Markdown file "%s".', $path));
@@ -156,7 +156,7 @@ final class MarkdownFactoryTest extends TestCase
             self::markTestSkipped('FIFO behavior requires POSIX support.');
         }
 
-        $path = \sys_get_temp_dir().'/alto-markdown-read-'.\bin2hex(\random_bytes(8));
+        $path = \sys_get_temp_dir() . '/alto-markdown-read-' . \bin2hex(\random_bytes(8));
         self::assertTrue(posix_mkfifo($path, 0o600));
 
         try {
@@ -177,8 +177,8 @@ final class MarkdownFactoryTest extends TestCase
         $second = Markdown::commonmark()->fromString($source)->headings()->all();
 
         self::assertSame(
-            \array_map(static fn (Heading $heading): array => [$heading->id()->generation, $heading->id()->ordinal], $first),
-            \array_map(static fn (Heading $heading): array => [$heading->id()->generation, $heading->id()->ordinal], $second),
+            \array_map(static fn(Heading $heading): array => [$heading->id()->generation, $heading->id()->ordinal], $first),
+            \array_map(static fn(Heading $heading): array => [$heading->id()->generation, $heading->id()->ordinal], $second),
         );
     }
 

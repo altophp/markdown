@@ -38,7 +38,5 @@ final class Markdown
         return new ParsedMarkdownFactory(new GitHubProfile());
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

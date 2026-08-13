@@ -68,6 +68,6 @@ final class PreferFencedCodeBlocksRule implements BlockRule
 
     private function fenced(string $code, bool $withLanguage): string
     {
-        return '```'.($withLanguage ? 'text' : '')."\n".rtrim($code, "\n")."\n```";
+        return '```' . ($withLanguage ? 'text' : '') . "\n" . rtrim($code, "\n") . "\n```";
     }
 }

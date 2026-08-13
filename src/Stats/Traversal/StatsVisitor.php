@@ -104,9 +104,7 @@ final class StatsVisitor implements TraversalVisitor
         }
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
     public function inline(InlineEvent $event): void
     {
@@ -153,7 +151,7 @@ final class StatsVisitor implements TraversalVisitor
             maxHeadingDepth: $this->maxHeadingDepth,
             outline: $this->outline,
             sectionWordCounts: array_map(
-                static fn (array $section): SectionWordCount => new SectionWordCount(
+                static fn(array $section): SectionWordCount => new SectionWordCount(
                     $section['title'],
                     $section['level'],
                     $section['wordCount'],
@@ -177,7 +175,7 @@ final class StatsVisitor implements TraversalVisitor
 
         $this->headingsByLevel[$level] = ($this->headingsByLevel[$level] ?? 0) + 1;
         $this->maxHeadingDepth = max($this->maxHeadingDepth, $level);
-        $this->outline[] = str_repeat('#', $level).' '.$title;
+        $this->outline[] = str_repeat('#', $level) . ' ' . $title;
         $this->sectionWordCounts[] = [
             'title' => $title,
             'level' => $level,

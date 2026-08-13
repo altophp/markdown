@@ -28,9 +28,7 @@ use Alto\Markdown\Profile\CompiledProfile;
  */
 final readonly class SyntaxParser
 {
-    public function __construct(private CompiledProfile $profile)
-    {
-    }
+    public function __construct(private CompiledProfile $profile) {}
 
     public function parse(string $source, ?ParseOptions $options = null): ParsedSyntax
     {

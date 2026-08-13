@@ -76,7 +76,7 @@ final class ProductConformanceTest extends TestCase
             try {
                 $rendered = $factory->toHtml($example['markdown'], renderOptions: $options);
             } catch (\Throwable $error) {
-                $rendered = 'threw '.$error::class;
+                $rendered = 'threw ' . $error::class;
             }
 
             if ($rendered !== $example['html']) {
@@ -88,7 +88,7 @@ final class ProductConformanceTest extends TestCase
         sort($known);
 
         self::assertSame($known, $failing, \sprintf(
-            "Shipped %s conformance changed under the %s profile: %d of %d examples fail.\n".
+            "Shipped %s conformance changed under the %s profile: %d of %d examples fail.\n" .
             "Unexpected failures: %s\nNewly passing (remove them from KNOWN_FAILURES): %s",
             $fixture,
             $profile,
@@ -154,7 +154,7 @@ final class ProductConformanceTest extends TestCase
      */
     private static function loadExamples(string $fixture): array
     {
-        $path = \dirname(__DIR__).'/fixtures/'.$fixture;
+        $path = \dirname(__DIR__) . '/fixtures/' . $fixture;
         $json = file_get_contents($path);
 
         if (false === $json) {

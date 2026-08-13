@@ -45,7 +45,7 @@ final class UseStatementGenerator
 
         sort($fqcns);
 
-        return array_map(static fn (string $fqcn): string => "use {$fqcn};", $fqcns);
+        return array_map(static fn(string $fqcn): string => "use {$fqcn};", $fqcns);
     }
 
     /**
@@ -73,7 +73,7 @@ final class UseStatementGenerator
         // backslash, dollar, "->" or "::" and not followed by a word char or a
         // namespace separator. That excludes imports, qualified names, method
         // and static calls, variables, and longer identifiers.
-        $pattern = '/(?<![\w\\\\$>:])'.preg_quote($shortName, '/').'(?![\w\\\\])/';
+        $pattern = '/(?<![\w\\\\$>:])' . preg_quote($shortName, '/') . '(?![\w\\\\])/';
 
         return 1 === preg_match($pattern, $code);
     }

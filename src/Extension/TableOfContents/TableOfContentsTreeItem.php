@@ -25,7 +25,5 @@ final class TableOfContentsTreeItem
      */
     public array $children = [];
 
-    public function __construct(public readonly TableOfContentsHeading $heading)
-    {
-    }
+    public function __construct(public readonly TableOfContentsHeading $heading) {}
 }

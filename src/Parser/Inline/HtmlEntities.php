@@ -2165,7 +2165,5 @@ final class HtmlEntities
         return self::TABLE[$name] ?? null;
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

@@ -27,6 +27,5 @@ final readonly class BlockStartResult
         public int $advanceOffset,
         public bool $container = false,
         public BlockState $state = new BlockState(),
-    ) {
-    }
+    ) {}
 }

@@ -29,8 +29,7 @@ final readonly class ReplaceCodeBlockContentOperation implements Operation
         private ?string $language,
         private string $code,
         private SourceRange $range,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {
@@ -51,7 +50,7 @@ final readonly class ReplaceCodeBlockContentOperation implements Operation
     {
         $info = null === $this->language ? '' : $this->language;
 
-        return "```{$info}\n".rtrim($this->code, "\n")."\n```\n";
+        return "```{$info}\n" . rtrim($this->code, "\n") . "\n```\n";
     }
 
     private function parsed(DocumentModel $model): ParsedDocumentModel

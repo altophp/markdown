@@ -58,10 +58,10 @@ final class HeadingLevelExtensionTest extends TestCase
 
         self::assertSame(
             "<h3>One</h3>\n"
-            ."<h2>Two</h2>\n"
-            ."<blockquote>\n"
-            ."<h5>Three</h5>\n"
-            ."</blockquote>\n",
+            . "<h2>Two</h2>\n"
+            . "<blockquote>\n"
+            . "<h5>Three</h5>\n"
+            . "</blockquote>\n",
             $factory->toHtml("# One\n\n## Two\n\n> ### Three\n"),
         );
     }
@@ -73,7 +73,7 @@ final class HeadingLevelExtensionTest extends TestCase
     {
         yield 'map' => [HeadingLevelPolicy::map([2 => 4]), 4];
         yield 'shift' => [HeadingLevelPolicy::shift(1), 3];
-        yield 'callback' => [HeadingLevelPolicy::using(static fn (int $level): int => $level + 3), 5];
+        yield 'callback' => [HeadingLevelPolicy::using(static fn(int $level): int => $level + 3), 5];
     }
 
     #[DataProvider('effectiveLevelPolicies')]
@@ -96,7 +96,7 @@ final class HeadingLevelExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(
             new HeadingLevelExtension(HeadingLevelPolicy::using(
-                static fn (int $level): ?int => 2 === $level ? null : $level + 1,
+                static fn(int $level): ?int => 2 === $level ? null : $level + 1,
             )),
         );
 
@@ -132,8 +132,8 @@ final class HeadingLevelExtensionTest extends TestCase
 
         self::assertSame(
             '<h2><a id="content-title" href="#content-title" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Title</h2>\n",
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Title</h2>\n",
             $factory->toHtml("# Title\n"),
         );
     }
@@ -163,11 +163,11 @@ final class HeadingLevelExtensionTest extends TestCase
         $tableOfContents = new TableOfContentsExtension();
         $source = "@toc {min: 2, max: 2}\n\n# Title\n";
         $expected = "<nav class=\"table-of-contents\" id=\"toc\">\n"
-            ."<ul>\n"
-            ."<li><a href=\"#title\">Title</a></li>\n"
-            ."</ul>\n"
-            ."</nav>\n"
-            ."<h2 id=\"title\">Title</h2>\n";
+            . "<ul>\n"
+            . "<li><a href=\"#title\">Title</a></li>\n"
+            . "</ul>\n"
+            . "</nav>\n"
+            . "<h2 id=\"title\">Title</h2>\n";
 
         self::assertSame(
             $expected,
@@ -251,12 +251,12 @@ final class HeadingLevelExtensionTest extends TestCase
      */
     public static function invalidCallbackResults(): iterable
     {
-        yield 'zero' => [static fn (int $level): int => 0, 'got 0 for level 1'];
-        yield 'above six' => [static fn (int $level): int => 7, 'got 7 for level 1'];
-        yield 'wrong type' => [static fn (int $level): string => (string) $level, "got '1' (string) for level 1"];
-        yield 'float' => [static fn (int $level): float => $level + 0.5, 'got 1.5 for level 1'];
-        yield 'boolean' => [static fn (int $level): bool => true, 'got true (bool) for level 1'];
-        yield 'array' => [static fn (int $level): array => [], 'got array for level 1'];
+        yield 'zero' => [static fn(int $level): int => 0, 'got 0 for level 1'];
+        yield 'above six' => [static fn(int $level): int => 7, 'got 7 for level 1'];
+        yield 'wrong type' => [static fn(int $level): string => (string) $level, "got '1' (string) for level 1"];
+        yield 'float' => [static fn(int $level): float => $level + 0.5, 'got 1.5 for level 1'];
+        yield 'boolean' => [static fn(int $level): bool => true, 'got true (bool) for level 1'];
+        yield 'array' => [static fn(int $level): array => [], 'got array for level 1'];
     }
 
     #[DataProvider('invalidCallbackResults')]
@@ -277,7 +277,7 @@ final class HeadingLevelExtensionTest extends TestCase
         $source = "# Title\n";
         $document = Markdown::commonmark()
             ->with(new HeadingLevelExtension(HeadingLevelPolicy::using(
-                static fn (int $level): never => throw new \RuntimeException('callback failed at '.$level),
+                static fn(int $level): never => throw new \RuntimeException('callback failed at ' . $level),
             )))
             ->fromString($source);
 
@@ -316,7 +316,7 @@ final readonly class PriorHeadingLevelExtension implements DocumentTransformExte
     {
         yield new DocumentTransformDefinition(
             'level',
-            static fn (): PriorHeadingLevelTransform => new PriorHeadingLevelTransform(),
+            static fn(): PriorHeadingLevelTransform => new PriorHeadingLevelTransform(),
             -200,
         );
     }

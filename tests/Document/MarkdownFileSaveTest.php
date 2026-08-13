@@ -147,8 +147,8 @@ final class MarkdownFileSaveTest extends TestCase
     {
         $firstDirectory = $this->tempDirectory();
         $secondDirectory = $this->tempDirectory();
-        $firstPath = $firstDirectory.'/guide.md';
-        $secondPath = $secondDirectory.'/guide.md';
+        $firstPath = $firstDirectory . '/guide.md';
+        $secondPath = $secondDirectory . '/guide.md';
         file_put_contents($firstPath, "# Guide\n");
         file_put_contents($secondPath, "# Guide\n");
         $this->paths[] = $firstPath;
@@ -177,8 +177,8 @@ final class MarkdownFileSaveTest extends TestCase
         $source = $this->writeTempFile("# Guide\n");
         $firstDirectory = $this->tempDirectory();
         $secondDirectory = $this->tempDirectory();
-        $firstPath = $firstDirectory.'/copy.md';
-        $secondPath = $secondDirectory.'/copy.md';
+        $firstPath = $firstDirectory . '/copy.md';
+        $secondPath = $secondDirectory . '/copy.md';
         $this->paths[] = $firstPath;
         $this->paths[] = $secondPath;
         $workingDirectory = getcwd();
@@ -267,7 +267,7 @@ final class MarkdownFileSaveTest extends TestCase
         $this->expectException(\RuntimeException::class);
 
         try {
-            $file->saveAs(\dirname($path).'/missing/out.md');
+            $file->saveAs(\dirname($path) . '/missing/out.md');
         } finally {
             self::assertSame("```php\necho \"old\";\n```\n", file_get_contents($path));
             self::assertFalse($file->model()->journal()->isEmpty());
@@ -598,7 +598,7 @@ final class MarkdownFileSaveTest extends TestCase
 
     private function tempPath(): string
     {
-        $path = \sys_get_temp_dir().'/alto-markdown-save-'.\bin2hex(\random_bytes(8)).'.md';
+        $path = \sys_get_temp_dir() . '/alto-markdown-save-' . \bin2hex(\random_bytes(8)) . '.md';
         $this->paths[] = $path;
 
         return $path;
@@ -606,7 +606,7 @@ final class MarkdownFileSaveTest extends TestCase
 
     private function tempDirectory(): string
     {
-        $directory = \sys_get_temp_dir().'/alto-markdown-save-'.\bin2hex(\random_bytes(8));
+        $directory = \sys_get_temp_dir() . '/alto-markdown-save-' . \bin2hex(\random_bytes(8));
         self::assertTrue(mkdir($directory));
         $this->directories[] = $directory;
 

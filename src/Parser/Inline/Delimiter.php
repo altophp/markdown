@@ -33,6 +33,5 @@ final class Delimiter
         public int $length,
         public readonly bool $canOpen,
         public readonly bool $canClose,
-    ) {
-    }
+    ) {}
 }

@@ -63,7 +63,7 @@ final readonly class ExternalLinkPolicy
             if ($host === $internal
                 || ($this->includeSubdomains
                     && false === filter_var($internal, \FILTER_VALIDATE_IP)
-                    && str_ends_with($host, '.'.$internal))
+                    && str_ends_with($host, '.' . $internal))
             ) {
                 return true;
             }
@@ -89,7 +89,7 @@ final readonly class ExternalLinkPolicy
 
         return 1 === preg_match(
             '/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*'
-            .'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/D',
+            . '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/D',
             $host,
         );
     }

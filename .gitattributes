@@ -1,15 +1,15 @@
 * text=auto eol=lf
 
-/.github/                   export-ignore
-/.gitattributes             export-ignore
-/.gitignore                 export-ignore
-/.php-cs-fixer.dist.php     export-ignore
-/phpstan.neon.dist          export-ignore
-/phpstan-snippets.neon.dist export-ignore
-/phpunit.xml.dist           export-ignore
-/docs/                      export-ignore
-/tests/                     export-ignore
+/.gitattributes              export-ignore
+/.github                     export-ignore
+/.gitignore                  export-ignore
+/.php-cs-fixer.dist.php      export-ignore
+/docs                        export-ignore
+/phpstan.neon.dist           export-ignore
+/phpstan-snippets.neon.dist  export-ignore
+/phpunit.xml.dist            export-ignore
+/tests                       export-ignore
 
-/tests/**                   linguist-vendored
-/docs/**                    linguist-documentation
-/tests/fixtures/*           -text
+/docs/**                     linguist-documentation
+/tests/fixtures/**           -linguist-detectable
+/tests/fixtures/**           -text

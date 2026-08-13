@@ -29,8 +29,7 @@ final readonly class DescriptionListParser implements BlockConstruct
     public function __construct(
         private int $kind,
         private int $descriptionKind,
-    ) {
-    }
+    ) {}
 
     public function kind(): int
     {

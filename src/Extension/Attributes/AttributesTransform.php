@@ -57,7 +57,7 @@ final class AttributesTransform implements DocumentProjectionTransform
         foreach ($context->blocks() as $block) {
             $this->ancestors = \array_slice($this->ancestors, 0, $block->depth);
             $parent = $block->depth > 0 ? ($this->ancestors[$block->depth - 1] ?? null) : null;
-            $key = $block->depth.':'.(null === $parent ? -1 : $context->blockOrdinal($parent));
+            $key = $block->depth . ':' . (null === $parent ? -1 : $context->blockOrdinal($parent));
 
             if (AttributesExtension::BLOCK_KIND === $block->kind) {
                 $attributes = $this->attributes($context, $block);

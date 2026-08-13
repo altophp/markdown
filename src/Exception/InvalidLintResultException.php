@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class InvalidLintResultException extends InvalidExtensionException
-{
-}
+final class InvalidLintResultException extends InvalidExtensionException {}

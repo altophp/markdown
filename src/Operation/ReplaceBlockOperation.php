@@ -31,8 +31,7 @@ final readonly class ReplaceBlockOperation implements Operation
         private string $replacement,
         private string $description = 'replace block',
         private bool $requiresFallback = false,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

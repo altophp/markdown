@@ -44,7 +44,7 @@ final class BlankLineFormattingPass implements FormattingPass
         $bytes = $model->source()->bytes;
         $topLevel = array_values(array_filter(
             BlockEventCollector::collect($model),
-            static fn ($event): bool => 1 === $event->depth,
+            static fn($event): bool => 1 === $event->depth,
         ));
         $operations = [];
 

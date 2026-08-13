@@ -54,8 +54,7 @@ final class RuleEngineVisitor implements TraversalVisitor
         private readonly array $inlineRules,
         private readonly RuleContext $context,
         private readonly bool $capturePublicContext = false,
-    ) {
-    }
+    ) {}
 
     public function enterBlock(BlockEvent $event): void
     {
@@ -68,9 +67,7 @@ final class RuleEngineVisitor implements TraversalVisitor
         }
     }
 
-    public function leaveBlock(BlockEvent $event): void
-    {
-    }
+    public function leaveBlock(BlockEvent $event): void {}
 
     public function inline(InlineEvent $event): void
     {

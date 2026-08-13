@@ -41,15 +41,15 @@ final class DirectHtmlConversionTest extends TestCase
     public static function provideDocuments(): iterable
     {
         yield 'commonmark' => [
-            static fn (): MarkdownFactory => Markdown::commonmark(),
+            static fn(): MarkdownFactory => Markdown::commonmark(),
             "# Title\n\nA **strong** [reference][id].\n\n1. first\n2. second\n\n```php\necho \"<ok>\";\n```\n\n[id]: /target \"Title\"\n",
         ];
         yield 'gfm' => [
-            static fn (): MarkdownFactory => Markdown::gfm(),
+            static fn(): MarkdownFactory => Markdown::gfm(),
             "- [x] ~~done~~\n\n| A | B |\n| :- | -: |\n| `x` | https://example.com |\n",
         ];
         yield 'github' => [
-            static fn (): MarkdownFactory => Markdown::github(),
+            static fn(): MarkdownFactory => Markdown::github(),
             "> [!WARNING]\n> Be **careful** with <title>.\n",
         ];
     }

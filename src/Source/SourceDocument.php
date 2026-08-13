@@ -22,6 +22,5 @@ final readonly class SourceDocument
         public string $bytes,
         public LineEnding $dominantEol,
         public bool $hasBom,
-    ) {
-    }
+    ) {}
 }

@@ -30,9 +30,7 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
      */
     private array $blocks = [];
 
-    public function __construct(private readonly ParsedMarkdownFactory $factory)
-    {
-    }
+    public function __construct(private readonly ParsedMarkdownFactory $factory) {}
 
     public function heading(int $level, string $text): self
     {
@@ -40,7 +38,7 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
             throw new InvalidMarkdownArgumentException('Heading level must be between 1 and 6.');
         }
 
-        $this->blocks[] = str_repeat('#', $level).' '.$this->text($text);
+        $this->blocks[] = str_repeat('#', $level) . ' ' . $this->text($text);
 
         return $this;
     }
@@ -67,21 +65,21 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
         $fence = $this->fence($code);
         $info = null === $language ? '' : $this->info($language);
 
-        $this->blocks[] = $fence.$info."\n".rtrim($code, "\n")."\n".$fence;
+        $this->blocks[] = $fence . $info . "\n" . rtrim($code, "\n") . "\n" . $fence;
 
         return $this;
     }
 
     public function unorderedList(iterable $items): self
     {
-        $this->blocks[] = $this->list($items, static fn (int $index): string => '-');
+        $this->blocks[] = $this->list($items, static fn(int $index): string => '-');
 
         return $this;
     }
 
     public function orderedList(iterable $items): self
     {
-        $this->blocks[] = $this->list($items, static fn (int $index): string => ($index + 1).'.');
+        $this->blocks[] = $this->list($items, static fn(int $index): string => ($index + 1) . '.');
 
         return $this;
     }
@@ -89,7 +87,7 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
     public function blockquote(string $text): self
     {
         $this->blocks[] = implode("\n", array_map(
-            static fn (string $line): string => '' === $line ? '>' : '> '.$line,
+            static fn(string $line): string => '' === $line ? '>' : '> ' . $line,
             explode("\n", $this->text($text)),
         ));
 
@@ -114,7 +112,7 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
             return '';
         }
 
-        return implode("\n\n", $this->blocks)."\n";
+        return implode("\n\n", $this->blocks) . "\n";
     }
 
     /**
@@ -127,14 +125,14 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
         $index = 0;
 
         foreach ($items as $item) {
-            $prefix = $marker($index).' ';
+            $prefix = $marker($index) . ' ';
             $indent = str_repeat(' ', \strlen($prefix));
             $itemLines = explode("\n", $this->text($item));
             $first = array_shift($itemLines) ?? '';
-            $lines[] = $prefix.$first;
+            $lines[] = $prefix . $first;
 
             foreach ($itemLines as $line) {
-                $lines[] = '' === $line ? '' : $indent.$line;
+                $lines[] = '' === $line ? '' : $indent . $line;
             }
 
             ++$index;
@@ -147,7 +145,7 @@ final class ParsedMarkdownBuilder implements MarkdownBuilder
     {
         return (string) preg_replace_callback(
             '/[!"#$%&\'()*+,\\.\/:;<=>?@\[\\\\\]\^_`{|}~-]/',
-            static fn (array $match): string => '\\'.$match[0],
+            static fn(array $match): string => '\\' . $match[0],
             $text,
         );
     }

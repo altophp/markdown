@@ -56,8 +56,8 @@ final class TabsExtensionTest extends TestCase
 
         self::assertStringContainsString(
             '<a class="markdown-tabs-tab is-active" id="markdown-tabs-1-tab-1"'
-            .' href="#markdown-tabs-1-panel-1" aria-controls="markdown-tabs-1-panel-1">'
-            .'PHP &amp; &lt;JS&gt;</a>',
+            . ' href="#markdown-tabs-1-panel-1" aria-controls="markdown-tabs-1-panel-1">'
+            . 'PHP &amp; &lt;JS&gt;</a>',
             $html,
         );
         self::assertStringContainsString("<h1>Heading</h1>\n", $html);
@@ -115,7 +115,7 @@ final class TabsExtensionTest extends TestCase
         self::assertStringContainsString('<p>Nested <strong>one</strong>.</p>', $html);
         self::assertStringContainsString(
             "</div>\n</div>\n<p>After.</p>\n</div>\n"
-            .'<div class="markdown-tabs-panel" id="markdown-tabs-1-panel-2"',
+            . '<div class="markdown-tabs-panel" id="markdown-tabs-1-panel-2"',
             $html,
         );
         self::assertSame($source, $document->toMarkdown());
@@ -133,8 +133,8 @@ final class TabsExtensionTest extends TestCase
             $factory->toHtml("@tabs\n@tab Open\nBody\n"),
         );
         self::assertSame(
-            '<p>'.str_repeat('@', 33)."tabs</p>\n",
-            $factory->toHtml(str_repeat('@', 33)."tabs\n"),
+            '<p>' . str_repeat('@', 33) . "tabs</p>\n",
+            $factory->toHtml(str_repeat('@', 33) . "tabs\n"),
         );
 
         $source = "@tabs\nIgnored before the first item.\n@tab Kept\nBody\n@endtabs\n";
@@ -146,15 +146,15 @@ final class TabsExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new TabsExtension());
         $source = "@tabs\n@tab Valid\n"
-            ."@@@tabs\n"
-            .'@tab '.str_repeat('x', 257)."\n"
-            ."@tab \"unclosed\n"
-            ."@tab \"bad\x7Ftitle\"\n"
-            ."Body\n@endtabs\n";
+            . "@@@tabs\n"
+            . '@tab ' . str_repeat('x', 257) . "\n"
+            . "@tab \"unclosed\n"
+            . "@tab \"bad\x7Ftitle\"\n"
+            . "Body\n@endtabs\n";
         $html = $factory->toHtml($source);
 
         self::assertStringContainsString('<p>@@@tabs', $html);
-        self::assertStringContainsString('@tab '.str_repeat('x', 257), $html);
+        self::assertStringContainsString('@tab ' . str_repeat('x', 257), $html);
         self::assertStringContainsString('@tab &quot;unclosed', $html);
         self::assertStringContainsString("@tab &quot;bad\x7Ftitle&quot;", $html);
         self::assertSame(1, substr_count($html, 'class="markdown-tabs-panel is-active"'));

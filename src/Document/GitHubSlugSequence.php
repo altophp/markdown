@@ -36,11 +36,11 @@ final class GitHubSlugSequence
     {
         $base = GitHubSlugger::slug($text);
         $suffix = $this->nextSuffix[$base] ?? 0;
-        $slug = 0 === $suffix ? $base : $base.'-'.$suffix;
+        $slug = 0 === $suffix ? $base : $base . '-' . $suffix;
 
         while (isset($this->used[$slug])) {
             ++$suffix;
-            $slug = $base.'-'.$suffix;
+            $slug = $base . '-' . $suffix;
         }
 
         $this->nextSuffix[$base] = $suffix + 1;

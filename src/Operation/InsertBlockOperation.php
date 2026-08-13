@@ -31,8 +31,7 @@ final readonly class InsertBlockOperation implements Operation, InsertionPointOp
         private SourceRange $range,
         private ?string $replacement = null,
         private bool $requiresFallback = false,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

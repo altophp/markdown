@@ -26,6 +26,5 @@ final readonly class ConformanceResult
         public array $sections,
         public int $passed,
         public int $total,
-    ) {
-    }
+    ) {}
 }

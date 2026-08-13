@@ -25,9 +25,7 @@ use Alto\Markdown\Extension\Block\MarkdownBlockPrinter;
  */
 final readonly class IncludeOutput implements HtmlBlockRenderer, MarkdownBlockPrinter
 {
-    public function __construct(private IncludePolicy $policy)
-    {
-    }
+    public function __construct(private IncludePolicy $policy) {}
 
     public function render(HtmlBlockOutputContext $context, string $children): string
     {

@@ -27,10 +27,10 @@ final class GitHubAlertPrinter implements BlockPrinter
     {
         $type = strtoupper($model->blockPayload($ordinal) ?? 'NOTE');
         $children = $context->renderChildren($model, $ordinal);
-        $content = '[!'.$type.']'.('' === $children ? '' : "\n".$children);
+        $content = '[!' . $type . ']' . ('' === $children ? '' : "\n" . $children);
 
         return implode("\n", array_map(
-            static fn (string $line): string => '' === $line ? '>' : '> '.$line,
+            static fn(string $line): string => '' === $line ? '>' : '> ' . $line,
             explode("\n", $content),
         ));
     }

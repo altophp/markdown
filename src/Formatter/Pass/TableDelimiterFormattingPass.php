@@ -79,7 +79,7 @@ final class TableDelimiterFormattingPass implements FormattingPass
             $leadingPipe = str_starts_with($trimmed, '|');
             $trailingPipe = str_ends_with($trimmed, '|');
             $cells = array_map(
-                static fn (string $alignment): string => match ($alignment) {
+                static fn(string $alignment): string => match ($alignment) {
                     'left' => ':---',
                     'center' => ':---:',
                     'right' => '---:',
@@ -87,7 +87,7 @@ final class TableDelimiterFormattingPass implements FormattingPass
                 },
                 $alignments,
             );
-            $replacement = ($leadingPipe ? '| ' : '').implode(' | ', $cells).($trailingPipe ? ' |' : '');
+            $replacement = ($leadingPipe ? '| ' : '') . implode(' | ', $cells) . ($trailingPipe ? ' |' : '');
 
             if ($line === $replacement) {
                 continue;

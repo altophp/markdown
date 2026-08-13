@@ -82,7 +82,7 @@ final class SectionTest extends TestCase
 
         self::assertContainsOnlyInstancesOf(Section::class, $sections);
         self::assertSame(['Install', 'install'], \array_map(
-            static fn (Section $section): string => $section->title(),
+            static fn(Section $section): string => $section->title(),
             $sections,
         ));
     }

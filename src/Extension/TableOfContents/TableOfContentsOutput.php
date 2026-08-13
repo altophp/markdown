@@ -26,9 +26,7 @@ use Alto\Markdown\Extension\Document\PlannedHtmlBlockRenderer;
  */
 final readonly class TableOfContentsOutput implements PlannedHtmlBlockRenderer, MarkdownBlockPrinter
 {
-    public function __construct(private TableOfContentsPolicy $policy)
-    {
-    }
+    public function __construct(private TableOfContentsPolicy $policy) {}
 
     public function render(HtmlBlockOutputContext $context, string $children): string
     {
@@ -50,7 +48,7 @@ final readonly class TableOfContentsOutput implements PlannedHtmlBlockRenderer, 
         $max = $context->state()->int('max');
         $headings = array_values(array_filter(
             $catalog->headings,
-            static fn (TableOfContentsHeading $heading): bool => $heading->level >= $min
+            static fn(TableOfContentsHeading $heading): bool => $heading->level >= $min
                 && $heading->level <= $max,
         ));
 
@@ -62,26 +60,26 @@ final readonly class TableOfContentsOutput implements PlannedHtmlBlockRenderer, 
         $attributes = [];
 
         if ('' !== $this->policy->htmlClass) {
-            $attributes[] = 'class="'.$context->escapeAttribute($this->policy->htmlClass).'"';
+            $attributes[] = 'class="' . $context->escapeAttribute($this->policy->htmlClass) . '"';
         }
 
         if ('' !== $this->policy->id) {
             $index = $catalog->markerIndex($context->range->startOffset);
-            $id = 0 === $index ? $this->policy->id : $this->policy->id.'-'.$index;
-            $attributes[] = 'id="'.$context->escapeAttribute($id).'"';
+            $id = 0 === $index ? $this->policy->id : $this->policy->id . '-' . $index;
+            $attributes[] = 'id="' . $context->escapeAttribute($id) . '"';
         }
 
-        $html = '<nav'.([] === $attributes ? '' : ' '.implode(' ', $attributes)).">\n";
+        $html = '<nav' . ([] === $attributes ? '' : ' ' . implode(' ', $attributes)) . ">\n";
 
         if (null !== $this->policy->title) {
             $html .= '<p class="table-of-contents-title">'
-                .$context->escapeText($this->policy->title)
-                ."</p>\n";
+                . $context->escapeText($this->policy->title)
+                . "</p>\n";
         }
 
         $html .= $this->renderItems($this->tree($headings), $tag, $context);
 
-        return $html."</nav>\n";
+        return $html . "</nav>\n";
     }
 
     public function print(MarkdownBlockOutputContext $context, string $children): string
@@ -129,22 +127,22 @@ final readonly class TableOfContentsOutput implements PlannedHtmlBlockRenderer, 
      */
     private function renderItems(array $items, string $tag, HtmlBlockOutputContext $context): string
     {
-        $html = '<'.$tag.">\n";
+        $html = '<' . $tag . ">\n";
 
         foreach ($items as $item) {
             $html .= '<li><a href="#'
-                .$context->escapeAttribute(TableOfContentsCatalog::targetId($item->heading->slug))
-                .'">'
-                .$context->escapeText($item->heading->text)
-                .'</a>';
+                . $context->escapeAttribute(TableOfContentsCatalog::targetId($item->heading->slug))
+                . '">'
+                . $context->escapeText($item->heading->text)
+                . '</a>';
 
             if ([] !== $item->children) {
-                $html .= "\n".$this->renderItems($item->children, $tag, $context);
+                $html .= "\n" . $this->renderItems($item->children, $tag, $context);
             }
 
             $html .= "</li>\n";
         }
 
-        return $html.'</'.$tag.">\n";
+        return $html . '</' . $tag . ">\n";
     }
 }

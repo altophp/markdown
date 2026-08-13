@@ -31,7 +31,5 @@ final class CalloutKind
 {
     public const int CALLOUT = 24;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

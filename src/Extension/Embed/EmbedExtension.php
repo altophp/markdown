@@ -25,8 +25,7 @@ final readonly class EmbedExtension implements BlockExtensionInterface
     public function __construct(
         private ResourceResolver $resolver,
         private EmbedPolicy $policy,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {

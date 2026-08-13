@@ -48,20 +48,20 @@ final class DefaultAttributesExtensionTest extends TestCase
             'thematic-break' => ['class' => 'rule', 'hidden' => true],
         ]));
         $source = "# Title\n\n"
-            ."Read [Alto](https://alto.example) and ![Logo](logo.png).\n\n"
-            ."```php\ncode();\n```\n\n"
-            ."3. Item\n\n"
-            ."---\n";
-        $expected = '<h1 class="title" id="fallback">Title</h1>'."\n"
-            .'<p class="prose content" data-kind="body">Read '
-            .'<a href="https://alto.example" class="link" target="_self">Alto</a> and '
-            .'<img src="logo.png" alt="Logo" class="media" loading="lazy" />.</p>'."\n"
-            .'<pre><code class="code copy language-php" data-copy>code();'."\n"
-            .'</code></pre>'."\n"
-            .'<ol start="3" class="items">'."\n"
-            .'<li class="item">Item</li>'."\n"
-            .'</ol>'."\n"
-            .'<hr class="rule" hidden />'."\n";
+            . "Read [Alto](https://alto.example) and ![Logo](logo.png).\n\n"
+            . "```php\ncode();\n```\n\n"
+            . "3. Item\n\n"
+            . "---\n";
+        $expected = '<h1 class="title" id="fallback">Title</h1>' . "\n"
+            . '<p class="prose content" data-kind="body">Read '
+            . '<a href="https://alto.example" class="link" target="_self">Alto</a> and '
+            . '<img src="logo.png" alt="Logo" class="media" loading="lazy" />.</p>' . "\n"
+            . '<pre><code class="code copy language-php" data-copy>code();' . "\n"
+            . '</code></pre>' . "\n"
+            . '<ol start="3" class="items">' . "\n"
+            . '<li class="item">Item</li>' . "\n"
+            . '</ol>' . "\n"
+            . '<hr class="rule" hidden />' . "\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame($expected, $factory->fromString($source)->toHtml());
@@ -87,17 +87,17 @@ final class DefaultAttributesExtensionTest extends TestCase
 
         self::assertSame(
             '<p><a href="https://actual.example" title="Actual" class="default link">Link</a> '
-            .'<img src="actual.png" alt="Actual" title="Actual" /></p>'."\n"
-            .'<ol start="4">'."\n"
-            .'<li>Item</li>'."\n"
-            .'</ol>'."\n"
-            .'<pre><code class="default code language-php">code'."\n"
-            .'</code></pre>'."\n",
+            . '<img src="actual.png" alt="Actual" title="Actual" /></p>' . "\n"
+            . '<ol start="4">' . "\n"
+            . '<li>Item</li>' . "\n"
+            . '</ol>' . "\n"
+            . '<pre><code class="default code language-php">code' . "\n"
+            . '</code></pre>' . "\n",
             $factory->toHtml(
                 '[Link](https://actual.example "Actual") '
-                ."![Actual](actual.png \"Actual\")\n\n"
-                ."4. Item\n\n"
-                ."```php\ncode\n```\n",
+                . "![Actual](actual.png \"Actual\")\n\n"
+                . "4. Item\n\n"
+                . "```php\ncode\n```\n",
             ),
         );
     }
@@ -110,7 +110,7 @@ final class DefaultAttributesExtensionTest extends TestCase
 
         self::assertSame(
             '<p><img src="logo.png" alt="Logo class=bad loading=bad" '
-            .'class="media" loading="lazy" /></p>'."\n",
+            . 'class="media" loading="lazy" /></p>' . "\n",
             $factory->toHtml("![Logo class=bad loading=bad](logo.png)\n"),
         );
     }
@@ -131,10 +131,10 @@ final class DefaultAttributesExtensionTest extends TestCase
 
         self::assertSame(
             '<h1 id="content-title" class="default-heading anchored">'
-            .'<a href="#content-title" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            .'Title</h1>'."\n"
-            .'<p><a rel="noopener noreferrer" target="_blank" '
-            .'href="https://outside.example" class="default-link">Outside</a></p>'."\n",
+            . '<a href="#content-title" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . 'Title</h1>' . "\n"
+            . '<p><a rel="noopener noreferrer" target="_blank" '
+            . 'href="https://outside.example" class="default-link">Outside</a></p>' . "\n",
             $factory->toHtml("# Title\n\n[Outside](https://outside.example)\n"),
         );
     }
@@ -153,7 +153,7 @@ final class DefaultAttributesExtensionTest extends TestCase
             $factory->toHtml("Text.\n"),
         );
         self::assertSame(
-            '<p href="javascript:alert(1)" src="data:text/html,unsafe">Text.</p>'."\n",
+            '<p href="javascript:alert(1)" src="data:text/html,unsafe">Text.</p>' . "\n",
             $factory->toHtml(
                 "Text.\n",
                 renderOptions: new RenderOptions(htmlPolicy: HtmlPolicy::spec()),
@@ -169,7 +169,7 @@ final class DefaultAttributesExtensionTest extends TestCase
                 'onclick' => 'alert("x")',
             ],
         ]));
-        $trusted = '<p style="color: red" onclick="alert(&quot;x&quot;)">Text.</p>'."\n";
+        $trusted = '<p style="color: red" onclick="alert(&quot;x&quot;)">Text.</p>' . "\n";
 
         self::assertSame($trusted, $factory->toHtml("Text.\n"));
         self::assertSame(
@@ -252,8 +252,8 @@ final class DefaultAttributesExtensionTest extends TestCase
 
         self::assertSame(
             "<p>Text.</p>\n"
-            .'<pre><code class="language-php">code'."\n"
-            .'</code></pre>'."\n",
+            . '<pre><code class="language-php">code' . "\n"
+            . '</code></pre>' . "\n",
             $factory->toHtml("Text.\n\n```php\ncode\n```\n"),
         );
     }

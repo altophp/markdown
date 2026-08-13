@@ -24,6 +24,5 @@ final readonly class InlineParseResult
     public function __construct(
         public int $endOffset,
         public InlineNode $node,
-    ) {
-    }
+    ) {}
 }

@@ -22,9 +22,7 @@ use Alto\Markdown\Resource\ResourceResolver;
  */
 final readonly class SourceExtension implements BlockExtensionInterface
 {
-    public function __construct(private ResourceResolver $resolver)
-    {
-    }
+    public function __construct(private ResourceResolver $resolver) {}
 
     public function name(): string
     {

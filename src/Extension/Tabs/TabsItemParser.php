@@ -30,8 +30,7 @@ final readonly class TabsItemParser implements BlockConstruct
     public function __construct(
         private int $groupKind,
         private int $kind,
-    ) {
-    }
+    ) {}
 
     public function kind(): int
     {

@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class SourcePositionException extends \OutOfRangeException implements MarkdownExceptionInterface
-{
-}
+final class SourcePositionException extends \OutOfRangeException implements MarkdownExceptionInterface {}

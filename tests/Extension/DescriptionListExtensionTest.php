@@ -48,13 +48,13 @@ final class DescriptionListExtensionTest extends TestCase
 
         self::assertSame(
             "<dl>\n"
-            ."<dt><strong>First</strong></dt>\n"
-            ."<dt>Second</dt>\n"
-            ."<dd>One</dd>\n"
-            ."<dd>Two with <a href=\"/target\">link</a></dd>\n"
-            ."<dt>Third</dt>\n"
-            ."<dd>Three</dd>\n"
-            ."</dl>\n",
+            . "<dt><strong>First</strong></dt>\n"
+            . "<dt>Second</dt>\n"
+            . "<dd>One</dd>\n"
+            . "<dd>Two with <a href=\"/target\">link</a></dd>\n"
+            . "<dt>Third</dt>\n"
+            . "<dd>Three</dd>\n"
+            . "</dl>\n",
             $factory->toHtml($source),
         );
 
@@ -68,9 +68,9 @@ final class DescriptionListExtensionTest extends TestCase
 
         self::assertSame(
             "<dl>\n<dt>Term</dt>\n<dd>\n"
-            ."<p>First paragraph</p>\n"
-            ."<ul>\n<li>one</li>\n<li>two</li>\n</ul>\n"
-            ."</dd>\n</dl>\n",
+            . "<p>First paragraph</p>\n"
+            . "<ul>\n<li>one</li>\n<li>two</li>\n</ul>\n"
+            . "</dd>\n</dl>\n",
             $factory->toHtml($source),
         );
     }
@@ -103,7 +103,7 @@ final class DescriptionListExtensionTest extends TestCase
 
         self::assertSame(
             "<h1>Intro</h1>\n<dl>\n<dt>First</dt>\n<dd>One</dd>\n"
-            ."<dt>Second</dt>\n<dd>Two</dd>\n</dl>\n",
+            . "<dt>Second</dt>\n<dd>Two</dd>\n</dl>\n",
             $factory->toHtml($source),
         );
     }
@@ -113,7 +113,7 @@ final class DescriptionListExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new DescriptionListExtension());
         $prefix = str_repeat('> ', 501);
         $html = $factory->toHtml(
-            $prefix."Term\n".$prefix.": Definition\n",
+            $prefix . "Term\n" . $prefix . ": Definition\n",
             new ParseOptions(maxNestingDepth: 0),
         );
 

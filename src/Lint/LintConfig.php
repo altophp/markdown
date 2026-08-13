@@ -27,8 +27,7 @@ final readonly class LintConfig
         public array $enabledRules = [],
         public array $severityByRule = [],
         public array $optionsByRule = [],
-    ) {
-    }
+    ) {}
 
     public static function recommended(): self
     {
@@ -48,7 +47,7 @@ final readonly class LintConfig
     {
         $rules = array_values(array_filter(
             $this->enabledRules,
-            static fn (string $enabled): bool => $enabled !== $ruleId,
+            static fn(string $enabled): bool => $enabled !== $ruleId,
         ));
         $severities = $this->severityByRule;
         unset($severities[$ruleId]);

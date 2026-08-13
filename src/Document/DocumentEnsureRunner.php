@@ -33,8 +33,7 @@ final class DocumentEnsureRunner implements EnsureRunner
     public function __construct(
         private readonly MarkdownDocument $document,
         private readonly ParsedDocumentModel $model,
-    ) {
-    }
+    ) {}
 
     public function section(string $title, ?int $level = null): self
     {
@@ -52,8 +51,8 @@ final class DocumentEnsureRunner implements EnsureRunner
 
             $level = $section['level'] ?? 1;
             $offset = \strlen($this->model->source()->bytes);
-            $markdown = str_repeat('#', $level).' '.$section['title']."\n";
-            $replacement = $this->appendSeparator($this->document->toMarkdown()).$markdown;
+            $markdown = str_repeat('#', $level) . ' ' . $section['title'] . "\n";
+            $replacement = $this->appendSeparator($this->document->toMarkdown()) . $markdown;
             $this->model->appendMarkdownToDocument($markdown);
             $this->model->journal()->record(
                 new SourcePatchOperation(new SourcePatch(

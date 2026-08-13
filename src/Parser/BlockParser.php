@@ -159,7 +159,7 @@ final class BlockParser
             ? $constructs
             : array_values(array_filter(
                 $constructs,
-                static fn (BlockConstruct $construct): bool => $excludedKind !== $construct->kind(),
+                static fn(BlockConstruct $construct): bool => $excludedKind !== $construct->kind(),
             ));
         $this->taskListItems = $profile->taskListItems;
         $this->githubAlertKind = $profile->githubAlertKind;
@@ -756,10 +756,10 @@ final class BlockParser
         $tape = $state->tape;
         $tape->setEndOffset($ordinal, $contentEnd);
 
-        $pair = $contentStart.':'.$contentEnd;
+        $pair = $contentStart . ':' . $contentEnd;
 
         if (0 !== $state->pendingPad) {
-            $pair .= ':'.$state->takePendingPad();
+            $pair .= ':' . $state->takePendingPad();
         }
 
         $tape->appendPayloadPart($ordinal, $pair, ';');
@@ -865,12 +865,12 @@ final class BlockParser
         $tape->setPayload($ordinal, strtolower($match[1][0]));
 
         if ($markerEnd < $end) {
-            $pairs[0] = $markerEnd.':'.$end;
+            $pairs[0] = $markerEnd . ':' . $end;
         } else {
             array_shift($pairs);
         }
 
-        $tape->setPayload($paragraph, [] === $pairs ? $end.':'.$end : implode(';', $pairs));
+        $tape->setPayload($paragraph, [] === $pairs ? $end . ':' . $end : implode(';', $pairs));
     }
 
     private function openBlock(ParserState $state, int $kind, int $parent, int $startOffset): int

@@ -30,13 +30,13 @@ final class CodeBlockPrinter implements BlockPrinter
         $language = $model->codeBlockLanguage($ordinal);
         $info = null === $language ? '' : $language;
 
-        return $fence.$info."\n".$code.$fence;
+        return $fence . $info . "\n" . $code . $fence;
     }
 
     private function fence(string $marker, string $code): string
     {
         $marker = '~' === $marker ? '~' : '`';
-        preg_match_all('/'.preg_quote($marker, '/').'+/', $code, $matches);
+        preg_match_all('/' . preg_quote($marker, '/') . '+/', $code, $matches);
         $max = 0;
 
         foreach ($matches[0] as $run) {

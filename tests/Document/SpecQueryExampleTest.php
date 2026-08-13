@@ -56,7 +56,7 @@ final class SpecQueryExampleTest extends TestCase
             MD);
 
         $heading = $document->headings()
-            ->filter(static fn (Heading $heading): bool => 2 === $heading->level())
+            ->filter(static fn(Heading $heading): bool => 2 === $heading->level())
             ->first();
 
         self::assertInstanceOf(Heading::class, $heading);
@@ -116,7 +116,7 @@ final class SpecQueryExampleTest extends TestCase
         self::assertSame('Install', $first->title());
         self::assertCount(2, $all);
         self::assertSame(['Install', 'install'], \array_map(
-            static fn (Section $section): string => $section->title(),
+            static fn(Section $section): string => $section->title(),
             $all,
         ));
     }
@@ -176,21 +176,21 @@ final class SpecQueryExampleTest extends TestCase
 
         $handles = $document->query()
             ->kind('atx-heading')
-            ->where(static fn (NodeHandle $handle): bool => $handle->exists())
+            ->where(static fn(NodeHandle $handle): bool => $handle->exists())
             ->get()
             ->all();
 
         self::assertContainsOnlyInstancesOf(NodeHandle::class, $handles);
         self::assertCount(2, $handles);
         self::assertSame([1, 3], \array_map(
-            static fn (NodeHandle $handle): int => $handle->id()->ordinal,
+            static fn(NodeHandle $handle): int => $handle->id()->ordinal,
             $handles,
         ));
     }
 
     public function testOpenReturnsMarkdownFileWithPath(): void
     {
-        $path = __DIR__.'/../fixtures/readme-symfony.md';
+        $path = __DIR__ . '/../fixtures/readme-symfony.md';
         $file = self::factory()->open($path);
 
         self::assertInstanceOf(MarkdownFile::class, $file);

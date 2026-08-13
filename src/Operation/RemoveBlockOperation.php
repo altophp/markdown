@@ -27,8 +27,7 @@ final readonly class RemoveBlockOperation implements Operation
     public function __construct(
         private NodeId $target,
         private SourceRange $range,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

@@ -24,6 +24,5 @@ final readonly class SaveOptions
         public bool $preserveEol = true,
         public bool $compareBeforeWrite = false,
         public SymlinkPolicy $symlinks = SymlinkPolicy::Reject,
-    ) {
-    }
+    ) {}
 }

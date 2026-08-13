@@ -65,7 +65,7 @@ final class ConformanceRunnerTest extends TestCase
 
         $result = (new ConformanceRunner(
             $fallback,
-            static fn (SpecExample $example): HtmlRenderer => 'Beta' === $example->section ? $special : $fallback,
+            static fn(SpecExample $example): HtmlRenderer => 'Beta' === $example->section ? $special : $fallback,
         ))->run([
             new SpecExample(markdown: 'x', html: 'fallback:x', example: 1, section: 'Alpha', startLine: 1, endLine: 2),
             new SpecExample(markdown: 'x', html: 'special:x', example: 2, section: 'Beta', startLine: 3, endLine: 4),
@@ -124,14 +124,12 @@ final class ConformanceRunnerTest extends TestCase
 
     private static function literalRenderer(string $prefix): HtmlRenderer
     {
-        return new class($prefix) implements HtmlRenderer {
-            public function __construct(private readonly string $prefix)
-            {
-            }
+        return new class ($prefix) implements HtmlRenderer {
+            public function __construct(private readonly string $prefix) {}
 
             public function render(string $markdown): string
             {
-                return $this->prefix.':'.$markdown;
+                return $this->prefix . ':' . $markdown;
             }
         };
     }

@@ -106,7 +106,7 @@ final class GitHubAlertParserTest extends TestCase
 
         foreach (explode(';', $payload) as $pair) {
             [$start, $end] = array_map('intval', explode(':', $pair, 3));
-            $text .= ('' === $text ? '' : "\n").$buffer->substring($start, $end);
+            $text .= ('' === $text ? '' : "\n") . $buffer->substring($start, $end);
         }
 
         return $text;

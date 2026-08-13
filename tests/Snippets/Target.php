@@ -26,6 +26,5 @@ final readonly class Target
         public string $path,
         public string $display,
         public bool $isDefault,
-    ) {
-    }
+    ) {}
 }

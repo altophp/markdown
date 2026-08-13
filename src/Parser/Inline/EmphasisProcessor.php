@@ -105,10 +105,10 @@ final class EmphasisProcessor
     private function openersBottomKey(Delimiter $closer): string
     {
         if ('~' === $closer->char) {
-            return '~:'.($closer->canOpen ? '1' : '0').':'.($closer->length >= 2 ? '2' : '1');
+            return '~:' . ($closer->canOpen ? '1' : '0') . ':' . ($closer->length >= 2 ? '2' : '1');
         }
 
-        return $closer->char.':'.($closer->canOpen ? '1' : '0').':'.($closer->length % 3);
+        return $closer->char . ':' . ($closer->canOpen ? '1' : '0') . ':' . ($closer->length % 3);
     }
 
     private function delimiterRuleForbids(Delimiter $opener, Delimiter $closer): bool

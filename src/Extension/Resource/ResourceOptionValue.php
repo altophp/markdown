@@ -23,6 +23,5 @@ final readonly class ResourceOptionValue
     public function __construct(
         public string $value,
         public bool $doubleQuoted,
-    ) {
-    }
+    ) {}
 }

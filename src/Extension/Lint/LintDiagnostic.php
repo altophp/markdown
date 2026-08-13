@@ -24,6 +24,5 @@ final readonly class LintDiagnostic
         public string $message,
         public SourceRange $range,
         public ?LintFix $fix = null,
-    ) {
-    }
+    ) {}
 }

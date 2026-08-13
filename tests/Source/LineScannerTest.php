@@ -163,9 +163,9 @@ final class LineScannerTest extends TestCase
         $scanner = self::scan('abc');
 
         foreach ([
-            static fn (): int => $scanner->contentEnd(1),
-            static fn (): int => $scanner->lineEnd(-1),
-            static fn (): SourceRange => $scanner->contentRange(1),
+            static fn(): int => $scanner->contentEnd(1),
+            static fn(): int => $scanner->lineEnd(-1),
+            static fn(): SourceRange => $scanner->contentRange(1),
         ] as $read) {
             try {
                 $read();

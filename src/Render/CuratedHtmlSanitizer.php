@@ -182,7 +182,7 @@ final readonly class CuratedHtmlSanitizer implements HtmlSanitizer
         }
 
         $document = HTMLDocument::createFromString(
-            '<!doctype html><html><body><div data-alto-sanitizer-root="">'.$html.'</div></body></html>',
+            '<!doctype html><html><body><div data-alto-sanitizer-root="">' . $html . '</div></body></html>',
             \LIBXML_NOERROR | \LIBXML_COMPACT,
             'UTF-8',
         );

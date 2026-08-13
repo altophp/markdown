@@ -45,7 +45,7 @@ final class MarkdownRoundTripHarnessTest extends TestCase
             [
                 'bad-heading' => "# Title\n",
             ],
-            static fn (MarkdownDocument $document, string $name): string => "Not a heading\n",
+            static fn(MarkdownDocument $document, string $name): string => "Not a heading\n",
         );
 
         self::assertFalse($comparison->isEqual());

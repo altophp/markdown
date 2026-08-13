@@ -53,7 +53,7 @@ final readonly class TableOfContentsExtension implements BlockExtensionInterface
     {
         yield new DocumentTransformDefinition(
             'catalog',
-            static fn (): TableOfContentsTransform => new TableOfContentsTransform(),
+            static fn(): TableOfContentsTransform => new TableOfContentsTransform(),
             \PHP_INT_MAX,
         );
     }

@@ -38,7 +38,7 @@ final class MarkdownInlineRendererTest extends TestCase
             \<x\> \& \\ back
             MD;
 
-        self::assertSame($expected."\n", Markdown::github()->fromString($source)->toMarkdown(new RenderOptions()));
+        self::assertSame($expected . "\n", Markdown::github()->fromString($source)->toMarkdown(new RenderOptions()));
     }
 
     public function testInlineConstructCorpusRoundTrips(): void

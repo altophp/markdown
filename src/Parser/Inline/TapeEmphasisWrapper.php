@@ -33,8 +33,7 @@ final readonly class TapeEmphasisWrapper implements EmphasisWrapper
         private ParseTape $tape,
         private int $root,
         private InlineState $state,
-    ) {
-    }
+    ) {}
 
     public function wrap(Delimiter $opener, Delimiter $closer, int $use): void
     {

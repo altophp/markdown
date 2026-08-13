@@ -25,9 +25,7 @@ use Alto\Markdown\Extension\Inline\InlineParseResult;
  */
 final readonly class AttributesInlineParser implements InlineParser
 {
-    public function __construct(private AttributeListParser $parser)
-    {
-    }
+    public function __construct(private AttributeListParser $parser) {}
 
     public function triggerByte(): string
     {

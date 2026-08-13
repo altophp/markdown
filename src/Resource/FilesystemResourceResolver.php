@@ -86,7 +86,7 @@ final readonly class FilesystemResourceResolver implements ResourceResolver
         }
 
         $this->root = $resolvedRoot;
-        $this->idPrefix = 'filesystem:'.hash('sha256', $this->root).':';
+        $this->idPrefix = 'filesystem:' . hash('sha256', $this->root) . ':';
         $this->allowedExtensions = $extensions;
     }
 
@@ -242,7 +242,7 @@ final readonly class FilesystemResourceResolver implements ResourceResolver
         $last = \count($segments) - 1;
 
         foreach ($segments as $index => $segment) {
-            $path .= \DIRECTORY_SEPARATOR.$segment;
+            $path .= \DIRECTORY_SEPARATOR . $segment;
             $metadata = @lstat($path);
 
             if (false === $metadata) {
@@ -286,13 +286,13 @@ final readonly class FilesystemResourceResolver implements ResourceResolver
     {
         return str_starts_with(
             $path,
-            rtrim($this->root, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR,
+            rtrim($this->root, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR,
         );
     }
 
     private function relativePath(string $path): string
     {
-        $prefix = rtrim($this->root, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR;
+        $prefix = rtrim($this->root, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR;
 
         return str_replace(
             \DIRECTORY_SEPARATOR,
@@ -303,7 +303,7 @@ final readonly class FilesystemResourceResolver implements ResourceResolver
 
     private function resourceId(string $relative): string
     {
-        return $this->idPrefix.$this->base64UrlEncode($relative);
+        return $this->idPrefix . $this->base64UrlEncode($relative);
     }
 
     private function base64UrlEncode(string $value): string
@@ -314,7 +314,7 @@ final readonly class FilesystemResourceResolver implements ResourceResolver
     private function base64UrlDecode(string $value): ?string
     {
         $padding = (4 - \strlen($value) % 4) % 4;
-        $decoded = base64_decode(strtr($value, '-_', '+/').str_repeat('=', $padding), true);
+        $decoded = base64_decode(strtr($value, '-_', '+/') . str_repeat('=', $padding), true);
 
         return false === $decoded ? null : $decoded;
     }

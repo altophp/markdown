@@ -163,17 +163,17 @@ final class RecordingTraversalVisitor implements TraversalVisitor
 
     public function enterBlock(BlockEvent $event): void
     {
-        $this->blockLog[] = 'enter:'.$event->kind->name.':'.$event->depth;
+        $this->blockLog[] = 'enter:' . $event->kind->name . ':' . $event->depth;
         $this->ranges[$event->kind->name] = [$event->range->startOffset, $event->range->endOffset];
     }
 
     public function leaveBlock(BlockEvent $event): void
     {
-        $this->blockLog[] = 'leave:'.$event->kind->name.':'.$event->depth;
+        $this->blockLog[] = 'leave:' . $event->kind->name . ':' . $event->depth;
     }
 
     public function inline(InlineEvent $event): void
     {
-        $this->inlineLog[] = 'inline:'.$event->kind;
+        $this->inlineLog[] = 'inline:' . $event->kind;
     }
 }

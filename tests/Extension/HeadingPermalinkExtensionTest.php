@@ -35,14 +35,14 @@ final class HeadingPermalinkExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new HeadingPermalinkExtension());
         $source = "# Hello, **world!**\n\nRepeat\n======\n\n# Hello, **world!**\n";
         $expected = '<h1><a id="content-hello-world" href="#content-hello-world" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Hello, <strong>world!</strong></h1>\n"
-            .'<h1><a id="content-repeat" href="#content-repeat" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Repeat</h1>\n"
-            .'<h1><a id="content-hello-world-1" href="#content-hello-world-1" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Hello, <strong>world!</strong></h1>\n";
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Hello, <strong>world!</strong></h1>\n"
+            . '<h1><a id="content-repeat" href="#content-repeat" '
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Repeat</h1>\n"
+            . '<h1><a id="content-hello-world-1" href="#content-hello-world-1" '
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Hello, <strong>world!</strong></h1>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
         self::assertSame($expected, $factory->fromString($source)->toHtml());
@@ -62,8 +62,8 @@ final class HeadingPermalinkExtensionTest extends TestCase
         self::assertCount(2, $sections);
         self::assertSame(
             '<h1><a id="content-repeat-1" href="#content-repeat-1" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Repeat</h1>\n",
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Repeat</h1>\n",
             $renderer->renderNode($document->model(), $headings[1]),
         );
         self::assertStringStartsWith(
@@ -92,10 +92,10 @@ final class HeadingPermalinkExtensionTest extends TestCase
 
         self::assertSame(
             "<h1>Title</h1>\n"
-            .'<h2 id="heading-details" class="anchored">Details'
-            .'<a href="#jump-details" class="permalink" title="Open &quot;section&quot;">&lt;#&gt;</a>'
-            ."</h2>\n"
-            ."<h4>Deep</h4>\n",
+            . '<h2 id="heading-details" class="anchored">Details'
+            . '<a href="#jump-details" class="permalink" title="Open &quot;section&quot;">&lt;#&gt;</a>'
+            . "</h2>\n"
+            . "<h4>Deep</h4>\n",
             $factory->toHtml("# Title\n\n## Details\n\n#### Deep\n"),
         );
     }
@@ -108,9 +108,9 @@ final class HeadingPermalinkExtensionTest extends TestCase
 
         self::assertSame(
             "<h1>Repeat</h1>\n"
-            .'<h2><a id="content-repeat-1" href="#content-repeat-1" '
-            .'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
-            ."Repeat</h2>\n",
+            . '<h2><a id="content-repeat-1" href="#content-repeat-1" '
+            . 'class="heading-permalink" aria-hidden="true" title="Permalink">¶</a>'
+            . "Repeat</h2>\n",
             $factory->toHtml("# Repeat\n\n## Repeat\n"),
         );
     }
@@ -145,7 +145,7 @@ final class HeadingPermalinkExtensionTest extends TestCase
 
         self::assertSame(
             '<h1><a id="title" href="#title" aria-hidden="true" title="">¶</a>'
-            ."Title</h1>\n",
+            . "Title</h1>\n",
             $factory->toHtml("# Title\n"),
         );
     }

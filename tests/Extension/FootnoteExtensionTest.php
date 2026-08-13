@@ -33,13 +33,13 @@ final class FootnoteExtensionTest extends TestCase
         $factory = Markdown::commonmark()->with(new FootnoteExtension());
         $source = "Text[^note] and again[^note].\n\n[^note]: Footnote with **strong**.\n";
         $expected = '<p>Text<sup id="fnref-1"><a href="#fn-1" role="doc-noteref">1</a></sup>'
-            ." and again<sup id=\"fnref-1-2\"><a href=\"#fn-1\" role=\"doc-noteref\">1</a></sup>.</p>\n"
-            ."<div class=\"footnotes\" role=\"doc-endnotes\">\n<hr />\n<ol>\n"
-            ."<li id=\"fn-1\" role=\"doc-endnote\">\n"
-            .'<p>Footnote with <strong>strong</strong>. '
-            .'<a href="#fnref-1" role="doc-backlink">↩</a> '
-            ."<a href=\"#fnref-1-2\" role=\"doc-backlink\">↩</a></p>\n"
-            ."</li>\n</ol>\n</div>\n";
+            . " and again<sup id=\"fnref-1-2\"><a href=\"#fn-1\" role=\"doc-noteref\">1</a></sup>.</p>\n"
+            . "<div class=\"footnotes\" role=\"doc-endnotes\">\n<hr />\n<ol>\n"
+            . "<li id=\"fn-1\" role=\"doc-endnote\">\n"
+            . '<p>Footnote with <strong>strong</strong>. '
+            . '<a href="#fnref-1" role="doc-backlink">↩</a> '
+            . "<a href=\"#fnref-1-2\" role=\"doc-backlink\">↩</a></p>\n"
+            . "</li>\n</ol>\n</div>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
 
@@ -60,7 +60,7 @@ final class FootnoteExtensionTest extends TestCase
 
         self::assertStringContainsString(
             'Missing[^none], alpha<sup id="fnref-1"><a href="#fn-1" role="doc-noteref">1</a></sup>, '
-            .'beta<sup id="fnref-2"><a href="#fn-2" role="doc-noteref">2</a></sup>.',
+            . 'beta<sup id="fnref-2"><a href="#fn-2" role="doc-noteref">2</a></sup>.',
             $html,
         );
         self::assertStringContainsString('<li id="fn-1" role="doc-endnote">', $html);
@@ -76,10 +76,10 @@ final class FootnoteExtensionTest extends TestCase
 
         self::assertStringContainsString(
             "<li id=\"fn-1\" role=\"doc-endnote\">\n"
-            ."<p>First</p>\n"
-            ."<ul>\n<li>one</li>\n<li>two</li>\n</ul> "
-            ."<a href=\"#fnref-1\" role=\"doc-backlink\">↩</a>\n"
-            .'</li>',
+            . "<p>First</p>\n"
+            . "<ul>\n<li>one</li>\n<li>two</li>\n</ul> "
+            . "<a href=\"#fnref-1\" role=\"doc-backlink\">↩</a>\n"
+            . '</li>',
             $factory->toHtml($source),
         );
     }
@@ -88,8 +88,8 @@ final class FootnoteExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new FootnoteExtension());
         $source = "Missing[^none], escaped \\[^note], `[^code]`, and unclosed[^open.\n\n"
-            ."[^unused]: Hidden\n"
-            ."[^bad label]: Ordinary\n";
+            . "[^unused]: Hidden\n"
+            . "[^bad label]: Ordinary\n";
 
         self::assertSame(
             "<p>Missing[^none], escaped [^note], <code>[^code]</code>, and unclosed[^open.</p>\n",

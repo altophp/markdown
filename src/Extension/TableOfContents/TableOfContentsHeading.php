@@ -24,6 +24,5 @@ final readonly class TableOfContentsHeading
         public int $level,
         public string $text,
         public string $slug,
-    ) {
-    }
+    ) {}
 }

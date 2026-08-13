@@ -11,20 +11,18 @@ For full copyright and license information, please see
 the LICENSE file distributed with this source code.
 EOF;
 
-$finder = (new PhpCsFixer\Finder())
+$finder = PhpCsFixer\Finder::create()
     ->in([__DIR__.'/src', __DIR__.'/tests'])
-    ->exclude('fixtures')
-;
+    ->exclude('fixtures');
 
 return (new PhpCsFixer\Config())
-    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
-    ->setFinder($finder)
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PER-CS' => true,
-        '@Symfony' => true,
-        'strict_param' => true,
+        '@PER-CS2.0' => true,
         'declare_strict_types' => true,
         'header_comment' => ['header' => $licence],
+        'no_unused_imports' => true,
+        'ordered_imports' => ['imports_order' => ['class', 'function', 'const']],
+        'phpdoc_line_span' => ['const' => 'multi', 'property' => 'multi', 'method' => 'multi'],
     ])
-;
+    ->setFinder($finder);

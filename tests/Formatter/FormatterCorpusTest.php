@@ -36,7 +36,7 @@ final class FormatterCorpusTest extends TestCase
             $failure = $this->specFailure(Markdown::commonmark(), $commonMarkRenderer, $example);
 
             if (null !== $failure) {
-                $failures[] = 'commonmark '.$failure;
+                $failures[] = 'commonmark ' . $failure;
             }
         }
 
@@ -45,7 +45,7 @@ final class FormatterCorpusTest extends TestCase
             $failure = $this->specFailure(Markdown::gfm(), $renderer, $example);
 
             if (null !== $failure) {
-                $failures[] = 'gfm '.$failure;
+                $failures[] = 'gfm ' . $failure;
             }
         }
 
@@ -73,24 +73,24 @@ final class FormatterCorpusTest extends TestCase
                 $comparison = (new SemanticTreeComparator())->compare($original->model(), $formatted->model());
 
                 if (!$comparison->isEqual()) {
-                    $failures[] = $name.': '.$comparison->message();
+                    $failures[] = $name . ': ' . $comparison->message();
                 }
 
                 if ($original->toHtml() !== $formatted->toHtml()) {
-                    $failures[] = $name.': product HTML changed after formatting.';
+                    $failures[] = $name . ': product HTML changed after formatting.';
                 }
 
                 $fixedPoint = $this->fixedPointFailure(Markdown::github(), $first['bytes']);
 
                 if (null !== $fixedPoint) {
-                    $failures[] = $name.': '.$fixedPoint;
+                    $failures[] = $name . ': ' . $fixedPoint;
                 }
 
                 if ([] !== $first['fallbacks']) {
-                    $failures[] = $name.': formatter unexpectedly used patch fallback.';
+                    $failures[] = $name . ': formatter unexpectedly used patch fallback.';
                 }
             } catch (\Throwable $error) {
-                $failures[] = $name.': '.$error::class.': '.$error->getMessage();
+                $failures[] = $name . ': ' . $error::class . ': ' . $error->getMessage();
             }
         }
 
@@ -116,18 +116,18 @@ final class FormatterCorpusTest extends TestCase
                 $lowered = new DisjointPatchLowerer()->lower($document->model(), $document->model()->journal());
 
                 if (!$document->model()->journal()->isEmpty()) {
-                    $failures[] = $name.': conforming input produced operations.';
+                    $failures[] = $name . ': conforming input produced operations.';
                 }
 
                 if (!$document->diff()->isEmpty()) {
-                    $failures[] = $name.': conforming input produced a diff.';
+                    $failures[] = $name . ': conforming input produced a diff.';
                 }
 
                 if ([] !== $lowered->patches || $source !== $lowered->bytes) {
-                    $failures[] = $name.': conforming input lowered to changed bytes.';
+                    $failures[] = $name . ': conforming input lowered to changed bytes.';
                 }
             } catch (\Throwable $error) {
-                $failures[] = $name.': '.$error::class.': '.$error->getMessage();
+                $failures[] = $name . ': ' . $error::class . ': ' . $error->getMessage();
             }
         }
 
@@ -230,7 +230,7 @@ final class FormatterCorpusTest extends TestCase
 
     private function fixture(string $relativePath): string
     {
-        $bytes = file_get_contents(\dirname(__DIR__).'/fixtures/'.$relativePath);
+        $bytes = file_get_contents(\dirname(__DIR__) . '/fixtures/' . $relativePath);
 
         if (false === $bytes) {
             throw new \RuntimeException(\sprintf('Unable to read fixture "%s".', $relativePath));

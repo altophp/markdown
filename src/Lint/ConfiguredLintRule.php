@@ -27,6 +27,5 @@ final readonly class ConfiguredLintRule
         public string $id,
         public LintRuleDefinition $definition,
         public LintRule $rule,
-    ) {
-    }
+    ) {}
 }

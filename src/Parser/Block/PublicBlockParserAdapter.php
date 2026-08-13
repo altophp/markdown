@@ -29,8 +29,7 @@ final readonly class PublicBlockParserAdapter implements BlockConstruct
     public function __construct(
         private int $kind,
         private ExtensionBlockParser $parser,
-    ) {
-    }
+    ) {}
 
     public function kind(): int
     {

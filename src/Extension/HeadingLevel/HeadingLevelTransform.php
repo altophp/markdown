@@ -23,9 +23,7 @@ use Alto\Markdown\Extension\Document\DocumentTransformContext;
  */
 final readonly class HeadingLevelTransform implements DocumentTransform
 {
-    public function __construct(private HeadingLevelPolicy $policy)
-    {
-    }
+    public function __construct(private HeadingLevelPolicy $policy) {}
 
     public function transform(DocumentTransformContext $context): void
     {

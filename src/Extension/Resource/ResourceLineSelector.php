@@ -58,7 +58,5 @@ final class ResourceLineSelector
         return substr($content, $selectionStart);
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

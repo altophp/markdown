@@ -58,7 +58,7 @@ final class PublicFormatterStatsExtensionTest extends TestCase
         $formatted->format();
         self::assertSame(":::note\nBody with [link](https://example.com).\n:::\n", $formatted->toMarkdown());
         self::assertSame(['lowercase callout label'], array_map(
-            static fn ($entry): string => $entry->operation->describe(),
+            static fn($entry): string => $entry->operation->describe(),
             $formatted->model()->journal()->entries(),
         ));
         self::assertSame(
@@ -176,8 +176,8 @@ final class PublicFormatterStatsExtensionTest extends TestCase
     public function testPublicFixturesCannotImportMutableInternals(): void
     {
         foreach ([
-            __DIR__.'/Fixture/PublicCalloutFormatter.php',
-            __DIR__.'/Fixture/PublicCalloutMetric.php',
+            __DIR__ . '/Fixture/PublicCalloutFormatter.php',
+            __DIR__ . '/Fixture/PublicCalloutMetric.php',
         ] as $path) {
             $source = file_get_contents($path);
 
@@ -199,15 +199,15 @@ final readonly class OrderedContributionsExtension implements FormatterExtension
 
     public function formatterPasses(): iterable
     {
-        yield new FormatterPassDefinition('zeta', 'Third pass.', static fn (): OrderingFormatterPass => new OrderingFormatterPass('zeta'), order: 20);
-        yield new FormatterPassDefinition('alpha', 'Second pass.', static fn (): OrderingFormatterPass => new OrderingFormatterPass('alpha'), order: 20);
-        yield new FormatterPassDefinition('first', 'First pass.', static fn (): OrderingFormatterPass => new OrderingFormatterPass('first'), order: 10);
+        yield new FormatterPassDefinition('zeta', 'Third pass.', static fn(): OrderingFormatterPass => new OrderingFormatterPass('zeta'), order: 20);
+        yield new FormatterPassDefinition('alpha', 'Second pass.', static fn(): OrderingFormatterPass => new OrderingFormatterPass('alpha'), order: 20);
+        yield new FormatterPassDefinition('first', 'First pass.', static fn(): OrderingFormatterPass => new OrderingFormatterPass('first'), order: 10);
     }
 
     public function statsMetrics(): iterable
     {
-        yield new StatsMetricDefinition('zeta', 'Zeta metric.', static fn (): ConstantStatsMetric => new ConstantStatsMetric());
-        yield new StatsMetricDefinition('alpha', 'Alpha metric.', static fn (): ConstantStatsMetric => new ConstantStatsMetric());
+        yield new StatsMetricDefinition('zeta', 'Zeta metric.', static fn(): ConstantStatsMetric => new ConstantStatsMetric());
+        yield new StatsMetricDefinition('alpha', 'Alpha metric.', static fn(): ConstantStatsMetric => new ConstantStatsMetric());
     }
 }
 
@@ -218,9 +218,7 @@ final class OrderingFormatterPass implements FormatterPass
      */
     public static array $calls = [];
 
-    public function __construct(private string $name)
-    {
-    }
+    public function __construct(private string $name) {}
 
     public function format(FormatterContext $context): iterable
     {
@@ -247,7 +245,7 @@ final readonly class InvalidFormatterExtension implements FormatterExtensionInte
 
     public function formatterPasses(): iterable
     {
-        yield new FormatterPassDefinition('range', 'Emit an invalid range.', static fn (): InvalidRangeFormatterPass => new InvalidRangeFormatterPass());
+        yield new FormatterPassDefinition('range', 'Emit an invalid range.', static fn(): InvalidRangeFormatterPass => new InvalidRangeFormatterPass());
     }
 }
 
@@ -268,8 +266,8 @@ final readonly class DuplicateFormatterExtension implements FormatterExtensionIn
 
     public function formatterPasses(): iterable
     {
-        yield new FormatterPassDefinition('same', 'First pass.', static fn (): OrderingFormatterPass => new OrderingFormatterPass('first'));
-        yield new FormatterPassDefinition('same', 'Second pass.', static fn (): OrderingFormatterPass => new OrderingFormatterPass('second'));
+        yield new FormatterPassDefinition('same', 'First pass.', static fn(): OrderingFormatterPass => new OrderingFormatterPass('first'));
+        yield new FormatterPassDefinition('same', 'Second pass.', static fn(): OrderingFormatterPass => new OrderingFormatterPass('second'));
     }
 }
 
@@ -285,7 +283,7 @@ final readonly class OverlappingFormatterExtension implements FormatterExtension
         yield new FormatterPassDefinition(
             'edits',
             'Emit overlapping edits.',
-            static fn (): OverlappingFormatterPass => new OverlappingFormatterPass(),
+            static fn(): OverlappingFormatterPass => new OverlappingFormatterPass(),
         );
     }
 }
@@ -308,8 +306,8 @@ final readonly class DuplicateStatsExtension implements StatsExtensionInterface
 
     public function statsMetrics(): iterable
     {
-        yield new StatsMetricDefinition('same', 'First metric.', static fn (): ConstantStatsMetric => new ConstantStatsMetric());
-        yield new StatsMetricDefinition('same', 'Second metric.', static fn (): ConstantStatsMetric => new ConstantStatsMetric());
+        yield new StatsMetricDefinition('same', 'First metric.', static fn(): ConstantStatsMetric => new ConstantStatsMetric());
+        yield new StatsMetricDefinition('same', 'Second metric.', static fn(): ConstantStatsMetric => new ConstantStatsMetric());
     }
 }
 
@@ -322,7 +320,7 @@ final readonly class NonFiniteStatsExtension implements StatsExtensionInterface
 
     public function statsMetrics(): iterable
     {
-        yield new StatsMetricDefinition('not-a-number', 'Return NaN.', static fn (): NonFiniteStatsMetric => new NonFiniteStatsMetric());
+        yield new StatsMetricDefinition('not-a-number', 'Return NaN.', static fn(): NonFiniteStatsMetric => new NonFiniteStatsMetric());
     }
 }
 

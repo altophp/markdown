@@ -30,7 +30,7 @@ final class InlineCountLimitException extends ParseLimitException
         );
 
         if (null !== $byteOffset) {
-            $message = substr($message, 0, -1).\sprintf(' at byte offset %d.', $byteOffset);
+            $message = substr($message, 0, -1) . \sprintf(' at byte offset %d.', $byteOffset);
         }
 
         parent::__construct($message);

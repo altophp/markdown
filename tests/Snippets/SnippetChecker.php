@@ -51,11 +51,11 @@ final class SnippetChecker
         private $stderr,
     ) {
         $this->rootDir = rtrim($rootDir, '/');
-        $this->srcDir = $this->rootDir.'/src';
-        $this->snippetsDir = $this->rootDir.'/var/snippets';
-        $this->phpstanBin = $this->rootDir.'/vendor/bin/phpstan';
-        $this->phpstanConfig = $this->rootDir.'/phpstan-snippets.neon.dist';
-        $this->autoloadFile = $this->rootDir.'/vendor/autoload.php';
+        $this->srcDir = $this->rootDir . '/src';
+        $this->snippetsDir = $this->rootDir . '/var/snippets';
+        $this->phpstanBin = $this->rootDir . '/vendor/bin/phpstan';
+        $this->phpstanConfig = $this->rootDir . '/phpstan-snippets.neon.dist';
+        $this->autoloadFile = $this->rootDir . '/vendor/autoload.php';
     }
 
     /**
@@ -103,7 +103,7 @@ final class SnippetChecker
             $targets = [];
 
             foreach ($this->defaultTargets() as $name) {
-                $targets[] = new Target($this->rootDir.'/'.$name, $name, true);
+                $targets[] = new Target($this->rootDir . '/' . $name, $name, true);
             }
 
             return [$targets, false];
@@ -134,7 +134,7 @@ final class SnippetChecker
     private function defaultTargets(): array
     {
         $targets = self::DEFAULT_TARGETS;
-        $docs = glob($this->rootDir.'/docs/*.md');
+        $docs = glob($this->rootDir . '/docs/*.md');
 
         if (false === $docs) {
             throw new \RuntimeException('Unable to list public documentation files.');
@@ -211,7 +211,7 @@ final class SnippetChecker
         }
 
         $bodyStartLine = \count($header) + 1;
-        $content = implode("\n", $header)."\n".$body;
+        $content = implode("\n", $header) . "\n" . $body;
         $path = sprintf('%s/S%d.php', $this->snippetsDir, $index);
 
         $this->write($path, $content);
@@ -305,7 +305,7 @@ final class SnippetChecker
             'analyse',
             '-c',
             $this->phpstanConfig,
-            '--autoload-file='.$this->autoloadFile,
+            '--autoload-file=' . $this->autoloadFile,
             '--error-format=json',
             '--no-progress',
             '--no-ansi',
@@ -356,7 +356,7 @@ final class SnippetChecker
         try {
             $decoded = json_decode(substr($stdout, $start), true, 512, \JSON_THROW_ON_ERROR);
         } catch (\JsonException $exception) {
-            throw new \RuntimeException('Cannot parse phpstan output: '.$exception->getMessage());
+            throw new \RuntimeException('Cannot parse phpstan output: ' . $exception->getMessage());
         }
 
         if (!\is_array($decoded)) {
@@ -366,7 +366,7 @@ final class SnippetChecker
         $topErrors = $decoded['errors'] ?? [];
 
         if (\is_array($topErrors) && [] !== $topErrors) {
-            throw new \RuntimeException('phpstan reported: '.$this->stringifyErrors($topErrors));
+            throw new \RuntimeException('phpstan reported: ' . $this->stringifyErrors($topErrors));
         }
 
         $files = $decoded['files'] ?? [];
@@ -442,7 +442,7 @@ final class SnippetChecker
     {
         $detail = trim('' !== $stderr ? $stderr : $stdout);
 
-        return 'phpstan produced no analysable output'.('' !== $detail ? ":\n".$detail : '');
+        return 'phpstan produced no analysable output' . ('' !== $detail ? ":\n" . $detail : '');
     }
 
     private function resetSnippetsDir(): void
@@ -472,7 +472,7 @@ final class SnippetChecker
 
         foreach (false === $entries ? [] : $entries as $entry) {
             if ('.' !== $entry && '..' !== $entry) {
-                $this->removeTree($path.'/'.$entry);
+                $this->removeTree($path . '/' . $entry);
             }
         }
 
@@ -507,12 +507,12 @@ final class SnippetChecker
 
         $cwd = getcwd();
 
-        return (false === $cwd ? $this->rootDir : $cwd).'/'.$path;
+        return (false === $cwd ? $this->rootDir : $cwd) . '/' . $path;
     }
 
     private function displayPath(string $absolute): string
     {
-        $prefix = $this->rootDir.'/';
+        $prefix = $this->rootDir . '/';
 
         if (str_starts_with($absolute, $prefix)) {
             return substr($absolute, \strlen($prefix));
@@ -523,11 +523,11 @@ final class SnippetChecker
 
     private function line(string $text): void
     {
-        fwrite($this->stdout, $text."\n");
+        fwrite($this->stdout, $text . "\n");
     }
 
     private function error(string $text): void
     {
-        fwrite($this->stderr, 'error: '.$text."\n");
+        fwrite($this->stderr, 'error: ' . $text . "\n");
     }
 }

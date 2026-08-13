@@ -29,6 +29,5 @@ final readonly class BlockEvent
         public NodeKind $kind,
         public SourceRange $range,
         public int $depth,
-    ) {
-    }
+    ) {}
 }

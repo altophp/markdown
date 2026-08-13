@@ -23,6 +23,5 @@ final readonly class EditJournalEntry
     public function __construct(
         public Operation $operation,
         public ?SourceRange $affectedRange = null,
-    ) {
-    }
+    ) {}
 }

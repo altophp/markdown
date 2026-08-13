@@ -537,10 +537,10 @@ final class ParsedDocumentModel implements DocumentModel, HtmlRenderSource
 
         $eol = $this->source()->dominantEol->value;
         $blocks = array_values(array_filter(
-            array_map(static fn (string $block): string => trim($block, "\r\n"), $blocks),
-            static fn (string $block): bool => '' !== $block,
+            array_map(static fn(string $block): string => trim($block, "\r\n"), $blocks),
+            static fn(string $block): bool => '' !== $block,
         ));
-        $candidate = ($this->source()->hasBom ? "\xEF\xBB\xBF" : '').implode($eol.$eol, $blocks);
+        $candidate = ($this->source()->hasBom ? "\xEF\xBB\xBF" : '') . implode($eol . $eol, $blocks);
         $parsed = new self(
             $this->syntaxParser->parse($candidate, $this->parseOptions),
             $this->inlineParser,
@@ -740,7 +740,7 @@ final class ParsedDocumentModel implements DocumentModel, HtmlRenderSource
                 );
                 [$destination, $title] = explode(
                     "\x00",
-                    ($inlineTape->payload($inlineOrdinal) ?? "\x00")."\x00",
+                    ($inlineTape->payload($inlineOrdinal) ?? "\x00") . "\x00",
                     3,
                 );
                 $labelEnd = $inlineTape->flags($inlineOrdinal);
@@ -826,13 +826,13 @@ final class ParsedDocumentModel implements DocumentModel, HtmlRenderSource
     ): NodeId {
         $inlineTape = $this->assertInlineKind($blockId, $inlineOrdinal, $expectedKind);
         $existingParts = explode("\x00", $inlineTape->payload($inlineOrdinal) ?? '', 3);
-        $payload = $destination."\x00".($title ?? '');
+        $payload = $destination . "\x00" . ($title ?? '');
 
         if (InlineKind::IMAGE === $expectedKind) {
             if (null !== $imageAltText) {
-                $payload .= "\x00".$imageAltText;
+                $payload .= "\x00" . $imageAltText;
             } elseif (\array_key_exists(2, $existingParts)) {
-                $payload .= "\x00".$existingParts[2];
+                $payload .= "\x00" . $existingParts[2];
             }
         }
 
@@ -1308,8 +1308,8 @@ final class ParsedDocumentModel implements DocumentModel, HtmlRenderSource
         [$contentStart, $contentEnd] = $this->frontMatterContentBounds($ordinal);
 
         return substr($this->source()->bytes, $range->startOffset, $contentStart - $range->startOffset)
-            .$this->frontMatterContentOverrides[$ordinal]
-            .substr($this->source()->bytes, $contentEnd, $range->endOffset - $contentEnd);
+            . $this->frontMatterContentOverrides[$ordinal]
+            . substr($this->source()->bytes, $contentEnd, $range->endOffset - $contentEnd);
     }
 
     public function frontMatterContentRange(NodeId $id): SourceRange

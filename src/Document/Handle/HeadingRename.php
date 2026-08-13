@@ -33,9 +33,7 @@ use Alto\Markdown\Source\SourceRange;
  */
 final readonly class HeadingRename
 {
-    public function __construct(private ParsedDocumentModel $model)
-    {
-    }
+    public function __construct(private ParsedDocumentModel $model) {}
 
     /**
      * @param string $subject the word used in the journal description, "heading" or "section"
@@ -63,25 +61,25 @@ final readonly class HeadingRename
         $trimmed = ltrim($original);
 
         if (str_starts_with($trimmed, '#')) {
-            return str_repeat('#', $this->model->headingLevel($headingId->ordinal)).' '.$title;
+            return str_repeat('#', $this->model->headingLevel($headingId->ordinal)) . ' ' . $title;
         }
 
         if (str_contains($original, "\r\n")) {
             [, $underline] = explode("\r\n", $original, 3) + ['', ''];
 
-            return $title."\r\n".$underline;
+            return $title . "\r\n" . $underline;
         }
 
         if (str_contains($original, "\n")) {
             [, $underline] = explode("\n", $original, 3) + ['', ''];
 
-            return $title."\n".$underline;
+            return $title . "\n" . $underline;
         }
 
         if (str_contains($original, "\r")) {
             [, $underline] = explode("\r", $original, 3) + ['', ''];
 
-            return $title."\r".$underline;
+            return $title . "\r" . $underline;
         }
 
         return $title;

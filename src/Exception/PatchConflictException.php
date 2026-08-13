@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-final class PatchConflictException extends \LogicException implements MarkdownExceptionInterface
-{
-}
+final class PatchConflictException extends \LogicException implements MarkdownExceptionInterface {}

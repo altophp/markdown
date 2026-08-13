@@ -102,7 +102,7 @@ final class SameOffsetFixInteractionTest extends TestCase
 
     private function writeTempFile(string $source): string
     {
-        $path = sys_get_temp_dir().'/alto-markdown-eof-fix-'.bin2hex(random_bytes(8)).'.md';
+        $path = sys_get_temp_dir() . '/alto-markdown-eof-fix-' . bin2hex(random_bytes(8)) . '.md';
         $this->paths[] = $path;
         file_put_contents($path, $source);
 

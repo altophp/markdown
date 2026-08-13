@@ -38,7 +38,7 @@ final readonly class ContentSlicerExtension implements DocumentTransformExtensio
     {
         yield new DocumentTransformDefinition(
             'sections',
-            fn (): ContentSlicerTransform => new ContentSlicerTransform($this->minLevel),
+            fn(): ContentSlicerTransform => new ContentSlicerTransform($this->minLevel),
         );
     }
 }

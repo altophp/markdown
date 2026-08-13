@@ -24,6 +24,5 @@ final readonly class RenderOptions
         public ?Profile $targetProfile = null,
         public ?MarkdownStyle $style = null,
         public ?HtmlPolicy $htmlPolicy = null,
-    ) {
-    }
+    ) {}
 }

@@ -287,7 +287,7 @@ final class MutableModelPrimitiveTest extends TestCase
     private static function headingTexts(MarkdownDocument $document): array
     {
         return array_map(
-            static fn (Heading $heading): string => $heading->text(),
+            static fn(Heading $heading): string => $heading->text(),
             $document->headings()->all(),
         );
     }

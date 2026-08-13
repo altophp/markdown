@@ -43,37 +43,59 @@ final class ParseTape implements ReadOnlyParseTape
 {
     public const int NONE = -1;
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $kind = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $parent = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $firstChild = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $nextSibling = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $startOffset = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $endOffset = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $generation = [];
 
-    /** @var array<int, int> */
+    /**
+     * @var array<int, int>
+     */
     private array $flags = [];
 
-    /** @var array<int, string> */
+    /**
+     * @var array<int, string>
+     */
     private array $payload = [];
 
-    /** @var array<int, BlockState> */
+    /**
+     * @var array<int, BlockState>
+     */
     private array $extensionBlockState = [];
 
-    /** @var array<int, InlineNode> */
+    /**
+     * @var array<int, InlineNode>
+     */
     private array $extensionInlineNode = [];
 
     /**

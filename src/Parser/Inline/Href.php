@@ -27,9 +27,7 @@ final class Href
 {
     private const string UNSAFE = '"<>[\\]^`{|}';
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     public static function encode(string $url): string
     {
@@ -57,7 +55,7 @@ final class Href
     {
         $text = preg_replace_callback(
             '/\\\\([!-\/:-@\[-`{-~])/',
-            static fn (array $m): string => $m[1],
+            static fn(array $m): string => $m[1],
             $text,
         ) ?? $text;
 
@@ -85,13 +83,13 @@ final class Href
         }
 
         if ($code < 0x800) {
-            return \chr(0xC0 | ($code >> 6)).\chr(0x80 | ($code & 0x3F));
+            return \chr(0xC0 | ($code >> 6)) . \chr(0x80 | ($code & 0x3F));
         }
 
         if ($code < 0x10000) {
-            return \chr(0xE0 | ($code >> 12)).\chr(0x80 | (($code >> 6) & 0x3F)).\chr(0x80 | ($code & 0x3F));
+            return \chr(0xE0 | ($code >> 12)) . \chr(0x80 | (($code >> 6) & 0x3F)) . \chr(0x80 | ($code & 0x3F));
         }
 
-        return \chr(0xF0 | ($code >> 18)).\chr(0x80 | (($code >> 12) & 0x3F)).\chr(0x80 | (($code >> 6) & 0x3F)).\chr(0x80 | ($code & 0x3F));
+        return \chr(0xF0 | ($code >> 18)) . \chr(0x80 | (($code >> 12) & 0x3F)) . \chr(0x80 | (($code >> 6) & 0x3F)) . \chr(0x80 | ($code & 0x3F));
     }
 }

@@ -123,9 +123,9 @@ final class IndentedCodeParser implements BlockConstruct
 
     private function appendPair(\Alto\Markdown\Parser\ParseTape $tape, int $ordinal, int $start, int $end, int $pad = 0, int $column = 0): void
     {
-        $pair = $start.':'.$end.($pad > 0 || $column > 0 ? ':'.$pad.':'.$column : '');
+        $pair = $start . ':' . $end . ($pad > 0 || $column > 0 ? ':' . $pad . ':' . $column : '');
         $existing = $tape->payload($ordinal);
-        $tape->setPayload($ordinal, null === $existing || '' === $existing ? $pair : $existing.';'.$pair);
+        $tape->setPayload($ordinal, null === $existing || '' === $existing ? $pair : $existing . ';' . $pair);
     }
 
     private function indentFromCursor(ParserState $state): int

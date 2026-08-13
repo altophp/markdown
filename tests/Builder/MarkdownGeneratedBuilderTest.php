@@ -34,8 +34,8 @@ final class MarkdownGeneratedBuilderTest extends TestCase
                 match (mt_rand(0, 6)) {
                     0 => $builder->h1($this->words()),
                     1 => $builder->h2($this->words()),
-                    2 => $builder->paragraph($this->words().' | marker'),
-                    3 => $builder->codeBlock('php', 'echo "'.$this->word()."\";\n"),
+                    2 => $builder->paragraph($this->words() . ' | marker'),
+                    3 => $builder->codeBlock('php', 'echo "' . $this->word() . "\";\n"),
                     4 => $builder->unorderedList([$this->words(), $this->words()]),
                     5 => $builder->orderedList([$this->words(), $this->words()]),
                     6 => $builder->blockquote($this->words()),
@@ -46,7 +46,7 @@ final class MarkdownGeneratedBuilderTest extends TestCase
             $roundTripped = $factory->fromString($document->toMarkdown());
             $comparison = $comparator->compare($document->model(), $roundTripped->model());
 
-            self::assertTrue($comparison->isEqual(), 'case '.$case.': '.$comparison->message());
+            self::assertTrue($comparison->isEqual(), 'case ' . $case . ': ' . $comparison->message());
         }
     }
 

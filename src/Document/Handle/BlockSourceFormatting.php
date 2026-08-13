@@ -23,9 +23,7 @@ use Alto\Markdown\Source\SourceRange;
  */
 final readonly class BlockSourceFormatting
 {
-    public function __construct(private ParsedDocumentModel $model)
-    {
-    }
+    public function __construct(private ParsedDocumentModel $model) {}
 
     public function normalize(string $markdown): string
     {
@@ -48,7 +46,7 @@ final readonly class BlockSourceFormatting
             ? $eol
             : str_repeat($eol, \max(0, 2 - $this->lineEndingsAfter($source->bytes, $offset)));
 
-        return $prefix.$markdown.$suffix;
+        return $prefix . $markdown . $suffix;
     }
 
     public function exactInsertionReplacement(SourceRange $range, string $markdown): string
@@ -65,7 +63,7 @@ final readonly class BlockSourceFormatting
             ? str_repeat($eol, \max(0, 1 - $trailing))
             : str_repeat($eol, \max(0, 2 - $trailing - $this->lineEndingsAfter($source->bytes, $offset)));
 
-        return $prefix.$markdown.$suffix;
+        return $prefix . $markdown . $suffix;
     }
 
     public function replacement(SourceRange $range, string $markdown): string
@@ -86,7 +84,7 @@ final readonly class BlockSourceFormatting
             default => '',
         };
 
-        return $markdown.$lineEnding;
+        return $markdown . $lineEnding;
     }
 
     private function lineEndingsBefore(string $source, int $offset): int

@@ -57,7 +57,7 @@ final readonly class TableOfContentsCatalog implements DocumentRenderProjection
         }
 
         return str_starts_with($slug, 'toc-heading')
-            ? 'toc-heading-'.$slug
+            ? 'toc-heading-' . $slug
             : $slug;
     }
 }

@@ -153,7 +153,7 @@ final class HtmlBlockParser implements OpaqueLeafBlock
         if (isset($this->rootContentEnd[$ordinal])) {
             $state->tape->setPayload(
                 $ordinal,
-                $state->tape->startOffset($ordinal).':'.$this->rootContentEnd[$ordinal],
+                $state->tape->startOffset($ordinal) . ':' . $this->rootContentEnd[$ordinal],
             );
             unset($this->rootContentEnd[$ordinal]);
         }
@@ -181,7 +181,7 @@ final class HtmlBlockParser implements OpaqueLeafBlock
      */
     private function appendPair(\Alto\Markdown\Parser\ParseTape $tape, int $ordinal, int $start, int $end, int $pad = 0): void
     {
-        $pair = $start.':'.$end.($pad > 0 ? ':'.$pad : '');
+        $pair = $start . ':' . $end . ($pad > 0 ? ':' . $pad : '');
         $tape->appendPayloadPart($ordinal, $pair, ';');
     }
 
@@ -317,7 +317,7 @@ final class HtmlBlockParser implements OpaqueLeafBlock
 
         $nameStart = $p;
         ++$p;
-        $p += strspn($bytes, self::ALNUM.'-', $p, $end - $p);
+        $p += strspn($bytes, self::ALNUM . '-', $p, $end - $p);
 
         if (\in_array(strtolower(substr($bytes, $nameStart, $p - $nameStart)), self::TYPE1_NAMES, true)) {
             return null;
@@ -372,7 +372,7 @@ final class HtmlBlockParser implements OpaqueLeafBlock
         }
 
         $p = $pos + 1;
-        $p += strspn($bytes, self::ALNUM.'_.:-', $p, $end - $p);
+        $p += strspn($bytes, self::ALNUM . '_.:-', $p, $end - $p);
 
         return $this->scanValueSpec($bytes, $p, $end, $length) ?? $p;
     }

@@ -25,8 +25,7 @@ final readonly class HtmlDecoratorDefinition
         public HtmlNodeDecorator $decorator,
         public int $priority = 0,
         private HtmlDecoratorRole $role = HtmlDecoratorRole::Node,
-    ) {
-    }
+    ) {}
 
     public static function node(string $kind, HtmlNodeDecorator $decorator, int $priority = 0): self
     {

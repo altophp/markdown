@@ -24,6 +24,5 @@ final readonly class StatsBlock
         public string $kind,
         public SourceRange $range,
         public int $depth,
-    ) {
-    }
+    ) {}
 }

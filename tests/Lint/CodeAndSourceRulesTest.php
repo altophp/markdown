@@ -167,7 +167,7 @@ final class CodeAndSourceRulesTest extends TestCase
     private static function ruleIds(array $problems): array
     {
         return array_map(
-            static fn (\Alto\Markdown\Lint\LintProblem $problem): string => $problem->ruleId,
+            static fn(\Alto\Markdown\Lint\LintProblem $problem): string => $problem->ruleId,
             $problems,
         );
     }

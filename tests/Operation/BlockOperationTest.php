@@ -237,7 +237,7 @@ final class BlockOperationTest extends TestCase
         self::parsedModel($document);
 
         return array_map(
-            static fn (Heading $heading): string => $heading->text(),
+            static fn(Heading $heading): string => $heading->text(),
             $document->headings()->all(),
         );
     }

@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-abstract class ParseLimitException extends \OverflowException implements MarkdownExceptionInterface
-{
-}
+abstract class ParseLimitException extends \OverflowException implements MarkdownExceptionInterface {}

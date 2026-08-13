@@ -40,13 +40,13 @@ final class EmbedExtensionTest extends TestCase
             $resolver,
             new EmbedPolicy(['video.example']),
         ));
-        $source = "Before.\n\n".$url."  \n\nAfter.\n";
+        $source = "Before.\n\n" . $url . "  \n\nAfter.\n";
         $safe = "<p>Before.</p>\n"
-            .'<p><a href="'.$url.'">'.$url."</a></p>\n"
-            ."<p>After.</p>\n";
+            . '<p><a href="' . $url . '">' . $url . "</a></p>\n"
+            . "<p>After.</p>\n";
         $raw = "<p>Before.</p>\n"
-            ."<iframe src=\"https://video.example/embed/1\"></iframe>\n"
-            ."<p>After.</p>\n";
+            . "<iframe src=\"https://video.example/embed/1\"></iframe>\n"
+            . "<p>After.</p>\n";
 
         $document = $factory->fromString($source);
 
@@ -62,7 +62,7 @@ final class EmbedExtensionTest extends TestCase
         self::assertCount(1, $resolver->requests);
         self::assertSame($source, $document->toMarkdown());
         self::assertSame(
-            "Before\\.\n\n".$url."  \n\nAfter\\.\n",
+            "Before\\.\n\n" . $url . "  \n\nAfter\\.\n",
             $document->toMarkdown(new RenderOptions()),
         );
         self::assertCount(1, $document->query()->kind('embed:block')->get()->all());
@@ -85,7 +85,7 @@ final class EmbedExtensionTest extends TestCase
         ));
 
         $html = $factory->toHtml(
-            "Before.\n\n".$url."\n\nAfter.\n",
+            "Before.\n\n" . $url . "\n\nAfter.\n",
             renderOptions: new RenderOptions(htmlPolicy: $policy),
         );
 
@@ -119,7 +119,7 @@ final class EmbedExtensionTest extends TestCase
             'https://youtube.com:8443/watch',
         ] as $url) {
             self::assertSame(
-                '<p><a href="'.$url.'">'.$url."</a></p>\n",
+                '<p><a href="' . $url . '">' . $url . "</a></p>\n",
                 $factory->toHtml($url, renderOptions: $options),
             );
         }
@@ -134,7 +134,7 @@ final class EmbedExtensionTest extends TestCase
         $options = new RenderOptions(htmlPolicy: HtmlPolicy::spec());
 
         self::assertSame(
-            '<p><a href="'.$url.'">'.$url."</a></p>\n",
+            '<p><a href="' . $url . '">' . $url . "</a></p>\n",
             Markdown::commonmark()
                 ->with(new EmbedExtension($resolver, new EmbedPolicy(['video.example'])))
                 ->toHtml($url, renderOptions: $options),
@@ -288,10 +288,10 @@ final class EmbedExtensionTest extends TestCase
         }
 
         foreach ([
-            static fn (): EmbedPolicy => new EmbedPolicy(['example.com'], maxUrlBytes: 0),
-            static fn (): EmbedPolicy => new EmbedPolicy(['example.com'], maxUrlBytes: \PHP_INT_MAX),
-            static fn (): EmbedPolicy => new EmbedPolicy(['example.com'], maxHtmlBytes: 0),
-            static fn (): EmbedPolicy => new EmbedPolicy(['example.com'], maxHtmlBytes: \PHP_INT_MAX),
+            static fn(): EmbedPolicy => new EmbedPolicy(['example.com'], maxUrlBytes: 0),
+            static fn(): EmbedPolicy => new EmbedPolicy(['example.com'], maxUrlBytes: \PHP_INT_MAX),
+            static fn(): EmbedPolicy => new EmbedPolicy(['example.com'], maxHtmlBytes: 0),
+            static fn(): EmbedPolicy => new EmbedPolicy(['example.com'], maxHtmlBytes: \PHP_INT_MAX),
         ] as $create) {
             try {
                 $create();
@@ -318,16 +318,14 @@ final class EmbedFixtureResolver implements ResourceResolver
     /**
      * @param array<string, string> $html
      */
-    public function __construct(private array $html)
-    {
-    }
+    public function __construct(private array $html) {}
 
     public function resolve(ResourceRequest $request): ResolvedResource
     {
         $this->requests[] = $request;
 
         return new ResolvedResource(
-            'embed:'.hash('sha256', $request->reference),
+            'embed:' . hash('sha256', $request->reference),
             $this->html[$request->reference] ?? throw new \LogicException('Missing embed fixture.'),
         );
     }

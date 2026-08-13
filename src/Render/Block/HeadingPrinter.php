@@ -28,6 +28,6 @@ final class HeadingPrinter implements BlockPrinter
         $marker = str_repeat('#', $model->headingLevel($ordinal));
         $content = $context->renderInlines($model, $ordinal);
 
-        return '' === $content ? $marker : $marker.' '.$content;
+        return '' === $content ? $marker : $marker . ' ' . $content;
     }
 }

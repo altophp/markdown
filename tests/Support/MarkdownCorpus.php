@@ -64,13 +64,13 @@ final class MarkdownCorpus
         sort($divergences, \SORT_STRING);
 
         foreach ($divergences as $path) {
-            $documents['divergence-'.pathinfo($path, \PATHINFO_FILENAME)] = self::read($path);
+            $documents['divergence-' . pathinfo($path, \PATHINFO_FILENAME)] = self::read($path);
         }
 
         $documents['huge-generated-corpus'] = self::fixture('huge.md');
 
         foreach (self::generatedDocuments() as $name => $bytes) {
-            $documents['generated-'.$name] = $bytes;
+            $documents['generated-' . $name] = $bytes;
         }
 
         if (self::REAL_AND_GENERATED_DOCUMENTS !== \count($documents)) {
@@ -144,7 +144,7 @@ final class MarkdownCorpus
 
     private static function fixturePath(string $relativePath): string
     {
-        return \dirname(__DIR__).'/fixtures/'.$relativePath;
+        return \dirname(__DIR__) . '/fixtures/' . $relativePath;
     }
 
     private static function read(string $path): string

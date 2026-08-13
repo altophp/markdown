@@ -30,7 +30,7 @@ final class SpecExampleLoader
         try {
             $decoded = json_decode($json, true, 512, \JSON_THROW_ON_ERROR);
         } catch (\JsonException $exception) {
-            throw new MalformedSpecException('Spec JSON is not valid JSON: '.$exception->getMessage(), previous: $exception);
+            throw new MalformedSpecException('Spec JSON is not valid JSON: ' . $exception->getMessage(), previous: $exception);
         }
 
         if (!\is_array($decoded) || !array_is_list($decoded)) {

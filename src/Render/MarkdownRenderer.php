@@ -196,7 +196,7 @@ final class MarkdownRenderer implements Renderer
 
             if (MarkdownBlockFrame::LIST === $top->kind) {
                 $item = new MarkdownBlockFrame(MarkdownBlockFrame::ITEM, $cursor, $model->firstChildOrdinal($cursor));
-                $item->marker = $top->ordered ? $top->number.'.' : $context->style()->bulletMarker;
+                $item->marker = $top->ordered ? $top->number . '.' : $context->style()->bulletMarker;
                 $item->loose = $top->loose;
                 ++$top->number;
                 $stack[] = $item;

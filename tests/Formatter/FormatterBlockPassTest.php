@@ -165,7 +165,7 @@ final class FormatterBlockPassTest extends TestCase
     public function testListMarkerFormattingHandlesManyAdjacentLists(): void
     {
         $source = implode('', array_map(
-            static fn (int $line): string => 0 === $line % 2 ? "1. item {$line}\n" : "1) item {$line}\n",
+            static fn(int $line): string => 0 === $line % 2 ? "1. item {$line}\n" : "1) item {$line}\n",
             range(1, 2_000),
         ));
         $started = hrtime(true);
@@ -354,14 +354,14 @@ final class FormatterBlockPassTest extends TestCase
         $document->format($style);
         $result = new DisjointPatchLowerer()->lower($document->model(), $document->model()->journal());
         $operations = array_map(
-            static fn ($entry): string => $entry->operation->describe(),
+            static fn($entry): string => $entry->operation->describe(),
             $document->model()->journal()->entries(),
         );
 
         return [
             'bytes' => $result->bytes,
             'operations' => $operations,
-            'fallbacks' => array_map(static fn ($fallback): string => $fallback->reason, $result->fallbacks),
+            'fallbacks' => array_map(static fn($fallback): string => $fallback->reason, $result->fallbacks),
         ];
     }
 

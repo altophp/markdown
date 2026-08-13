@@ -34,8 +34,7 @@ final readonly class MoveBlockOperation implements MultiPatchOperation, Insertio
         private SourceRange $affectedRange,
         private array $patches = [],
         private ?SourceRange $insertionRange = null,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

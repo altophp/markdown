@@ -25,9 +25,7 @@ use Alto\Markdown\Parser\ParseTape;
  */
 final class GfmTableParser implements BlockConstruct, ParagraphReplacementValidator
 {
-    public function __construct(private readonly int $kind)
-    {
-    }
+    public function __construct(private readonly int $kind) {}
 
     public function kind(): int
     {
@@ -90,7 +88,7 @@ final class GfmTableParser implements BlockConstruct, ParagraphReplacementValida
                 return ContinueResult::NotMatched;
             }
 
-            $tape->setPayload($ordinal, $payload.'|'.implode(',', $alignments).'|');
+            $tape->setPayload($ordinal, $payload . '|' . implode(',', $alignments) . '|');
             $tape->setEndOffset($ordinal, $end);
             $state->advanceTo($end);
 
@@ -101,17 +99,15 @@ final class GfmTableParser implements BlockConstruct, ParagraphReplacementValida
             return ContinueResult::NotMatched;
         }
 
-        $row = $first.':'.$end;
-        $tape->setPayload($ordinal, $payload.('|' === $payload[\strlen($payload) - 1] ? '' : ';').$row);
+        $row = $first . ':' . $end;
+        $tape->setPayload($ordinal, $payload . ('|' === $payload[\strlen($payload) - 1] ? '' : ';') . $row);
         $tape->setEndOffset($ordinal, $end);
         $state->advanceTo($end);
 
         return ContinueResult::Matched;
     }
 
-    public function close(ParserState $state, int $ordinal): void
-    {
-    }
+    public function close(ParserState $state, int $ordinal): void {}
 
     /**
      * @return ?list<'left'|'center'|'right'|''>
@@ -187,7 +183,7 @@ final class GfmTableParser implements BlockConstruct, ParagraphReplacementValida
             $cells[\count($cells) - 1] .= $byte;
         }
 
-        return array_map(static fn (string $cell): string => trim(str_replace('\\|', '|', $cell)), $cells);
+        return array_map(static fn(string $cell): string => trim(str_replace('\\|', '|', $cell)), $cells);
     }
 
     private function lineText(ParserState $state): string

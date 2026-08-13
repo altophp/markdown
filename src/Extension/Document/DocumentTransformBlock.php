@@ -27,6 +27,5 @@ final readonly class DocumentTransformBlock
         public string $kind,
         public SourceRange $range,
         public int $depth,
-    ) {
-    }
+    ) {}
 }

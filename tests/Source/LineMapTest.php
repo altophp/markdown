@@ -73,7 +73,7 @@ final class LineMapTest extends TestCase
     public function testBlankLineDetection(string $line, int $expectedColumn): void
     {
         // Wrap the blank line between two content lines so offsets are non-trivial.
-        $map = self::mapOf("x\n".$line."\ny");
+        $map = self::mapOf("x\n" . $line . "\ny");
 
         self::assertTrue($map->isBlank(1));
         self::assertSame($expectedColumn, $map->firstNonSpaceColumn(1));
@@ -136,8 +136,8 @@ final class LineMapTest extends TestCase
         self::assertSame(1, $map->lineCount());
 
         foreach ([
-            static fn (): int => $map->firstNonSpaceOffset(-1),
-            static fn (): int => $map->firstNonSpaceColumn(1),
+            static fn(): int => $map->firstNonSpaceOffset(-1),
+            static fn(): int => $map->firstNonSpaceColumn(1),
         ] as $read) {
             try {
                 $read();

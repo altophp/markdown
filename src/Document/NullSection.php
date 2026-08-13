@@ -28,9 +28,7 @@ use Alto\Markdown\Source\SourceRange;
  */
 final readonly class NullSection implements Section
 {
-    public function __construct(private MarkdownDocument $document)
-    {
-    }
+    public function __construct(private MarkdownDocument $document) {}
 
     public function id(): NodeId
     {

@@ -191,8 +191,7 @@ final readonly class FixedResultParser implements InlineParser
     public function __construct(
         private int $endOffset,
         private string $trigger = '^',
-    ) {
-    }
+    ) {}
 
     public function triggerByte(): string
     {

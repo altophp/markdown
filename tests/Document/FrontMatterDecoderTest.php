@@ -27,7 +27,7 @@ final class FrontMatterDecoderTest extends TestCase
         self::assertNotNull($frontMatter);
 
         $decoded = $frontMatter->decode(new CallbackFrontMatterDecoder(
-            static fn (string $content, string $fence): array => [
+            static fn(string $content, string $fence): array => [
                 'content' => $content,
                 'fence' => $fence,
             ],
@@ -51,7 +51,7 @@ final class FrontMatterDecoderTest extends TestCase
         self::assertSame(
             ['+++', "title = \"New\"\n"],
             $frontMatter->decode(new CallbackFrontMatterDecoder(
-                static fn (string $content, string $fence): array => [$fence, $content],
+                static fn(string $content, string $fence): array => [$fence, $content],
             )),
         );
     }
@@ -79,7 +79,7 @@ final class FrontMatterDecoderTest extends TestCase
 
         try {
             $frontMatter->decode(new CallbackFrontMatterDecoder(
-                static fn (): never => throw new \DomainException('Invalid metadata.'),
+                static fn(): never => throw new \DomainException('Invalid metadata.'),
             ));
         } catch (\DomainException $exception) {
             $caught = $exception;

@@ -32,9 +32,7 @@ final readonly class LinkRewriter implements LinkDestinationRewriter
     /**
      * @param list<\Closure(LinkDestinationContext): string> $steps
      */
-    private function __construct(private array $steps)
-    {
-    }
+    private function __construct(private array $steps) {}
 
     /**
      * Prefix path-like destinations with one fixed URI. This is deliberately
@@ -63,7 +61,7 @@ final readonly class LinkRewriter implements LinkDestinationRewriter
                     return $destination;
                 }
 
-                return $baseUri.'/'.ltrim($destination, '/');
+                return $baseUri . '/' . ltrim($destination, '/');
             },
         ]);
     }
@@ -81,7 +79,7 @@ final readonly class LinkRewriter implements LinkDestinationRewriter
         }
 
         return new self([
-            static fn (LinkDestinationContext $context): string => $destinations[$context->destination]
+            static fn(LinkDestinationContext $context): string => $destinations[$context->destination]
                 ?? $context->destination,
         ]);
     }
@@ -96,7 +94,7 @@ final readonly class LinkRewriter implements LinkDestinationRewriter
             static function (LinkDestinationContext $context) use ($pattern, $replacement): string {
                 $rewritten = preg_replace($pattern, $replacement, $context->destination);
                 if (null === $rewritten) {
-                    throw new InvalidMarkdownOperationException('Link rewrite pattern failed: '.preg_last_error_msg().'.');
+                    throw new InvalidMarkdownOperationException('Link rewrite pattern failed: ' . preg_last_error_msg() . '.');
                 }
 
                 return $rewritten;
@@ -112,7 +110,7 @@ final readonly class LinkRewriter implements LinkDestinationRewriter
         $callback = \Closure::fromCallable($callback);
 
         return new self([
-            static fn (LinkDestinationContext $context): string => $callback($context),
+            static fn(LinkDestinationContext $context): string => $callback($context),
         ]);
     }
 

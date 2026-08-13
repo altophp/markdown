@@ -39,9 +39,7 @@ final readonly class TableOfContentsParser implements BlockParser
         'ordered' => true,
     ];
 
-    public function __construct(private TableOfContentsPolicy $policy)
-    {
-    }
+    public function __construct(private TableOfContentsPolicy $policy) {}
 
     public function triggerBytes(): string
     {

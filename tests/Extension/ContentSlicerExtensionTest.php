@@ -39,23 +39,23 @@ final class ContentSlicerExtensionTest extends TestCase
     {
         $factory = Markdown::commonmark()->with(new ContentSlicerExtension());
         $source = "# Main\n\nContent 1.\n\n"
-            ."## Sub 1\n\nContent 2.\n\n"
-            ."#### Sub 1.1\n\nContent 3.\n\n"
-            ."## Sub 2\n\nContent 4.\n";
+            . "## Sub 1\n\nContent 2.\n\n"
+            . "#### Sub 1.1\n\nContent 3.\n\n"
+            . "## Sub 2\n\nContent 4.\n";
         $expected = "<h1>Main</h1>\n"
-            ."<p>Content 1.</p>\n"
-            ."<section>\n"
-            ."<h2>Sub 1</h2>\n"
-            ."<p>Content 2.</p>\n"
-            ."<section>\n"
-            ."<h4>Sub 1.1</h4>\n"
-            ."<p>Content 3.</p>\n"
-            ."</section>\n"
-            ."</section>\n"
-            ."<section>\n"
-            ."<h2>Sub 2</h2>\n"
-            ."<p>Content 4.</p>\n"
-            ."</section>\n";
+            . "<p>Content 1.</p>\n"
+            . "<section>\n"
+            . "<h2>Sub 1</h2>\n"
+            . "<p>Content 2.</p>\n"
+            . "<section>\n"
+            . "<h4>Sub 1.1</h4>\n"
+            . "<p>Content 3.</p>\n"
+            . "</section>\n"
+            . "</section>\n"
+            . "<section>\n"
+            . "<h2>Sub 2</h2>\n"
+            . "<p>Content 4.</p>\n"
+            . "</section>\n";
 
         self::assertSame($expected, $factory->toHtml($source));
 
@@ -74,23 +74,23 @@ final class ContentSlicerExtensionTest extends TestCase
         yield 'all headings' => [
             1,
             "<section>\n<h1>One</h1>\n"
-            ."<section>\n<h2>Two</h2>\n"
-            ."<section>\n<h3>Three</h3>\n"
-            ."<section>\n<h6>Six</h6>\n</section>\n"
-            ."</section>\n"
-            ."</section>\n</section>\n",
+            . "<section>\n<h2>Two</h2>\n"
+            . "<section>\n<h3>Three</h3>\n"
+            . "<section>\n<h6>Six</h6>\n</section>\n"
+            . "</section>\n"
+            . "</section>\n</section>\n",
         ];
         yield 'h3 and deeper' => [
             3,
             "<h1>One</h1>\n<h2>Two</h2>\n"
-            ."<section>\n<h3>Three</h3>\n"
-            ."<section>\n<h6>Six</h6>\n</section>\n"
-            ."</section>\n",
+            . "<section>\n<h3>Three</h3>\n"
+            . "<section>\n<h6>Six</h6>\n</section>\n"
+            . "</section>\n",
         ];
         yield 'h6 only' => [
             6,
             "<h1>One</h1>\n<h2>Two</h2>\n<h3>Three</h3>\n"
-            ."<section>\n<h6>Six</h6>\n</section>\n",
+            . "<section>\n<h6>Six</h6>\n</section>\n",
         ];
     }
 
@@ -110,12 +110,12 @@ final class ContentSlicerExtensionTest extends TestCase
     public function testKeepsPreambleAndNestedHeadingsOutsideTheRootOutline(): void
     {
         $source = "Preamble.\n\n> ## Quoted\n>\n> Body.\n\n"
-            ."- item\n  - nested\n\n"
-            ."## Root\n\nBody.\n";
+            . "- item\n  - nested\n\n"
+            . "## Root\n\nBody.\n";
         $expected = "<p>Preamble.</p>\n"
-            ."<blockquote>\n<h2>Quoted</h2>\n<p>Body.</p>\n</blockquote>\n"
-            ."<ul>\n<li>item\n<ul>\n<li>nested</li>\n</ul>\n</li>\n</ul>\n"
-            ."<section>\n<h2>Root</h2>\n<p>Body.</p>\n</section>\n";
+            . "<blockquote>\n<h2>Quoted</h2>\n<p>Body.</p>\n</blockquote>\n"
+            . "<ul>\n<li>item\n<ul>\n<li>nested</li>\n</ul>\n</li>\n</ul>\n"
+            . "<section>\n<h2>Root</h2>\n<p>Body.</p>\n</section>\n";
 
         self::assertSame(
             $expected,

@@ -16,6 +16,4 @@ namespace Alto\Markdown\Operation;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-interface ModelOperation extends Operation
-{
-}
+interface ModelOperation extends Operation {}

@@ -49,8 +49,7 @@ final readonly class RuleEngine
         private DocumentTraversal $traversal = new TapeDocumentTraversal(),
         private iterable $rules = [],
         private iterable $customRules = [],
-    ) {
-    }
+    ) {}
 
     public function run(DocumentModel $model, LintConfig $config): LintReport
     {

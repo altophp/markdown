@@ -41,7 +41,7 @@ final class PublicHtmlDecoratorContractTest extends TestCase
         $factory = Markdown::commonmark()->with(new ContextRecordingDecoratorExtension());
         $markdown = "# Hello\n\nRead [Alto](https://example.com/docs \"Docs\").\n";
         $expected = "<h1 data-level=\"1\">Hello</h1>\n"
-            ."<p>Read <a data-destination=\"https://example.com/docs\" href=\"https://example.com/docs\" title=\"Docs\">Alto</a>.</p>\n";
+            . "<p>Read <a data-destination=\"https://example.com/docs\" href=\"https://example.com/docs\" title=\"Docs\">Alto</a>.</p>\n";
 
         self::assertSame($expected, $factory->toHtml($markdown));
         self::assertSame($expected, $factory->fromString($markdown)->toHtml());
@@ -135,7 +135,7 @@ final class PublicHtmlDecoratorContractTest extends TestCase
 
         self::assertSame(
             "<p><span data-url=\"\">x &amp; y</span></p>\n",
-            $factory->toHtml('[x & y](javascript:alert(1))'."\n"),
+            $factory->toHtml('[x & y](javascript:alert(1))' . "\n"),
         );
     }
 
@@ -162,7 +162,7 @@ final class PublicHtmlDecoratorContractTest extends TestCase
         $depth = 550;
         $factory = Markdown::commonmark()->with(new OrderedDecoratorExtension('decorated', 0, 'block-quote'));
         $html = $factory->toHtml(
-            str_repeat('> ', $depth)."text\n",
+            str_repeat('> ', $depth) . "text\n",
             new ParseOptions(maxNestingDepth: 600),
         );
 
@@ -375,8 +375,8 @@ final readonly class HeadingAttributeDecorator implements HtmlNodeDecorator
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
         return str_replace(
-            '<h'.$context->int('level'),
-            '<h'.$context->int('level').' data-level="'.$context->int('level').'"',
+            '<h' . $context->int('level'),
+            '<h' . $context->int('level') . ' data-level="' . $context->int('level') . '"',
             $html,
         );
     }
@@ -388,7 +388,7 @@ final readonly class LinkAttributeDecorator implements HtmlNodeDecorator
     {
         return str_replace(
             '<a ',
-            '<a data-destination="'.$context->escapeUrl($context->string('destination')).'" ',
+            '<a data-destination="' . $context->escapeUrl($context->string('destination')) . '" ',
             $html,
         );
     }
@@ -400,12 +400,11 @@ final readonly class OrderedDecoratorExtension implements HtmlDecoratorExtension
         private string $label,
         private int $priority,
         private string $kind = 'thematic-break',
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
-        return 'order-'.$this->label;
+        return 'order-' . $this->label;
     }
 
     public function htmlDecorators(): iterable
@@ -416,13 +415,11 @@ final readonly class OrderedDecoratorExtension implements HtmlDecoratorExtension
 
 final readonly class OrderDecorator implements HtmlNodeDecorator
 {
-    public function __construct(private string $label)
-    {
-    }
+    public function __construct(private string $label) {}
 
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
-        return $this->label.'('.$html.')';
+        return $this->label . '(' . $html . ')';
     }
 }
 
@@ -446,8 +443,7 @@ final readonly class RecordingDecoratorExtension implements HtmlDecoratorExtensi
     public function __construct(
         private RecordingDecorator $heading,
         private RecordingDecorator $link,
-    ) {
-    }
+    ) {}
 
     public function name(): string
     {
@@ -463,9 +459,7 @@ final readonly class RecordingDecoratorExtension implements HtmlDecoratorExtensi
 
 final readonly class LinkLikeRecordingDecoratorExtension implements HtmlDecoratorExtensionInterface
 {
-    public function __construct(private RecordingDecorator $decorator)
-    {
-    }
+    public function __construct(private RecordingDecorator $decorator) {}
 
     public function name(): string
     {
@@ -480,9 +474,7 @@ final readonly class LinkLikeRecordingDecoratorExtension implements HtmlDecorato
 
 final readonly class HeadingRoleRecordingDecoratorExtension implements HtmlDecoratorExtensionInterface
 {
-    public function __construct(private RecordingDecorator $decorator)
-    {
-    }
+    public function __construct(private RecordingDecorator $decorator) {}
 
     public function name(): string
     {
@@ -512,9 +504,9 @@ final readonly class EscapingLinkDecorator implements HtmlNodeDecorator
 {
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
-        return '<span data-url="'.$context->escapeUrl($context->string('destination')).'">'
-            .$context->escapeText('x & y')
-            .'</span>';
+        return '<span data-url="' . $context->escapeUrl($context->string('destination')) . '">'
+            . $context->escapeText('x & y')
+            . '</span>';
     }
 }
 
@@ -535,7 +527,7 @@ final readonly class UnsafeDecorator implements HtmlNodeDecorator
 {
     public function decorate(HtmlNodeOutputContext $context, string $html): string
     {
-        return '<script>alert(1)</script>'.$html;
+        return '<script>alert(1)</script>' . $html;
     }
 }
 

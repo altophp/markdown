@@ -22,6 +22,5 @@ final readonly class MentionTarget
         public string $url,
         public ?string $label = null,
         public ?string $title = null,
-    ) {
-    }
+    ) {}
 }

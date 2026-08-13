@@ -48,9 +48,7 @@ final readonly class ImportParser implements BlockParser
         'indent' => true,
     ];
 
-    public function __construct(private ResourceResolver $resolver)
-    {
-    }
+    public function __construct(private ResourceResolver $resolver) {}
 
     public function triggerBytes(): string
     {

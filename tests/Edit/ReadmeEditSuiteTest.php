@@ -67,8 +67,8 @@ final class ReadmeEditSuiteTest extends TestCase
             $operation = ($seed + $index) % 4;
 
             match ($operation) {
-                0 => $file->ensure()->section('Fuzz '.$index, 2)->apply(),
-                1 => $this->renameFirstHeading($file, 'Fuzz Title '.$index),
+                0 => $file->ensure()->section('Fuzz ' . $index, 2)->apply(),
+                1 => $this->renameFirstHeading($file, 'Fuzz Title ' . $index),
                 2 => $this->appendToFirstExistingSection($file, "Fuzz body {$index}.\n"),
                 default => $this->replaceFirstCodeBlockOrEnsure($file, $index),
             };
@@ -78,12 +78,12 @@ final class ReadmeEditSuiteTest extends TestCase
                 $file->model(),
                 Markdown::github()->fromString($lowered->bytes)->model(),
             );
-            self::assertTrue($comparisonBeforeSave->isEqual(), $relativePath.': '.$comparisonBeforeSave->message());
+            self::assertTrue($comparisonBeforeSave->isEqual(), $relativePath . ': ' . $comparisonBeforeSave->message());
             $file->save();
             $saved = (string) file_get_contents($path);
 
-            self::assertSame($lowered->bytes, $saved, $relativePath.' should save the lowered bytes.');
-            self::assertTrue($file->model()->journal()->isEmpty(), $relativePath.' should clear journal after save.');
+            self::assertSame($lowered->bytes, $saved, $relativePath . ' should save the lowered bytes.');
+            self::assertTrue($file->model()->journal()->isEmpty(), $relativePath . ' should clear journal after save.');
         }
     }
 
@@ -132,7 +132,7 @@ final class ReadmeEditSuiteTest extends TestCase
      */
     private function originalRanges(PatchLoweringResult $result): array
     {
-        return array_map(static fn (SourcePatch $patch): SourceRange => $patch->range, $result->patches);
+        return array_map(static fn(SourcePatch $patch): SourceRange => $patch->range, $result->patches);
     }
 
     /**
@@ -189,7 +189,7 @@ final class ReadmeEditSuiteTest extends TestCase
             return;
         }
 
-        $file->ensure()->section('Fuzz Code '.$index, 2)->apply();
+        $file->ensure()->section('Fuzz Code ' . $index, 2)->apply();
     }
 
     private function copyFixture(string $relativePath): string
@@ -202,12 +202,12 @@ final class ReadmeEditSuiteTest extends TestCase
 
     private function projectPath(string $relativePath): string
     {
-        return \dirname(__DIR__, 2).'/'.$relativePath;
+        return \dirname(__DIR__, 2) . '/' . $relativePath;
     }
 
     private function tempPath(): string
     {
-        $path = \sys_get_temp_dir().'/alto-markdown-readme-'.\bin2hex(\random_bytes(8)).'.md';
+        $path = \sys_get_temp_dir() . '/alto-markdown-readme-' . \bin2hex(\random_bytes(8)) . '.md';
         $this->paths[] = $path;
 
         return $path;
@@ -225,18 +225,18 @@ final class ReadmeEditSuiteTest extends TestCase
             'README.md',
             'docs/index.md',
             'docs/installation.md',
-            'docs/conversion.md',
-            'docs/profiles.md',
-            'docs/security.md',
-            'docs/api-reference.md',
-            'docs/errors.md',
-            'docs/extensions.md',
-            'docs/queries-and-stats.md',
-            'docs/manipulation.md',
-            'docs/lint-fix-and-format.md',
-            'docs/command-line.md',
-            'docs/compliance.md',
-            'docs/performance.md',
+            'docs/getting-started.md',
+            'docs/conversion/html.md',
+            'docs/conversion/markdown.md',
+            'docs/documents/profiles.md',
+            'docs/documents/queries.md',
+            'docs/documents/statistics.md',
+            'docs/documents/editing.md',
+            'docs/quality/linting.md',
+            'docs/quality/fixing.md',
+            'docs/quality/formatting.md',
+            'docs/extensions/index.md',
+            'docs/engine/security.md',
         ];
     }
 

@@ -77,7 +77,7 @@ final class DirectDocumentParityTest extends TestCase
     {
         foreach (['spec_tests.json', 'gfm_tests.json'] as $fixture) {
             foreach (['commonmark', 'gfm'] as $profile) {
-                yield $fixture.' / '.$profile => [$fixture, $profile];
+                yield $fixture . ' / ' . $profile => [$fixture, $profile];
             }
         }
     }
@@ -95,7 +95,7 @@ final class DirectDocumentParityTest extends TestCase
      */
     private static function loadExamples(string $fixture): array
     {
-        $path = \dirname(__DIR__).'/fixtures/'.$fixture;
+        $path = \dirname(__DIR__) . '/fixtures/' . $fixture;
         $json = file_get_contents($path);
 
         if (false === $json) {

@@ -30,10 +30,10 @@ final class TabsInternalsTest extends TestCase
     {
         $catalog = new TabsCatalog();
         $actions = [
-            static fn () => $catalog->registerItem(1, 2),
-            static fn () => $catalog->recordTitle(2, 'Title'),
-            static fn () => $catalog->item(2),
-            static fn () => $catalog->groupId(1),
+            static fn() => $catalog->registerItem(1, 2),
+            static fn() => $catalog->recordTitle(2, 'Title'),
+            static fn() => $catalog->item(2),
+            static fn() => $catalog->groupId(1),
         ];
 
         foreach ($actions as $action) {

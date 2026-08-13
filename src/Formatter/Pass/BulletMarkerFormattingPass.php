@@ -126,7 +126,7 @@ final class BulletMarkerFormattingPass implements FormattingPass
 
             $firstMarker = \min($markers) - $lineStart;
             $suffix = substr($line, $firstMarker);
-            $pattern = '/^(?:'.preg_quote($preferredMarker, '/').'[ \t]*){3,}$/D';
+            $pattern = '/^(?:' . preg_quote($preferredMarker, '/') . '[ \t]*){3,}$/D';
 
             if (1 !== preg_match($pattern, $suffix)) {
                 continue;

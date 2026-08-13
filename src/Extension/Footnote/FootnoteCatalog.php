@@ -45,7 +45,7 @@ final class FootnoteCatalog implements DocumentRenderProjection, DocumentHtmlFin
     public function referenceMarker(string $label, string $fallback): string
     {
         $key = ReferenceMap::normalize($label);
-        $marker = "\x1Ealto-footnote-".spl_object_id($this).'-'.\count($this->referenceMarkers)."\x1F";
+        $marker = "\x1Ealto-footnote-" . spl_object_id($this) . '-' . \count($this->referenceMarkers) . "\x1F";
         $this->referenceMarkers[$marker] = [$key, $fallback];
 
         return $marker;
@@ -73,11 +73,11 @@ final class FootnoteCatalog implements DocumentRenderProjection, DocumentHtmlFin
             $number = $numbers[$key];
             $occurrence = ($occurrences[$key] ?? 0) + 1;
             $occurrences[$key] = $occurrence;
-            $suffix = 1 === $occurrence ? '' : '-'.$occurrence;
-            $replacements[$marker] = '<sup id="fnref-'.$number.$suffix.'">'
-                .'<a href="#fn-'.$number.'" role="doc-noteref">'
-                .$number
-                .'</a></sup>';
+            $suffix = 1 === $occurrence ? '' : '-' . $occurrence;
+            $replacements[$marker] = '<sup id="fnref-' . $number . $suffix . '">'
+                . '<a href="#fn-' . $number . '" role="doc-noteref">'
+                . $number
+                . '</a></sup>';
         }
 
         $items = '';
@@ -88,27 +88,27 @@ final class FootnoteCatalog implements DocumentRenderProjection, DocumentHtmlFin
             $backlinks = '';
 
             for ($occurrence = 1; $occurrence <= $occurrences[$key]; ++$occurrence) {
-                $suffix = 1 === $occurrence ? '' : '-'.$occurrence;
-                $backlinks .= ' <a href="#fnref-'.$number.$suffix.'" role="doc-backlink">↩</a>';
+                $suffix = 1 === $occurrence ? '' : '-' . $occurrence;
+                $backlinks .= ' <a href="#fnref-' . $number . $suffix . '" role="doc-backlink">↩</a>';
             }
 
             $body = rtrim($body, "\n");
             if (str_ends_with($body, '</p>')) {
-                $body = substr($body, 0, -4).$backlinks.'</p>';
+                $body = substr($body, 0, -4) . $backlinks . '</p>';
             } else {
                 $body .= $backlinks;
             }
 
-            $items .= '<li id="fn-'.$number.'" role="doc-endnote">'."\n"
-                .$body."\n"
-                ."</li>\n";
+            $items .= '<li id="fn-' . $number . '" role="doc-endnote">' . "\n"
+                . $body . "\n"
+                . "</li>\n";
         }
 
         if ('' !== $items) {
             $html .= "<div class=\"footnotes\" role=\"doc-endnotes\">\n"
-                ."<hr />\n<ol>\n"
-                .$items
-                ."</ol>\n</div>\n";
+                . "<hr />\n<ol>\n"
+                . $items
+                . "</ol>\n</div>\n";
         }
 
         return strtr($html, $replacements);

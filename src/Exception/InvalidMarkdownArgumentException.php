@@ -16,6 +16,4 @@ namespace Alto\Markdown\Exception;
 /**
  * @author Simon André <smn.andre@gmail.com>
  */
-class InvalidMarkdownArgumentException extends \InvalidArgumentException implements MarkdownExceptionInterface
-{
-}
+class InvalidMarkdownArgumentException extends \InvalidArgumentException implements MarkdownExceptionInterface {}

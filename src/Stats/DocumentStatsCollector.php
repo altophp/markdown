@@ -33,8 +33,7 @@ final readonly class DocumentStatsCollector
 {
     public function __construct(
         private DocumentTraversal $traversal = new TapeDocumentTraversal(),
-    ) {
-    }
+    ) {}
 
     public function collect(DocumentModel $model): DocumentStats
     {

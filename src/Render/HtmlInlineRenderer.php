@@ -103,7 +103,7 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
             return $this->renderMarkdownTape($source, $markdown);
         }
 
-        $key = $policy->cacheKey()."\x00".$markdown;
+        $key = $policy->cacheKey() . "\x00" . $markdown;
         $cached = $cache->get($key);
 
         if (null !== $cached) {
@@ -180,12 +180,12 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
                 InlineKind::TEXT => HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])),
                 InlineKind::SOFT_BREAK => "\n",
                 InlineKind::HARD_BREAK => $hardBreaks ? "<br />\n" : "\n",
-                InlineKind::CODE_SPAN => '<code>'.HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])).'</code>',
+                InlineKind::CODE_SPAN => '<code>' . HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])) . '</code>',
                 InlineKind::AUTOLINK => $this->autolinkTape($buffer, $columns, $node, $linkAttributes),
                 InlineKind::HTML_INLINE => $this->rawHtml($source, $payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])),
-                InlineKind::EMPHASIS => '<em>'.$this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: $insideLink).'</em>',
+                InlineKind::EMPHASIS => '<em>' . $this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: $insideLink) . '</em>',
                 InlineKind::STRONG => $this->strongTape($source, $buffer, $columns, $node, $hardBreaks, $insideStrong, $insideLink),
-                InlineKind::STRIKETHROUGH => '<del>'.$this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: $insideLink).'</del>',
+                InlineKind::STRIKETHROUGH => '<del>' . $this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: $insideLink) . '</del>',
                 InlineKind::LINK => $this->linkTape($source, $buffer, $columns, $node, $hardBreaks, $linkAttributes),
                 InlineKind::IMAGE => $this->imageTape($buffer, $columns, $node, $linkAttributes),
                 default => $this->customTape($source, $buffer, $columns, $node, $insideLink),
@@ -251,14 +251,14 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
                 InlineKind::TEXT => HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])),
                 InlineKind::SOFT_BREAK => "\n",
                 InlineKind::HARD_BREAK => $hardBreaks ? "<br />\n" : "\n",
-                InlineKind::CODE_SPAN => '<code>'.HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])).'</code>',
+                InlineKind::CODE_SPAN => '<code>' . HtmlEscaper::text($payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])) . '</code>',
                 InlineKind::AUTOLINK => $this->autolinkTape($buffer, $columns, $node, $linkAttributes),
                 InlineKind::HTML_INLINE => $this->rawHtml($source, $payloads[$node] ?? $buffer->substring($starts[$node], $ends[$node])),
-                InlineKind::EMPHASIS => '<em>'.$this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: $insideLink).'</em>',
+                InlineKind::EMPHASIS => '<em>' . $this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: $insideLink) . '</em>',
                 InlineKind::STRONG => $insideStrong && $source->compiledProfile()->strikethrough
                     ? $this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, true, $insideLink)
-                    : '<strong>'.$this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, true, $insideLink).'</strong>',
-                InlineKind::STRIKETHROUGH => '<del>'.$this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: $insideLink).'</del>',
+                    : '<strong>' . $this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, true, $insideLink) . '</strong>',
+                InlineKind::STRIKETHROUGH => '<del>' . $this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: $insideLink) . '</del>',
                 InlineKind::LINK => $this->decoratedLinkTape($source, $buffer, $columns, $node, $hardBreaks, $decorators, $linkAttributes),
                 InlineKind::IMAGE => $this->imageTape($buffer, $columns, $node, $linkAttributes),
                 default => $this->customTape($source, $buffer, $columns, $node, $insideLink),
@@ -295,13 +295,13 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
         array $decorators,
         ?array $linkAttributes,
     ): string {
-        [$href, $title] = explode("\x00", ($columns->payload[$node] ?? "\x00")."\x00", 3);
+        [$href, $title] = explode("\x00", ($columns->payload[$node] ?? "\x00") . "\x00", 3);
         $href = $linkAttributes['destination'] ?? $href;
-        $attribute = '' === $title ? '' : ' title="'.HtmlEscaper::attribute($title).'"';
+        $attribute = '' === $title ? '' : ' title="' . HtmlEscaper::attribute($title) . '"';
 
-        return '<a href="'.HtmlEscaper::attribute($this->url($href)).'"'.$attribute.'>'
-            .$this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: true)
-            .'</a>';
+        return '<a href="' . HtmlEscaper::attribute($this->url($href)) . '"' . $attribute . '>'
+            . $this->renderDecoratedTapeChildren($source, $buffer, $columns, $node, $hardBreaks, $decorators, insideLink: true)
+            . '</a>';
     }
 
     /**
@@ -344,7 +344,7 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
      */
     private function linkAttributes(?string $payload): array
     {
-        [$destination, $title] = explode("\x00", ($payload ?? "\x00")."\x00", 3);
+        [$destination, $title] = explode("\x00", ($payload ?? "\x00") . "\x00", 3);
 
         return ['destination' => $destination, 'title' => $title];
     }
@@ -454,7 +454,7 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
     ): string {
         $children = $this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, true, $insideLink);
 
-        return $insideStrong && $source->compiledProfile()->strikethrough ? $children : '<strong>'.$children.'</strong>';
+        return $insideStrong && $source->compiledProfile()->strikethrough ? $children : '<strong>' . $children . '</strong>';
     }
 
     /**
@@ -468,11 +468,11 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
         bool $hardBreaks,
         ?array $linkAttributes,
     ): string {
-        [$href, $title] = explode("\x00", ($columns->payload[$node] ?? "\x00")."\x00", 3);
+        [$href, $title] = explode("\x00", ($columns->payload[$node] ?? "\x00") . "\x00", 3);
         $href = $linkAttributes['destination'] ?? $href;
-        $attribute = '' === $title ? '' : ' title="'.HtmlEscaper::attribute($title).'"';
+        $attribute = '' === $title ? '' : ' title="' . HtmlEscaper::attribute($title) . '"';
 
-        return '<a href="'.HtmlEscaper::attribute($this->url($href)).'"'.$attribute.'>'.$this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: true).'</a>';
+        return '<a href="' . HtmlEscaper::attribute($this->url($href)) . '"' . $attribute . '>' . $this->renderTapeChildren($source, $buffer, $columns, $node, $hardBreaks, insideLink: true) . '</a>';
     }
 
     /**
@@ -484,9 +484,9 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
         $src = $linkAttributes['destination'] ?? ($parts[0] ?? '');
         $title = $parts[1] ?? '';
         $altText = $parts[2] ?? $this->altText($buffer, $columns, $node);
-        $attribute = '' === $title ? '' : ' title="'.HtmlEscaper::attribute($title).'"';
+        $attribute = '' === $title ? '' : ' title="' . HtmlEscaper::attribute($title) . '"';
 
-        return '<img src="'.HtmlEscaper::attribute($this->url($src)).'" alt="'.HtmlEscaper::attribute($altText).'"'.$attribute.' />';
+        return '<img src="' . HtmlEscaper::attribute($this->url($src)) . '" alt="' . HtmlEscaper::attribute($altText) . '"' . $attribute . ' />';
     }
 
     /**
@@ -500,9 +500,9 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
     ): string {
         $destination = $linkAttributes['destination'] ?? ($columns->payload[$node] ?? '');
 
-        return '<a href="'.HtmlEscaper::attribute($this->url($destination)).'">'
-            .HtmlEscaper::text($buffer->substring($columns->startOffset[$node], $columns->endOffset[$node]))
-            .'</a>';
+        return '<a href="' . HtmlEscaper::attribute($this->url($destination)) . '">'
+            . HtmlEscaper::text($buffer->substring($columns->startOffset[$node], $columns->endOffset[$node]))
+            . '</a>';
     }
 
     /**
@@ -644,7 +644,7 @@ final class HtmlInlineRenderer implements BlockInlineRenderer
     {
         return (string) preg_replace_callback(
             '/<(?=\\/?(?:title|textarea|style|xmp|iframe|noembed|noframes|script|plaintext)(?:\\s|>|\\/))/i',
-            static fn (): string => '&lt;',
+            static fn(): string => '&lt;',
             $html,
         );
     }

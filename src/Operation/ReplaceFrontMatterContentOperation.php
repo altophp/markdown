@@ -30,8 +30,7 @@ final readonly class ReplaceFrontMatterContentOperation implements Operation
         private NodeId $target,
         private string $content,
         private SourceRange $range,
-    ) {
-    }
+    ) {}
 
     public function describe(): string
     {

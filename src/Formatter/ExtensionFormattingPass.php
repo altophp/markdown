@@ -35,9 +35,7 @@ final readonly class ExtensionFormattingPass implements FormattingPass
     /**
      * @param array<string, FormatterPassDefinition> $definitions
      */
-    public function __construct(private array $definitions)
-    {
-    }
+    public function __construct(private array $definitions) {}
 
     public function level(): FormattingLevel
     {

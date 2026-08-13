@@ -42,19 +42,19 @@ final class RawHtmlParser implements InlineConstruct
     /**
      * Tag-name continuation bytes: ASCII alphanumerics and "-".
      */
-    private const string TAG_NAME_CONT = self::ALNUM.'-';
+    private const string TAG_NAME_CONT = self::ALNUM . '-';
 
     /**
      * Attribute-name continuation bytes: alphanumerics, "_", ".", ":", "-".
      */
-    private const string ATTR_NAME_CONT = self::ALNUM.'_.:-';
+    private const string ATTR_NAME_CONT = self::ALNUM . '_.:-';
 
     /**
      * Bytes that end an unquoted attribute value: every byte <= 0x20 (spaces,
      * tabs, line endings, controls) plus " ' = < > and backtick.
      */
     private const string UNQUOTED_STOP = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
-        ."\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\"'=<>`";
+        . "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\"'=<>`";
 
     public function triggerBytes(): string
     {

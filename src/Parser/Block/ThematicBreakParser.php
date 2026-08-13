@@ -88,7 +88,5 @@ final class ThematicBreakParser implements BlockConstruct
         return ContinueResult::Closed;
     }
 
-    public function close(ParserState $state, int $ordinal): void
-    {
-    }
+    public function close(ParserState $state, int $ordinal): void {}
 }

@@ -30,9 +30,7 @@ final class BlockCountBudget
 {
     private int $blockCount = 0;
 
-    public function __construct(private readonly int $maxBlockCount)
-    {
-    }
+    public function __construct(private readonly int $maxBlockCount) {}
 
     public function add(int $byteOffset): void
     {

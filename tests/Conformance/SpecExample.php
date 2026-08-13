@@ -26,6 +26,5 @@ final readonly class SpecExample
         public string $section,
         public int $startLine,
         public int $endLine,
-    ) {
-    }
+    ) {}
 }

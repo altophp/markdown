@@ -23,6 +23,5 @@ final readonly class StatsInline
     public function __construct(
         public string $kind,
         public SourceRange $range,
-    ) {
-    }
+    ) {}
 }

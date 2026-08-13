@@ -80,7 +80,7 @@ final class InlineAndCodeFixTest extends TestCase
 
     private function tempPath(): string
     {
-        $path = \sys_get_temp_dir().'/alto-markdown-inline-code-fix-'.\bin2hex(\random_bytes(8)).'.md';
+        $path = \sys_get_temp_dir() . '/alto-markdown-inline-code-fix-' . \bin2hex(\random_bytes(8)) . '.md';
         $this->paths[] = $path;
 
         return $path;

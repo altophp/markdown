@@ -27,9 +27,7 @@ final readonly class CompiledLinkDestinationRewriter
     /**
      * @param list<LinkDestinationRewriter> $rewriters
      */
-    public function __construct(private array $rewriters)
-    {
-    }
+    public function __construct(private array $rewriters) {}
 
     public function rewrite(
         string $kind,

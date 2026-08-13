@@ -28,6 +28,5 @@ final readonly class DocumentTransformHeading
         public SourceRange $range,
         public int $depth,
         public int $level,
-    ) {
-    }
+    ) {}
 }

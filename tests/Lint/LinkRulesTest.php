@@ -22,8 +22,8 @@ final class LinkRulesTest extends TestCase
 {
     public function testNoDeadAnchorsCatchesBrokenRealReadmeFragment(): void
     {
-        $source = (string) file_get_contents(__DIR__.'/../fixtures/readme-symfony.md');
-        $document = Markdown::github()->fromString($source."\n[broken](#not-in-this-readme)\n");
+        $source = (string) file_get_contents(__DIR__ . '/../fixtures/readme-symfony.md');
+        $document = Markdown::github()->fromString($source . "\n[broken](#not-in-this-readme)\n");
 
         $report = $document->lint((new LintConfig())->withRule('no-dead-anchor'));
 
@@ -49,7 +49,7 @@ final class LinkRulesTest extends TestCase
         self::assertSame(
             ['![](/inline.png)', '![` `](/empty-code.png)', '![][logo]'],
             array_map(
-                static fn ($problem): string => substr(
+                static fn($problem): string => substr(
                     $source,
                     $problem->range->startOffset,
                     $problem->range->endOffset - $problem->range->startOffset,
@@ -117,7 +117,7 @@ final class LinkRulesTest extends TestCase
     private static function ruleIds(array $problems): array
     {
         return array_map(
-            static fn (\Alto\Markdown\Lint\LintProblem $problem): string => $problem->ruleId,
+            static fn(\Alto\Markdown\Lint\LintProblem $problem): string => $problem->ruleId,
             $problems,
         );
     }
