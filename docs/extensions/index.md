@@ -17,32 +17,32 @@ $factory = Markdown::github()->with(
 
 ## Authoring syntax
 
-- `PairedDelimiterExtension`: configurable leaf delimiter pairs.
-- `SmartPunctuationExtension`: quotes, dashes, and ellipses.
-- `HighlightExtension`: highlighted inline text.
-- `DescriptionListExtension`: description lists.
-- `FootnoteExtension`: definitions and references.
-- `TabsExtension`: nested tab groups.
-- `MentionExtension`: application-resolved mentions.
-- `AttributesExtension`: constrained source attributes.
+- [Paired delimiters](paired-delimiters.md): configurable leaf delimiter pairs.
+- [Smart punctuation](smart-punctuation.md): quotes, dashes, and ellipses.
+- [Highlight](highlight.md): highlighted inline text.
+- [Description lists](description-lists.md): terms and definitions.
+- [Footnotes](footnotes.md): definitions and references.
+- [Tabs](tabs.md): nested tab groups.
+- [Mentions](mentions.md): application-resolved references.
+- [Attributes](attributes.md): constrained source attributes.
 
 ## Documents and HTML
 
-- `HeadingLevelExtension`: project heading levels at render time.
-- `ContentSlicerExtension`: group heading sections.
-- `HeadingPermalinkExtension`: add stable heading links.
-- `TableOfContentsExtension`: generate a document outline.
-- `DefaultAttributesExtension`: add controlled HTML attributes.
-- `CodeBlockTitleExtension`: render code-block titles.
-- `ExternalLinkExtension`: mark external links.
-- `LinkRewriterExtension`: rewrite link destinations.
+- [Heading levels](heading-levels.md): project heading levels at render time.
+- [Content slicer](content-slicer.md): group heading sections.
+- [Heading permalinks](heading-permalinks.md): add stable heading links.
+- [Table of contents](table-of-contents.md): generate a document outline.
+- [Default attributes](default-attributes.md): add controlled HTML attributes.
+- [Code block titles](code-block-titles.md): render code-block titles.
+- [External links](external-links.md): mark external links.
+- [Link rewriting](link-rewriting.md): rewrite link destinations.
 
 ## External resources
 
-- `ImportExtension`: insert escaped source code.
-- `IncludeExtension`: expand bounded Markdown resources.
-- `SourceExtension`: display source excerpts.
-- `EmbedExtension`: resolve allowlisted rich embeds.
+- [Import](import.md): insert escaped source code.
+- [Include](include.md): expand bounded Markdown resources.
+- [Source](source.md): display source excerpts.
+- [Embeds](embeds.md): resolve allowlisted rich content.
 
 Resource-backed extensions require an injected `ResourceResolver`; installing
 an extension never grants filesystem or network authority by itself. Read

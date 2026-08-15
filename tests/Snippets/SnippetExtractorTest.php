@@ -38,6 +38,13 @@ final class SnippetExtractorTest extends TestCase
         self::assertSame([], (new SnippetExtractor())->extract($markdown));
     }
 
+    public function testIgnoresPhpLookingFenceInsideMarkdownExample(): void
+    {
+        $markdown = "````markdown\n```php\necho 1;\n```\n````\n";
+
+        self::assertSame([], (new SnippetExtractor())->extract($markdown));
+    }
+
     public function testMatchesTildeFences(): void
     {
         $markdown = "~~~php\n\$y = 2;\n~~~\n";
