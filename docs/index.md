@@ -34,12 +34,41 @@ $html = Markdown::github()->toHtml("# Hello\n\nWelcome.\n");
 - [Fixing](quality/fixing.md): apply enabled safe corrections.
 - [Formatting](quality/formatting.md): normalize selected Markdown style.
 
-## Extensions
+## Extension API
 
 - [All extensions](extensions/index.md): choose bundled capabilities.
 - [Compatibility](extensions/compatibility.md): understand extension versioning.
 - [Extension points](extensions/extension-points.md): select the correct contract.
 - [Custom extension](extensions/custom.md): register trusted application behavior.
+
+## Syntax
+
+- [Paired delimiters](extensions/paired-delimiters.md): define a safe inline syntax.
+- [Smart punctuation](extensions/smart-punctuation.md): replace quotes, dashes, and ellipses.
+- [Highlight](extensions/highlight.md): mark inline text with paired delimiters.
+- [Description lists](extensions/description-lists.md): render terms and definitions.
+- [Footnotes](extensions/footnotes.md): connect references to endnotes.
+- [Tabs](extensions/tabs.md): group nested content into accessible panels.
+- [Mentions](extensions/mentions.md): resolve application-specific references.
+- [Attributes](extensions/attributes.md): attach constrained attributes to elements.
+
+## Rendering
+
+- [Heading levels](extensions/heading-levels.md): project headings to different HTML levels.
+- [Content slicer](extensions/content-slicer.md): wrap heading sections in semantic elements.
+- [Permalinks](extensions/heading-permalinks.md): add stable links to headings.
+- [Contents](extensions/table-of-contents.md): build a document outline.
+- [Default attributes](extensions/default-attributes.md): add controlled HTML attributes.
+- [Code titles](extensions/code-block-titles.md): label fenced code blocks.
+- [External links](extensions/external-links.md): classify and mark outbound links.
+- [Link rewriting](extensions/link-rewriting.md): transform destinations at render time.
+
+## Resources
+
+- [Import](extensions/import.md): insert escaped source code.
+- [Include](extensions/include.md): expand bounded Markdown resources.
+- [Source](extensions/source.md): display annotated source excerpts.
+- [Embeds](extensions/embeds.md): resolve allowlisted rich content.
 
 ## Engine
 

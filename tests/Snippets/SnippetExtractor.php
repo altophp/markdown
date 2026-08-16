@@ -38,16 +38,32 @@ final class SnippetExtractor
 
         $snippets = [];
         $open = null;
+        $ignored = null;
         $body = [];
         $openLine = 0;
 
         foreach ($lines as $index => $rawLine) {
             $line = rtrim($rawLine, "\r");
 
+            if (null !== $ignored) {
+                if ($this->matchesClosingFence($line, $ignored)) {
+                    $ignored = null;
+                }
+
+                continue;
+            }
+
             if (null === $open) {
-                $fence = $this->matchOpeningFence($line);
+                $isPhp = false;
+                $fence = $this->matchOpeningFence($line, $isPhp);
 
                 if (null !== $fence) {
+                    if (!$isPhp) {
+                        $ignored = $fence;
+
+                        continue;
+                    }
+
                     $open = $fence;
                     $body = [];
                     $openLine = $index + 1;
@@ -73,8 +89,10 @@ final class SnippetExtractor
         return $snippets;
     }
 
-    private function matchOpeningFence(string $line): ?OpeningFence
+    private function matchOpeningFence(string $line, bool &$isPhp): ?OpeningFence
     {
+        $isPhp = false;
+
         if (1 !== preg_match('/^( {0,3})(`{3,}|~{3,})[ \t]*(.*)$/', $line, $matches)) {
             return null;
         }
@@ -88,9 +106,7 @@ final class SnippetExtractor
             return null;
         }
 
-        if (1 !== preg_match('/^php(?![a-zA-Z0-9_])/', $info)) {
-            return null;
-        }
+        $isPhp = 1 === preg_match('/^php(?![a-zA-Z0-9_])/', $info);
 
         return new OpeningFence($char, \strlen($marker), \strlen($matches[1]));
     }
