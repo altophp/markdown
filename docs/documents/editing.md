@@ -27,6 +27,7 @@ The result changes only the section body:
 ## Install
 
 Run Composer.
+
 ```
 
 Available typed edits:
@@ -218,6 +219,10 @@ Compare-before-write protects against silently replacing bytes changed by
 another editor or process. It is optimistic conflict detection, not a
 filesystem lock.
 
+After a conflict, keep the pending diff for review, reopen the current file,
+and reapply the intended change against its updated content. Do not disable
+comparison merely to force a stale write over another editor's changes.
+
 Protected `saveAs()` can create a new target but refuses to replace an existing
 file that this document did not open. The default comparison option remains
 `false`, so enable it explicitly when concurrent changes are possible.
@@ -252,5 +257,5 @@ mode handling is platform-limited. Use `atomic: false` only when retaining the
 existing inode and its metadata is more important than all-or-nothing
 replacement. A non-atomic write can leave partial content after an I/O failure.
 
-See [Exceptions](../api/exceptions.md) for conflicts, stale handles, missing sections, and
+See [Errors](../errors.md) for conflicts, stale handles, missing sections, and
 unsupported edits.

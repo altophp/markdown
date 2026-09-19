@@ -235,8 +235,8 @@ final class ReadmeEditSuiteTest extends TestCase
             'docs/quality/linting.md',
             'docs/quality/fixing.md',
             'docs/quality/formatting.md',
-            'docs/extensions/index.md',
-            'docs/engine/security.md',
+            'docs/extensions.md',
+            'docs/security.md',
         ];
     }
 

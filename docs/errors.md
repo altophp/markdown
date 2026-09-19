@@ -63,7 +63,7 @@ Use the precise subtype when its recovery is different:
 Parser limit subclasses expose the configured and attempted values. File
 exceptions expose the original application path through `path`. Resource limits
 and their exact counting rules are documented in
-[Security](../engine/security.md#bound-parsing-and-file-access).
+[Security](security.md#bound-parsing-and-file-access).
 
 Unknown generic node kinds also raise an Alto domain exception. Construct
 factories with custom extensions during application startup rather than after
@@ -122,5 +122,5 @@ own symlink policy. Existing non-regular targets are rejected. A relative path
 is anchored to its canonical parent when opened or adopted by `saveAs()`, but
 that does not replace application authorization. Permission inspection or
 restoration failures abort atomic replacement and preserve the pending diff.
-See [Editing](../documents/editing.md#preview-and-save) for the complete
+See [Editing](documents/editing.md#preview-and-save) for the complete
 persistence contract.

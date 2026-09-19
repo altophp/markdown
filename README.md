@@ -71,7 +71,7 @@ $label = Markdown::github()->toInlineHtml('Install **Alto**');
 ```
 
 See [Installation](docs/installation.md), [HTML](docs/conversion/html.md),
-[Profiles](docs/documents/profiles.md), and [Security](docs/engine/security.md) to choose the
+[Profiles](docs/documents/profiles.md), and [Security](docs/security.md) to choose the
 right language and HTML policy.
 
 ## Open a document when you need more
@@ -118,7 +118,7 @@ if ($file->hasChanges()) {
 ```
 
 Source ranges use original byte offsets. `toMarkdown()` preserves unchanged
-bytes, line endings, and a UTF-8 BOM. Alto rejects an edit when it cannot apply
+bytes, line endings, and a UTF-8 BOM. ALTO rejects an edit when it cannot apply
 it safely under the documented V1 contract.
 
 The documentation covers this in more depth: [Queries](docs/documents/queries.md)
@@ -133,15 +133,26 @@ to enforce content and style policies.
 Trusted extensions add custom blocks, leaf inlines, native and link-aware HTML
 decoration, document render projections, lint, formatting, metrics,
 heading-level projection, permalinks, and generated tables of contents through
-compiled contracts. Read [Extensions](docs/extensions/index.md) and
+compiled contracts. Read [Extensions](docs/extensions.md) and
 [Compatibility](docs/extensions/compatibility.md) for the extension contracts
-and migration notes from historical Alto CommonMark extensions.
+and migration notes from historical ALTO CommonMark extensions.
 
 ## Documentation
 
-- [Documentation index](docs/index.md): browse the complete guide set.
-- [API reference](docs/api/index.md) and [Exceptions](docs/api/exceptions.md): the
-  public surface and recovery contracts.
+- [Installation](docs/installation.md): install the package and verify the runtime.
+- [Getting started](docs/getting-started.md): render and inspect a document.
+- [Conversion](docs/conversion.md): produce HTML or Markdown output.
+- [Documents](docs/documents.md): query, measure, and edit source-backed content.
+- [Quality](docs/quality.md): lint, fix, and format Markdown.
+- [Extensions](docs/extensions.md): choose bundled capabilities or create one.
+- [Syntax](docs/syntax.md): add authoring syntax.
+- [Rendering](docs/rendering.md): control document and HTML output.
+- [Resources](docs/resources.md): resolve imported, included, and embedded content.
+- [Security](docs/security.md): define HTML, input, and resource boundaries.
+- [Errors](docs/errors.md): recover from parse, edit, resource, and file failures.
+- [Performance](docs/performance.md): select and measure the processing path.
+- [Compliance](docs/compliance.md): review supported Markdown specifications.
+- [Documentation index](docs/index.md): browse every guide.
 
 ## Contributing
 

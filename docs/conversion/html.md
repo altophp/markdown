@@ -46,5 +46,5 @@ The default policy escapes raw HTML and filters unsafe URL schemes. Pass a
 `RenderOptions` value only when the application has an explicit reason to use
 another policy.
 
-Read [Security](../engine/security.md) before enabling authored HTML. Continue
+Read [Security](../security.md) before enabling authored HTML. Continue
 with [Markdown](markdown.md) when output must remain Markdown.

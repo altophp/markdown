@@ -70,3 +70,11 @@ Resolution happens once while parsing; later renders perform no I/O.
 The resolver defines the available resources. `FilesystemResourceResolver`
 accepts relative paths only, rejects parent traversal and symlink components,
 and enforces both the extension allowlist and `maxBytes`.
+
+## When a resource is rejected
+
+Check that the requested path is relative to the configured resolver root,
+uses an allowed extension, and fits the byte limit. Verify the file exists and
+is readable. Keep the root bounded when correcting a rejected path; do not
+broaden filesystem authority to accept untrusted references. See
+[Security](../security.md) and [Errors](../errors.md).
