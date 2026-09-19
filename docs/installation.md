@@ -1,6 +1,6 @@
 # Installation
 
-Install Alto Markdown in a PHP 8.4 or newer application, then run one smoke
+Install ALTO Markdown in a PHP 8.4 or newer application, then run one smoke
 test to confirm that Composer can load the package.
 
 ## Requirements

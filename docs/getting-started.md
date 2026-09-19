@@ -5,7 +5,8 @@ without parsing the source twice.
 
 ## Create a document
 
-Start from a Composer application with `alto/markdown` installed:
+Start from a Composer application with `alto/markdown` installed. Save this
+as `render.php` beside `vendor/` and run `php render.php`:
 
 ```php
 <?php
@@ -27,8 +28,14 @@ echo $document->links()->count()."\n";
 echo $document->toHtml();
 ```
 
-The first two lines are `Project` and `1`. The remaining output is the rendered
-heading and paragraph.
+The complete output is:
+
+```text
+Project
+1
+<h1>Project</h1>
+<p>Read the <a href="https://example.com/guide">guide</a>.</p>
+```
 
 `github()` enables CommonMark, GitHub Flavored Markdown, GitHub alerts, and
 front matter. The returned document retains the parsed structure and original

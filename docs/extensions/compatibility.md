@@ -1,6 +1,6 @@
 # Compatibility
 
-Alto extensions depend only on Alto's public contracts. Extensions written for
+ALTO extensions depend only on ALTO's public contracts. Extensions written for
 League CommonMark, Parsedown, or the historical `alto/commonmark` packages use
 different parser and renderer APIs. They cannot be passed directly to
 `MarkdownFactory::with()`.
@@ -62,7 +62,7 @@ Alto does not emit deprecation warnings from parser or renderer hot paths.
 Security fixes may narrow unsafe behavior in a patch release when preserving it
 would keep users exposed. Such changes require an explicit security notice.
 
-Package authors should test the lowest and newest Alto versions allowed by
+Package authors should test the lowest and newest ALTO versions allowed by
 their Composer constraint. Invalid definitions and callback results raise
 `InvalidExtensionException`; arbitrary exceptions thrown by application
 callbacks remain unchanged.
@@ -90,19 +90,19 @@ Map new block syntax to `BlockExtensionInterface`, leaf inline syntax to
 `HtmlDecoratorExtensionInterface`, and document-wide output decisions to
 `DocumentTransformExtensionInterface`. Do not adapt or expose the foreign AST.
 
-Every historical Alto CommonMark feature has a native replacement:
+Every historical ALTO CommonMark feature has a native replacement:
 
 | Historical package | Native Alto replacement | Migration note |
 | --- | --- | --- |
-| `alto/commonmark-code-block-title` | [`CodeBlockTitleExtension`](index.md) | Use the typed title policy |
-| `alto/commonmark-content-slicer` | [`ContentSlicerExtension`](index.md) | `minLevel` is the first heading level that opens a section |
-| `alto/commonmark-heading-level` | [`HeadingLevelExtension`](index.md) | Use `HeadingLevelPolicy::map()`, `shift()`, or `using()` |
-| `alto/commonmark-import` | [`ImportExtension`](index.md) | Inject a bounded `ResourceResolver` |
-| `alto/commonmark-include` | [`IncludeExtension`](index.md) | Inject a resolver and explicit recursion policy |
-| `alto/commonmark-link-rewriter` | [`LinkRewriterExtension`](index.md) | Build rules with `LinkRewriter` |
-| `alto/commonmark-source` | [`SourceExtension`](index.md) | Inject a bounded resolver |
-| `alto/commonmark-table-of-contents` | [`TableOfContentsExtension`](index.md) | Use the typed TOC policy |
-| `alto/commonmark-tabs` | [`TabsExtension`](index.md) | Review generated HTML and progressive behavior |
+| `alto/commonmark-code-block-title` | [`CodeBlockTitleExtension`](../rendering/code-block-titles.md) | Use the typed title policy |
+| `alto/commonmark-content-slicer` | [`ContentSlicerExtension`](../rendering/content-slicer.md) | `minLevel` is the first heading level that opens a section |
+| `alto/commonmark-heading-level` | [`HeadingLevelExtension`](../rendering/heading-levels.md) | Use `HeadingLevelPolicy::map()`, `shift()`, or `using()` |
+| `alto/commonmark-import` | [`ImportExtension`](../resources/import.md) | Inject a bounded `ResourceResolver` |
+| `alto/commonmark-include` | [`IncludeExtension`](../resources/include.md) | Inject a resolver and explicit recursion policy |
+| `alto/commonmark-link-rewriter` | [`LinkRewriterExtension`](../rendering/link-rewriting.md) | Build rules with `LinkRewriter` |
+| `alto/commonmark-source` | [`SourceExtension`](../resources/source.md) | Inject a bounded resolver |
+| `alto/commonmark-table-of-contents` | [`TableOfContentsExtension`](../rendering/table-of-contents.md) | Use the typed TOC policy |
+| `alto/commonmark-tabs` | [`TabsExtension`](../syntax/tabs.md) | Review generated HTML and progressive behavior |
 
 These are feature migrations, not drop-in class aliases. Re-run output,
 security, and source-preservation tests when moving an application.

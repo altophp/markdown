@@ -1,4 +1,4 @@
-# Nodes API
+# Nodes
 
 Typed handles expose semantic values and the mutations Alto can lower safely
 to source patches.
@@ -27,4 +27,4 @@ query the current document again.
 
 Generic block movement and insertion accept only direct children of the
 document root. Typed mutations retain their own documented boundaries. See
-[Editing](../documents/editing.md) for worked operations.
+[Editing](editing.md) for worked operations.

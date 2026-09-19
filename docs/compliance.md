@@ -25,7 +25,7 @@ The published package carries the conformance fixtures and runs them with the
 rest of the suite:
 
 ```bash
-composer tests
+composer test
 ```
 
 The full quality gate also runs static analysis and style checks on top of the

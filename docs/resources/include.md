@@ -89,3 +89,11 @@ raw HTML, or custom containers remain literal.
 
 The original `@include` directive is preserved when the document is rendered
 back to Markdown. Included HTML follows the active HTML policy.
+
+## When a resource is rejected
+
+Check that the requested path is relative to the configured resolver root,
+uses an allowed extension, and fits the byte limit. Verify the file exists and
+is readable. Keep the root bounded when correcting a rejected path; do not
+broaden filesystem authority to accept untrusted references. See
+[Security](../security.md) and [Errors](../errors.md).
