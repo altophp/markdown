@@ -169,17 +169,19 @@ Before submitting code, run:
 composer qa
 ```
 
-Changes to public behavior should include tests and documentation. Run
-`composer coverage` separately to enforce the 99% line-coverage floor.
+Changes to public behavior should include tests and documentation.
+
+Run `composer coverage` separately to enforce the 99% line-coverage floor.
 
 ## Support
 
-ALTO Markdown is open source. You can support its continued development through
+ALTO Markdown is open source and independently maintained by
+[Simon André](https://smnandre.dev). If it is useful to your work, you can
+support its continued development through
 [GitHub Sponsors](https://github.com/sponsors/smnandre).
 
-Sharing this package with others or
-[starring it on GitHub](https://github.com/altophp/markdown) is also much
-appreciated.
+Sharing the package or
+[starring it on GitHub](https://github.com/altophp/markdown) also helps.
 
 ## License
 
