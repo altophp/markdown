@@ -3,7 +3,6 @@
     "description": "Parse, query, lint, build, render, and edit Markdown with minimal diffs.",
     "license": "MIT",
     "type": "library",
-    "homepage": "https://altophp.com/markdown",
     "keywords": [
         "markdown",
         "commonmark",
@@ -12,17 +11,18 @@
         "linter",
         "renderer"
     ],
-    "support": {
-        "issues": "https://github.com/altophp/markdown/issues",
-        "source": "https://github.com/altophp/markdown",
-        "docs": "https://altophp.com/markdown"
-    },
     "authors": [
         {
             "name": "Simon André",
             "email": "smn.andre@gmail.com"
         }
     ],
+    "homepage": "https://altophp.com/markdown",
+    "support": {
+        "issues": "https://github.com/altophp/markdown/issues",
+        "source": "https://github.com/altophp/markdown",
+        "docs": "https://altophp.com/markdown"
+    },
     "funding": [
         {
             "type": "github",
