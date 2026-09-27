@@ -232,16 +232,20 @@ final class PublicHtmlDecoratorContractTest extends TestCase
     {
         Instrumentation::measure();
         Markdown::commonmark()->toHtml("# Heading\n\nRich *text*.\n");
-        self::assertSame(0, Instrumentation::$htmlDecoratorInvocations);
+        $inactiveInvocations = Instrumentation::$htmlDecoratorInvocations;
 
         Instrumentation::measure();
         $factory = Markdown::commonmark()->with(new OrderedDecoratorExtension('unused', 0, 'thematic-break'));
         $factory->toHtml("# Heading\n\nRich *text*.\n");
-        self::assertSame(0, Instrumentation::$htmlDecoratorInvocations);
+        $unmatchedInvocations = Instrumentation::$htmlDecoratorInvocations;
 
         Instrumentation::measure();
         $factory->toHtml("---\n");
-        self::assertSame(1, Instrumentation::$htmlDecoratorInvocations);
+        $matchedInvocations = Instrumentation::$htmlDecoratorInvocations;
+
+        self::assertSame(0, $inactiveInvocations);
+        self::assertSame(0, $unmatchedInvocations);
+        self::assertSame(1, $matchedInvocations);
     }
 
     public function testEveryNativeKindKeepsItsHtmlWhenDecoratedWithANoOp(): void
