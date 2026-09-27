@@ -200,12 +200,15 @@ final class CodeBlockTitleExtensionTest extends TestCase
 
         Instrumentation::reset();
         $factory->toHtml($source);
-        self::assertSame(1, Instrumentation::$codeBlockCodeReads);
+        $directCodeReads = Instrumentation::$codeBlockCodeReads;
 
         $document = $factory->fromString($source);
         Instrumentation::reset();
         $document->toHtml();
-        self::assertSame(1, Instrumentation::$codeBlockCodeReads);
+        $documentCodeReads = Instrumentation::$codeBlockCodeReads;
+
+        self::assertSame(1, $directCodeReads);
+        self::assertSame(1, $documentCodeReads);
     }
 
     public function testDocumentEditsReuseOriginalTitleWithCurrentCodeAndLanguage(): void

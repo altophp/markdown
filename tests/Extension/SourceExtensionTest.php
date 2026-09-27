@@ -43,8 +43,11 @@ final class SourceExtensionTest extends TestCase
 
         $document = $factory->fromString($source);
         self::assertCount(2, $resolver->requests);
-        self::assertSame($expected, $document->toHtml());
-        self::assertSame($expected, $document->toHtml());
+        $firstRender = $document->toHtml();
+        $secondRender = $document->toHtml();
+
+        self::assertSame($expected, $firstRender);
+        self::assertSame($expected, $secondRender);
         self::assertCount(2, $resolver->requests);
         self::assertSame($source, $document->toMarkdown());
         self::assertSame($source, $document->toMarkdown(new RenderOptions()));

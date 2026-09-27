@@ -72,13 +72,16 @@ final class DocumentRevisionTest extends TestCase
         $file = Markdown::github()->open($path);
         $model = $file->model();
 
-        self::assertSame(0, $model->generation());
+        $beforeReads = $model->generation();
 
         $file->headings()->all();
         $file->toHtml();
         $file->stats();
 
-        self::assertSame(0, $model->generation());
+        $afterReads = $model->generation();
+
+        self::assertSame(0, $beforeReads);
+        self::assertSame(0, $afterReads);
 
         $file->section('One')->rename('Uno');
         $afterEdit = $model->generation();
